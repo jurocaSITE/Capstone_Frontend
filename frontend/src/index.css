@@ -6,6 +6,9 @@
 	--main-clr: #d6955a;
 	--dark-accent: #d37942;
 	--dark-shade: #344356;
+
+	--light-shade-6-opacity: rgba(242, 239, 231, .6);
+	--border-rad: 6px;
 }
 
 body {
