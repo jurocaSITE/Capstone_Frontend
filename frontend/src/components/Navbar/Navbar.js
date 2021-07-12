@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink as Link, useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoTriangleDown } from "react-icons/go";
 import "./Navbar.css";
 
 const userExists = true;
@@ -45,13 +47,18 @@ export default function Navbar() {
                 type="text"
                 name="search"
                 placeholder="Search..."
-                // value={form.email}
+                // value={form.searchTerm}
                 // onChange={handleOnInputChange}
               />
-			  <button className="search-btn">
-				<BiSearch className="search-icon" />
-			  </button>
+              <button className="search-btn">
+                <BiSearch className="search-icon" />
+              </button>
             </div>
+
+            <button className="user-portal">
+              <FaUserCircle className="user-icon" />
+              <GoTriangleDown className="user-triangle" />
+            </button>
           </>
         )}
       </div>

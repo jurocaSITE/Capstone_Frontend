@@ -48,15 +48,18 @@
 	border: none;
 	border-radius: var(--border-rad);
 }
-.Navbar .content .search-bar button {
+.Navbar .content button {
 	cursor: pointer;
 	background: transparent;
 	border: none;
 	color: inherit;
 }
 .Navbar .content .search-bar .search-icon {
-	margin: 0 0.5em;
+	margin: 0;
 	font-size: 1.5rem;
+}
+.Navbar .content .user-portal .user-icon {
+	font-size: 2rem;
 }
 .Navbar .content .user-buttons {
 	display: flex;
