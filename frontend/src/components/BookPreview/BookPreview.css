@@ -1,6 +1,11 @@
 .BookPreview img {
+    cursor: pointer;
     margin: 0 1em;
     max-height: 250px;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
+    transition: ease .5s;
+}
+.BookPreview img:hover {
+    transform: scale(1.5);
 }
