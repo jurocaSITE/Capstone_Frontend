@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Register, Login, Navbar, Footer, Home, UserHome } from "../../components";
+import { Register, Login, Navbar, Footer, Home, UserHome, Book } from "../../components";
 
 // var for testing purposes. 
 // remember to REMOVE
@@ -15,7 +15,8 @@ export default function App() {
 					{ userExists ?
 						<Route path="/" element={<UserHome />} /> :
 						<Route path="/" element={<Home />} /> 
-					}					
+					}
+					<Route path="/book" element={<Book />} /> 					
 				</Routes>
 				<Footer />
 			</BrowserRouter>

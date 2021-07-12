@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ImBook } from "react-icons/im";
+import { GiWhiteBook } from "react-icons/gi";
 import "./Footer.css";
 
 export default function Footer() {
   return (
     <div className="Footer">
-      <ImBook className="footer-icon" />
+      <GiWhiteBook className="footer-icon" />
         <ul className="footer-links">
           <li>
             <Link to="/about" >
