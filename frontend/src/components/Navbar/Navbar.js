@@ -5,9 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
 import "./Navbar.css";
 
-const userExists = true;
-
-export default function Navbar() {
+export default function Navbar({userExists}) {
   return (
     <nav className="Navbar">
       <div className="content">

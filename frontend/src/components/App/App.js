@@ -1,16 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Register, Login, Navbar, Footer, Home, UserHome, Book } from "../../components";
+import { Register, Login, Navbar, Footer, Home, UserHome, Book } from "components";
 
 // var for testing purposes. 
-// remember to REMOVE
-const userExists = true;
+// remember to REMOVE (App, Navbar)
+const userExists = false;
 
 export default function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Navbar />
+				<Navbar userExists={userExists} />
 				<Routes>
 					{ userExists ?
 						<Route path="/" element={<UserHome />} /> :
