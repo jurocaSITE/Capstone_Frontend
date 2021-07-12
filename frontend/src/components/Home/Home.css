@@ -1,0 +1,42 @@
+.Home h1,
+.Home h2 {
+    margin: 0;
+}
+.Home h1 {
+    font-size: 2.5rem;
+}
+.Home .home-hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background: var(--light-shade);
+
+    padding: 1em;
+}
+.Home .home-hero img {
+    border-radius: var(--border-rad);
+    box-shadow: var(--default-shadow);
+}
+.Home .home-hero button {
+    cursor: pointer;
+    padding: 0.5em 3em;
+
+    font-family: inherit;
+    font-size: 1.2rem;
+    color: var(--light-shade);
+
+    background: var(--dark-accent);
+    border: none;
+    border-radius: var(--border-rad);
+    box-shadow: var(--default-shadow);
+    transition: ease;
+}
+.Home .home-hero button:hover {
+    transform: translateY(2px);
+}
+.Home .home-feed {
+    padding: 1em;
+
+    color: var(--light-shade);
+}

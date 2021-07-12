@@ -6,6 +6,10 @@
 	--main-clr: #d6955a;
 	--dark-accent: #d37942;
 	--dark-shade: #344356;
+
+	--light-shade-6-opacity: rgba(242, 239, 231, .6);
+	--border-rad: 6px;
+	--default-shadow: 0 4px 4px 0px rgba(0,0,0,.25);
 }
 
 body {
@@ -18,6 +22,10 @@ body {
 	font-family: "Poppins", sans-serif;
 	-moz-osx-font-smoothing: grayscale;
 	background: var(--dark-shade);
+}
+
+h1, h2, h3 {
+	margin: 0;
 }
 
 body::-webkit-scrollbar {
