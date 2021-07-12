@@ -1,7 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Register, Login, Navbar, Home } from "../../components";
+import { Register, Login, Navbar, Footer, Home, UserHome } from "../../components";
 
+// var for testing purposes. 
+// remember to REMOVE
+const userExists = true;
 
 export default function App() {
 	return (
@@ -9,8 +12,12 @@ export default function App() {
 			<BrowserRouter>
 				<Navbar />
 				<Routes>
-					<Route path="/" element={<Home />} />
+					{ userExists ?
+						<Route path="/" element={<UserHome />} /> :
+						<Route path="/" element={<Home />} /> 
+					}					
 				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	);

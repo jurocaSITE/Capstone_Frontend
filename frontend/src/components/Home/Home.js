@@ -1,4 +1,3 @@
-import { Footer } from "../../components"
 import "./Home.css";
 
 const home_hero_img = 
@@ -25,8 +24,6 @@ export default function Home() {
 	  <div className="home-feed">
 		  <h2>Feed</h2>
 	  </div>
-
-	  <Footer />
     </div>
   );
 }
