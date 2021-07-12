@@ -40,9 +40,13 @@ class ApiClient {
         return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials})
     }
 
-    // async getBookById() {
-    //     return await this.request({ enpoint: })
-    // }
+    async getBookById(id) {
+        return await this.request({ endpoint: `books/id/${id}`, method: `GET` })
+    }
+
+    async getTopSellers() {
+        return await this.request({ endpoint: `books/top/sellers`, method: `GET` })
+    }
 }
 
-export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:3001")
+export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000")

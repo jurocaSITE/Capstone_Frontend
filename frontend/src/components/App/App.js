@@ -1,12 +1,37 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Register, Login, Navbar, Footer, Home, UserHome, Book } from "components";
+import apiClient from "services/apiClient"
 
 // var for testing purposes. 
 // remember to REMOVE (App, Navbar)
 const userExists = false;
 
 export default function App() {
+	const [topSellers, setTopSellers] = useState([])
+	const [errors, setErrors] = useState(null)
+
+	useEffect(() => {
+		const fetchTopSellers = async () => {
+			//setIsFetching(true)
+
+			const { data, error } = await apiClient.getTopSellers()
+			if (error) {
+				setErrors((e) => ({ ...e, db: error}))
+				setTopSellers([])
+			}
+			if(data?.top_sellers) {
+				setErrors(null)
+				setTopSellers(data.top_sellers)
+			}
+		}
+		//setIsFetching(false)
+		fetchTopSellers()
+	}, [])
+
+	console.log("Top Sellers after call...", topSellers)
+
 	return (
 		<div className="App">
 			<BrowserRouter>
@@ -14,7 +39,7 @@ export default function App() {
 				<Routes>
 					{ userExists ?
 						<Route path="/" element={<UserHome />} /> :
-						<Route path="/" element={<Home />} /> 
+						<Route path="/" element={<Home topSellers={topSellers} />} /> 
 					}
 					<Route path="/book" element={<Book />} /> 					
 				</Routes>

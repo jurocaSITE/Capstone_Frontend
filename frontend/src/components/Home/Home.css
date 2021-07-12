@@ -43,3 +43,9 @@
 
     color: var(--light-shade);
 }
+.Home .home-feed-books {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 1em;
+}

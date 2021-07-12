@@ -1,0 +1,6 @@
+.BookPreview img {
+    margin: 0 1em;
+    max-height: 250px;
+    border-radius: var(--border-rad);
+    box-shadow: var(--default-shadow);
+}
