@@ -43,10 +43,15 @@
 }
 .Navbar .content .search-bar input {
 	height: 2em;
+	width: 25em;
 
 	background: var(--light-shade-6-opacity);
 	border: none;
 	border-radius: var(--border-rad);
+}
+.Navbar .content .search-bar input[type="text" i] {
+	padding-left: 1em;
+	font-family: inherit;
 }
 .Navbar .content button {
 	cursor: pointer;

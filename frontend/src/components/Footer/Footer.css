@@ -1,4 +1,23 @@
 .Footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     background: var(--main-clr);
     color: var(--light-shade);
+
+    padding-left: 1em;
+}
+.Footer .footer-icon {
+    font-size: 2rem;
+}
+.Footer .footer-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    list-style-type: none;
+}
+.Footer .footer-links li {
+    margin: 0 1em;
 }

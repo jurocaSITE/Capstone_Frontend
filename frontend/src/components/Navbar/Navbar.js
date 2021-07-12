@@ -26,7 +26,7 @@ export default function Navbar() {
           <>
             <ul className="pages">
               <li>
-                <Link to="/home" activeClassName="active" end>
+                <Link to="/" activeClassName="active" end>
                   Home
                 </Link>
               </li>
