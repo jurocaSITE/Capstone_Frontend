@@ -18,6 +18,9 @@
     padding: 1em;
 }
 .Home .home-hero img {
+    object-fit: contain;
+    max-height: 30em;
+
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
 }
