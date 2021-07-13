@@ -1,3 +1,6 @@
+.Home {
+    min-height: 100vh;
+}
 .Home h1,
 .Home h2 {
     margin: 0;
@@ -15,6 +18,9 @@
     padding: 1em;
 }
 .Home .home-hero img {
+    object-fit: contain;
+    max-height: 30em;
+
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
 }
@@ -39,4 +45,10 @@
     padding: 1em;
 
     color: var(--light-shade);
+}
+.Home .home-feed-books {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 1em;
 }

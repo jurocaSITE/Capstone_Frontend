@@ -16,9 +16,8 @@
     align-items: flex-start;
 }
 .Book .book-card img {
-    /* max-width: 25em; */
-    /* max-height: 40em; */
-    height: 500px;
+    object-fit: contain;
+    max-height: 500px;
     width: 312.5px;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
