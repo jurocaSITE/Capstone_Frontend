@@ -45,14 +45,14 @@ export default function Book() {
             return <h1>Loading...</h1>
         }
         //! Uncomment and check for Top Seller
-        if (errors) {
-            return (
-                <>
-                <h1>Error</h1>
-                <p className="error">{String(errors)}</p>
-                </>
-            )
-        }
+        // if (errors) {
+        //     return (
+        //         <>
+        //         <h1>Error</h1>
+        //         <p className="error">{String(errors)}</p>
+        //         </>
+        //     )
+        // }
 
         return (
             <>
