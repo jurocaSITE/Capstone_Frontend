@@ -49,6 +49,7 @@ export default function App() {
 						<Route path="/" element={<Home topSellers={topSellers} />} />
 					)}
 					<Route path="/books/id/:book_id" element={<Book />} />
+					<Route path="/books/top/sellers/:title" element={<Book />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
