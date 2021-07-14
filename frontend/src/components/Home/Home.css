@@ -43,12 +43,14 @@
 }
 .Home .home-feed {
     padding: 1em;
-
     color: var(--light-shade);
+}
+.Home .home-feed h2 {
+    font-weight: 500;
 }
 .Home .home-feed-books {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 1em;
+    padding-top: 2em;
 }
