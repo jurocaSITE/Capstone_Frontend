@@ -6,7 +6,7 @@
 	align-items: center;
 
 	background: var(--main-clr);
-	padding: 1rem;
+	padding: 0.5em 1em;
 }
 .Navbar .content {
 	display: flex;
@@ -25,4 +25,51 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+}
+.Navbar .content .pages {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	list-style-type: none;
+
+	margin: 0;
+}
+.Navbar .content .pages li {
+	margin: 0 1em;
+}
+.Navbar .content .search-bar {
+	display: flex;
+	align-items: center;
+}
+.Navbar .content .search-bar input {
+	height: 2em;
+	width: 25em;
+
+	background: var(--light-shade-6-opacity);
+	border: none;
+	border-radius: var(--border-rad);
+}
+.Navbar .content .search-bar input[type="text" i] {
+	padding-left: 1em;
+	font-family: inherit;
+}
+.Navbar .content button {
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	color: inherit;
+}
+.Navbar .content .search-bar .search-icon {
+	margin: 0;
+	font-size: 1.5rem;
+}
+.Navbar .content .user-portal .user-icon {
+	font-size: 2rem;
+}
+.Navbar .content .user-buttons {
+	display: flex;
+	align-items: center;
+}
+.Navbar .content .user-buttons a {
+	margin: 0 1em;
 }

@@ -1,0 +1,8 @@
+.UserHome {
+    display: flex;
+    flex-direction: column;
+
+    color: var(--light-shade);
+    padding: 1em;
+    min-height: 100vh;
+}
