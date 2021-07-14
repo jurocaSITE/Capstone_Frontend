@@ -3,7 +3,7 @@
     display: flex;
     /* align-items: center; */
     justify-content: center;
-    padding: 2em 0;
+    padding: 2em 1em;
     color: var(--light-shade);
 }
 .Book h1,
@@ -14,6 +14,7 @@
 .Book .book-card {
     display: flex;
     align-items: flex-start;
+    width: 80%;
 }
 .Book .book-card img {
     object-fit: contain;
@@ -35,11 +36,14 @@
 .Book .book-card .book-details-head {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     width: fit-content;
 }
+.Book .book-card .book-details-head .book-author {
+    align-self: flex-end;
+}
 .Book .book-card .book-details-head .pub-date {
-    align-self: flex-start;
+    /* align-self: flex-start; */
     padding-top: .5em;
     color: var(--light-shade-6-opacity);
 }
