@@ -28,6 +28,11 @@ h1, h2, h3, p {
 	margin: 0;
 }
 
+h1 { 
+	font-size: 3rem;
+	font-weight: 500;
+}
+
 body::-webkit-scrollbar {
 	width: 0.25rem;
 	height: 0.25rem;

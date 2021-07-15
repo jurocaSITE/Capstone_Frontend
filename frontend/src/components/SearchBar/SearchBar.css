@@ -1,0 +1,20 @@
+.SearchBar {
+	display: flex;
+	align-items: center;
+}
+.SearchBar input {
+	height: 2em;
+	width: 25em;
+
+	background: var(--light-shade-6-opacity);
+	border: none;
+	border-radius: var(--border-rad);
+}
+.SearchBar input[type="text" i] {
+	padding-left: 1em;
+	font-family: inherit;
+}
+.SearchBar .search-icon {
+	margin: 0;
+	font-size: 1.5rem;
+}

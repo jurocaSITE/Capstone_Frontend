@@ -24,7 +24,7 @@ export default function UserPortal() {
             <li>Settings</li>
           </Link>
           <Link to="/">
-            <li>Sign Out</li>
+            <li className="sign-out"></li>
           </Link>
         </ul>
       ) : null}

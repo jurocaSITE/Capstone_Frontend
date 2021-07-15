@@ -1,12 +1,11 @@
 import React from "react";
 import { NavLink as Link, useNavigate } from "react-router-dom";
-import { BiSearch } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
-import { GoTriangleDown } from "react-icons/go";
-import { UserPortal } from "components";
+import { UserPortal, SearchBar } from "components";
 import "./Navbar.css";
 
 export default function Navbar({userExists}) {
+  const navigate = useNavigate()
+
   return (
     <nav className="Navbar">
       <div className="content">
@@ -41,25 +40,8 @@ export default function Navbar({userExists}) {
               </li>
             </ul>
 
-            <div className="search-bar">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search..."
-                // value={form.searchTerm}
-                // onChange={handleOnInputChange}
-              />
-              <button className="search-btn">
-                <BiSearch className="search-icon" />
-              </button>
-            </div>
-
+            <SearchBar />
             <UserPortal />
-
-            {/* <button className="user-portal">
-              <FaUserCircle className="user-icon" />
-              <GoTriangleDown className="user-triangle" />
-            </button> */}
           </>
         )}
       </div>

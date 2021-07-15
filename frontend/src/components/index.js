@@ -9,3 +9,5 @@ export { default as Book } from "./Book/Book";
 export { default as BookPreview } from "./BookPreview/BookPreview";
 export { default as ActionButton } from "./ActionButton/ActionButton";
 export { default as UserPortal } from "./UserPortal/UserPortal";
+export { default as SearchResults } from "./SearchResults/SearchResults";
+export { default as SearchBar } from "./SearchBar/SearchBar";

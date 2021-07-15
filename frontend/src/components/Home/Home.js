@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { BookPreview, ActionButton } from "components";
 import "./Home.css";
 
@@ -11,6 +10,7 @@ const home_hero_img =
 export default function Home({ topSellers = [] }) {
   return (
     <div className="Home">
+      
       <div className="home-hero">
         <div className="home-hero-text">
           <h1>Welcome!</h1>
@@ -20,9 +20,6 @@ export default function Home({ topSellers = [] }) {
             site has to offer.
           </p>
           <ActionButton link={"/register"} text={"Sign Up"} />
-          {/* <Link to="/register">
-            <button className="call-to-sign-up">Sign Up</button>
-          </Link> */}
         </div>
         <img alt="library shelves" src={home_hero_img} />
       </div>
@@ -35,6 +32,7 @@ export default function Home({ topSellers = [] }) {
           ))}
         </div>
       </div>
+
     </div>
   );
 }

@@ -1,0 +1,17 @@
+.SearchResults
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 100vh;
+    color: var(--light-shade);
+    padding: 2em .5em;
+}
+.SearchResults h1 {
+    margin: 0 auto;
+}
+.SearchResults .search-feed {
+    display: flex;
+    flex-wrap: wrap;
+}
