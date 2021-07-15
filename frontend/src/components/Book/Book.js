@@ -1,8 +1,5 @@
 import "./Book.css"
 
-const bookImg = 
-    "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.raincoast.com%2Fimages%2Fuploads%2F9781627792431.jpg&f=1&nofb=1"
-
 export default function Book() {
     const book = {
         title: "All That Followed",

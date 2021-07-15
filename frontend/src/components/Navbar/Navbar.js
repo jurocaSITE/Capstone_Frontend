@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink as Link, useNavigate } from "react-router-dom";
-import { BiSearch } from "react-icons/bi";
+import { BiSearch } from "react-icons/bi"; // npm install react-icons --save
 import { FaUserCircle } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
 import "./Navbar.css";
@@ -16,7 +16,7 @@ export default function Navbar({userExists}) {
         {!userExists && (
           <span className="user-buttons">
             <Link to="/login">Login</Link>
-            <Link to="/register">Sign up</Link>
+            <Link to="/signup">Sign up</Link>
           </span>
         )}
 
