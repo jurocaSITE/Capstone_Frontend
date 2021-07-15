@@ -37,7 +37,7 @@ export default function Login({ user, setUser }) {
     setErrors((e) => ({ ...e, form: null }))
 
     try {
-      const res = await axios.post("http://localhost:3001/auth/login", form)
+      const res = await axios.post("http://localhost:5000/auth/login", form)
       if (res?.data?.user) {
         setUser(res.data.user)
       } else {

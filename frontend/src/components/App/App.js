@@ -38,7 +38,6 @@ export default function App() {
 			<BrowserRouter>
 				<Navbar userExists={userExists} />
 				<Routes>
-					<Route path="/" element={<Home />} />
 					<Route path="/login" element={<Login user={user} setUser={setUser} />} />
 					<Route path="/signup" element={<Register setAppState={setAppState} />} />
 					{ userExists ?

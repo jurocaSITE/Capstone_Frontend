@@ -9,6 +9,7 @@ export default function BookPreview({ book = {} }) {
   console.log("Book Preview topSeller exists? ", topSellerBook)
   return (
     <div className="BookPreview">
+
       {topSellerBook ? (
         <Link to={`/books/top/sellers/${book.title}`}>
           <img alt="book cover" src={book.book_image || defaultBookCover} />

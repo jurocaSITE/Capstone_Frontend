@@ -8,6 +8,8 @@ export default function Register({ setAppState }) {
 	const [isProcessing, setIsProcessing] = useState(false)
 	const [errors, setErrors] = useState({})
 	const [form, setForm] = useState({
+		firstName: "",
+		lastName: "",
 		username: "",
 		email: "",
 		password: "",
@@ -30,8 +32,10 @@ export default function Register({ setAppState }) {
 		setErrors((e) => ({ ...e, form: null }))
 	
 		try {
-		  const res = await axios.post("http://localhost:3001/auth/register", {
-			full_name: form.name,
+		  const res = await axios.post("http://localhost:5000/auth/register", {
+			first_name: form.firstName,
+			last_name: form.lastName,
+			username: form.username,
 			email: form.email,
 			password: form.password,
 		  })
@@ -47,7 +51,7 @@ export default function Register({ setAppState }) {
 		  setErrors((e) => ({ ...e, form: message ?? String(err) }))
 		} finally {
 		  setIsProcessing(false)
-		  navigate("/select/interests") // if user registers successfully, take them to the select genre interests page
+		//   navigate("/select/interests") // if user registers successfully, take them to the select genre interests page
 		}
 	  }
 	
@@ -58,47 +62,72 @@ export default function Register({ setAppState }) {
 	
 			{errors.form && <span className="error">{errors.form}</span>}
 			<br />
-	
+
 			<div className="form">
-			  <div className="input-field">
-				<label htmlFor="name">Username*</label>
+
+				<div className="input-field">
+				<label htmlFor="name">First name*</label>
 				<input
-				  type="text"
-				  name="name"
-				  placeholder="Enter your username"
-				  value={form.name}
-				  onChange={handleOnInputChange}
+					type="text"
+					name="firstName"
+					placeholder="Enter your first name"
+					value={form.firstName}
+					onChange={handleOnInputChange}
 				/>
-				{errors.name && <span className="error">{errors.name}</span>}
-			  </div>
-	
-			  <div className="input-field">
-				<label htmlFor="email">Email Address*</label>
+				{errors.firstName && <span className="error">{errors.firstName}</span>}
+				</div>
+				
+				<div className="input-field">
+				<label htmlFor="name">Last name*</label>
 				<input
-				  type="email"
-				  name="email"
-				  placeholder="Enter a valid email"
-				  value={form.email}
-				  onChange={handleOnInputChange}
+					type="text"
+					name="lastName"
+					placeholder="Enter your last name"
+					value={form.lastName}
+					onChange={handleOnInputChange}
 				/>
-				{errors.email && <span className="error">{errors.email}</span>}
-			  </div>
-	
-			  <div className="input-field">
-				<label htmlFor="password">Password*</label>
-				<input
-				  type="password"
-				  name="password"
-				  placeholder="Enter a secure password"
-				  value={form.password}
-				  onChange={handleOnInputChange}
-				/>
-				{errors.password && <span className="error">{errors.password}</span>}
-			  </div>
-	
-			  <button className="btn" disabled={isProcessing} onClick={handleOnSubmit}>
-				{isProcessing ? "Loading..." : "Sign Up"}
-			  </button>
+				{errors.lastName && <span className="error">{errors.lastName}</span>}
+				</div>
+
+				<div className="input-field">
+					<label htmlFor="name">Username*</label>
+					<input
+					type="text"
+					name="username"
+					placeholder="Enter a unique username"
+					value={form.username}
+					onChange={handleOnInputChange}
+					/>
+					{errors.username && <span className="error">{errors.username}</span>}
+				</div>
+		
+				<div className="input-field">
+					<label htmlFor="email">Email Address*</label>
+					<input
+					type="email"
+					name="email"
+					placeholder="Enter a valid email"
+					value={form.email}
+					onChange={handleOnInputChange}
+					/>
+					{errors.email && <span className="error">{errors.email}</span>}
+				</div>
+		
+				<div className="input-field">
+					<label htmlFor="password">Password*</label>
+					<input
+					type="password"
+					name="password"
+					placeholder="Enter a secure password"
+					value={form.password}
+					onChange={handleOnInputChange}
+					/>
+					{errors.password && <span className="error">{errors.password}</span>}
+				</div>
+		
+				<button className="btn" disabled={isProcessing} onClick={handleOnSubmit}>
+					{isProcessing ? "Loading..." : "Sign Up"}
+				</button>
 			</div>
 	
 			<div className="footer">
