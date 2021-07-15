@@ -1,7 +1,6 @@
-/* .Lists {
+.Lists {
 	background-color: #344356;
-	display: grid;
-	height: 100vh;
+	/* height: 100vh; */
 	font-family: Poppins;
 }
 
@@ -18,22 +17,28 @@
 
 .Lists .default-lists {
 	background: #ad9d81;
-	grid-row: 2;
-}
-*/
-
-.Lists {
-	background-color: #344356;
-	height: 100vh;
-	font-family: Poppins;
+	padding: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: space-around;
 }
 
-.Lists .top .title {
-	background-color: #344356;
-	padding: 90px;
-	color: #f2efe7;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 48px;
-	text-align: center;
+.Lists .search-and-create {
+	display: flex;
+	padding: 30px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.Lists .search-and-create .create-new-list {
+	cursor: pointer;
+}
+
+.Lists .display-lists-area {
+	display: flex;
+	padding: 30px 200px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
 }

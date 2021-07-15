@@ -8,3 +8,4 @@ export { default as UserHome } from "./UserHome/UserHome";
 export { default as Book } from "./Book/Book";
 export { default as BookPreview } from "./BookPreview/BookPreview";
 export { default as Lists } from "./Lists/Lists";
+export { default as ListCard } from "./ListCard/ListCard";

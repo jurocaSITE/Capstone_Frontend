@@ -53,7 +53,9 @@ export default function App() {
 					<Route path="/books/top/sellers/:title" element={<Book />} />
 					<Route path="/my-lists" element={<Lists />} />
 				</Routes>
-				<Footer />
+				<footer>
+					<Footer />
+				</footer>
 			</BrowserRouter>
 		</div>
 	);
