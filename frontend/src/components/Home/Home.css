@@ -6,7 +6,7 @@
   margin: 0;
 }
 .Home h1 {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
 }
 .Home .home-hero {
   display: flex;
@@ -20,6 +20,7 @@
   overflow: auto;
 }
 .Home .home-hero-text p {
+  font-size: 1.125rem; /* this equals 18px */
   padding-left: 0.5em;
   padding-right: 2em;
 }

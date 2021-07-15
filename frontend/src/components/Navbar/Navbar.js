@@ -3,6 +3,7 @@ import { NavLink as Link, useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
+import { UserPortal } from "components";
 import "./Navbar.css";
 
 export default function Navbar({userExists}) {
@@ -53,10 +54,12 @@ export default function Navbar({userExists}) {
               </button>
             </div>
 
-            <button className="user-portal">
+            <UserPortal />
+
+            {/* <button className="user-portal">
               <FaUserCircle className="user-icon" />
               <GoTriangleDown className="user-triangle" />
-            </button>
+            </button> */}
           </>
         )}
       </div>

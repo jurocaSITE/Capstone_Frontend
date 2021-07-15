@@ -63,9 +63,6 @@
 	margin: 0;
 	font-size: 1.5rem;
 }
-.Navbar .content .user-portal .user-icon {
-	font-size: 2rem;
-}
 .Navbar .content .user-buttons {
 	display: flex;
 	align-items: center;

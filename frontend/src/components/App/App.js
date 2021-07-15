@@ -1,12 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Register, Login, Navbar, Footer, Home, UserHome, Book } from "components";
+import { Register, Login, Navbar, Footer, Home, UserHome, Book, UserPortal } from "components";
 import apiClient from "services/apiClient"
 
 // var for testing purposes. 
 // TODO: remember to REMOVE (App, Navbar)
-const userExists = false;
+const userExists = true;
 
 export default function App() {
 	const [topSellers, setTopSellers] = useState([])
@@ -40,7 +40,8 @@ export default function App() {
 						<Route path="/" element={<Home topSellers={topSellers} />} /> 
 					}
 					<Route path="/books/id/:book_id" element={<Book />} /> 					
-					<Route path="/books/top/sellers/:title" element={<Book />} /> 					
+					<Route path="/books/top/sellers/:title" element={<Book />} />
+					<Route path="/test" element={<UserPortal />} /> 					
 				</Routes>
 				<Footer />
 			</BrowserRouter>
