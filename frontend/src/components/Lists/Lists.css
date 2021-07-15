@@ -1,0 +1,39 @@
+/* .Lists {
+	background-color: #344356;
+	display: grid;
+	height: 100vh;
+	font-family: Poppins;
+}
+
+.Lists .top .title {
+	background-color: #344356;
+	padding: 90px;
+	grid-column: 1 / -1;
+	color: #f2efe7;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 48px;
+	text-align: center;
+}
+
+.Lists .default-lists {
+	background: #ad9d81;
+	grid-row: 2;
+}
+*/
+
+.Lists {
+	background-color: #344356;
+	height: 100vh;
+	font-family: Poppins;
+}
+
+.Lists .top .title {
+	background-color: #344356;
+	padding: 90px;
+	color: #f2efe7;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 48px;
+	text-align: center;
+}

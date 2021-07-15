@@ -9,6 +9,7 @@ import {
 	Home,
 	UserHome,
 	Book,
+	Lists,
 } from "components";
 import apiClient from "services/apiClient";
 
@@ -50,6 +51,7 @@ export default function App() {
 					)}
 					<Route path="/books/id/:book_id" element={<Book />} />
 					<Route path="/books/top/sellers/:title" element={<Book />} />
+					<Route path="/my-lists" element={<Lists />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
