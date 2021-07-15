@@ -5,7 +5,7 @@ import { Register, Login, Navbar, Footer, Home, UserHome, Book } from "component
 import apiClient from "services/apiClient"
 
 // var for testing purposes. 
-// remember to REMOVE (App, Navbar)
+// TODO: remember to REMOVE (App, Navbar)
 const userExists = false;
 
 export default function App() {
@@ -32,8 +32,6 @@ export default function App() {
 		fetchTopSellers()
 	}, [])
 
-	console.log("Top Sellers after call...", topSellers)
-
 	return (
 
 		<div className="App">
@@ -47,7 +45,8 @@ export default function App() {
 						<Route path="/" element={<UserHome />} /> :
 						<Route path="/" element={<Home topSellers={topSellers} />} /> 
 					}
-					<Route path="/book" element={<Book />} /> 					
+					<Route path="/books/id/:book_id" element={<Book />} /> 					
+					<Route path="/books/top/sellers/:title" element={<Book />} /> 					
 				</Routes>
 				<Footer />
 			</BrowserRouter>
