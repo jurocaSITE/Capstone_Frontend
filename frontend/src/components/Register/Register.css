@@ -60,7 +60,7 @@
   }
 
 .Register .card .form .btn {
-    background-color: var(--main-clr);
+    background-color: var(--dark-accent);
     border: none;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
@@ -70,6 +70,7 @@
     font-size: 20px;
     margin-top: 20px;
     cursor: pointer;
+    transition: ease .25s;
 }
 
 .Register .card .form .btn:hover {
@@ -90,5 +91,9 @@
 .Register .card .footer a {
     color: black;
     font-weight: bold;
+    transition: ease .25s;
+}
+.Register .card .footer a:hover {
+    font-size: 1.05rem;
 }
 

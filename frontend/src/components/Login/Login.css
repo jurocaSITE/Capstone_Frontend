@@ -31,9 +31,13 @@
 .Login .card .form .input-field {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 80%;
     margin: 12px 0;
+}
+
+.Login .card .form .input-field label {
+    color: #696F79;
 }
 
 .Login .card .form .input-field input {
@@ -46,7 +50,7 @@
 }
 
 .Login .card .form .btn {
-    background-color: var(--main-clr);
+    background-color: var(--dark-accent);
     border: none;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
@@ -56,6 +60,7 @@
     font-size: 20px;
     margin-top: 20px;
     cursor: pointer;
+    transition: ease .25s;
 }
 
 .Login .card .error {
@@ -76,7 +81,7 @@
 
 .Login .card .footer {
     color: #696F79;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,4 +92,8 @@
 .Login .card .footer a {
     color: black;
     font-weight: bold;
+    transition: ease .25s;
+}
+.Login .card .footer a:hover {
+    font-size: 1.05rem;
 }

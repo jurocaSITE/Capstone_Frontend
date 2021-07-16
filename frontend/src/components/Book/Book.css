@@ -18,8 +18,10 @@
 }
 .Book .book-card img {
     object-fit: contain;
-    max-height: 500px;
-    width: 312.5px;
+    /* max-height: 500px; */
+    /* width: 312.5px; */
+    min-height: 20em;
+    width: 20em;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
     transition: ease .5s;
@@ -46,4 +48,10 @@
     /* align-self: flex-start; */
     padding-top: .5em;
     color: var(--light-shade-6-opacity);
+}
+.Book .book-details-lower {
+    margin-top: 1em;
+}
+.Book .book-details p {
+    padding: 1em 0;
 }

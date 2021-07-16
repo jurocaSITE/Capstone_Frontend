@@ -1,24 +1,27 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "services/apiClient";
 import { useSearchContext } from "contexts/search";
+import { useSearchForm } from "hooks/useSearchForm";
 import { BiSearch } from "react-icons/bi";
 import { IoCloseCircle } from "react-icons/io";
 import "./SearchBar.css";
 
-const testKey = "hunger games"
+const testKey = "hunger games";
 
 export default function SearchBar() {
   const navigate = useNavigate();
-//   const [searchResults, setSearchResults] = useState([])
-    const { searchResults, setSearchResults } = useSearchContext()
-  const [isFetching, setIsFetching] = useState(false)
-  const [errors, setErrors] = useState(null)
+  //   const [searchResults, setSearchResults] = useState([])
+  const { searchResults, setSearchResults } = useSearchContext();
+  const { form, errors, resetForm, setErrors, handleOnInputChange } =
+    useSearchForm();
+
+  const [isFetching, setIsFetching] = useState(false);
+  // const [errors, setErrors] = useState(null)
 
   const handleOnSubmit = async () => {
     navigate("/search");
-    setIsFetching(true)
+    setIsFetching(true);
 
     const { data, error } = await apiClient.getBooksByKeyword(testKey);
     if (error) {
@@ -28,10 +31,10 @@ export default function SearchBar() {
     if (data?.books) {
       setErrors(null);
       setSearchResults(data.books);
-      console.log("Search Results...", searchResults)
+      console.log("Search Results...", searchResults);
     }
 
-    setIsFetching(false)
+    setIsFetching(false);
   };
 
   return (
@@ -46,7 +49,11 @@ export default function SearchBar() {
       {/* {searchTerm > 0 && (
         <IoCloseCircle />
       )} */}
-      <button className="search-btn" onClick={handleOnSubmit}>
+      <button
+        className="search-btn"
+        disabled={isFetching}
+        onClick={handleOnSubmit}
+      >
         <BiSearch className="search-icon" />
       </button>
     </div>
