@@ -19,7 +19,7 @@ export default function Home({ topSellers = [] }) {
             features, and much more. Please sign up to explore everything the
             site has to offer.
           </p>
-          <ActionButton link={"/register"} text={"Sign Up"} />
+          <ActionButton link={"/signup"} text={"Sign Up"} />
         </div>
         <img alt="library shelves" src={home_hero_img} />
       </div>

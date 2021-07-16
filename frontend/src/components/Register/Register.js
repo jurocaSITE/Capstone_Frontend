@@ -2,9 +2,11 @@ import "./Register.css";
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
+import { useAuthContext } from "contexts/auth";
 
 export default function Register({ setAppState }) {
 	const navigate = useNavigate()
+	const { setUser } = useAuthContext()
 	const [isProcessing, setIsProcessing] = useState(false)
 	const [errors, setErrors] = useState({})
 	const [form, setForm] = useState({
@@ -41,7 +43,9 @@ export default function Register({ setAppState }) {
 		  })
 		  console.log(res)
 		  if (res?.data?.user) {
-			setAppState(res.data.user)
+			// setAppState(res.data.user)
+			setUser(res.data.user)
+			navigate("/") //TODO navigate to select interest page
 		  } else {
 			setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
 		  }
@@ -66,7 +70,7 @@ export default function Register({ setAppState }) {
 			<div className="form">
 
 				<div className="input-field">
-				<label htmlFor="name">First name*</label>
+				<label htmlFor="firstName">First name*</label>
 				<input
 					type="text"
 					name="firstName"
@@ -78,7 +82,7 @@ export default function Register({ setAppState }) {
 				</div>
 				
 				<div className="input-field">
-				<label htmlFor="name">Last name*</label>
+				<label htmlFor="lastName">Last name*</label>
 				<input
 					type="text"
 					name="lastName"

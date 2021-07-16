@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchContextProvider, useSearchContext } from "contexts/search";
+import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 import {
   Register,
@@ -17,21 +18,24 @@ import {
 
 // var for testing purposes.
 // TODO: remember to REMOVE (App, Navbar)
-const userExists = true;
+const userExists = false;
 
 // this is for global context so all components can access searchResults
 export default function AppContainer() {
 	return (
-		<SearchContextProvider>
-			<App />
-		</SearchContextProvider>
+    <AuthContextProvider>
+      <SearchContextProvider>
+        <App />
+      </SearchContextProvider>
+    </AuthContextProvider>
 	)
 }
 
 function App() {
   const [topSellers, setTopSellers] = useState([]);
   const [errors, setErrors] = useState(null);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
+  const {user, setUser} = useAuthContext();
 	const [appState, setAppState] = useState({});
 
   useEffect(() => {
@@ -55,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar userExists={userExists} />
+        <Navbar />
         <Routes>
           <Route path="/books/id/:book_id" element={<Book />} />
           <Route path="/books/top/sellers/:title" element={<Book />} />
@@ -69,7 +73,7 @@ function App() {
 						element={<Register setAppState={setAppState} />}
             />
           <Route path="/search" element={<SearchResults />} />
-            {userExists ? (
+            {user ? (
               <Route path="/" element={<UserHome />} />
             ) : (
               <Route path="/" element={<Home topSellers={topSellers} />} />

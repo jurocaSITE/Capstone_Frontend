@@ -39,7 +39,7 @@ function Lists() {
 			<div className="search-and-create">
 				<div className="search">
 					<div className="search-bar">
-						{/* <h1>Search</h1> */}
+						<h1>Search</h1>
 						<InputBase
 							placeholder="Search…"
 							classes={{
