@@ -16,7 +16,7 @@ export default function Navbar({userExists}) {
         {!userExists && (
           <span className="user-buttons">
             <Link to="/login">Login</Link>
-            <Link to="/register">Sign up</Link>
+            <Link to="/signup">Sign up</Link>
           </span>
         )}
 

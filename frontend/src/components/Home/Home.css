@@ -32,7 +32,7 @@
   border-radius: var(--border-rad);
   box-shadow: var(--default-shadow);
 }
-.Home .home-hero button {
+/* .Home .home-hero button {
   cursor: pointer;
   padding: 0.5em 3em;
   margin-left: 0.5em;
@@ -49,7 +49,7 @@
 }
 .Home .home-hero button:hover {
   transform: scale(1.1);
-}
+} */
 .Home .home-feed {
   padding: 1em;
   color: var(--light-shade);

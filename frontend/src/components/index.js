@@ -11,3 +11,5 @@ export { default as ActionButton } from "./ActionButton/ActionButton";
 export { default as UserPortal } from "./UserPortal/UserPortal";
 export { default as SearchResults } from "./SearchResults/SearchResults";
 export { default as SearchBar } from "./SearchBar/SearchBar";
+export { default as Lists } from "./Lists/Lists";
+export { default as ListCard } from "./ListCard/ListCard";

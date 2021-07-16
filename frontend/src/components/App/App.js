@@ -1,6 +1,6 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchContextProvider, useSearchContext } from "contexts/search";
 import apiClient from "services/apiClient";
 import {
@@ -12,6 +12,7 @@ import {
   UserHome,
   Book,
   SearchResults,
+  Lists
 } from "components";
 
 // var for testing purposes.
@@ -30,6 +31,8 @@ export default function AppContainer() {
 function App() {
   const [topSellers, setTopSellers] = useState([]);
   const [errors, setErrors] = useState(null);
+  const [user, setUser] = useState({});
+	const [appState, setAppState] = useState({});
 
   useEffect(() => {
     const fetchTopSellers = async () => {
@@ -54,16 +57,27 @@ function App() {
       <BrowserRouter>
         <Navbar userExists={userExists} />
         <Routes>
-          {userExists ? (
-            <Route path="/" element={<UserHome />} />
-          ) : (
-            <Route path="/" element={<Home topSellers={topSellers} />} />
-          )}
           <Route path="/books/id/:book_id" element={<Book />} />
           <Route path="/books/top/sellers/:title" element={<Book />} />
+          <Route path="/my-lists" element={<Lists />} />
+          <Route
+						path="/login"
+						element={<Login user={user} setUser={setUser} />}
+            />
+					<Route
+						path="/signup"
+						element={<Register setAppState={setAppState} />}
+            />
           <Route path="/search" element={<SearchResults />} />
+            {userExists ? (
+              <Route path="/" element={<UserHome />} />
+            ) : (
+              <Route path="/" element={<Home topSellers={topSellers} />} />
+            )}
         </Routes>
-        <Footer />
+        <footer>
+					<Footer />
+				</footer>
       </BrowserRouter>
     </div>
   );
