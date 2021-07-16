@@ -1,10 +1,12 @@
 import React from "react";
-import { NavLink as Link, useNavigate } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 import { UserPortal, SearchBar } from "components";
+import { useAuthContext } from "contexts/auth";
 import "./Navbar.css";
 
-export default function Navbar({ userExists }) {
-	const navigate = useNavigate();
+export default function Navbar() {
+	// const navigate = useNavigate()
+	const { user } = useAuthContext();
 
 	return (
 		<nav className="Navbar">
@@ -13,14 +15,17 @@ export default function Navbar({ userExists }) {
 					<Link to="/">teca</Link>
 				</span>
 
-				{!userExists && (
-					<span className="user-buttons">
-						<Link to="/login">Login</Link>
-						<Link to="/signup">Sign up</Link>
-					</span>
+				{!user && (
+					<>
+						<SearchBar />
+						<span className="user-buttons">
+							<Link to="/login">Login</Link>
+							<Link to="/signup">Sign up</Link>
+						</span>
+					</>
 				)}
 
-				{userExists && (
+				{user && (
 					<>
 						<ul className="pages">
 							<li>

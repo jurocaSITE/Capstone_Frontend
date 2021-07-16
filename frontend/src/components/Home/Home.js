@@ -30,6 +30,15 @@ export default function Home({ topSellers = [] }) {
 					))}
 				</div>
 			</div>
+
+			<div className="home-feed">
+				<h2>NYT Top Sellers</h2>
+				<div className="home-feed-books">
+					{topSellers.map((book) => (
+						<BookPreview book={book} key={book.title} />
+					))}
+				</div>
+			</div>
 		</div>
 	);
 }

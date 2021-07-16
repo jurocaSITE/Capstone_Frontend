@@ -7,7 +7,7 @@ export const useSearchForm = () => {
     searchTerm: ""
   });
 
-// potential function for filtering for lists
+//! potential function for filtering for lists
 //   const handleFilter = (event) => {
 //     const searchTerm = event.target.value
 //     const newFilter = data.filter((value) => {
@@ -17,7 +17,7 @@ export const useSearchForm = () => {
 //   }
 
   const handleOnInputChange = (event) => {
-    if (event.target.name === "name") {
+    if (event.target.name === "search") {
       if (!event.target.value) {
         setErrors((e) => ({ ...e, name: "This field cannot be empty." }));
       } else {

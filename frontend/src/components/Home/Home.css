@@ -23,6 +23,7 @@
 	font-size: 1.125rem; /* this equals 18px */
 	padding-left: 0.5em;
 	padding-right: 2em;
+	padding-bottom: 1em;
 }
 .Home .home-hero img {
 	/* object-fit: contain; */
@@ -32,24 +33,7 @@
 	border-radius: var(--border-rad);
 	box-shadow: var(--default-shadow);
 }
-/* .Home .home-hero button {
-  cursor: pointer;
-  padding: 0.5em 3em;
-  margin-left: 0.5em;
 
-  font-family: inherit;
-  font-size: 1.2rem;
-  color: var(--light-shade);
-
-  background: var(--dark-accent);
-  border: none;
-  border-radius: var(--border-rad);
-  box-shadow: var(--default-shadow);
-  transition: ease .25s;
-}
-.Home .home-hero button:hover {
-  transform: scale(1.1);
-} */
 .Home .home-feed {
 	padding: 1em;
 	color: var(--light-shade);

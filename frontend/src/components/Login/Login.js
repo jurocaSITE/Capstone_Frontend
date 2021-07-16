@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useAuthContext } from "contexts/auth"
 import "./Login.css"
 
-export default function Login({ user, setUser }) {
+export default function Login() {
   const navigate = useNavigate()
+  const { user, setUser } = useAuthContext()
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState({})
   const [form, setForm] = useState({
@@ -54,13 +56,14 @@ export default function Login({ user, setUser }) {
   return (
     <div className="Login">
       <div className="card">
-        <h2>Sign In</h2>
+        <h2>Login</h2>
 
         {errors.form && <span className="error">{errors.form}</span>}
         <br />
 
         <div className="form">
           <div className="input-field">
+            <label htmlFor="email">Email*</label>
             <input 
               type="email" 
               name="email" 
@@ -71,6 +74,7 @@ export default function Login({ user, setUser }) {
           </div>
 
           <div className="input-field">
+            <label htmlFor="password">Password*</label>
             <input
               type="password"
               name="password"

@@ -7,7 +7,7 @@ const defaultBookCover =
 
 export default function BookPreview({ book = {} }) {
 	const topSellerBook = !book.id; // top sellers from NYT api do not have an id
-	console.log("Book Preview topSeller exists? ", topSellerBook);
+	// console.log("Book Preview topSeller exists? ", topSellerBook);
 	return (
 		<div className="BookPreview">
 			{topSellerBook ? (
@@ -16,7 +16,16 @@ export default function BookPreview({ book = {} }) {
 				</Link>
 			) : (
 				<Link to={`/books/id/${book.id}`}>
-					<img alt="book cover" src={book.book_image || defaultBookCover} />
+					<img
+						alt="book cover"
+						src={
+							book?.imageLinks?.large ||
+							book?.imageLinks?.medium ||
+							book?.imageLinks?.small ||
+							book?.imageLinks?.thumbnail ||
+							defaultBookCover
+						}
+					/>
 				</Link>
 			)}
 		</div>
