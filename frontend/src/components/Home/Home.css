@@ -23,6 +23,7 @@
 	font-size: 1.125rem; /* this equals 18px */
 	padding-left: 0.5em;
 	padding-right: 2em;
+	padding-bottom: 2em;
 }
 .Home .home-hero img {
 	/* object-fit: contain; */
