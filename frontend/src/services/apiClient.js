@@ -40,6 +40,10 @@ class ApiClient {
         return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials})
     }
 
+    async getBooksByKeyword(keyword) {
+        return await this.request({ endpoint: `books/${keyword}`, method: `GET` })
+    }
+
     async getBookById(id) {
         return await this.request({ endpoint: `books/id/${id}`, method: `GET` })
     }

@@ -1,0 +1,59 @@
+.UserPortal 
+{
+    color: var(--light-shade);
+    position: relative;
+} 
+.UserPortal .user-icons 
+{
+    background: transparent;
+    cursor: pointer;
+    width: fit-content;
+}
+.UserPortal .user-icons svg:first-child
+{
+    font-size: 2rem;
+}
+.UserPortal .user-icons:hover svg:nth-child(2)
+{
+    transform: translateY(2px);
+}
+.UserPortal .user-menu
+{
+    position: absolute;
+    left: -5em;
+    top: 1.5em;
+
+    background: var(--light-shade);
+    width: fit-content;
+    white-space: nowrap;
+    border-radius: var(--border-rad);
+    box-shadow: var(--default-shadow);
+    padding: .5em .75em;
+}
+.UserPortal ul 
+{
+    display: flex;
+    flex-direction: column;
+}
+.UserPortal li
+{
+    list-style-type: none;
+    color: var(--dark-shade);
+    margin: .25em 0;
+    transition: ease .25s;
+}
+.UserPortal li:hover
+{
+    background: var(--dark-accent);
+    border-radius: var(--border-rad);
+    color: var(--light-shade);
+    padding: .2em .5em;
+}
+.UserPortal .sign-out::after 
+{
+    content: 'Sign Out';
+}
+.UserPortal .sign-out:hover::after 
+{
+    content: 'Goodbye 🤗';
+}

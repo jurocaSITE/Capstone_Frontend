@@ -1,0 +1,19 @@
+.ActionButton {
+  cursor: pointer;
+  padding: 0.5em 3em;
+  /* margin-left: 0.5em; */
+  width: fit-content;
+
+  font-family: inherit;
+  font-size: 1.2rem;
+  color: var(--light-shade);
+
+  background: var(--dark-accent);
+  border: none;
+  border-radius: var(--border-rad);
+  box-shadow: var(--default-shadow);
+  transition: ease 0.25s;
+}
+.ActionButton:hover {
+  transform: scale(1.1);
+}
