@@ -4,11 +4,14 @@
 	font-family: Poppins;
 }
 
+h1 {
+	color: #f2efe7;
+}
+
 .Lists .top .title {
 	background-color: #344356;
 	padding: 90px;
 	grid-column: 1 / -1;
-	color: #f2efe7;
 	font-style: normal;
 	font-weight: 600;
 	font-size: 48px;
@@ -31,6 +34,33 @@
 	align-items: center;
 }
 
+.Lists .search-and-create .search {
+	display: flex;
+	align-items: center;
+}
+
+.Lists .search-and-create .search-bar {
+	background-color: #f2efe7;
+	opacity: 0.5;
+	border-radius: var(--border-rad);
+}
+
+.Lists .search-and-create .search-icon {
+	color: white;
+	margin-left: 10px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
+}
+
+.Lists .search-and-create .search-icon .icon {
+	font-size: 37px;
+	cursor: pointer;
+}
+
 .Lists .search-and-create .create-new-list {
 	cursor: pointer;
 }
@@ -41,4 +71,5 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 70px;
 }
