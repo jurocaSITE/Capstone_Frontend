@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink as Link, useNavigate } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 import { UserPortal, SearchBar } from "components";
 import { useAuthContext } from "contexts/auth";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { user } = useAuthContext()
 
   return (

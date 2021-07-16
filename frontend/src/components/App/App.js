@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchContextProvider, useSearchContext } from "contexts/search";
+import { SearchContextProvider } from "contexts/search";
 import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 import {
@@ -13,30 +13,25 @@ import {
   UserHome,
   Book,
   SearchResults,
-  Lists
+  Lists,
 } from "components";
 
-// var for testing purposes.
-// TODO: remember to REMOVE (App, Navbar)
-const userExists = false;
-
-// this is for global context so all components can access searchResults
+// this is for global context so all components can access searchResults, user
 export default function AppContainer() {
-	return (
+  return (
     <AuthContextProvider>
       <SearchContextProvider>
         <App />
       </SearchContextProvider>
     </AuthContextProvider>
-	)
+  );
 }
 
 function App() {
   const [topSellers, setTopSellers] = useState([]);
   const [errors, setErrors] = useState(null);
-  // const [user, setUser] = useState({});
-  const {user, setUser} = useAuthContext();
-	const [appState, setAppState] = useState({});
+  const { user, setUser } = useAuthContext();
+  // const [appState, setAppState] = useState({});
 
   useEffect(() => {
     const fetchTopSellers = async () => {
@@ -65,23 +60,21 @@ function App() {
           <Route path="/books/top/sellers/:title" element={<Book />} />
           <Route path="/my-lists" element={<Lists />} />
           <Route
-						path="/login"
-						element={<Login user={user} setUser={setUser} />}
-            />
-					<Route
-						path="/signup"
-						element={<Register setAppState={setAppState} />}
-            />
+            path="/login"
+            element={<Login user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/signup"
+            element={<Register />}
+          />
           <Route path="/search" element={<SearchResults />} />
-            {user ? (
-              <Route path="/" element={<UserHome />} />
-            ) : (
-              <Route path="/" element={<Home topSellers={topSellers} />} />
-            )}
+          {user ? (
+            <Route path="/" element={<UserHome />} />
+          ) : (
+            <Route path="/" element={<Home topSellers={topSellers} />} />
+          )}
         </Routes>
-        <footer>
-					<Footer />
-				</footer>
+        <Footer />
       </BrowserRouter>
     </div>
   );

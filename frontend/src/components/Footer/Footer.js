@@ -1,10 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { GiWhiteBook } from "react-icons/gi";
 import "./Footer.css";
 
 export default function Footer() {
   return (
-    <div className="Footer">
+    <footer className="Footer">
       <GiWhiteBook className="footer-icon" />
         <ul className="footer-links">
           <li>
@@ -18,6 +18,6 @@ export default function Footer() {
             </Link>
           </li>
         </ul>
-    </div>
+    </footer>
   );
 }
