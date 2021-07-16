@@ -4,20 +4,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchContextProvider, useSearchContext } from "contexts/search";
 import apiClient from "services/apiClient";
 import {
-  Register,
-  Login,
-  Navbar,
-  Footer,
-  Home,
-  UserHome,
-  Book,
-  SearchResults,
-  Lists
+	Register,
+	Login,
+	Navbar,
+	Footer,
+	Home,
+	UserHome,
+	Book,
+	SearchResults,
+	Lists,
+	ProfilePage,
 } from "components";
 
 // var for testing purposes.
 // TODO: remember to REMOVE (App, Navbar)
-const userExists = true;
+const userExists = false;
 
 // this is for global context so all components can access searchResults
 export default function AppContainer() {
@@ -25,60 +26,61 @@ export default function AppContainer() {
 		<SearchContextProvider>
 			<App />
 		</SearchContextProvider>
-	)
+	);
 }
 
 function App() {
-  const [topSellers, setTopSellers] = useState([]);
-  const [errors, setErrors] = useState(null);
-  const [user, setUser] = useState({});
+	const [topSellers, setTopSellers] = useState([]);
+	const [errors, setErrors] = useState(null);
+	const [user, setUser] = useState({});
 	const [appState, setAppState] = useState({});
 
-  useEffect(() => {
-    const fetchTopSellers = async () => {
-      //setIsFetching(true)
+	useEffect(() => {
+		const fetchTopSellers = async () => {
+			//setIsFetching(true)
 
-      const { data, error } = await apiClient.getTopSellers();
-      if (error) {
-        setErrors((e) => ({ ...e, db: error }));
-        setTopSellers([]);
-      }
-      if (data?.top_sellers) {
-        setErrors(null);
-        setTopSellers(data.top_sellers);
-      }
-    };
-    //setIsFetching(false)
-    fetchTopSellers();
-  }, []);
+			const { data, error } = await apiClient.getTopSellers();
+			if (error) {
+				setErrors((e) => ({ ...e, db: error }));
+				setTopSellers([]);
+			}
+			if (data?.top_sellers) {
+				setErrors(null);
+				setTopSellers(data.top_sellers);
+			}
+		};
+		//setIsFetching(false)
+		fetchTopSellers();
+	}, []);
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar userExists={userExists} />
-        <Routes>
-          <Route path="/books/id/:book_id" element={<Book />} />
-          <Route path="/books/top/sellers/:title" element={<Book />} />
-          <Route path="/my-lists" element={<Lists />} />
-          <Route
+	return (
+		<div className="App">
+			<BrowserRouter>
+				<Navbar userExists={userExists} />
+				<Routes>
+					<Route path="/books/id/:book_id" element={<Book />} />
+					<Route path="/books/top/sellers/:title" element={<Book />} />
+					<Route path="/my-lists" element={<Lists />} />
+					<Route path="/profile" element={<ProfilePage />} />
+					<Route
 						path="/login"
 						element={<Login user={user} setUser={setUser} />}
-            />
+					/>
 					<Route
 						path="/signup"
 						element={<Register setAppState={setAppState} />}
-            />
-          <Route path="/search" element={<SearchResults />} />
-            {userExists ? (
-              <Route path="/" element={<UserHome />} />
-            ) : (
-              <Route path="/" element={<Home topSellers={topSellers} />} />
-            )}
-        </Routes>
-        <footer>
+					/>
+					<Route path="/search" element={<SearchResults />} />
+					{userExists ? (
+						<Route path="/" element={<UserHome />} />
+					) : (
+						<Route path="/" element={<Home topSellers={topSellers} />} />
+					)}
+				</Routes>
+				<footer>
 					<Footer />
 				</footer>
-      </BrowserRouter>
-    </div>
-  );
+			</BrowserRouter>
+		</div>
+	);
 }
