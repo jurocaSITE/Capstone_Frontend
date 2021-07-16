@@ -5,10 +5,10 @@ import "./SearchResults.css";
 const search_term = "hunger games";
 
 export default function SearchResults() {
-  const { searchResults } = useSearchContext();
+  const { searchResults, form } = useSearchContext();
   return (
     <div className="SearchResults">
-      <h1>Search Results for '{search_term}'</h1>
+      <h1>Search Results for '{form.searchTerm}'</h1>
       <div className="search-feed">
         {searchResults?.map((book) => (
           <BookPreview book={book} key={book.id} />

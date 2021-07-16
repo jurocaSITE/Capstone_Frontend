@@ -25,13 +25,13 @@ export default function UserPortal() {
 			</div>
 			{showMenu ? (
 				<ul className="user-menu">
-					<Link to="/profile">
+					<Link to="/profile" onClick={toggleMenu} >
 						<li>Your Profile</li>
 					</Link>
-					<Link to="/">
+					<Link to="/" onClick={toggleMenu} >
 						<li>Settings</li>
 					</Link>
-					<Link to="/">
+					<Link to="/" onClick={toggleMenu} >
 						<li className="sign-out" onClick={handleOnSignOut}></li>
 					</Link>
 				</ul>

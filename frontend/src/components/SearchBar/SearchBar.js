@@ -2,36 +2,38 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "services/apiClient";
 import { useSearchContext } from "contexts/search";
-import { useSearchForm } from "hooks/useSearchForm";
 import { BiSearch } from "react-icons/bi";
-import { IoCloseCircle } from "react-icons/io";
+import { IoCloseCircle } from "react-icons/io5";
 import "./SearchBar.css";
 
 const testKey = "hunger games";
 
 export default function SearchBar() {
   const navigate = useNavigate();
-  //   const [searchResults, setSearchResults] = useState([])
-  const { searchResults, setSearchResults } = useSearchContext();
-  const { form, errors, resetForm, setErrors, handleOnInputChange } =
-    useSearchForm();
+  const {
+    setSearchResults,
+    form,
+    errors,
+    resetForm,
+    setErrors,
+    handleOnInputChange,
+  } = useSearchContext();
 
   const [isFetching, setIsFetching] = useState(false);
-  // const [errors, setErrors] = useState(null)
 
   const handleOnSubmit = async () => {
     navigate("/search");
     setIsFetching(true);
 
-    const { data, error } = await apiClient.getBooksByKeyword(testKey);
+    const { data, error } = await apiClient.getBooksByKeyword(form.searchTerm);
     if (error) {
       setErrors((e) => ({ ...e, db: error }));
       setSearchResults([]);
+      
     }
     if (data?.books) {
       setErrors(null);
       setSearchResults(data.books);
-      console.log("Search Results...", searchResults);
     }
 
     setIsFetching(false);
@@ -41,14 +43,14 @@ export default function SearchBar() {
     <div className="SearchBar">
       <input
         type="text"
-        name="search"
+        name="searchTerm"
         placeholder="Search..."
-        // value={form.searchTerm}
-        // onChange={handleOnInputChange}
+        value={form.searchTerm}
+        onChange={handleOnInputChange}
       />
-      {/* {searchTerm > 0 && (
-        <IoCloseCircle />
-      )} */}
+      {form.searchTerm.length > 0 && (
+        <IoCloseCircle className="close-icon" onClick={resetForm} />
+      )}
       <button
         className="search-btn"
         disabled={isFetching}
