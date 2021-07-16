@@ -12,12 +12,13 @@ import {
   UserHome,
   Book,
   SearchResults,
-  Lists
+  Lists,
+  DetailedList
 } from "components";
 
 // var for testing purposes.
 // TODO: remember to REMOVE (App, Navbar)
-const userExists = false;
+const userExists = true;
 
 // this is for global context so all components can access searchResults
 export default function AppContainer() {
@@ -60,6 +61,7 @@ function App() {
           <Route path="/books/id/:book_id" element={<Book />} />
           <Route path="/books/top/sellers/:title" element={<Book />} />
           <Route path="/my-lists" element={<Lists />} />
+		  <Route path="/detailed-list" element={<DetailedList />} />
           <Route
 						path="/login"
 						element={<Login user={user} setUser={setUser} />}

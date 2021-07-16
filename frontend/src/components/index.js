@@ -13,3 +13,4 @@ export { default as SearchResults } from "./SearchResults/SearchResults";
 export { default as SearchBar } from "./SearchBar/SearchBar";
 export { default as Lists } from "./Lists/Lists";
 export { default as ListCard } from "./ListCard/ListCard";
+export { default as DetailedList } from "./DetailedList/DetailedList";
