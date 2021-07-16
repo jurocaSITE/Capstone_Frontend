@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import apiClient from "services/apiClient";
 import { useSearchContext } from "contexts/search";
 import { BiSearch } from "react-icons/bi";
+import { IoCloseCircle } from "react-icons/io";
 import "./SearchBar.css";
 
 const testKey = "hunger games"
@@ -42,6 +43,9 @@ export default function SearchBar() {
         // value={form.searchTerm}
         // onChange={handleOnInputChange}
       />
+      {/* {searchTerm > 0 && (
+        <IoCloseCircle />
+      )} */}
       <button className="search-btn" onClick={handleOnSubmit}>
         <BiSearch className="search-icon" />
       </button>
