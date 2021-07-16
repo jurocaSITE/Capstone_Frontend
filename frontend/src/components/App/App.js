@@ -5,7 +5,6 @@ import { SearchContextProvider } from "contexts/search";
 import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 import {
-<<<<<<< HEAD
 	Register,
 	Login,
 	Navbar,
@@ -18,53 +17,22 @@ import {
 	ProfilePage,
 } from "components";
 
-// var for testing purposes.
-// TODO: remember to REMOVE (App, Navbar)
-const userExists = false;
-
-// this is for global context so all components can access searchResults
+// this is for global context so all components can access searchResults, user
 export default function AppContainer() {
 	return (
-		<SearchContextProvider>
-			<App />
-		</SearchContextProvider>
+		<AuthContextProvider>
+			<SearchContextProvider>
+				<App />
+			</SearchContextProvider>
+		</AuthContextProvider>
 	);
 }
 
 function App() {
 	const [topSellers, setTopSellers] = useState([]);
 	const [errors, setErrors] = useState(null);
-	const [user, setUser] = useState({});
-	const [appState, setAppState] = useState({});
-=======
-  Register,
-  Login,
-  Navbar,
-  Footer,
-  Home,
-  UserHome,
-  Book,
-  SearchResults,
-  Lists,
-} from "components";
-
-// this is for global context so all components can access searchResults, user
-export default function AppContainer() {
-  return (
-    <AuthContextProvider>
-      <SearchContextProvider>
-        <App />
-      </SearchContextProvider>
-    </AuthContextProvider>
-  );
-}
-
-function App() {
-  const [topSellers, setTopSellers] = useState([]);
-  const [errors, setErrors] = useState(null);
-  const { user, setUser } = useAuthContext();
-  // const [appState, setAppState] = useState({});
->>>>>>> 458c9f741a591f61dfea8ab2f4ffd6398721d9d1
+	const { user, setUser } = useAuthContext();
+	// const [appState, setAppState] = useState({});
 
 	useEffect(() => {
 		const fetchTopSellers = async () => {
@@ -84,11 +52,10 @@ function App() {
 		fetchTopSellers();
 	}, []);
 
-<<<<<<< HEAD
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Navbar userExists={userExists} />
+				<Navbar />
 				<Routes>
 					<Route path="/books/id/:book_id" element={<Book />} />
 					<Route path="/books/top/sellers/:title" element={<Book />} />
@@ -98,50 +65,16 @@ function App() {
 						path="/login"
 						element={<Login user={user} setUser={setUser} />}
 					/>
-					<Route
-						path="/signup"
-						element={<Register setAppState={setAppState} />}
-					/>
+					<Route path="/signup" element={<Register />} />
 					<Route path="/search" element={<SearchResults />} />
-					{userExists ? (
+					{user ? (
 						<Route path="/" element={<UserHome />} />
 					) : (
 						<Route path="/" element={<Home topSellers={topSellers} />} />
 					)}
 				</Routes>
-				<footer>
-					<Footer />
-				</footer>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	);
-=======
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/books/id/:book_id" element={<Book />} />
-          <Route path="/books/top/sellers/:title" element={<Book />} />
-          <Route path="/my-lists" element={<Lists />} />
-          <Route
-            path="/login"
-            element={<Login user={user} setUser={setUser} />}
-          />
-          <Route
-            path="/signup"
-            element={<Register />}
-          />
-          <Route path="/search" element={<SearchResults />} />
-          {user ? (
-            <Route path="/" element={<UserHome />} />
-          ) : (
-            <Route path="/" element={<Home topSellers={topSellers} />} />
-          )}
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </div>
-  );
->>>>>>> 458c9f741a591f61dfea8ab2f4ffd6398721d9d1
 }

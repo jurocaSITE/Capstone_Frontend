@@ -6,36 +6,36 @@ import { useAuthContext } from "contexts/auth";
 import "./UserPortal.css";
 
 export default function UserPortal() {
-  const navigate = useNavigate()
-  const { setUser } = useAuthContext()
-  const [showMenu, setShowMenu] = useState(false);
+	const navigate = useNavigate();
+	const { setUser } = useAuthContext();
+	const [showMenu, setShowMenu] = useState(false);
 
-  const toggleMenu = () => setShowMenu(!showMenu);
+	const toggleMenu = () => setShowMenu(!showMenu);
 
-  const handleOnSignOut = () => {
-    setUser(null)
-    navigate("/")
-  }
+	const handleOnSignOut = () => {
+		setUser(null);
+		navigate("/");
+	};
 
-  return (
-    <div className="UserPortal">
-      <div className="user-icons" onClick={toggleMenu}>
-        <FaUserCircle />
-        <GoTriangleDown />
-      </div>
-      {showMenu ? (
-        <ul className="user-menu">
-          <Link to="/">
-            <li>Your Profile</li>
-          </Link>
-          <Link to="/">
-            <li>Settings</li>
-          </Link>
-          <Link to="/">
-            <li className="sign-out" onClick={handleOnSignOut}></li>
-          </Link>
-        </ul>
-      ) : null}
-    </div>
-  );
+	return (
+		<div className="UserPortal">
+			<div className="user-icons" onClick={toggleMenu}>
+				<FaUserCircle />
+				<GoTriangleDown />
+			</div>
+			{showMenu ? (
+				<ul className="user-menu">
+					<Link to="/profile">
+						<li>Your Profile</li>
+					</Link>
+					<Link to="/">
+						<li>Settings</li>
+					</Link>
+					<Link to="/">
+						<li className="sign-out" onClick={handleOnSignOut}></li>
+					</Link>
+				</ul>
+			) : null}
+		</div>
+	);
 }
