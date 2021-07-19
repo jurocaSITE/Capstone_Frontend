@@ -2,8 +2,10 @@ import "./SearchResults.css";
 import { useSearchContext } from "contexts/search";
 import { BookPreview, ActionButton } from "components";
 import apiClient from "services/apiClient";
+import { useEffect } from "react";
 
 export default function SearchResults() {
+  let offset = 0;
   const {
     searchResults,
     form,
@@ -12,7 +14,10 @@ export default function SearchResults() {
     setErrors,
     setSearchResults,
   } = useSearchContext();
-  let offset = 0;
+
+  useEffect(() => {
+    setSearchResults([])
+  }, [setSearchResults])
 
   const loadMore = async () => {
     offset = searchResults.length;
@@ -37,7 +42,7 @@ export default function SearchResults() {
   return (
     <div className="SearchResults">
       <h1>Search Results for '{form.searchTerm}'</h1>
-      {isSearching && <div className="loader"></div>}
+      {isSearching && <div className="loader">Loading...</div>}
       {errors?.db && <p>Error: {errors.db}</p>}
       
       <div className="search-feed">

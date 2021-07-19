@@ -4,7 +4,7 @@ import { UserPortal, SearchBar } from "components";
 import { useAuthContext } from "contexts/auth";
 import "./Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({appRef}) {
 	// const navigate = useNavigate()
 	const { user } = useAuthContext();
 

@@ -32,7 +32,6 @@ function App() {
 	const [topSellers, setTopSellers] = useState([]);
 	const [errors, setErrors] = useState(null);
 	const { user, setUser } = useAuthContext();
-	// const [appState, setAppState] = useState({});
 
 	useEffect(() => {
 		const fetchTopSellers = async () => {

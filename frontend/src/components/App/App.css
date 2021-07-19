@@ -15,7 +15,7 @@
   height: 4em;
 }
 .loader {
-  color: #ffffff;
+  color: var(--light-shade);
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;

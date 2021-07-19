@@ -67,7 +67,7 @@ export default function Book() {
 
   const renderBookInfo = () => {
     if (isFetching) {
-      return <h1>Loading...</h1>;
+      return <div className="loader">Loading...</div>;
     }
 
     if (errors) {
@@ -103,7 +103,7 @@ export default function Book() {
 
             <div class="book-details-lower">
               <h2>Description</h2>
-              <p>{book.description}</p>
+              <p className="book-desc">{book.description}</p>
               <ActionButton link={"#"} text={"Add to List"} />
             </div>
           </div>
