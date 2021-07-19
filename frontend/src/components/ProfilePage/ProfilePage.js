@@ -7,10 +7,10 @@ const defaultUserPicture = "https://source.unsplash.com/random";
 function ProfilePage() {
 	return (
 		<div className="ProfilePage">
+			<div className="white-chunk"></div>
 			<div className="user-information-and-image">
 				<div className="user-image">
 					<img className="imgage" alt="list cover" src={defaultUserPicture} />
-					{/* image */}
 				</div>
 				<div className="user-information">
 					<h1>Username</h1>

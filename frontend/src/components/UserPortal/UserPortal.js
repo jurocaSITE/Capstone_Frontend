@@ -28,7 +28,7 @@ export default function UserPortal() {
 					<Link to="/profile">
 						<li>Your Profile</li>
 					</Link>
-					<Link to="/">
+					<Link to="/edit-profile">
 						<li>Settings</li>
 					</Link>
 					<Link to="/">
