@@ -1,8 +1,8 @@
 import "./EditProfile.css";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "contexts/auth";
+import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
+import { useAuthContext } from "contexts/auth";
 
 function EditProfile() {
 	const navigate = useNavigate();
@@ -14,6 +14,7 @@ function EditProfile() {
 		profile_picture: "",
 		date_of_birth: "",
 	});
+	const { setUser } = useAuthContext();
 
 	const handleOnInputChange = (event) => {
 		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
@@ -35,6 +36,19 @@ function EditProfile() {
 		setIsProcessing(false);
 
 		navigate("/profile");
+	};
+
+	const handleOnSignOut = async () => {
+		await apiClient.logoutUser();
+		setUser(null);
+		setErrors(null);
+		navigate("/");
+	};
+
+	const handleOneDelete = async (event) => {
+		await apiClient.deleteUserProfile();
+
+		handleOnSignOut();
 	};
 
 	return (
@@ -78,6 +92,7 @@ function EditProfile() {
 						<label htmlFor="name">Image URL</label>
 						<input
 							type="text"
+							// type="file"
 							name="profile_picture"
 							placeholder="Enter a image URL"
 							value={form.profile_picture}
@@ -101,13 +116,24 @@ function EditProfile() {
 						)}
 					</div>
 
-					<button
-						className="btn"
-						disabled={isProcessing}
-						onClick={handleOnSubmit}
-					>
-						{isProcessing ? "Loading..." : "Save"}
-					</button>
+					<Link to="/">
+						<button className="btn delete-account" onClick={handleOneDelete}>
+							Delete Account
+						</button>
+					</Link>
+
+					<div className="footer">
+						<button
+							className="btn"
+							disabled={isProcessing}
+							onClick={handleOnSubmit}
+						>
+							{isProcessing ? "Loading..." : "Save"}
+						</button>
+						<Link to={`/profile`}>
+							<button className="btn cancel">Cancel</button>
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>

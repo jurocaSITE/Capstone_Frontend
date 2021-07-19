@@ -58,7 +58,25 @@
 	padding: 10px 20px;
 }
 
-.EditProfile .card .form .btn {
+.EditProfile .card .form .delete-account {
+	background-color: rgb(220, 55, 55);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	height: 60px;
+	width: 120px;
+	color: white;
+	font-size: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+
+.EditProfile .card .form .delete-account:hover {
+	transform: scale(1.1);
+}
+
+.EditProfile .card .form .footer .btn {
 	background-color: var(--dark-accent);
 	border: none;
 	border-radius: var(--border-rad);
@@ -72,26 +90,15 @@
 	transition: ease 0.25s;
 }
 
-.EditProfile .card .form .btn:hover {
+.EditProfile .card .form .footer .btn:hover {
 	transform: scale(1.1);
 }
 
-.EditProfile .card .footer {
-	color: #696f79;
-	margin-top: 10px;
+.EditProfile .card .form .footer {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 50px;
-	width: 100%;
-	padding-bottom: 20px;
 }
 
-.EditProfile .card .footer a {
-	color: black;
-	font-weight: bold;
-	transition: ease 0.25s;
-}
-.EditProfile .card .footer a:hover {
-	font-size: 1.05rem;
+.EditProfile .card .form .footer .cancel {
+	background-color: rgb(220, 55, 55);
+	margin-left: 10px;
 }

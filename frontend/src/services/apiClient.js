@@ -84,6 +84,15 @@ class ApiClient {
 			data: credentials,
 		});
 	}
+
+	async deleteUserProfile() {
+		await this.request({
+			endpoint: `auth/delete-account`,
+			method: `DELETE`,
+		});
+
+		this.logoutUser();
+	}
 }
 
 export default new ApiClient(

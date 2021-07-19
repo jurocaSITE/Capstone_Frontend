@@ -14,11 +14,6 @@ export default function UserPortal() {
 
 	const toggleMenu = () => setShowMenu(!showMenu);
 
-	// const handleOnSignOut = () => {
-	// 	setUser(null);
-	// 	navigate("/");
-	// };
-
 	const handleOnSignOut = async () => {
 		await apiClient.logoutUser();
 		setUser(null);
