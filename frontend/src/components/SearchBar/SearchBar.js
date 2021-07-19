@@ -20,7 +20,7 @@ export default function SearchBar() {
   } = useSearchContext();
 
   const [isFetching, setIsFetching] = useState(false);
-
+  
   const handleOnSubmit = async () => {
     navigate("/search");
     setIsFetching(true);
@@ -29,7 +29,6 @@ export default function SearchBar() {
     if (error) {
       setErrors((e) => ({ ...e, db: error }));
       setSearchResults([]);
-      
     }
     if (data?.books) {
       setErrors(null);

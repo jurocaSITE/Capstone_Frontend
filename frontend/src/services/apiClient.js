@@ -36,12 +36,17 @@ class ApiClient {
         return await this.request({ endpoint: `auth/login`, method: `POST`, data: credentials})
     } 
 
+    async logoutUser() {
+        this.setToken(null)
+        localStorage.setItem(this.tokenName, "")
+    }
+
     async registerUser(credentials) {
         return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials})
     }
 
-    async getBooksByKeyword(keyword) {
-        return await this.request({ endpoint: `books/${keyword}`, method: `GET` })
+    async getBooksByKeyword(keyword, offset = 0) {
+        return await this.request({ endpoint: `books/${keyword}/${offset}`, method: `GET` })
     }
 
     async getBookById(id) {
@@ -49,7 +54,7 @@ class ApiClient {
     }
 
     async getTopSellers() {
-        return await this.request({ endpoint: `books/top/sellers`, method: `GET` })
+        return await this.request({ endpoint: `books/top-sellers`, method: `GET` })
     }
 
     async getTopSellerByName(title) {
