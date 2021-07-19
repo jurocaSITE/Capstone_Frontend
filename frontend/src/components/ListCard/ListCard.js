@@ -1,6 +1,7 @@
 import "./ListCard.css";
-import React from "react";
+import React, { useState } from "react";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { Link } from "react-router-dom";
 
 const defaultBookCover = "https://source.unsplash.com/random";
 
@@ -10,6 +11,9 @@ function ListCard() {
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
 	};
+	const [showMenu, setShowMenu] = useState(false);
+
+	const toggleMenu = () => setShowMenu(!showMenu);
 
 	return (
 		<div className="ListCard">
@@ -26,8 +30,21 @@ function ListCard() {
 				</div>
 				<div className="create-new-list">
 					{/* <div className="three-dots"> */}
-					<MoreHorizIcon className="three-dots" />
+					<MoreHorizIcon className="three-dots" onClick={toggleMenu} />
 					{/* </div> */}
+					{showMenu && (
+						<ul className="options">
+							<Link to="/">
+								<li>Your Profile</li>
+							</Link>
+							<Link to="/">
+								<li>Settings</li>
+							</Link>
+							<Link to="/">
+								<li className="sign-out"></li>
+							</Link>
+						</ul>
+					)}
 				</div>
 			</div>
 		</div>

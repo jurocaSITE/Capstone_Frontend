@@ -14,43 +14,44 @@ import {
   Book,
   SearchResults,
   Lists,
-  DetailedList
+  DetailedList,
+  ProfilePage
 } from "components";
 
 // this is for global context so all components can access searchResults, user
 export default function AppContainer() {
-  return (
-    <AuthContextProvider>
-      <SearchContextProvider>
-        <App />
-      </SearchContextProvider>
-    </AuthContextProvider>
-  );
+	return (
+		<AuthContextProvider>
+			<SearchContextProvider>
+				<App />
+			</SearchContextProvider>
+		</AuthContextProvider>
+	);
 }
 
 function App() {
-  const [topSellers, setTopSellers] = useState([]);
-  const [errors, setErrors] = useState(null);
-  const { user, setUser } = useAuthContext();
-  // const [appState, setAppState] = useState({});
+	const [topSellers, setTopSellers] = useState([]);
+	const [errors, setErrors] = useState(null);
+	const { user, setUser } = useAuthContext();
+	// const [appState, setAppState] = useState({});
 
-  useEffect(() => {
-    const fetchTopSellers = async () => {
-      //setIsFetching(true)
+	useEffect(() => {
+		const fetchTopSellers = async () => {
+			//setIsFetching(true)
 
-      const { data, error } = await apiClient.getTopSellers();
-      if (error) {
-        setErrors((e) => ({ ...e, db: error }));
-        setTopSellers([]);
-      }
-      if (data?.top_sellers) {
-        setErrors(null);
-        setTopSellers(data.top_sellers);
-      }
-    };
-    //setIsFetching(false)
-    fetchTopSellers();
-  }, []);
+			const { data, error } = await apiClient.getTopSellers();
+			if (error) {
+				setErrors((e) => ({ ...e, db: error }));
+				setTopSellers([]);
+			}
+			if (data?.top_sellers) {
+				setErrors(null);
+				setTopSellers(data.top_sellers);
+			}
+		};
+		//setIsFetching(false)
+		fetchTopSellers();
+	}, []);
 
   return (
     <div className="App">
@@ -61,6 +62,7 @@ function App() {
           <Route path="/books/top/sellers/:title" element={<Book />} />
           <Route path="/my-lists" element={<Lists />} />
 		  <Route path="/detailed-list" element={<DetailedList />} />
+		  <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/login"
             element={<Login user={user} setUser={setUser} />}
