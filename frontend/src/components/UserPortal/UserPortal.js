@@ -4,16 +4,25 @@ import { FaUserCircle } from "react-icons/fa";
 import { GoTriangleDown } from "react-icons/go";
 import { useAuthContext } from "contexts/auth";
 import "./UserPortal.css";
+import apiClient from "services/apiClient";
 
 export default function UserPortal() {
 	const navigate = useNavigate();
 	const { setUser } = useAuthContext();
 	const [showMenu, setShowMenu] = useState(false);
+	const [errors, setErrors] = useState(null);
 
 	const toggleMenu = () => setShowMenu(!showMenu);
 
-	const handleOnSignOut = () => {
+	// const handleOnSignOut = () => {
+	// 	setUser(null);
+	// 	navigate("/");
+	// };
+
+	const handleOnSignOut = async () => {
+		await apiClient.logoutUser();
 		setUser(null);
+		setErrors(null);
 		navigate("/");
 	};
 

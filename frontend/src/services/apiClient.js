@@ -53,6 +53,11 @@ class ApiClient {
 		});
 	}
 
+	async logoutUser() {
+		this.setToken(null);
+		localStorage.setItem(this.tokenName, "");
+	}
+
 	async getBooksByKeyword(keyword) {
 		return await this.request({ endpoint: `books/${keyword}`, method: `GET` });
 	}
