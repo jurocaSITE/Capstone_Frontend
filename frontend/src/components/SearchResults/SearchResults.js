@@ -35,10 +35,12 @@ export default function SearchResults() {
           <BookPreview book={book} key={book.id} />
         ))}
       </div>
-      <div className="search-feed-buttons">
-        <ActionButton clickFunc={loadMore} text={`Load More`} />
-        <ActionButton clickFunc={scrollToTop} text={`To The Top`} />
-      </div>
+      {searchResults.length > 0 && (
+        <div className="search-feed-buttons">
+          <ActionButton clickFunc={loadMore} text={`Load More`} />
+          <ActionButton clickFunc={scrollToTop} text={`To The Top`} />
+        </div>
+      )}
     </div>
   );
 }
