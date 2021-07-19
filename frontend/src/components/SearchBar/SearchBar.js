@@ -14,16 +14,16 @@ export default function SearchBar() {
     setSearchResults,
     form,
     errors,
+    isSearching,
     resetForm,
     setErrors,
+    setIsSearching,
     handleOnInputChange,
   } = useSearchContext();
-
-  const [isFetching, setIsFetching] = useState(false);
   
   const handleOnSubmit = async () => {
     navigate("/search");
-    setIsFetching(true);
+    setIsSearching(true);
 
     const { data, error } = await apiClient.getBooksByKeyword(form.searchTerm);
     if (error) {
@@ -35,7 +35,7 @@ export default function SearchBar() {
       setSearchResults(data.books);
     }
 
-    setIsFetching(false);
+    setIsSearching(false);
   };
 
   return (
@@ -52,7 +52,7 @@ export default function SearchBar() {
       )}
       <button
         className="search-btn"
-        disabled={isFetching}
+        disabled={isSearching}
         onClick={handleOnSubmit}
       >
         <BiSearch className="search-icon" />

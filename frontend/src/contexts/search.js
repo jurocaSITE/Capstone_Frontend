@@ -4,16 +4,34 @@ import { useSearchForm } from "hooks/useSearchForm";
 const SearchContext = createContext(null);
 
 export const SearchContextProvider = ({ children }) => {
-    const [searchResults, setSearchResults] = useState([])
-    const { form, errors, resetForm, setErrors, handleOnInputChange } = useSearchForm()
+  const [searchResults, setSearchResults] = useState([]);
+  const {
+    form,
+    errors,
+    isSearching,
+    resetForm,
+    setErrors,
+    setIsSearching,
+    handleOnInputChange,
+  } = useSearchForm();
 
-    const searchValue = { searchResults, setSearchResults, form, errors, resetForm, setErrors, handleOnInputChange }
+  const searchValue = {
+    searchResults,
+    setSearchResults,
+    form,
+    errors,
+    isSearching,
+    resetForm,
+    setErrors,
+    setIsSearching,
+    handleOnInputChange,
+  };
 
-    return (
-        <SearchContext.Provider value={searchValue} >
-            <>{children}</>
-        </SearchContext.Provider>
-    )
-}
+  return (
+    <SearchContext.Provider value={searchValue}>
+      <>{children}</>
+    </SearchContext.Provider>
+  );
+};
 
-export const useSearchContext = () => useContext(SearchContext)
+export const useSearchContext = () => useContext(SearchContext);

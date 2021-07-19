@@ -46,7 +46,7 @@ class ApiClient {
     }
 
     async getBooksByKeyword(keyword, offset = 0) {
-        return await this.request({ endpoint: `books/${keyword}/${offset}`, method: `GET` })
+        return await this.request({ endpoint: `books/search/${keyword}/${offset}`, method: `GET` })
     }
 
     async getBookById(id) {
@@ -58,7 +58,7 @@ class ApiClient {
     }
 
     async getTopSellerByName(title) {
-        return await this.request({ endpoint: `books/top/sellers/${title}`, method: `GET` })
+        return await this.request({ endpoint: `books/top-sellers/${title}`, method: `GET` })
     }
 }
 
