@@ -38,6 +38,12 @@ export default function SearchBar() {
     setIsSearching(false);
   };
 
+  const keyPressEnter = (e) => {
+    if (e.keyCode === 13) {
+      handleOnSubmit()
+    }
+  }
+
   return (
     <div className="SearchBar">
       <input
@@ -46,6 +52,7 @@ export default function SearchBar() {
         placeholder="Search..."
         value={form.searchTerm}
         onChange={handleOnInputChange}
+        onKeyDown={keyPressEnter}
       />
       {form.searchTerm.length > 0 && (
         <IoCloseCircle className="close-icon" onClick={resetForm} />
