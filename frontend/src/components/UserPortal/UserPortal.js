@@ -12,7 +12,7 @@ export default function UserPortal() {
 	const [showMenu, setShowMenu] = useState(false);
 	const [errors, setErrors] = useState(null);
 
-	const toggleMenu = () => setShowMenu(!showMenu);
+  const toggleMenu = () => setShowMenu(!showMenu);
 
 	const handleOnSignOut = async () => {
 		await apiClient.logoutUser();
