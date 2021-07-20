@@ -15,6 +15,7 @@ import {
 	SearchResults,
 	Lists,
 	ProfilePage,
+	EditProfile,
 } from "components";
 
 // this is for global context so all components can access searchResults, user
@@ -51,6 +52,20 @@ function App() {
 		fetchTopSellers();
 	}, []);
 
+	useEffect(() => {
+		const fetchUser = async () => {
+			const { data, error } = await apiClient.fetchUserFromToken();
+			if (data) setUser(data.user);
+			if (error) setErrors(error);
+		};
+
+		const token = localStorage.getItem("teca_token");
+		if (token) {
+			apiClient.setToken(token);
+			fetchUser();
+		}
+	}, [setUser]);
+
 	return (
 		<div className="App">
 			<BrowserRouter>
@@ -60,11 +75,15 @@ function App() {
 					<Route path="/books/top/sellers/:title" element={<Book />} />
 					<Route path="/my-lists" element={<Lists />} />
 					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="/edit-profile" element={<EditProfile />} />
 					<Route
 						path="/login"
 						element={<Login user={user} setUser={setUser} />}
 					/>
-					<Route path="/signup" element={<Register />} />
+					<Route
+						path="/signup"
+						element={<Register user={user} setUser={setUser} />}
+					/>
 					<Route path="/search" element={<SearchResults />} />
 					{user ? (
 						<Route path="/" element={<UserHome />} />

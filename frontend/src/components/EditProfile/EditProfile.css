@@ -1,0 +1,104 @@
+.EditProfile {
+	height: 100%;
+	width: 100%;
+	background: var(--dark-shade);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2em 0;
+}
+
+.EditProfile .card {
+	width: 620px;
+	padding: 24px 36px 0 36px;
+	background: var(--light-shade);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 6px;
+}
+
+.EditProfile .card .form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 60%;
+	padding-bottom: 10px;
+}
+
+.EditProfile .card .form .input-field {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 80%;
+	margin: 12px 0;
+}
+
+.EditProfile .card .form .input-field label {
+	color: #696f79;
+}
+
+.EditProfile .card .form .input-field input {
+	height: 52px;
+	padding: 0 15px;
+	font-size: 16px;
+	border: solid 1px #8692a6;
+	width: 100%;
+	border-radius: 6px;
+}
+
+.EditProfile .card .error {
+	background: #fe5421;
+	background: rgba(245, 41, 41, 0.1);
+	color: rgba(245, 41, 41, 1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+}
+
+.EditProfile .card .form .delete-account {
+	background-color: rgb(220, 55, 55);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	height: 60px;
+	width: 120px;
+	color: white;
+	font-size: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+
+.EditProfile .card .form .delete-account:hover {
+	transform: scale(1.1);
+}
+
+.EditProfile .card .form .footer .btn {
+	background-color: var(--dark-accent);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	height: 40px;
+	width: 120px;
+	color: white;
+	font-size: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+
+.EditProfile .card .form .footer .btn:hover {
+	transform: scale(1.1);
+}
+
+.EditProfile .card .form .footer {
+	display: flex;
+}
+
+.EditProfile .card .form .footer .cancel {
+	background-color: rgb(220, 55, 55);
+	margin-left: 10px;
+}

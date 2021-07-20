@@ -1,101 +1,122 @@
-import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
-import { useAuthContext } from "contexts/auth"
-import "./Login.css"
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuthContext } from "contexts/auth";
+import "./Login.css";
+import apiClient from "services/apiClient";
 
 export default function Login() {
-  const navigate = useNavigate()
-  const { user, setUser } = useAuthContext()
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [errors, setErrors] = useState({})
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  })
+	const navigate = useNavigate();
+	const { user, setUser } = useAuthContext();
+	const [isProcessing, setIsProcessing] = useState(false);
+	const [errors, setErrors] = useState({});
+	const [form, setForm] = useState({
+		email: "",
+		password: "",
+	});
 
-  useEffect(() => {
-    // if user is already logged in,
-    // redirect them to the home page
-    if (user?.email) {
-      navigate("/")
-    }
-  }, [user, navigate])
+	useEffect(() => {
+		// if user is already logged in,
+		// redirect them to the home page
+		if (user?.email) {
+			navigate("/");
+		}
+	}, [user, navigate]);
 
-  const handleOnInputChange = (event) => {
-    if (event.target.name === "email") {
-      if (event.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
-      } else {
-        setErrors((e) => ({ ...e, email: null }))
-      }
-    }
+	const handleOnInputChange = (event) => {
+		if (event.target.name === "email") {
+			if (event.target.value.indexOf("@") === -1) {
+				setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
+			} else {
+				setErrors((e) => ({ ...e, email: null }));
+			}
+		}
 
-    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-  }
+		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+	};
 
-  const handleOnSubmit = async () => {
-    setIsProcessing(true)
-    setErrors((e) => ({ ...e, form: null }))
+	const handleOnSubmit = async () => {
+		setIsProcessing(true);
+		setErrors((e) => ({ ...e, form: null }));
 
-    try {
-      const res = await axios.post("http://localhost:5000/auth/login", form)
-      if (res?.data?.user) {
-        setUser(res.data.user)
-      } else {
-        setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-      }
-    } catch (err) {
-      console.log(err)
-      setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-    } finally {
-      setIsProcessing(false)
-    }
-  }
+		const { data, error } = await apiClient.loginUser({
+			email: form.email,
+			password: form.password,
+		});
 
-  return (
-    <div className="Login">
-      <div className="card">
-        <h2>Login</h2>
+		if (error) setErrors((e) => ({ ...e, form: error }));
+		if (data?.user) {
+			setUser(data.user);
+			apiClient.setToken(data.token);
+		}
 
-        {errors.form && <span className="error">{errors.form}</span>}
-        <br />
+		setIsProcessing(false);
 
-        <div className="form">
-          <div className="input-field">
-            <label htmlFor="email">Email*</label>
-            <input 
-              type="email" 
-              name="email" 
-              placeholder="Enter email" 
-              value={form.email} 
-              onChange={handleOnInputChange} />
-            {errors.email && <span className="error">{errors.email}</span>}
-          </div>
+		// try {
+		//   const res = await axios.post("http://localhost:5000/auth/login", form)
+		//   if (res?.data?.user) {
+		//     setUser(res.data.user)
+		//   } else {
+		//     setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
+		//   }
+		// } catch (err) {
+		//   console.log(err)
+		//   setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
+		// } finally {
+		//   setIsProcessing(false)
+		// }
+	};
 
-          <div className="input-field">
-            <label htmlFor="password">Password*</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter password"
-              value={form.password}
-              onChange={handleOnInputChange}
-            />
-            {errors.password && <span className="error">{errors.password}</span>}
-          </div>
+	return (
+		<div className="Login">
+			<div className="card">
+				<h2>Login</h2>
 
-          <button className="btn" disabled={isProcessing} onClick={handleOnSubmit}>
-            {isProcessing ? "Loading..." : "Login"}
-          </button>
-        </div>
+				{errors.form && <span className="error">{errors.form}</span>}
+				<br />
 
-        <div className="footer">
-          <p>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
-          </p>
-        </div>
-      </div>
-    </div>
-  )
+				<div className="form">
+					<div className="input-field">
+						<label htmlFor="email">Email*</label>
+						<input
+							type="email"
+							name="email"
+							placeholder="Enter email"
+							value={form.email}
+							onChange={handleOnInputChange}
+						/>
+						{errors.email && <span className="error">{errors.email}</span>}
+					</div>
+
+					<div className="input-field">
+						<label htmlFor="password">Password*</label>
+						<input
+							type="password"
+							name="password"
+							placeholder="Enter password"
+							value={form.password}
+							onChange={handleOnInputChange}
+						/>
+						{errors.password && (
+							<span className="error">{errors.password}</span>
+						)}
+					</div>
+
+					<button
+						className="btn"
+						disabled={isProcessing}
+						onClick={handleOnSubmit}
+					>
+						{isProcessing ? "Loading..." : "Login"}
+					</button>
+				</div>
+
+				<div className="footer">
+					<p>
+						Don't have an account? <Link to="/signup">Sign Up</Link>
+					</p>
+				</div>
+			</div>
+		</div>
+	);
 }
