@@ -42,9 +42,27 @@
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
+	position: relative;
 }
 
 .ListCard .information .create-new-list .three-dots {
 	font-size: 2.5rem;
 	cursor: pointer;
+}
+
+/* The toggled menu that appears after clicking dots */
+.ListCard .create-new-list .options {
+	position: absolute;
+	top: 2em;
+	left: -1em;
+
+	padding: .5em 2em;
+	background-color: var(--light-shade);
+	border-radius: var(--border-rad);
+}
+
+.ListCard .create-new-list li {
+	color: black;
+	list-style-type: none;
+	white-space: nowrap;
 }
