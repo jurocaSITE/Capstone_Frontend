@@ -2,11 +2,9 @@ import "./Register.css";
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
-import { useAuthContext } from "contexts/auth";
 
 export default function Register({ setAppState }) {
 	const navigate = useNavigate()
-	const { setUser } = useAuthContext()
 	const [isProcessing, setIsProcessing] = useState(false)
 	const [errors, setErrors] = useState({})
 	const [form, setForm] = useState({
@@ -35,17 +33,15 @@ export default function Register({ setAppState }) {
 	
 		try {
 		  const res = await axios.post("http://localhost:5000/auth/register", {
-			first_name: form.firstName,
-			last_name: form.lastName,
+			first_name: form.first_name,
+			last_name: form.last_name,
 			username: form.username,
 			email: form.email,
 			password: form.password,
 		  })
 		  console.log(res)
 		  if (res?.data?.user) {
-			// setAppState(res.data.user)
-			setUser(res.data.user)
-			navigate("/") //TODO navigate to select interest page
+			setAppState(res.data.user)
 		  } else {
 			setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
 		  }
@@ -70,27 +66,27 @@ export default function Register({ setAppState }) {
 			<div className="form">
 
 				<div className="input-field">
-				<label htmlFor="firstName">First name*</label>
+				<label htmlFor="name">First name*</label>
 				<input
 					type="text"
-					name="firstName"
+					name="first_name"
 					placeholder="Enter your first name"
-					value={form.firstName}
+					value={form.first_name}
 					onChange={handleOnInputChange}
 				/>
-				{errors.firstName && <span className="error">{errors.firstName}</span>}
+				{errors.first_name && <span className="error">{errors.first_name}</span>}
 				</div>
 				
 				<div className="input-field">
-				<label htmlFor="lastName">Last name*</label>
+				<label htmlFor="name">Last name*</label>
 				<input
 					type="text"
-					name="lastName"
+					name="last_name"
 					placeholder="Enter your last name"
-					value={form.lastName}
+					value={form.last_name}
 					onChange={handleOnInputChange}
 				/>
-				{errors.lastName && <span className="error">{errors.lastName}</span>}
+				{errors.last_name && <span className="error">{errors.last_name}</span>}
 				</div>
 
 				<div className="input-field">

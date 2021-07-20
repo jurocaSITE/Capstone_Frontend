@@ -55,6 +55,10 @@ class ApiClient {
     async getTopSellerByName(title) {
         return await this.request({ endpoint: `books/top/sellers/${title}`, method: `GET` })
     }
+
+    async getAllBooksInListByListId(list_name) {
+        return await this.request({ endpoint: `my-lists/${list_name}`, method: `GET` })
+    }
 }
 
 export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000")

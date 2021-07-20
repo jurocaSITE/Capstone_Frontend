@@ -30,10 +30,11 @@ export default function AppContainer() {
 }
 
 function App() {
-	const [topSellers, setTopSellers] = useState([]);
+  const [topSellers, setTopSellers] = useState([]);
+  const [list, setList] = useState([]);
 	const [errors, setErrors] = useState(null);
 	const { user, setUser } = useAuthContext();
-	// const [appState, setAppState] = useState({});
+	const [appState, setAppState] = useState({});
 
 	useEffect(() => {
 		const fetchTopSellers = async () => {
@@ -61,7 +62,7 @@ function App() {
           <Route path="/books/id/:book_id" element={<Book />} />
           <Route path="/books/top/sellers/:title" element={<Book />} />
           <Route path="/my-lists" element={<Lists />} />
-		  <Route path="/detailed-list" element={<DetailedList />} />
+		  <Route path="/my-lists/:list_name" element={<DetailedList />} />
 		  <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/login"
@@ -69,7 +70,7 @@ function App() {
           />
           <Route
             path="/signup"
-            element={<Register />}
+            element={<Register setAppState={setAppState}/>}
           />
           <Route path="/search" element={<SearchResults />} />
           {user ? (
