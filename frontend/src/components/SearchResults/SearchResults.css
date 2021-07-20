@@ -2,18 +2,29 @@
 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     min-height: 100vh;
     color: var(--light-shade);
     padding: 2em .5em;
 }
-.SearchResults h1 {
+.SearchResults h1 
+{
     margin: 0 auto;
+    margin-bottom: 1em;
 }
-.SearchResults .search-feed {
+.SearchResults .search-feed 
+{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+.SearchResults .search-feed-buttons 
+{
+    margin-top: 2em;
+}
+.SearchResults .search-feed-buttons button {
+    background: var(--light-accent);
+    margin: 0 .5em;
+    padding: .5em 2em;
 }

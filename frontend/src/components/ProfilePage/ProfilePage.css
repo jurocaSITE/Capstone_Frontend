@@ -1,6 +1,14 @@
 .ProfilePage {
-	font-family: Poppins;
-	padding: 30px;
+	/* font-family: Poppins; */
+	/* padding: 30px; */
+}
+
+.ProfilePage .white-chunk {
+	position: absolute;
+	width: 100%;
+	height: 200px;
+	z-index: -1;
+	background: #f2efe7;
 }
 
 .ProfilePage .user-information-and-image {
@@ -30,7 +38,7 @@
 }
 
 .ProfilePage .user-information-and-image .user-information h1 {
-	/* color: #344356; */
+	color: #344356;
 }
 
 .ProfilePage .user-information-and-image .user-information .more-info {

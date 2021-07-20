@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "./ActionButton.css";
 
-export default function ActionButton({ link = "/", text = "" }) {
+export default function ActionButton({ link = "#", text = "", clickFunc = null }) {
   return (
     <Link to={link}>
-      <button className="ActionButton">{text}</button>
+      <button onClick={clickFunc} className="ActionButton">{text}</button>
     </Link>
   );
 }

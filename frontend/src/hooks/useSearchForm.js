@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export const useSearchForm = () => {
-
   const [errors, setErrors] = useState({});
+  const [isSearching, setIsSearching] = useState(false)
   const [form, setForm] = useState({
     searchTerm: ""
   });
@@ -34,5 +35,5 @@ export const useSearchForm = () => {
       })
   }
 
-  return { form, errors, resetForm, setErrors, handleOnInputChange };
+  return { form, errors, isSearching, resetForm, setErrors, setIsSearching, handleOnInputChange };
 };

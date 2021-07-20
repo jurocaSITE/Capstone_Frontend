@@ -8,8 +8,9 @@ class ApiClient {
     }
 
     setToken(token) {
-        this.token = token
-    }
+		this.token = token;
+		localStorage.setItem(this.tokenName, token);
+	}
 
     async request({ endpoint, method = `GET`, data = {}}) {
         const url = `${this.remoteHostUrl}/${endpoint}`
@@ -32,16 +33,25 @@ class ApiClient {
         }
     }
 
+    async fetchUserFromToken() {
+		return await this.request({ endpoint: `auth/me`, method: `GET` });
+	}
+
     async loginUser(credentials) {
         return await this.request({ endpoint: `auth/login`, method: `POST`, data: credentials})
     } 
+
+    async logoutUser() {
+        this.setToken(null)
+        localStorage.setItem(this.tokenName, "")
+    }
 
     async registerUser(credentials) {
         return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials})
     }
 
-    async getBooksByKeyword(keyword) {
-        return await this.request({ endpoint: `books/${keyword}`, method: `GET` })
+    async getBooksByKeyword(keyword, offset = 0) {
+        return await this.request({ endpoint: `books/search/${keyword}/${offset}`, method: `GET` })
     }
 
     async getBookById(id) {
@@ -49,16 +59,35 @@ class ApiClient {
     }
 
     async getTopSellers() {
-        return await this.request({ endpoint: `books/top/sellers`, method: `GET` })
+        return await this.request({ endpoint: `books/top-sellers`, method: `GET` })
     }
 
     async getTopSellerByName(title) {
-        return await this.request({ endpoint: `books/top/sellers/${title}`, method: `GET` })
+        return await this.request({ endpoint: `books/top-sellers/${title}`, method: `GET` })
     }
 
     async getAllBooksInListByListId(list_name) {
         return await this.request({ endpoint: `my-lists/${list_name}`, method: `GET` })
     }
+    
+    async editUserProfile(credentials) {
+		return await this.request({
+			endpoint: `auth/update-personal-information`,
+			method: `PUT`,
+			data: credentials,
+		});
+	}
+
+	async deleteUserProfile() {
+		await this.request({
+			endpoint: `auth/delete-account`,
+			method: `DELETE`,
+		});
+
+		this.logoutUser();
+	}
 }
 
-export default new ApiClient(process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000")
+export default new ApiClient(
+	process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000"
+);

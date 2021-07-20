@@ -15,6 +15,7 @@ import {
   SearchResults,
   Lists,
   DetailedList,
+  EditProfile,
   ProfilePage
 } from "components";
 
@@ -62,7 +63,7 @@ function App() {
           <Route path="/books/id/:book_id" element={<Book />} />
           <Route path="/books/top/sellers/:title" element={<Book />} />
           <Route path="/my-lists" element={<Lists />} />
-		  <Route path="/my-lists/:list_name" element={<DetailedList />} />
+		  <Route path="/my-lists/:list_name" element={<DetailedList list={list} setList={setList}/>} />
 		  <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/login"

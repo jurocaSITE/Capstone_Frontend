@@ -1,19 +1,27 @@
 import "./ProfilePage.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AuthorCard, BookPreview, ProfileListCard } from "components";
+import { useAuthContext } from "contexts/auth";
 
 const defaultUserPicture = "https://source.unsplash.com/random";
 
 function ProfilePage() {
+	const { user } = useAuthContext();
+	console.log(user);
+
 	return (
 		<div className="ProfilePage">
+			<div className="white-chunk"></div>
 			<div className="user-information-and-image">
 				<div className="user-image">
-					<img className="imgage" alt="list cover" src={defaultUserPicture} />
-					{/* image */}
+					<img
+						className="imgage"
+						alt="user profile"
+						src={user?.profile_picture || defaultUserPicture}
+					/>
 				</div>
 				<div className="user-information">
-					<h1>Username</h1>
+					<h1>{user?.username}</h1>
 					<div className="more-info">
 						<p>15 Reading lists</p>
 						<p>144 followers</p>
