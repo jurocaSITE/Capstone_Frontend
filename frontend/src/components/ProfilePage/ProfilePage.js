@@ -7,7 +7,6 @@ const defaultUserPicture = "https://source.unsplash.com/random";
 
 function ProfilePage() {
 	const { user } = useAuthContext();
-	console.log(user);
 
 	return (
 		<div className="ProfilePage">

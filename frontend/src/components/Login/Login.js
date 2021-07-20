@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuthContext } from "contexts/auth";
 import "./Login.css";
 import apiClient from "services/apiClient";
@@ -51,20 +50,6 @@ export default function Login() {
 		}
 
 		setIsProcessing(false);
-
-		// try {
-		//   const res = await axios.post("http://localhost:5000/auth/login", form)
-		//   if (res?.data?.user) {
-		//     setUser(res.data.user)
-		//   } else {
-		//     setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-		//   }
-		// } catch (err) {
-		//   console.log(err)
-		//   setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
-		// } finally {
-		//   setIsProcessing(false)
-		// }
 	};
 
 	return (

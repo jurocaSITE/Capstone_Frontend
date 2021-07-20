@@ -1,9 +1,11 @@
 import "./Lists.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ListCard } from "components";
 import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import { useAuthContext } from "contexts/auth";
+import apiClient from "services/apiClient";
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -24,9 +26,29 @@ const useStyles = makeStyles((theme) => ({
 
 function Lists() {
 	const classes = useStyles();
+	const { user } = useAuthContext();
+	const [lists, setLists] = useState({});
+	const [isFetching, setIsFetching] = useState(false);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const fetchListsByUserId = async () => {
+			setIsFetching(true);
+			const { data, error } = await apiClient.getAllListsByUserId();
+			console.log(data);
+			if (data) {
+				setLists(data);
+			}
+			if (error) setError(error);
+
+			setIsFetching(false);
+		};
+
+		fetchListsByUserId();
+	}, []);
+
 	return (
 		<div className="Lists">
-			{/* <CssBaseline /> */}
 			<div className="top">
 				<h1 className="title">Library</h1>
 			</div>

@@ -93,6 +93,13 @@ class ApiClient {
 
 		this.logoutUser();
 	}
+
+	async getAllListsByUserId() {
+		await this.request({
+			endpoint: `lists/get-all-lists`,
+			method: `GET`,
+		});
+	}
 }
 
 export default new ApiClient(
