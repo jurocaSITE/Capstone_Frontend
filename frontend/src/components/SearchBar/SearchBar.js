@@ -6,8 +6,6 @@ import { BiSearch } from "react-icons/bi";
 import { IoCloseCircle } from "react-icons/io5";
 import "./SearchBar.css";
 
-const testKey = "hunger games";
-
 export default function SearchBar() {
   const navigate = useNavigate();
   const {
@@ -38,6 +36,7 @@ export default function SearchBar() {
     setIsSearching(false);
   };
 
+  //activates if user presses enter key
   const keyPressEnter = (e) => {
     if (e.keyCode === 13) {
       handleOnSubmit()
