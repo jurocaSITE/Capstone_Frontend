@@ -1,15 +1,14 @@
 .Lists {
-	background-color: #344356;
+	background-color: var(--dark-shade);
 	/* height: 100vh; */
-	font-family: Poppins;
 }
 
 .Lists h1 {
-	color: #f2efe7;
+	color: var(--light-shade);
 }
 
 .Lists .top .title {
-	background-color: #344356;
+	background-color: var(--dark-shade);
 	padding: 90px;
 	grid-column: 1 / -1;
 	font-style: normal;
@@ -19,12 +18,12 @@
 }
 
 .Lists .default-lists {
-	background: #ad9d81;
-	padding: 30px;
+	background: var(--light-accent);
+	padding: 2em 0 2em 0;
 	display: flex;
 	flex-wrap: wrap;
 	align-content: center;
-	justify-content: space-around;
+	justify-content: space-evenly;
 }
 
 .Lists .search-and-create {
@@ -40,13 +39,13 @@
 }
 
 .Lists .search-and-create .search-bar {
-	background-color: #f2efe7;
+	background-color: var(--light-shade);
 	opacity: 0.5;
 	border-radius: var(--border-rad);
 }
 
 .Lists .search-and-create .search-icon {
-	color: white;
+	color: var(--light-shade);
 	margin-left: 10px;
 	background-color: transparent;
 	background-repeat: no-repeat;
@@ -67,9 +66,9 @@
 
 .Lists .display-lists-area {
 	display: flex;
-	padding: 30px 200px;
+	padding: 2em 0 2em 0;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: center;
 	margin-bottom: 70px;
 }

@@ -16,6 +16,8 @@ import {
 	Lists,
 	ProfilePage,
 	EditProfile,
+	ListForm,
+	ListFormCreateNew,
 } from "components";
 
 // this is for global context so all components can access searchResults, user
@@ -74,6 +76,8 @@ function App() {
 					<Route path="/books/id/:book_id" element={<Book />} />
 					<Route path="/books/top/sellers/:title" element={<Book />} />
 					<Route path="/my-lists" element={<Lists />} />
+					<Route path="/list/edit/:list_id/:listName" element={<ListForm />} />
+					<Route path="/list/create-new" element={<ListFormCreateNew />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
 					<Route

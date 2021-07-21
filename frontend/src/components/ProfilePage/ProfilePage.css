@@ -8,7 +8,7 @@
 	width: 100%;
 	height: 200px;
 	z-index: -1;
-	background: #f2efe7;
+	background: var(--light-shade);
 }
 
 .ProfilePage .user-information-and-image {
@@ -38,7 +38,7 @@
 }
 
 .ProfilePage .user-information-and-image .user-information h1 {
-	color: #344356;
+	color: var(--dark-shade);
 }
 
 .ProfilePage .user-information-and-image .user-information .more-info {
@@ -47,11 +47,11 @@
 
 .ProfilePage .user-information-and-image .user-information .more-info p {
 	margin-right: 20px;
-	color: #ad9d81;
+	color: var(--light-accent);
 }
 
 .ProfilePage .top-authors {
-	color: white;
+	color: var(--light-shade);
 	margin: 100px 30px 30px 30px;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .ProfilePage .library {
-	color: white;
+	color: var(--light-shade);
 	margin: 30px;
 }
 
@@ -75,7 +75,7 @@
 
 .ProfilePage .currently-reading {
 	margin: 30px;
-	color: white;
+	color: var(--light-shade);
 }
 
 .ProfilePage .currently-reading .books {
@@ -86,5 +86,5 @@
 }
 
 .ProfilePage .my-reviews {
-	color: white;
+	color: var(--light-shade);
 }

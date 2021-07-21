@@ -89,7 +89,7 @@ function EditProfile() {
 					</div>
 
 					<div className="input-field">
-						<label htmlFor="name">Image URL</label>
+						<label htmlFor="profile_picture">Image URL</label>
 						<input
 							type="text"
 							// type="file"

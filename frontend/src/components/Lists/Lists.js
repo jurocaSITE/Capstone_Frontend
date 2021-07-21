@@ -1,11 +1,11 @@
 import "./Lists.css";
 import React, { useEffect, useState } from "react";
-import { ListCard } from "components";
+import { ListCard, ListCardNoChange } from "components";
 import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -26,26 +26,45 @@ const useStyles = makeStyles((theme) => ({
 
 function Lists() {
 	const classes = useStyles();
-	const { user } = useAuthContext();
-	const [lists, setLists] = useState({});
+	const [lists, setLists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 	const [error, setError] = useState(null);
+	let defaultLists = [];
+	let otherLists = [];
 
 	useEffect(() => {
 		const fetchListsByUserId = async () => {
 			setIsFetching(true);
-			const { data, error } = await apiClient.getAllListsByUserId();
-			console.log(data);
-			if (data) {
-				setLists(data);
+			try {
+				const allLists = await apiClient.getAllListsByUserId();
+				setLists(allLists.data.all_lists);
+			} catch (error) {
+				setError(error);
 			}
-			if (error) setError(error);
 
 			setIsFetching(false);
 		};
 
 		fetchListsByUserId();
-	}, []);
+	}, [error]);
+
+	const settingLists = () => {
+		for (let i = 0; i < lists.length; i++) {
+			if (lists[i].list_name === "Want To Read") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Currently Reading") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Did Not Finish") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Finished") {
+				defaultLists.push(lists[i]);
+			} else {
+				otherLists.push(lists[i]);
+			}
+		}
+	};
+
+	settingLists();
 
 	return (
 		<div className="Lists">
@@ -53,10 +72,9 @@ function Lists() {
 				<h1 className="title">Library</h1>
 			</div>
 			<div className="default-lists">
-				<ListCard />
-				<ListCard />
-				<ListCard />
-				<ListCard />
+				{defaultLists.map((list) => (
+					<ListCardNoChange key={list.id} list={list} className="list-card" />
+				))}
 			</div>
 			<div className="search-and-create">
 				<div className="search">
@@ -76,14 +94,15 @@ function Lists() {
 				</div>
 
 				<div className="create-new-list">
-					<h1>Create New List +</h1>
+					<Link to={`/list/create-new`}>
+						<h1>Create New List +</h1>
+					</Link>
 				</div>
 			</div>
 			<div className="display-lists-area">
-				<ListCard />
-				<ListCard />
-				<ListCard />
-				<ListCard />
+				{otherLists.map((list) => (
+					<ListCard list={list} className="list-card" />
+				))}
 			</div>
 		</div>
 	);

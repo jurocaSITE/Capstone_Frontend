@@ -1,4 +1,4 @@
-.ListCard {
+.ListCardNoChange {
 	display: grid;
 	grid-template-rows: 2fr 1fr;
 	background-color: var(--light-shade);
@@ -8,7 +8,7 @@
 	height: 20em;
 }
 
-.ListCard .cover {
+.ListCardNoChange .cover {
 	padding: 10px;
 	height: 10em;
 	width: 18em;
@@ -16,31 +16,31 @@
 	margin: 0 auto;
 }
 
-.ListCard img {
+.ListCardNoChange img {
 	object-fit: cover;
 	height: 10em;
 	width: 18em;
 	border-radius: var(--border-rad);
 }
 
-.ListCard .information {
+.ListCardNoChange .information {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 1fr;
 	margin: 10px;
 }
 
-.ListCard .information .by-and-more {
+.ListCardNoChange .information .by-and-more {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr;
 }
 
-.ListCard .information .by-and-more .by-username {
+.ListCardNoChange .information .by-and-more .by-username {
 	grid-column: 1;
 }
 
-.ListCard .information .by-and-more .create-new-list {
+.ListCardNoChange .information .by-and-more .create-new-list {
 	grid-column: 2;
 	display: flex;
 	justify-content: flex-end;
@@ -48,24 +48,7 @@
 	position: relative;
 }
 
-.ListCard .information .by-and-more .create-new-list .three-dots {
+.ListCardNoChange .information .by-and-more .create-new-list .three-dots {
 	font-size: 2.5rem;
 	cursor: pointer;
-}
-
-/* The toggled menu that appears after clicking dots */
-.ListCard .create-new-list .options {
-	position: absolute;
-	top: 2em;
-	right: -6em;
-
-	padding: 0.5em 2em;
-	background-color: var(--light-shade);
-	border-radius: var(--border-rad);
-}
-
-.ListCard .create-new-list li {
-	color: black;
-	list-style-type: none;
-	white-space: nowrap;
 }

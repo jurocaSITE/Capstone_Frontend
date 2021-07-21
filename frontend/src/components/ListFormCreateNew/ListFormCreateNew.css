@@ -1,14 +1,14 @@
-.EditProfile {
-	height: 100%;
-	width: 100%;
+.ListFormCreateNew {
+	height: 100vh;
+	width: 100vw;
 	background: var(--dark-shade);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 2em 0;
+	/* padding: 2em 0; */
 }
 
-.EditProfile .card {
+.ListFormCreateNew .card {
 	width: 620px;
 	padding: 24px 36px 0 36px;
 	background: var(--light-shade);
@@ -18,15 +18,15 @@
 	border-radius: 6px;
 }
 
-.EditProfile .card .form {
+.ListFormCreateNew .card .form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 60%;
-	padding-bottom: 10px;
+	padding-bottom: 30px;
 }
 
-.EditProfile .card .form .input-field {
+.ListFormCreateNew .card .form .input-field {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -34,11 +34,11 @@
 	margin: 12px 0;
 }
 
-.EditProfile .card .form .input-field label {
+.ListFormCreateNew .card .form .input-field label {
 	color: #696f79;
 }
 
-.EditProfile .card .form .input-field input {
+.ListFormCreateNew .card .form .input-field input {
 	height: 52px;
 	padding: 0 15px;
 	font-size: 16px;
@@ -47,7 +47,7 @@
 	border-radius: 6px;
 }
 
-.EditProfile .card .error {
+.ListFormCreateNew .card .error {
 	background: #fe5421;
 	background: var(--default-shadow);
 	color: rgba(245, 41, 41, 1);
@@ -55,10 +55,10 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 10px 20px;
+	/* padding: 10px 20px; */
 }
 
-.EditProfile .card .form .delete-account {
+.ListFormCreateNew .card .form .delete-account {
 	background-color: rgb(220, 55, 55);
 	border: none;
 	border-radius: var(--border-rad);
@@ -72,11 +72,11 @@
 	transition: ease 0.25s;
 }
 
-.EditProfile .card .form .delete-account:hover {
+.ListFormCreateNew .card .form .delete-account:hover {
 	transform: scale(1.1);
 }
 
-.EditProfile .card .form .footer .btn {
+.btn {
 	background-color: var(--dark-accent);
 	border: none;
 	border-radius: var(--border-rad);
@@ -90,15 +90,15 @@
 	transition: ease 0.25s;
 }
 
-.EditProfile .card .form .footer .btn:hover {
+.btn:hover {
 	transform: scale(1.1);
 }
 
-.EditProfile .card .form .footer {
+.ListFormCreateNew .card .form .footer {
 	display: flex;
 }
 
-.EditProfile .card .form .footer .cancel {
+.ListFormCreateNew .cancel {
 	background-color: rgb(220, 55, 55);
 	margin-left: 10px;
 }
