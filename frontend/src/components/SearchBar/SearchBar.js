@@ -46,16 +46,17 @@ export default function SearchBar() {
   return (
     <div className="SearchBar">
       <input
-        type="text"
+        type="search"
         name="searchTerm"
+        aria-label="Search for any book"
         placeholder="Search..."
         value={form.searchTerm}
         onChange={handleOnInputChange}
         onKeyDown={keyPressEnter}
       />
-      {form.searchTerm.length > 0 && (
+      {/* {form.searchTerm.length > 0 && (
         <IoCloseCircle className="close-icon" onClick={resetForm} />
-      )}
+      )} */}
       <button
         className="search-btn"
         disabled={isSearching}

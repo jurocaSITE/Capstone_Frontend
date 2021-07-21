@@ -1,37 +1,41 @@
 .SearchBar {
-	display: flex;
-	align-items: center;
-	position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 .SearchBar input {
-	height: 2em;
-	width: 25em;
+  height: 2em;
+  width: 25em;
 
-	background: var(--light-shade-6-opacity);
-	border: none;
-	border-radius: var(--border-rad);
+  background: var(--light-shade-6-opacity);
+  border: none;
+  border-radius: var(--border-rad);
 }
-.SearchBar input[type="text" i] {
-	padding-left: 1em;
-	font-family: inherit;
+.SearchBar input[type="search" i] {
+  padding-left: 1em;
+  padding-right: .5em;
+  font-family: inherit;
 }
+/* .SearchBar input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+} */
 .SearchBar .close-icon {
-	cursor: pointer;
-	font-size: 1.25rem;
-	position: absolute;
-	right: 2em;
-	color: var(--dark-shade);
-	transform: scale(1);
-	transition: ease .25s;
+  cursor: pointer;
+  font-size: 1.25rem;
+  position: absolute;
+  right: 2em;
+  color: var(--dark-shade);
+  transform: scale(1);
+  transition: ease 0.25s;
 }
 .SearchBar .close-icon:hover {
-	transform: scale(.9);
+  transform: scale(0.9);
 }
 .SearchBar .search-icon {
-	margin: 0;
-	font-size: 1.5rem;
-	transition: ease .25s;
+  margin: 0;
+  font-size: 1.5rem;
+  transition: ease 0.25s;
 }
 .SearchBar .search-icon:hover {
-	transform: scale(1.2);
+  transform: scale(1.2);
 }

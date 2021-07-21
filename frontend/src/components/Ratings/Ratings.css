@@ -1,0 +1,66 @@
+.Ratings
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 3em 5em;
+}
+.Ratings .ratings-head 
+{
+    display: flex;
+    color: var(--light-shade);
+}
+.Ratings .ratings-head a 
+{ 
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit; */
+    transition: ease .25s;
+}
+.Ratings .ratings-head a:hover {
+    transform: scale(1.05);
+}
+.Ratings .ratings-feed-container
+{
+    display: flex;
+    flex-direction: column;
+    padding: 1em 2em;
+    margin-top: 1.5em;
+    max-height: 30em;
+    overflow-y: auto;
+
+    background: var(--dark-shade-darkest);
+    border-radius: var(--border-rad);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, .1);
+}
+.Ratings .rating-review 
+{
+    display: flex;
+    align-items: center;
+    margin: .5em 0;
+}
+.Ratings .rating-review-user 
+{  
+    flex: .5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 .5em;
+}
+.Ratings .rating-review-content
+{
+    flex: 6;
+    padding: 1em 2em;
+    border: solid 1px var(--light-shade);
+    border-radius: var(--border-rad);
+}
+.Ratings .rating-review-content-head
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

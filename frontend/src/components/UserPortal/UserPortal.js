@@ -10,7 +10,7 @@ export default function UserPortal() {
 	const navigate = useNavigate();
 	const { setUser } = useAuthContext();
 	const [showMenu, setShowMenu] = useState(false);
-	const [errors, setErrors] = useState(null);
+	const [ errors, setErrors ] = useState(null);
 
   const toggleMenu = () => setShowMenu(!showMenu);
 

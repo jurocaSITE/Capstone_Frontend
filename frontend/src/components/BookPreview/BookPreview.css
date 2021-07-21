@@ -1,7 +1,13 @@
+.BookPreview {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em;
+    max-width: min-content;
+}
 .BookPreview img {
     object-fit: contain;
     cursor: pointer;
-    margin: 0 1em;
+    /* margin: 0 1em; */
     /* min-height: 20em; */
     /* max-height: 20em; */
     max-height: 20em;
@@ -12,4 +18,9 @@
 }
 .BookPreview img:hover {
     transform: scale(1.25);
+}
+
+.BookPreview .book-details {
+    display: flex;
+    flex-wrap: wrap;
 }

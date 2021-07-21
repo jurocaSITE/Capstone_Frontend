@@ -2,6 +2,18 @@
   min-height: 100vh;
 }
 
+.error {
+  background: #fe5421;
+  background: rgba(245, 41, 41, 0.1);
+  color: rgba(245, 41, 41, 1);
+  /* color: white; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
 /* ----- Loader Animation ----- */
 /* source: https://projects.lukehaas.me/css-loaders/ */
 
@@ -30,7 +42,7 @@
 .loader:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 .loader:before {
   left: -1.5em;
@@ -64,4 +76,3 @@
     height: 5em;
   }
 }
-

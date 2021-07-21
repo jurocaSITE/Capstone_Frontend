@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ActionButton } from "components";
+import { ActionButton, Ratings } from "components";
 import apiClient from "services/apiClient";
 import "./Book.css";
 
@@ -86,7 +86,7 @@ export default function Book() {
             alt="book cover"
             src={
               book?.book_image ||
-              book?.imageLinks?.large ||
+              // book?.imageLinks?.large ||
               book?.imageLinks?.thumbnail ||
               test_book.imgUrl
             }
@@ -101,7 +101,7 @@ export default function Book() {
               </h3>
             </div>
 
-            <div class="book-details-lower">
+            <div className="book-details-lower">
               <h2>Description</h2>
               <p className="book-desc">{book.description}</p>
               <ActionButton link={"#"} text={"Add to List"} />
@@ -112,5 +112,12 @@ export default function Book() {
     );
   };
 
-  return <div className="Book">{renderBookInfo()}</div>;
+  return (
+    <div className="Book">
+      {renderBookInfo()}
+      {book_id ? (
+        <Ratings book_id={book_id} />
+      ) : null}
+    </div>
+  );
 }

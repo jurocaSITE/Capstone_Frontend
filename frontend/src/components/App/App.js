@@ -5,94 +5,90 @@ import { SearchContextProvider } from "contexts/search";
 import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 import {
-	Register,
-	Login,
-	Navbar,
-	Footer,
-	Home,
-	UserHome,
-	Book,
-	SearchResults,
-	Lists,
-	ProfilePage,
-	EditProfile,
+  Register,
+  Login,
+  Navbar,
+  Footer,
+  Home,
+  UserHome,
+  Book,
+  SearchResults,
+  Lists,
+  ProfilePage,
+  EditProfile,
+  AddRating
 } from "components";
 
 // this is for global context so all components can access searchResults, user
 export default function AppContainer() {
-	return (
-		<AuthContextProvider>
-			<SearchContextProvider>
-				<App />
-			</SearchContextProvider>
-		</AuthContextProvider>
-	);
+  return (
+    <AuthContextProvider>
+      <SearchContextProvider>
+        <App />
+      </SearchContextProvider>
+    </AuthContextProvider>
+  );
 }
 
 function App() {
-	const [topSellers, setTopSellers] = useState([]);
-	const [errors, setErrors] = useState(null);
-	const { user, setUser } = useAuthContext();
+  const [topSellers, setTopSellers] = useState([]);
+  const [errors, setErrors] = useState(null);
+  const { user, setUser } = useAuthContext();
 
-	useEffect(() => {
-		const fetchTopSellers = async () => {
-			//setIsFetching(true)
+  useEffect(() => {
+    const fetchTopSellers = async () => {
+      //setIsFetching(true)
 
-			const { data, error } = await apiClient.getTopSellers();
-			if (error) {
-				setErrors((e) => ({ ...e, db: error }));
-				setTopSellers([]);
-			}
-			if (data?.top_sellers) {
-				setErrors(null);
-				setTopSellers(data.top_sellers);
-			}
-		};
-		//setIsFetching(false)
-		fetchTopSellers();
-	}, []);
+      const { data, error } = await apiClient.getTopSellers();
+      if (error) {
+        setErrors((e) => ({ ...e, db: error }));
+        setTopSellers([]);
+      }
+      if (data?.top_sellers) {
+        setErrors(null);
+        setTopSellers(data.top_sellers);
+      }
+    };
+    //setIsFetching(false)
+    fetchTopSellers();
+  }, []);
 
-	useEffect(() => {
-		const fetchUser = async () => {
-			const { data, error } = await apiClient.fetchUserFromToken();
-			if (data) setUser(data.user);
-			if (error) setErrors(error);
-		};
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data, error } = await apiClient.fetchUserFromToken();
+      if (data) setUser(data.user);
+      if (error) setErrors(error);
+    };
 
-		const token = localStorage.getItem("teca_token");
-		if (token) {
-			apiClient.setToken(token);
-			fetchUser();
-		}
-	}, [setUser]);
+    const token = localStorage.getItem("teca_token");
+    if (token) {
+      apiClient.setToken(token);
+      fetchUser();
+    }
+  }, [setUser]);
 
-	return (
-		<div className="App">
-			<BrowserRouter>
-				<Navbar />
-				<Routes>
-					<Route path="/books/id/:book_id" element={<Book />} />
-					<Route path="/books/top/sellers/:title" element={<Book />} />
-					<Route path="/my-lists" element={<Lists />} />
-					<Route path="/profile" element={<ProfilePage />} />
-					<Route path="/edit-profile" element={<EditProfile />} />
-					<Route
-						path="/login"
-						element={<Login user={user} setUser={setUser} />}
-					/>
-					<Route
-						path="/signup"
-						element={<Register user={user} setUser={setUser} />}
-					/>
-					<Route path="/search" element={<SearchResults />} />
-					{user ? (
-						<Route path="/" element={<UserHome />} />
-					) : (
-						<Route path="/" element={<Home topSellers={topSellers} />} />
-					)}
-				</Routes>
-				<Footer />
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/books/id/:book_id" element={<Book />} />
+          <Route path="/books/top/sellers/:title" element={<Book />} />
+          <Route path="/my-lists" element={<Lists />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/add-rating/:bookId" element={<AddRating />} />
+          {user ? (
+            <Route path="/" element={<UserHome />} />
+          ) : (
+            <Route path="/" element={<Home topSellers={topSellers} />} />
+          )}
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
 }

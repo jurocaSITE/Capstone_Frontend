@@ -3,9 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
     /* justify-content: center; */
     padding: 2em 1em;
     color: var(--light-shade);
+    width: 80%;
 }
 .Book h1,
 .Book h2,
@@ -15,7 +17,7 @@
 .Book .book-card {
     display: flex;
     align-items: flex-start;
-    width: 80%;
+    /* width: 80%; */
 }
 .Book .book-card img {
     object-fit: contain;

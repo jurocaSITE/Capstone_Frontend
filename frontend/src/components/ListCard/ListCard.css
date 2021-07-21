@@ -62,7 +62,7 @@
 }
 
 .ListCard .create-new-list li {
-	color: black;
+	color: var(--dark-shade);
 	list-style-type: none;
 	white-space: nowrap;
 }

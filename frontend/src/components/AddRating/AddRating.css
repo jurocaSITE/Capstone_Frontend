@@ -1,0 +1,44 @@
+.AddRating {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    color: var(--light-shade);
+}
+.AddRating form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* min-height: 30em; */
+    height: fit-content;
+    width: 60%;
+    padding: 2em;
+    overflow: hidden;
+
+    color: var(--dark-shade);
+    background: var(--light-shade);
+    border-radius: var(--border-rad);
+}
+.AddRating .input-field {
+    display: flex;
+    flex-direction: column;
+    margin: .5em 0;
+}
+.AddRating .input-field input {
+    height: 52px;
+    padding: 0 15px;
+    font-size: 16px;
+    border: solid 1px #8692A6;
+    width: 100%;
+    border-radius: 6px;
+}
+.AddRating .input-field input[type="range"] {
+    padding: 0;
+    width: min-content;
+}
+.AddRating button {
+    margin-top: .5em;
+    padding: .5em 1em;
+    background: var(--light-accent);
+}
