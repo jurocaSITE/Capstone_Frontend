@@ -17,12 +17,94 @@ function EditProfile() {
 	const { setUser } = useAuthContext();
 
 	const handleOnInputChange = (event) => {
+		if (event.target.name === "first_name") {
+			if (event.target.value === "") {
+				setErrors((e) => ({
+					...e,
+					first_name_error: "Please enter a new first name or cancel.",
+				}));
+			} else {
+				setErrors((e) => ({ ...e, first_name_error: null }));
+			}
+		}
+		if (event.target.name === "last_name") {
+			if (event.target.value === "") {
+				setErrors((e) => ({
+					...e,
+					last_name_error: "Please enter a new last name or cancel.",
+				}));
+			} else {
+				setErrors((e) => ({ ...e, last_name_error: null }));
+			}
+		}
+		if (event.target.name === "profile_picture") {
+			if (event.target.value === "") {
+				setErrors((e) => ({
+					...e,
+					profile_picture_error: "Please enter a new image URL or cancel.",
+				}));
+			} else {
+				setErrors((e) => ({ ...e, profile_picture_error: null }));
+			}
+		}
+		if (event.target.name === "date_of_birth") {
+			if (event.target.value === "") {
+				setErrors((e) => ({
+					...e,
+					date_of_birth_error: "Please enter a new date of birth or cancel.",
+				}));
+			} else {
+				setErrors((e) => ({ ...e, date_of_birth_error: null }));
+			}
+		}
+
 		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
 	};
 
 	const handleOnSubmit = async () => {
 		setIsProcessing(true);
 		setErrors((e) => ({ ...e, form: null }));
+
+		if (form.first_name === "") {
+			setErrors((e) => ({
+				...e,
+				first_name_error: "Please enter a new first name or cancel.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else {
+			setErrors((e) => ({ ...e, first_name_error: null }));
+		}
+		if (form.last_name === "") {
+			setErrors((e) => ({
+				...e,
+				last_name_error: "Please enter a new last name or cancel.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else {
+			setErrors((e) => ({ ...e, last_name_error: null }));
+		}
+		if (form.profile_picture === "") {
+			setErrors((e) => ({
+				...e,
+				profile_picture_error: "Please enter a new image URL or cancel.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else {
+			setErrors((e) => ({ ...e, profile_picture_error: null }));
+		}
+		if (form.date_of_birth === "") {
+			setErrors((e) => ({
+				...e,
+				date_of_birth_error: "Please enter a new date of birth or cancel.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else {
+			setErrors((e) => ({ ...e, date_of_birth_error: null }));
+		}
 
 		const { data, error } = await apiClient.editUserProfile({
 			first_name: form.first_name,
@@ -61,6 +143,9 @@ function EditProfile() {
 
 				<div className="form">
 					<div className="input-field">
+						{errors.first_name_error && (
+							<span className="error">{errors.first_name_error}</span>
+						)}
 						<label htmlFor="first_name">First name</label>
 						<input
 							type="text"
@@ -69,12 +154,12 @@ function EditProfile() {
 							value={form.first_name}
 							onChange={handleOnInputChange}
 						/>
-						{errors.first_name && (
-							<span className="error">{errors.first_name}</span>
-						)}
 					</div>
 
 					<div className="input-field">
+						{errors.last_name_error && (
+							<span className="error">{errors.last_name_error}</span>
+						)}
 						<label htmlFor="last_name">Last name</label>
 						<input
 							type="text"
@@ -83,12 +168,12 @@ function EditProfile() {
 							value={form.last_name}
 							onChange={handleOnInputChange}
 						/>
-						{errors.last_name && (
-							<span className="error">{errors.last_name}</span>
-						)}
 					</div>
 
 					<div className="input-field">
+						{errors.profile_picture_error && (
+							<span className="error">{errors.profile_picture_error}</span>
+						)}
 						<label htmlFor="profile_picture">Image URL</label>
 						<input
 							type="text"
@@ -98,12 +183,12 @@ function EditProfile() {
 							value={form.profile_picture}
 							onChange={handleOnInputChange}
 						/>
-						{errors.profile_picture && (
-							<span className="error">{errors.profile_picture}</span>
-						)}
 					</div>
 
 					<div className="input-field">
+						{errors.date_of_birth_error && (
+							<span className="error">{errors.date_of_birth_error}</span>
+						)}
 						<label htmlFor="date_of_birth">Date of Birth</label>
 						<input
 							type="date"
@@ -111,9 +196,6 @@ function EditProfile() {
 							value={form.date_of_birth}
 							onChange={handleOnInputChange}
 						/>
-						{errors.date_of_birth && (
-							<span className="error">{errors.date_of_birth}</span>
-						)}
 					</div>
 
 					<Link to="/">

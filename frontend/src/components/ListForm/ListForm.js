@@ -22,7 +22,7 @@ function ListForm() {
 					list_name_error: "Please enter a new list name or cancel.",
 				}));
 			} else {
-				setErrors((e) => ({ ...e, dateError: null }));
+				setErrors((e) => ({ ...e, list_name_error: null }));
 			}
 		}
 		if (event.target.name === "image") {
@@ -32,7 +32,7 @@ function ListForm() {
 					image_error: "Please enter an image URL or cancel.",
 				}));
 			} else {
-				setErrors((e) => ({ ...e, dateError: null }));
+				setErrors((e) => ({ ...e, image_error: null }));
 			}
 		}
 

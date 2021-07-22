@@ -2,11 +2,51 @@ import "./ProfilePage.css";
 import React, { useEffect, useState } from "react";
 import { AuthorCard, BookPreview, ProfileListCard } from "components";
 import { useAuthContext } from "contexts/auth";
+import apiClient from "services/apiClient";
 
 const defaultUserPicture = "https://source.unsplash.com/random";
 
 function ProfilePage() {
 	const { user } = useAuthContext();
+	const [lists, setLists] = useState([]);
+	const [isFetching, setIsFetching] = useState(false);
+	const [error, setError] = useState(null);
+	let defaultLists = [];
+	let otherLists = [];
+
+	useEffect(() => {
+		const fetchListsByUserId = async () => {
+			setIsFetching(true);
+			try {
+				const allLists = await apiClient.getAllListsByUserId();
+				setLists(allLists.data.all_lists);
+			} catch (error) {
+				setError(error);
+			}
+
+			setIsFetching(false);
+		};
+
+		fetchListsByUserId();
+	}, []);
+
+	const settingLists = () => {
+		for (let i = 0; i < lists.length; i++) {
+			if (lists[i].list_name === "Want To Read") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Currently Reading") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Did Not Finish") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Finished") {
+				defaultLists.push(lists[i]);
+			} else {
+				otherLists.push(lists[i]);
+			}
+		}
+	};
+
+	settingLists();
 
 	return (
 		<div className="ProfilePage">
@@ -38,12 +78,11 @@ function ProfilePage() {
 				</div>
 			</div>
 			<div className="library">
-				<h2>Library</h2>
+				<h2>Default Lists</h2>
 				<div className="lists-cards">
-					<ProfileListCard />
-					<ProfileListCard />
-					<ProfileListCard />
-					<ProfileListCard />
+					{defaultLists.map((list) => (
+						<ProfileListCard key={list.id} list={list} className="list-card" />
+					))}
 				</div>
 			</div>
 			<div className="currently-reading">

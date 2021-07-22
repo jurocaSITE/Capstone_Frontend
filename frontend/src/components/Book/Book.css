@@ -1,61 +1,79 @@
 .Book {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    padding: 2em 1em;
-    color: var(--light-shade);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	padding: 2em 1em;
+	color: var(--light-shade);
 }
 .Book h1,
 .Book h2,
 .Book h3 {
-    font-weight: 400;
+	font-weight: 400;
 }
 .Book .book-card {
-    display: flex;
-    align-items: flex-start;
-    width: 80%;
+	display: flex;
+	align-items: flex-start;
+	width: 80%;
 }
 .Book .book-card img {
-    object-fit: contain;
-    /* max-height: 500px; */
-    /* width: 312.5px; */
-    min-height: 20em;
-    width: 20em;
-    border-radius: var(--border-rad);
-    box-shadow: var(--default-shadow);
-    transition: ease .5s;
+	object-fit: contain;
+	/* max-height: 500px; */
+	/* width: 312.5px; */
+	min-height: 20em;
+	width: 20em;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	transition: ease 0.5s;
 }
 .Book .book-card img:hover {
-    transform: scale(1.05);
+	transform: scale(1.05);
 }
 .Book .book-card .book-details {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    margin-left: 1em;
+	margin-left: 1em;
 }
 .Book .book-card .book-details-head {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: fit-content;
 }
 .Book .book-card .book-details-head .book-author {
-    align-self: flex-end;
+	align-self: flex-end;
 }
 .Book .book-card .book-details-head .pub-date {
-    /* align-self: flex-start; */
-    padding-top: .5em;
-    color: var(--light-shade-6-opacity);
+	/* align-self: flex-start; */
+	padding-top: 0.5em;
+	color: var(--light-shade-6-opacity);
 }
 .Book .book-details-lower {
-    margin-top: 1em;
+	margin-top: 1em;
 }
 .Book .book-details p {
-    padding: 1em 0;
-    /* max-height: 2em; */
-    overflow: hidden;
-    text-overflow: ellipsis;
+	padding: 1em 0;
+	/* max-height: 2em; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.btn {
+	background-color: var(--dark-accent);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	height: 40px;
+	width: 120px;
+	color: var(--light-shade);
+	font-size: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+
+.btn:hover {
+	transform: scale(1.1);
 }
