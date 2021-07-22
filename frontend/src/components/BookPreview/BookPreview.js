@@ -8,6 +8,7 @@ const defaultBookCover =
 export default function BookPreview({ book = {} }) {
 	const topSellerBook = !book.id; // top sellers from NYT api do not have an id
 	// console.log("Book Preview topSeller exists? ", topSellerBook);
+
 	return (
 		<div className="BookPreview">
 			{topSellerBook ? (

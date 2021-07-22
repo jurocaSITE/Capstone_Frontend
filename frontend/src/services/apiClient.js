@@ -126,6 +126,13 @@ class ApiClient {
 			data: credentials,
 		});
 	}
+
+	async addBookToList(bookId, listId) {
+		return await this.request({
+			endpoint: `lists/${listId}/add-book/${bookId}`,
+			method: `POST`,
+		});
+	}
 }
 
 export default new ApiClient(

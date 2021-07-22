@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { ActionButton } from "components";
+import { Link, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
 import "./Book.css";
 import { Modal } from "components";
@@ -23,6 +22,33 @@ export default function Book() {
 	const [book, setBook] = useState({});
 	const [isFetching, setIsFetching] = useState(false);
 	const [errors, setErrors] = useState(null);
+
+	const [lists, setLists] = useState([]);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const fetchListsByUserId = async () => {
+			setIsFetching(true);
+			try {
+				const allLists = await apiClient.getAllListsByUserId();
+				setLists(allLists.data.all_lists);
+			} catch (error) {
+				setError(error);
+			}
+
+			setIsFetching(false);
+		};
+
+		fetchListsByUserId();
+	}, []);
+
+	const addToList = async (bookId, listId) => {
+		setIsFetching(true);
+
+		const { data, error } = await apiClient.addBookToList(bookId, listId);
+
+		setIsFetching(false);
+	};
 
 	useEffect(() => {
 		window.scrollTo(0, 0); // makes sure the page renders at the top of the screen
@@ -87,9 +113,9 @@ export default function Book() {
 						alt="book cover"
 						src={
 							book?.book_image ||
-							book?.imageLinks?.large ||
 							book?.imageLinks?.thumbnail ||
-							test_book.imgUrl
+							book?.imageLinks?.large // ||
+							// test_book.imgUrl
 						}
 					/>
 					<div className="book-details">
@@ -112,7 +138,24 @@ export default function Book() {
 						</div>
 					</div>
 				</div>
-				<Modal>Hello</Modal>
+				<Modal>
+					<div className="select-list">
+						{lists.map((list) => (
+							<button
+								className="btn-select-list"
+								key={list.id}
+								onClick={() => {
+									addToList(book.id, list.id);
+								}}
+							>
+								{list.list_name}
+							</button>
+						))}
+						<Link to={`/list/create-new`}>
+							<button className="btn-select-list">Create New List +</button>
+						</Link>
+					</div>
+				</Modal>
 			</>
 		);
 	};

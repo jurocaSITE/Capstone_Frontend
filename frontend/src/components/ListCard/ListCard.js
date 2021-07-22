@@ -38,9 +38,6 @@ function ListCard({ list }) {
 								<Link to={`/list/edit/${list.id}/${list.list_name}`}>
 									<li>Edit</li>
 								</Link>
-								<Link to="/">
-									<li className="sign-out"></li>
-								</Link>
 							</ul>
 						)}
 					</div>

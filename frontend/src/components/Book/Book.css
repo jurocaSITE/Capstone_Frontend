@@ -77,3 +77,27 @@
 .btn:hover {
 	transform: scale(1.1);
 }
+
+.select-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.btn-select-list {
+	padding: 1em;
+	background-color: var(--dark-accent);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	/* height: 40px;
+	width: 120px; */
+	color: var(--light-shade);
+	font-size: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+.btn-select-list:hover {
+	transform: scale(1.1);
+}

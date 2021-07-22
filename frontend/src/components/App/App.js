@@ -78,6 +78,10 @@ function App() {
 					<Route path="/my-lists" element={<Lists />} />
 					<Route path="/list/edit/:list_id/:listName" element={<ListForm />} />
 					<Route path="/list/create-new" element={<ListFormCreateNew />} />
+					<Route
+						path="/list/create-new/:bookId"
+						element={<ListFormCreateNew />}
+					/>
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
 					<Route

@@ -103,6 +103,6 @@
 .modal__btn:hover,
 .modal__btn:focus {
 	border-color: var(--dark-accent);
-	color: var(--dark-accent);
+	/* color: var(--dark-accent); */
 	transform: translateY(-0.2rem);
 }
