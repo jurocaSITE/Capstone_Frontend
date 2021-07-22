@@ -85,8 +85,8 @@ export default function DetailedList( ) {
 
                     <div className="book-info">
                         <div className="index">
-                            {listContents.map((book) => (
-                                <h2>{book.id}</h2>
+                            {listContents.map((book, index) => (
+                                <h2>{index+1}</h2>
                             ))}
                         </div>
                         <div className="preview">
@@ -109,7 +109,7 @@ export default function DetailedList( ) {
                                 <p>{book.categories}</p>
                             ))} */}
                             {bookList.map((book) => (
-                                <Genre text={book.categories[0]}/>
+                                <Genre text={book.categories}/>
                             ))}
 
                         </div>
