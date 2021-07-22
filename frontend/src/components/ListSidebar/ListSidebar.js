@@ -1,41 +1,29 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
-import { GoTriangleDown } from "react-icons/go";
+import { BsThreeDots } from "react-icons/bs";
 import { useAuthContext } from "contexts/auth";
 import "./ListSidebar.css";
 
 export default function ListSidebar() {
-	// const navigate = useNavigate();
-	// const { setUser } = useAuthContext();
-	// const [showMenu, setShowMenu] = useState(false);
+	const navigate = useNavigate();
+	const { setUser } = useAuthContext();
+	const [showMenu, setShowMenu] = useState(false);
 
-	// const toggleMenu = () => setShowMenu(!showMenu);
+	const toggleMenu = () => setShowMenu(!showMenu);
 
-	// const handleOnClickRemove = () => {
-	// 	setUser(null);
-	// 	navigate("/");
-	// };
 
-	// return (
-	// 	<div className="UserPortal">
-	// 		<div className="user-icons" onClick={toggleMenu}>
-	// 			<FaUserCircle />
-	// 			<GoTriangleDown />
-	// 		</div>
-	// 		{showMenu ? (
-	// 			<ul className="user-menu">
-	// 				<Link to="/profile">
-	// 					<li>Your Profile</li>
-	// 				</Link>
-	// 				<Link to="/">
-	// 					<li>Settings</li>
-	// 				</Link>
-	// 				<Link to="/">
-	// 					<li className="sign-out" onClick={handleOnSignOut}></li>
-	// 				</Link>
-	// 			</ul>
-	// 		) : null}
-	// 	</div>
-	// );
+	return (
+		<div className="UserPortal">
+			<div className="user-icons" onClick={toggleMenu}>
+				<BsThreeDots />
+			</div>
+			{showMenu ? (
+				<ul className="user-menu">
+					<li>Transfer</li>
+					<li>Copy</li>
+					<li> Remove </li>
+				</ul>
+			) : null}
+		</div>
+	);
 }

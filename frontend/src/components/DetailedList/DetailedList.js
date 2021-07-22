@@ -1,9 +1,11 @@
 import "./DetailedList.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { BookPreview } from "components";
+import { BookPreview, Genre } from "components";
 import apiClient from "services/apiClient";
 import moment from "moment";
+import { useParams } from "react-router-dom";
+import ListSidebar from "components/ListSidebar/ListSidebar";
 
 
 export default function DetailedList( ) {
@@ -11,10 +13,12 @@ export default function DetailedList( ) {
     const [listName, setListName] = useState([]);
     const [errors, setErrors] = useState(null);
     const [bookList, setBookList] = useState([]);
+    const { list_id } = useParams(); // searches url for book_id param if book else null
+
 
     useEffect(() => {
         const fetchListContents = async () => {
-            const {data, error } = await apiClient.getListContents("22");
+            const {data, error } = await apiClient.getListContents(list_id);
             if (error) {
                 setErrors(error);
             }
@@ -26,7 +30,7 @@ export default function DetailedList( ) {
         }
 
         const fetchListName = async () => {
-            const {data, error } = await apiClient.getListNameById("22");
+            const {data, error } = await apiClient.getListNameById(list_id);
             if (error) {
                 setErrors(error);
             }
@@ -38,7 +42,7 @@ export default function DetailedList( ) {
 
         const fetchBooksInList = async () => {
       
-            const { data, error } = await apiClient.getBooksInList("22");
+            const { data, error } = await apiClient.getBooksInList(list_id);
             if (error) {
               setErrors(error);
               console.log("book data is ", data)
@@ -86,13 +90,13 @@ export default function DetailedList( ) {
                             ))}
                         </div>
                         <div className="preview">
-                        {listContents.map((book) => (
-                            <BookPreview book={book} key={book.title} />
-                        ))}
+                            {bookList.map((book) => (
+                                <BookPreview book={book} key={book.title} />
+                            ))}
                         </div>
                         <div className="title-and-author">
                             {bookList.map((book) => (
-                                <h3>{book.title}{book.authors}</h3>
+                                <h3>{book.title} by {book.authors}</h3>
                             ))}
                         </div>
                         <div className="dates">
@@ -101,19 +105,23 @@ export default function DetailedList( ) {
                             ))}
                         </div>
                         <div className="tags">
-                            {bookList.map((book) => (
+                            {/* {bookList.map((book) => (
                                 <p>{book.categories}</p>
+                            ))} */}
+                            {bookList.map((book) => (
+                                <Genre text={book.categories[0]}/>
                             ))}
 
                         </div>
                         <div className="page-count">
-                        {bookList.map((book) => (
+                            {bookList.map((book) => (
                                 <h2>{book.pageCount}</h2>
                             ))}
                         </div>
                         <div className="settings">
-                            <h1>...</h1>
-                            <h1>...</h1>
+                            {bookList.map((book) => (
+                                <ListSidebar/>
+                            ))}
                         </div>
                     </div>
                 </div>

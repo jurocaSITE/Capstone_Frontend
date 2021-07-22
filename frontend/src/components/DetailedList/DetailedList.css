@@ -41,7 +41,6 @@
     margin-right: 5.5em;
 }
 
-
 .DetailedList .content .book-info{
     display: flex;
     flex-direction: row;
@@ -58,12 +57,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    min-width: 14em;
+    max-width: 14em;
 }
 
 .DetailedList .content .book-info .title-and-author{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    min-width: 12em;
     max-width: 12em;
 
 }
@@ -79,7 +81,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 3em;
+    margin-left: 4em;
+    min-width: 10em;
     max-width: 10em;
 }
 
@@ -88,6 +91,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin-left: 6em;
+    min-width: 16em;
     max-width: 16em;
 }
 
@@ -111,8 +115,8 @@
     object-fit: contain;
     cursor: pointer;
     margin: 1em 4em;
-    max-height: 10em;
-    max-width: 7em;
+    max-height: 9em;
+    max-width: 6em;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
     transition: ease .5s;
