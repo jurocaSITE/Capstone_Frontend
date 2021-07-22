@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchContextProvider } from "contexts/search";
 import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
+
 import {
   Register,
   Login,
@@ -32,12 +33,11 @@ export default function AppContainer() {
 
 function App() {
   const [topSellers, setTopSellers] = useState([]);
-  const [list, setList] = useState([]);
 	const [errors, setErrors] = useState(null);
-	const { user, setUser } = useAuthContext();
-	const [appState, setAppState] = useState({});
+  const { user, setUser } = useAuthContext();
+  const [listContents, setListContents] = useState([]);
 
-	useEffect(() => {
+  useEffect(() => {
 		const fetchTopSellers = async () => {
 			//setIsFetching(true)
 
@@ -55,6 +55,20 @@ function App() {
 		fetchTopSellers();
 	}, []);
 
+  useEffect(() => {
+		const fetchUser = async () => {
+			const { data, error } = await apiClient.fetchUserFromToken();
+			if (data) setUser(data.user);
+			if (error) setErrors(error);
+		};
+
+		const token = localStorage.getItem("teca_token");
+		if (token) {
+			apiClient.setToken(token);
+			fetchUser();
+		}
+	}, [setUser]);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -63,7 +77,7 @@ function App() {
           <Route path="/books/id/:book_id" element={<Book />} />
           <Route path="/books/top/sellers/:title" element={<Book />} />
           <Route path="/my-lists" element={<Lists />} />
-		  <Route path="/my-lists/:list_name" element={<DetailedList list={list} setList={setList}/>} />
+		  <Route path="/my-lists/:list_name" element={<DetailedList/>} />
 		  <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/login"
@@ -71,7 +85,7 @@ function App() {
           />
           <Route
             path="/signup"
-            element={<Register setAppState={setAppState}/>}
+            element={<Register user={user} setUser={setUser}/>}
           />
           <Route path="/search" element={<SearchResults />} />
           {user ? (
