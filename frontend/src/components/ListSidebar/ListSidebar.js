@@ -21,7 +21,7 @@ export default function ListSidebar() {
 				<ul className="user-menu">
 					<li>Transfer</li>
 					<li>Copy</li>
-					<li> Remove </li>
+					<li>Remove</li>
 				</ul>
 			) : null}
 		</div>

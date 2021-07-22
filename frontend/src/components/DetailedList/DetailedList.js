@@ -86,41 +86,58 @@ export default function DetailedList( ) {
                     <div className="book-info">
                         <div className="index">
                             {listContents.map((book, index) => (
-                                <h2>{index+1}</h2>
+                                <div className="row"><h2>{index+1}</h2></div>
                             ))}
                         </div>
                         <div className="preview">
                             {bookList.map((book) => (
-                                <BookPreview book={book} key={book.title} />
+                                <div className="row"><BookPreview book={book} key={book.title} /></div>
                             ))}
                         </div>
                         <div className="title-and-author">
                             {bookList.map((book) => (
-                                <h3>{book.title} by {book.authors}</h3>
+                                <div className="row">
+                                    <h3>{book.title}</h3>
+                                    <h3>by {book.authors}</h3>
+                                </div>
                             ))}
                         </div>
                         <div className="dates">
                             {listContents.map((book) => (
-                                <h3>{moment(book.added_on).format("MMMM Do YYYY")}</h3>
+                                <div className="row"><h3>{moment(book.added_on).format("MMMM Do YYYY")}</h3></div>
                             ))}
                         </div>
                         <div className="tags">
-                            {/* {bookList.map((book) => (
-                                <p>{book.categories}</p>
-                            ))} */}
-                            {bookList.map((book) => (
-                                <Genre text={book.categories}/>
-                            ))}
+                            {bookList.map((book, index) => { 
+                                // book.categories = array w/categories
+                                // array called unique categories --> implement logic here using split("/") that
+                                // gets all unique categories and then returns for each book in the list
+                                const unique_categories = [];
 
+                                for (let i = 0; i < book.categories.length; i++) {
+                                    let split = book.categories[i].split("/");
+                                    for (let j = 0; j < split.length; j++) {
+                                        if (!(unique_categories.includes(split[j]))){
+                                            unique_categories.push(split[j]);
+                                        }
+                                    }
+                                }
+                                return (
+                                    <div className="row">
+                                        {unique_categories.map((category) => {
+                                                return(<div className="r"><Genre text={category}/></div>)
+                                        })}
+                                    </div>
+                            )})}
                         </div>
                         <div className="page-count">
                             {bookList.map((book) => (
-                                <h2>{book.pageCount}</h2>
+                                <div className="row"><h2>{book.pageCount}</h2></div>
                             ))}
                         </div>
                         <div className="settings">
                             {bookList.map((book) => (
-                                <ListSidebar/>
+                                <div className="row"><ListSidebar/></div>
                             ))}
                         </div>
                     </div>
