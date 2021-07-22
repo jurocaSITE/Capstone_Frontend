@@ -151,7 +151,7 @@ export default function Book() {
 								{list.list_name}
 							</button>
 						))}
-						<Link to={`/list/create-new`}>
+						<Link to={`/list/create-new/${book.id}`}>
 							<button className="btn-select-list">Create New List +</button>
 						</Link>
 					</div>

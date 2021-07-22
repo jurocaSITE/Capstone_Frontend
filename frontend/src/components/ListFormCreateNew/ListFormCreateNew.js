@@ -1,6 +1,6 @@
 import "./ListFormCreateNew.css";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
 
 function ListFormCreateNew() {
@@ -11,6 +11,8 @@ function ListFormCreateNew() {
 		list_name: "",
 		image: "",
 	});
+	const { bookId } = useParams(); // searches for a book id patam if not sets to null
+	const [isFetching, setIsFetching] = useState(false);
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
@@ -66,6 +68,17 @@ function ListFormCreateNew() {
 			list_name: form.list_name,
 			image: form.image,
 		});
+
+		if (bookId && data?.new_list.id) {
+			setIsFetching(true);
+
+			const { info, error } = await apiClient.addBookToList(
+				bookId,
+				data.new_list.id
+			);
+
+			setIsFetching(false);
+		}
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
 
