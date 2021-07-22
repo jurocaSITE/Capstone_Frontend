@@ -4,12 +4,16 @@
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
+    padding: 2em 1em;
     color: var(--light-shade);
+}
+.AddRating h1 {
+    padding-bottom: .5em;
 }
 .AddRating form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     /* min-height: 30em; */
     height: fit-content;
     width: 60%;
@@ -27,18 +31,49 @@
 }
 .AddRating .input-field input {
     height: 52px;
-    padding: 0 15px;
+    padding: 0 .5em;
     font-size: 16px;
     border: solid 1px #8692A6;
-    width: 100%;
-    border-radius: 6px;
+    max-width: 100%;
+    border-radius: var(--border-rad);
+}
+.AddRating .rating-bar {
+    display: flex;
+    align-items: center;
+}
+.AddRating .rating-bar .star-rating {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: .5em;
+    font-size: 1.5rem;
+}
+.AddRating .rating-bar .star-rating svg {
+    padding-right: .2em;
 }
 .AddRating .input-field input[type="range"] {
+    flex: 3;
     padding: 0;
-    width: min-content;
+    /* max-width: 100%; */
+}
+.AddRating .input-field textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    max-width: 100%;
+    max-height: 30em;
+    padding: 2px .5em;
+    resize: none;
+    overflow-y: auto;
+
+    border: solid 1px #8692A6;
+    border-radius: var(--border-rad);
+}
+.AddRating .form-buttons {
+    align-self: center;
+    margin-top: 1em;
 }
 .AddRating button {
-    margin-top: .5em;
     padding: .5em 1em;
+    margin: 0 .5em;
     background: var(--light-accent);
 }

@@ -36,24 +36,26 @@ export default function AddRating() {
     <div className="AddRating">
       <h1>Add Review</h1>
 
-      <form>
+      <form autoComplete="off">
         {errors?.form && <span className="error">{errors.form}</span>}
 
         <div className="input-field">
           <label htmlFor="rating">Star Rating (between 0 and 5)</label>
-          <span>
-            <FaRegStar /> {form.rating}
+          <span className="rating-bar">
+            <input
+              type="range"
+              name="rating"
+              min="0"
+              max="5"
+              step=".1"
+              value={form.rating}
+              onChange={handleOnInputChange}
+            />
+            <span className="star-rating">
+              <FaRegStar size={25} /> {form.rating}
+            </span>
           </span>
-          <input
-            type="range"
-            name="rating"
-            min="0"
-            max="5"
-            step=".1"
-            value={form.rating}
-            onChange={handleOnInputChange}
-          />
-          {/* {errors?.rating && <span className="error">{errors.rating}</span>} */}
+          {errors?.rating && <span className="error">{errors.rating}</span>}
         </div>
 
         <div className="input-field">
@@ -71,29 +73,31 @@ export default function AddRating() {
 
         <div className="input-field">
           <label htmlFor="reviewBody">Review Body</label>
-          <input
-            type="text"
+          <textarea
             name="reviewBody"
             placeholder="Review Body"
+            rows="4"
+            cols="30"
             value={form.reviewBody}
             onChange={handleOnInputChange}
             required
-          />
+          ></textarea>
           {/* {errors?.password && <span className="error">{errors.password}</span>} */}
         </div>
 
-        {/* <button
-          className="submit-btn"
-          disabled={isProcessing}
-          onClick={handleOnSubmit}
-        >
-          {isProcessing ? "Processing..." : "Submit"}
-        </button> */}
-        <ActionButton
-          disabled={isProcessing}
-          text={isProcessing ? "Processing..." : "Submit"}
-          clickFunc={handleOnSubmit}
-        />
+        <div className="form-buttons">
+          <ActionButton
+            disabled={isProcessing}
+            text={isProcessing ? "Processing..." : "Submit"}
+            clickFunc={handleOnSubmit}
+          />
+          
+          <ActionButton
+            disabled={isProcessing}
+            text={`Cancel`}
+            link={`/books/id/${bookId}`}
+          />
+        </div>
       </form>
     </div>
   );
