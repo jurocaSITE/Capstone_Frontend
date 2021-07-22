@@ -64,7 +64,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 2em;
+    max-width: 12em;
+
 }
 
 .DetailedList .content .book-info .index{
@@ -78,28 +79,32 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 13em;
+    margin-left: 3em;
+    max-width: 10em;
 }
 
 .DetailedList .content .book-info .tags{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 16em;
+    margin-left: 6em;
+    max-width: 16em;
 }
 
 .DetailedList .content .book-info .page-count{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 18em;
+    margin-left: 5em;
+    min-width: 5em;
 }
 
 .DetailedList .content .book-info .settings{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 5em;
+    margin-left: 1.5em;
+
 }
 
 .DetailedList img {
