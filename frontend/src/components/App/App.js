@@ -80,7 +80,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/search" element={<SearchResults />} />
-          <Route path="/add-rating/:bookId" element={<AddRating />} />
+          <Route path="/set-rating/:status/:bookId" element={<AddRating />} />
+          <Route path="/set-rating/:status/:bookId/:ratingId" element={<AddRating />} />
           {user ? (
             <Route path="/" element={<UserHome />} />
           ) : (

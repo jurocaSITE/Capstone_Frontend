@@ -9,6 +9,7 @@
 	--dark-shade-darkest: #232e3c;
 
 	--light-shade-6-opacity: rgba(242, 239, 231, .6);
+	--error-color: rgba(245, 41, 41, 1);
 	--border-rad: 6px;
 	--default-shadow: 0 4px 4px 0 rgba(0,0,0,.25);
 }

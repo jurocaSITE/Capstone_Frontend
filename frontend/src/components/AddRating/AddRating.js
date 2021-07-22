@@ -1,36 +1,24 @@
 import "./AddRating.css";
-import { useState } from "react";
+// import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaRegStar } from "react-icons/fa";
-import apiClient from "services/apiClient";
+// import apiClient from "services/apiClient";
 import { useRatingForm } from "hooks/useRatingForm";
 import { ActionButton } from "components";
 
 export default function AddRating() {
   const navigate = useNavigate();
-  const { bookId } = useParams();
-  const { form, errors, resetForm, setErrors, handleOnInputChange } =
-    useRatingForm();
-  const [isProcessing, setIsProcessing] = useState(false);
+  const { status, bookId, ratingId } = useParams();
+  const {
+    form,
+    errors,
+    isProcessing,
+    handleOnInputChange,
+    handleOnSubmit,
+    handleOnUpdate,
+  } = useRatingForm({ bookId, ratingId });
 
-  const handleOnSubmit = async () => {
-    setIsProcessing(true);
-    setErrors((e) => ({ ...e, form: null }));
-
-    const { data, error } = await apiClient.createNewRatingForBook(bookId, {
-      rating: form.rating,
-      reviewTitle: form.reviewTitle,
-      reviewBody: form.reviewBody,
-    });
-
-    if (error) setErrors((e) => ({ ...e, form: error }));
-    if (data?.rating) {
-      console.log("Rating added...", data.rating);
-      navigate(`/books/id/${bookId}`);
-    }
-
-    setIsProcessing(false);
-  };
+  const userOwnsRating = status === "update";
 
   return (
     <div className="AddRating">
@@ -68,7 +56,6 @@ export default function AddRating() {
             onChange={handleOnInputChange}
             required
           />
-          {/* {errors?.password && <span className="error">{errors.password}</span>} */}
         </div>
 
         <div className="input-field">
@@ -82,16 +69,33 @@ export default function AddRating() {
             onChange={handleOnInputChange}
             required
           ></textarea>
-          {/* {errors?.password && <span className="error">{errors.password}</span>} */}
         </div>
 
         <div className="form-buttons">
-          <ActionButton
-            disabled={isProcessing}
-            text={isProcessing ? "Processing..." : "Submit"}
-            clickFunc={handleOnSubmit}
-          />
-          
+          {userOwnsRating ? (
+            <ActionButton
+              disabled={isProcessing}
+              text={isProcessing ? "Processing..." : "Update"}
+              clickFunc={async () => {
+                await handleOnUpdate();
+                if (errors.form === null) {
+                  navigate(`/books/id/${bookId}`);
+                }
+              }}
+            />
+          ) : (
+            <ActionButton
+              disabled={isProcessing}
+              text={isProcessing ? "Processing..." : "Submit"}
+              clickFunc={async () => {
+                await handleOnSubmit();
+                if (errors.form) {
+                  navigate(`/books/id/${bookId}`);
+                }
+              }}
+            />
+          )}
+
           <ActionButton
             disabled={isProcessing}
             text={`Cancel`}

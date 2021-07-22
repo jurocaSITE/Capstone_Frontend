@@ -111,6 +111,14 @@ class ApiClient {
       data: rating
     });
   }
+
+  async updateRatingForBook(rating_id, update_body) {
+    return await this.request({
+      endpoint: `ratings/${rating_id}`,
+      method: `PATCH`,
+      data: update_body
+    });
+  }
 }
 
 export default new ApiClient(
