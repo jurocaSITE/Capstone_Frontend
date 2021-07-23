@@ -119,6 +119,13 @@ class ApiClient {
       data: update_body
     });
   }
+
+  async deleteRatingForBook(rating_id) {
+    return await this.request({
+      endpoint: `ratings/${rating_id}`,
+      method: `DELETE`
+    });
+  }
 }
 
 export default new ApiClient(

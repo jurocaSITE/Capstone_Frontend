@@ -23,8 +23,8 @@
     object-fit: contain;
     /* max-height: 500px; */
     /* width: 312.5px; */
-    min-height: 20em;
-    width: 20em;
+    /* min-height: 20em; */
+    /* width: 20em; */
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
     transition: ease .5s;
