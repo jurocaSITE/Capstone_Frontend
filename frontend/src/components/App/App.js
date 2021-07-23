@@ -5,6 +5,7 @@ import { SearchContextProvider } from "contexts/search";
 import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 import {
+	Account,
 	Register,
 	Login,
 	Navbar,
@@ -82,6 +83,7 @@ function App() {
 						path="/list/create-new/:bookId"
 						element={<ListFormCreateNew />}
 					/>
+					<Route path="/account" element={<Account />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
 					<Route

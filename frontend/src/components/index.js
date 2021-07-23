@@ -21,3 +21,4 @@ export { default as ProfileListCard } from "./ProfileListCard/ProfileListCard";
 export { default as EditProfile } from "./EditProfile/EditProfile";
 export { default as AuthorCard } from "./AuthorCard/AuthorCard";
 export { default as Modal } from "./Modal/Modal";
+export { default as Account } from "./Account/Account";

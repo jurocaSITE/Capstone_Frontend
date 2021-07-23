@@ -7,28 +7,31 @@
 	--dark-accent: #d37942;
 	--dark-shade: #344356;
 
-	--light-shade-6-opacity: rgba(242, 239, 231, .6);
+	--light-shade-6-opacity: rgba(242, 239, 231, 0.6);
 	--border-rad: 6px;
-	--default-shadow: 0 4px 4px 0 rgba(0,0,0,.25);
+	--default-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 body {
 	margin: 0;
 	padding: 0;
 	/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif; */
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+	sans-serif; */
 	-webkit-font-smoothing: antialiased;
 	font-family: "Poppins", sans-serif;
 	-moz-osx-font-smoothing: grayscale;
 	background: var(--dark-shade);
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
 	margin: 0;
 }
 
-h1 { 
+h1 {
 	font-size: 3rem;
 	font-weight: 500;
 }

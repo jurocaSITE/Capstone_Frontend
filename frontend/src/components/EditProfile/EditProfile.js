@@ -2,7 +2,7 @@ import "./EditProfile.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
-import { useAuthContext } from "contexts/auth";
+// import { useAuthContext } from "contexts/auth";
 
 function EditProfile() {
 	const navigate = useNavigate();
@@ -14,7 +14,7 @@ function EditProfile() {
 		profile_picture: "",
 		date_of_birth: "",
 	});
-	const { setUser } = useAuthContext();
+	// const { setUser } = useAuthContext();
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "first_name") {
@@ -120,18 +120,18 @@ function EditProfile() {
 		navigate("/profile");
 	};
 
-	const handleOnSignOut = async () => {
-		await apiClient.logoutUser();
-		setUser(null);
-		setErrors(null);
-		navigate("/");
-	};
+	// const handleOnSignOut = async () => {
+	// 	await apiClient.logoutUser();
+	// 	setUser(null);
+	// 	setErrors(null);
+	// 	navigate("/");
+	// };
 
-	const handleOneDelete = async (event) => {
-		await apiClient.deleteUserProfile();
+	// const handleOneDelete = async (event) => {
+	// 	await apiClient.deleteUserProfile();
 
-		handleOnSignOut();
-	};
+	// 	handleOnSignOut();
+	// };
 
 	return (
 		<div className="EditProfile">
@@ -198,11 +198,11 @@ function EditProfile() {
 						/>
 					</div>
 
-					<Link to="/">
+					{/* <Link to="/">
 						<button className="btn delete-account" onClick={handleOneDelete}>
 							Delete Account
 						</button>
-					</Link>
+					</Link> */}
 
 					<div className="footer">
 						<button

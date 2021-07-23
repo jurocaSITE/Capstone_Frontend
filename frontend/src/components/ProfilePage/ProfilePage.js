@@ -78,7 +78,7 @@ function ProfilePage() {
 				</div>
 			</div>
 			<div className="library">
-				<h2>Default Lists</h2>
+				<h2>My Library</h2>
 				<div className="lists-cards">
 					{defaultLists.map((list) => (
 						<ProfileListCard key={list.id} list={list} className="list-card" />

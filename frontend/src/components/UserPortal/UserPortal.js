@@ -12,7 +12,7 @@ export default function UserPortal() {
 	const [showMenu, setShowMenu] = useState(false);
 	const [errors, setErrors] = useState(null);
 
-  const toggleMenu = () => setShowMenu(!showMenu);
+	const toggleMenu = () => setShowMenu(!showMenu);
 
 	const handleOnSignOut = async () => {
 		await apiClient.logoutUser();
@@ -32,8 +32,8 @@ export default function UserPortal() {
 					<Link to="/profile">
 						<li>Your Profile</li>
 					</Link>
-					<Link to="/edit-profile">
-						<li>Settings</li>
+					<Link to="/account">
+						<li>Account</li>
 					</Link>
 					<Link to="/">
 						<li className="sign-out" onClick={handleOnSignOut}></li>
