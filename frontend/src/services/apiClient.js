@@ -80,6 +80,34 @@ class ApiClient {
 		});
 	}
 
+	async getBooksInList(list_id) {
+		return await this.request({
+			endpoint: `books/my-lists/${list_id}`,
+			method: `GET`,
+		});
+	}
+
+	async getTopSellerByName(title) {
+		return await this.request({
+			endpoint: `books/top-sellers/${title}`,
+			method: `GET`,
+		});
+	}
+
+	async getListContents(list_id) {
+		return await this.request({
+			endpoint: `lists/${list_id}/books`,
+			method: `GET`,
+		});
+	}
+
+	async getListNameById(list_id) {
+		return await this.request({
+			endpoint: `lists/get-list-name/${list_id}`,
+			method: `GET`,
+		});
+	}
+
 	async editUserProfile(credentials) {
 		return await this.request({
 			endpoint: `auth/update-personal-information`,

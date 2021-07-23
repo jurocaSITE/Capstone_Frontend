@@ -1,0 +1,18 @@
+.GenreTag {
+    padding: 0.3em 1em;
+    /* margin-left: 0.5em; */
+    width: fit-content;
+  
+    font-family: inherit;
+    font-size: .8rem;
+    color: var(--light-shade);
+  
+    background: var(--light-accent);
+    border: none;
+    border-radius: var(--border-rad);
+    box-shadow: var(--default-shadow);
+    transition: ease 0.25s;
+  }
+  .GanreTag:hover {
+    transform: scale(.5);
+  }

@@ -7,29 +7,30 @@ const home_hero_img =
 // TODO: Maybe make separate component or folder for buttons
 
 export default function Home({ topSellers = [] }) {
-	return (
-		<div className="Home">
-			<div className="home-hero">
-				<div className="home-hero-text">
-					<h1>Welcome!</h1>
-					<p>
-						This is a description about the website: what you can do, some core
-						features, and much more. Please sign up to explore everything the
-						site has to offer.
-					</p>
-					<ActionButton link={"/signup"} text={"Sign Up"} />
-				</div>
-				<img alt="library shelves" src={home_hero_img} />
-			</div>
+  return (
+    <div className="Home">
+      
+      <div className="home-hero">
+        <div className="home-hero-text">
+          <h1>Welcome!</h1>
+          <p>
+            This is a description about the website: what you can do, some core
+            features, and much more. Please sign up to explore everything the
+            site has to offer.
+          </p>
+          <ActionButton link={"/signup"} text={"Sign up now!"} />
+        </div>
+        <img alt="library shelves" src={home_hero_img} />
+      </div>
 
-			<div className="home-feed">
-				<h2>NYT Top Sellers</h2>
-				<div className="home-feed-books">
-					{topSellers.map((book) => (
-						<BookPreview book={book} key={book.title} />
-					))}
-				</div>
-			</div>
+      <div className="home-feed">
+        <h2>NYT Top Sellers</h2>
+        <div className="home-feed-books">
+          {topSellers.map((book) => (
+            <BookPreview book={book} key={book.title} />
+          ))}
+        </div>
+      </div>
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchContextProvider } from "contexts/search";
 import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
+
 import {
 	Account,
 	Register,
@@ -19,6 +20,7 @@ import {
 	EditProfile,
 	ListForm,
 	ListFormCreateNew,
+	DetailedList,
 } from "components";
 
 // this is for global context so all components can access searchResults, user
@@ -36,6 +38,7 @@ function App() {
 	const [topSellers, setTopSellers] = useState([]);
 	const [errors, setErrors] = useState(null);
 	const { user, setUser } = useAuthContext();
+	const [listContents, setListContents] = useState([]);
 
 	useEffect(() => {
 		const fetchTopSellers = async () => {
@@ -83,6 +86,7 @@ function App() {
 						path="/list/create-new/:bookId"
 						element={<ListFormCreateNew />}
 					/>
+					<Route path="/my-lists/:list_id" element={<DetailedList />} />
 					<Route path="/account" element={<Account />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
