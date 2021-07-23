@@ -13,20 +13,9 @@ export default function DetailedList() {
 	const [errors, setErrors] = useState(null);
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
+	const [isEmpty, setIsEmpty] = useState(true);
 
 	useEffect(() => {
-		const fetchListContents = async () => {
-			const { data, error } = await apiClient.getListContents(list_id);
-			if (error) {
-				setErrors(error);
-			}
-			if (data?.list_contents) {
-				setErrors(null);
-				setListContents(data.list_contents);
-				console.log("listContents is ", listContents);
-			}
-		};
-
 		const fetchListName = async () => {
 			const { data, error } = await apiClient.getListNameById(list_id);
 			if (error) {
@@ -51,6 +40,22 @@ export default function DetailedList() {
 			}
 		};
 
+		const fetchListContents = async () => {
+			const { data, error } = await apiClient.getListContents(list_id);
+			if (error) {
+				setErrors(error);
+			}
+			if (data?.list_contents) {
+				setErrors(null);
+				setListContents(data.list_contents);
+				console.log("listContents is ", listContents);
+			}
+			if (data?.list_contents.length > 0) {
+				setIsEmpty(false);
+				console.log("isEmpty is ", isEmpty);
+			}
+		};
+
 		fetchBooksInList();
 		fetchListName();
 		fetchListContents();
@@ -67,7 +72,7 @@ export default function DetailedList() {
 				</div>
 			</div>
 
-			<div className="list-content">
+			<div className="list-contents">
 				<div className="column-names">
 					<h3 className="title">Title</h3>
 					<h3 className="date-added">Date Added</h3>
@@ -75,87 +80,98 @@ export default function DetailedList() {
 					<h3 className="page-count">Page Count</h3>
 				</div>
 
-				<div className="book-info">
-					<div className="index">
-						{listContents.map((book, index) => (
-							<div className="row">
-								<h2>{index + 1}</h2>
-							</div>
-						))}
+				{isEmpty === true ? (
+					<div className="book-info">
+						<div className="empty-message">
+							<h2>
+								Your list doesn't have any books in it! Add books to change
+								this.
+							</h2>
+						</div>
 					</div>
-					<div className="preview">
-						{bookList.map((book) => (
-							<div className="row">
-								<img
-									alt="boook cover"
-									src={
-										book?.imageLinks?.large ||
-										book?.imageLinks?.medium ||
-										book?.imageLinks?.small ||
-										book?.imageLinks?.thumbnail
-									}
-								></img>
-							</div>
-						))}
-					</div>
-					<div className="title-and-author">
-						{bookList.map((book) => (
-							<div className="row">
-								<h3>{book.title}</h3>
-								<h3>by {book.authors}</h3>
-							</div>
-						))}
-					</div>
-					<div className="dates">
-						{listContents.map((book) => (
-							<div className="row">
-								<h3>{moment(book.added_on).format("MMMM Do YYYY")}</h3>
-							</div>
-						))}
-					</div>
-					<div className="tags">
-						{bookList.map((book, index) => {
-							// book.categories = array w/categories
-							// array called unique categories --> implement logic here using split("/") that
-							// gets all unique categories and then returns for each book in the list
-							const unique_categories = [];
+				) : (
+					<div className="book-info">
+						<div className="index">
+							{listContents.map((book, index) => (
+								<div className="row">
+									<h2>{index + 1}</h2>
+								</div>
+							))}
+						</div>
+						<div className="preview">
+							{bookList.map((book) => (
+								<div className="row">
+									<img
+										alt="boook cover"
+										src={
+											book?.imageLinks?.large ||
+											book?.imageLinks?.medium ||
+											book?.imageLinks?.small ||
+											book?.imageLinks?.thumbnail
+										}
+									></img>
+								</div>
+							))}
+						</div>
+						<div className="title-and-author">
+							{bookList.map((book) => (
+								<div className="row">
+									<h3>{book.title}</h3>
+									<h3>by {book.authors}</h3>
+								</div>
+							))}
+						</div>
+						<div className="dates">
+							{listContents.map((book) => (
+								<div className="row">
+									<h3>{moment(book.added_on).format("MMMM Do YYYY")}</h3>
+								</div>
+							))}
+						</div>
+						<div className="tags">
+							{bookList?.map((book) => {
+								// book.categories = array w/categories
+								// array called unique categories --> implement logic here using split("/") that
+								// gets all unique categories and then returns for each book in the list
+								const unique_categories = [];
 
-							for (let i = 0; i < book?.categories?.length; i++) {
-								let split = book.categories[i].split("/");
-								for (let j = 0; j < split.length; j++) {
-									if (!unique_categories.includes(split[j])) {
-										unique_categories.push(split[j]);
+								for (let i = 0; i < book?.categories?.length; i++) {
+									let split = book.categories[i].split("/");
+									for (let j = 0; j < split.length; j++) {
+										if (!unique_categories.includes(split[j])) {
+											unique_categories.push(split[j]);
+										}
 									}
 								}
-							}
-							return (
+								return (
+									<div className="row">
+										{unique_categories.map((category) => {
+											return (
+												<div className="r">
+													<Genre text={category} />
+												</div>
+											);
+										})}
+									</div>
+								);
+							})}
+						</div>
+						<div className="page-count">
+							{bookList.map((book) => (
 								<div className="row">
-									{unique_categories.map((category) => {
-										return (
-											<div className="r">
-												<Genre text={category} />
-											</div>
-										);
-									})}
+									<h2>{book.pageCount}</h2>
 								</div>
-							);
-						})}
+							))}
+						</div>
+						<div className="settings">
+							{bookList.map((book) => (
+								<div className="row">
+									<ListSidebar />
+								</div>
+							))}
+						</div>
 					</div>
-					<div className="page-count">
-						{bookList.map((book) => (
-							<div className="row">
-								<h2>{book.pageCount}</h2>
-							</div>
-						))}
-					</div>
-					<div className="settings">
-						{bookList.map((book) => (
-							<div className="row">
-								<ListSidebar />
-							</div>
-						))}
-					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);
