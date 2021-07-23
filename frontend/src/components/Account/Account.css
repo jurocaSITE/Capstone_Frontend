@@ -1,6 +1,6 @@
 .Account {
-	/* color: var(--light-shade); */
-	height: 100vh;
+	min-height: 100vh;
+	margin-bottom: 3em;
 }
 
 .Account .header {
@@ -10,20 +10,6 @@
 	align-items: center;
 	margin: 2em 0;
 }
-
-/*.Account .card-content {
-	display: grid;
-	grid-template-columns: 1fr 4fr 1fr;
-}
-
-.card {
-	color: black;
-	grid-column: 2;
-	background-color: var(--light-shade);
-	display: grid;
-	grid-template-columns: 1fr 3fr;
-	margin-bottom: 2em;
-} */
 
 .Account::before,
 ::after {
@@ -35,16 +21,6 @@
 .container {
 	display: grid;
 	grid-template-columns: 1fr 2fr 4fr 1fr;
-
-	/* display: flex;
-	flex-direction: row; */
-	/* position: relative; */
-	/* width: 500px; */
-	/* height: 300px; */
-	/* background: #693333; */
-	/* margin: 100px auto 0; */
-	/* word-break: break-all; */
-	/* border: 1px solid rgba(0, 0, 0, 0.274); */
 }
 
 .bloc-tabs {
@@ -52,21 +28,19 @@
 	flex-direction: column;
 
 	grid-column: 2;
-	background-color: var(--light-shade);
+	background-color: rgb(227, 224, 217);
 }
 .tabs {
 	padding: 15px;
-	text-align: center;
-	width: 50%;
-	background: rgba(128, 128, 128, 0.075);
+	background: rgb(227, 224, 217);
 	cursor: pointer;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+	border-bottom: 1px solid rgb(214, 211, 205);
 	box-sizing: content-box;
 	position: relative;
 	outline: none;
 }
-.tabs:not(:last-child) {
-	/* border-right: 1px solid rgba(0, 0, 0, 0.274); */
+.tabs:last-child {
+	border: none;
 }
 
 .active-tabs {
@@ -90,29 +64,13 @@ button {
 	border: none;
 }
 .content-tabs {
-	/* flex-grow: 1; */
 	grid-column: 3;
 	background-color: var(--light-shade);
 }
 .content {
-	/* background: white; */
-	/* padding: 20px; */
 	width: 100%;
 	height: 100%;
 	display: none;
-}
-.content h2 {
-	padding: 0px 0 5px 0px;
-}
-.content hr {
-	width: 100px;
-	height: 2px;
-	background: #222;
-	margin-bottom: 2em;
-}
-.content p {
-	width: 100%;
-	height: 100%;
 }
 
 .content .edit-profile {
@@ -122,4 +80,28 @@ button {
 
 .active-content {
 	display: block;
+}
+
+.delete-btn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.delete-account {
+	background-color: rgb(220, 55, 55);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	height: 60px;
+	width: 120px;
+	color: var(--light-shade);
+	font-size: 20px;
+	margin-bottom: 2em;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+.delete-account-body {
+	margin: 2em 2em 0 2em;
 }

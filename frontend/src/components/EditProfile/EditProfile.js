@@ -2,7 +2,7 @@ import "./EditProfile.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
-// import { useAuthContext } from "contexts/auth";
+import { useAuthContext } from "contexts/auth";
 
 function EditProfile() {
 	const navigate = useNavigate();
@@ -14,7 +14,7 @@ function EditProfile() {
 		profile_picture: "",
 		date_of_birth: "",
 	});
-	// const { setUser } = useAuthContext();
+	const { user } = useAuthContext();
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "first_name") {
@@ -120,19 +120,6 @@ function EditProfile() {
 		navigate("/profile");
 	};
 
-	// const handleOnSignOut = async () => {
-	// 	await apiClient.logoutUser();
-	// 	setUser(null);
-	// 	setErrors(null);
-	// 	navigate("/");
-	// };
-
-	// const handleOneDelete = async (event) => {
-	// 	await apiClient.deleteUserProfile();
-
-	// 	handleOnSignOut();
-	// };
-
 	return (
 		<div className="EditProfile">
 			<div className="card">
@@ -150,7 +137,7 @@ function EditProfile() {
 						<input
 							type="text"
 							name="first_name"
-							placeholder="Enter your first name"
+							placeholder={user?.first_name}
 							value={form.first_name}
 							onChange={handleOnInputChange}
 						/>
@@ -164,7 +151,7 @@ function EditProfile() {
 						<input
 							type="text"
 							name="last_name"
-							placeholder="Enter your last name"
+							placeholder={user?.last_name}
 							value={form.last_name}
 							onChange={handleOnInputChange}
 						/>
@@ -179,7 +166,7 @@ function EditProfile() {
 							type="text"
 							// type="file"
 							name="profile_picture"
-							placeholder="Enter a image URL"
+							placeholder="Enter new image URL"
 							value={form.profile_picture}
 							onChange={handleOnInputChange}
 						/>
@@ -198,12 +185,6 @@ function EditProfile() {
 						/>
 					</div>
 
-					{/* <Link to="/">
-						<button className="btn delete-account" onClick={handleOneDelete}>
-							Delete Account
-						</button>
-					</Link> */}
-
 					<div className="footer">
 						<button
 							className="btn"
@@ -213,7 +194,7 @@ function EditProfile() {
 							{isProcessing ? "Loading..." : "Save"}
 						</button>
 						<Link to={`/profile`}>
-							<button className="btn cancel">Cancel</button>
+							<button className="cancel">Go to profile</button>
 						</Link>
 					</div>
 				</div>

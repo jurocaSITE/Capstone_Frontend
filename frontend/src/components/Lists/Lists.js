@@ -48,22 +48,6 @@ function Lists() {
 		fetchListsByUserId();
 	}, []);
 
-	useEffect(() => {
-		const fetchListsByUserId = async () => {
-			setIsFetching(true);
-			try {
-				const allLists = await apiClient.getAllListsByUserId();
-				setLists(allLists.data.all_lists);
-			} catch (error) {
-				setError(error);
-			}
-
-			setIsFetching(false);
-		};
-
-		fetchListsByUserId();
-	}, [error]);
-
 	const settingLists = () => {
 		for (let i = 0; i < lists.length; i++) {
 			if (lists[i].list_name === "Want To Read") {
