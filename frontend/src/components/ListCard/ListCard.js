@@ -20,7 +20,9 @@ function ListCard({ list }) {
 	return (
 		<div className="ListCard">
 			<div className="cover">
-				<img alt="list cover" src={list?.image || defaultBookCover} />
+				<Link to={`/my-lists/${list.id}`}>
+					<img alt="list cover" src={list?.image || defaultBookCover} />	
+				</Link>
 			</div>
 			<div className="information">
 				<h2>{list?.list_name}</h2>
