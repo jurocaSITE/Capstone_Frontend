@@ -87,13 +87,6 @@ class ApiClient {
 		});
 	}
 
-	async getTopSellerByName(title) {
-		return await this.request({
-			endpoint: `books/top-sellers/${title}`,
-			method: `GET`,
-		});
-	}
-
 	async getListContents(list_id) {
 		return await this.request({
 			endpoint: `lists/${list_id}/books`,

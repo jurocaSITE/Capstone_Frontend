@@ -126,162 +126,158 @@
 } */
 
 .DetailedList {
-    color: white;
+	color: white;
 }
 
-.DetailedList .content .column-names{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 33px;
-    color: white;
-    border-bottom: 1px solid rgb(223, 223, 222);
-    max-width: 90%;
-    margin-left: 5%;
+.DetailedList .list-content .column-names {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 33px;
+	color: white;
+	border-bottom: 1px solid rgb(223, 223, 222);
+	max-width: 90%;
+	margin-left: 5%;
 }
 
-.DetailedList .header{
-    padding-left: 4em;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: baseline;
-    margin-top: 2em;
-    margin-bottom: 4em;
+.DetailedList .header {
+	padding-left: 4em;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: baseline;
+	margin-top: 2em;
+	margin-bottom: 4em;
 }
 
-.DetailedList .header .num-books{
-    margin-left: 5em;
-    color: var(--light-accent);
+.DetailedList .header .num-books {
+	margin-left: 5em;
+	color: var(--light-accent);
 }
 
-
-.DetailedList .content .column-names .title{
-    margin-left: 5.5em;
+.DetailedList .list-content .column-names .title {
+	margin-left: 5.5em;
 }
 
-.DetailedList .content .column-names .date-added{
-    margin-left: 11em;
+.DetailedList .list-content .column-names .date-added {
+	margin-left: 11em;
 }
 
-.DetailedList .content .column-names .page-count{
-    margin-right: 5.5em;
+.DetailedList .list-content .column-names .page-count {
+	margin-right: 5.5em;
 }
 
-.DetailedList .content .book-info{
-    display: grid;
-    grid-template-columns: [one] 1.15fr [two] 2.75fr [three] 4fr [four] 4fr [five] 6fr [six] 2fr [seven] 1.5fr[end];
-    color: white;
-    border: 1px solid rgb(223, 223, 222);
-    min-height: 90%;
-    margin: 2em 5%;
-    padding: 2em 0;
-    border-radius: var(--border-rad);
+.DetailedList .list-content .book-info {
+	display: grid;
+	grid-template-columns: [one] 1.15fr [two] 2.75fr [three] 4fr [four] 4fr [five] 6fr [six] 2fr [seven] 1.5fr[end];
+	color: white;
+	border: 1px solid rgb(223, 223, 222);
+	min-height: 90%;
+	margin: 2em 5%;
+	padding: 2em 0;
+	border-radius: var(--border-rad);
 }
 
-.DetailedList .content .book-info .index {
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .index {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .index .row{
-    align-self: center;
-    justify-self: center;
-
+.DetailedList .list-content .book-info .index .row {
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .preview{
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .preview {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .preview .row{
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .preview .row {
+	align-self: center;
+	justify-self: center;
 }
 
-
-.DetailedList .content .book-info .title-and-author{
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .title-and-author {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .title-and-author .row{
-    align-self: center;
-    justify-self: flex-start;
+.DetailedList .list-content .book-info .title-and-author .row {
+	align-self: center;
+	justify-self: flex-start;
 }
 
-.DetailedList .content .book-info .dates{
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .dates {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .dates .row{
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .dates .row {
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .tags{
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .tags {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
 }
-.DetailedList .content .book-info .tags .row{
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-row-gap: 2px;
-    align-self: center;
-    justify-self: center;
-}
-
-.DetailedList .content .book-info .tags .row .r{
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .tags .row {
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-row-gap: 2px;
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .page-count{
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .tags .row .r {
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .page-count .row{
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .page-count {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .settings{
-    display: grid;
-    grid-auto-rows: 210px;
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .page-count .row {
+	align-self: center;
+	justify-self: center;
 }
 
-.DetailedList .content .book-info .settings .row{
-    align-self: center;
-    justify-self: center;
+.DetailedList .list-content .book-info .settings {
+	display: grid;
+	grid-auto-rows: 210px;
+	align-self: center;
+	justify-self: center;
+}
+
+.DetailedList .list-content .book-info .settings .row {
+	align-self: center;
+	justify-self: center;
 }
 
 .DetailedList img {
-    object-fit: contain;
-    cursor: pointer;
-    max-height: 9em;
-    max-width: 6em;
-    border-radius: var(--border-rad);
-    transition: ease .5s;
-    align-self: center;
+	object-fit: contain;
+	cursor: pointer;
+	max-height: 9em;
+	max-width: 6em;
+	border-radius: var(--border-rad);
+	transition: ease 0.5s;
+	align-self: center;
 }
 .DetailedList img:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
-
