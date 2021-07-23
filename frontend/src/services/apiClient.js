@@ -123,7 +123,14 @@ class ApiClient {
 			endpoint: `lists/get-all-lists`,
 			method: `GET`,
 		});
-	}
+    }
+    
+    async getCurrentlyReadingListByUserId(user) {
+		return await this.request({
+			endpoint: `lists/get-currently-reading`,
+			method: `GET`,
+		});
+    }
 
 	async deleteList(list_id) {
 		return await this.request({
