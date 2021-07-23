@@ -86,7 +86,15 @@ export default function DetailedList() {
 					<div className="preview">
 						{bookList.map((book) => (
 							<div className="row">
-								<BookPreview book={book} key={book.title} />
+								<img
+									alt="boook cover"
+									src={
+										book?.imageLinks?.large ||
+										book?.imageLinks?.medium ||
+										book?.imageLinks?.small ||
+										book?.imageLinks?.thumbnail
+									}
+								></img>
 							</div>
 						))}
 					</div>

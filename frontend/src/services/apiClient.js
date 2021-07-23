@@ -154,6 +154,29 @@ class ApiClient {
 			method: `POST`,
 		});
 	}
+
+	async getRatingsForBook(book_id) {
+		return await this.request({
+			endpoint: `ratings/book/${book_id}`,
+			method: `GET`,
+		});
+	}
+
+	async createNewRatingForBook(book_id, rating) {
+		return await this.request({
+			endpoint: `ratings/${book_id}`,
+			method: `POST`,
+			data: rating,
+		});
+	}
+
+	async updateRatingForBook(rating_id, update_body) {
+		return await this.request({
+			endpoint: `ratings/${rating_id}`,
+			method: `PATCH`,
+			data: update_body,
+		});
+	}
 }
 
 export default new ApiClient(

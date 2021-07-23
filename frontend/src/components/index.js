@@ -25,3 +25,5 @@ export { default as EditProfile } from "./EditProfile/EditProfile";
 export { default as AuthorCard } from "./AuthorCard/AuthorCard";
 export { default as Modal } from "./Modal/Modal";
 export { default as Account } from "./Account/Account";
+export { default as Ratings } from "./Ratings/Ratings";
+export { default as AddRating } from "./AddRating/AddRating";

@@ -127,6 +127,7 @@
 
 .DetailedList {
 	color: white;
+	min-height: 100vh;
 }
 
 .DetailedList .list-content .column-names {

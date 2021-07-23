@@ -8,26 +8,35 @@ const defaultBookCover =
 export default function BookPreview({ book = {} }) {
 	const topSellerBook = !book.id; // top sellers from NYT api do not have an id
 	// console.log("Book Preview topSeller exists? ", topSellerBook);
-
 	return (
 		<div className="BookPreview">
 			{topSellerBook ? (
-				<Link to={`/books/top/sellers/${book.title}`}>
-					<img alt="book cover" src={book?.book_image || defaultBookCover} />
-				</Link>
+				<>
+					<Link to={`/books/top/sellers/${book.title}`}>
+						<img alt="book cover" src={book?.book_image || defaultBookCover} />
+					</Link>
+					<div className="book-details">
+						<h3>{book.title}</h3>
+					</div>
+				</>
 			) : (
-				<Link to={`/books/id/${book.id}`}>
-					<img
-						alt="book cover"
-						src={
-							book?.imageLinks?.large ||
-							book?.imageLinks?.medium ||
-							book?.imageLinks?.small ||
-							book?.imageLinks?.thumbnail ||
-							defaultBookCover
-						}
-					/>
-				</Link>
+				<>
+					<Link to={`/books/id/${book.id}`}>
+						<img
+							alt="book cover"
+							src={
+								book?.imageLinks?.large ||
+								book?.imageLinks?.medium ||
+								book?.imageLinks?.small ||
+								book?.imageLinks?.thumbnail ||
+								defaultBookCover
+							}
+						/>
+					</Link>
+					<div className="book-details">
+						<h3>{book.title}</h3>
+					</div>
+				</>
 			)}
 		</div>
 	);

@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Ratings } from "components";
+
+import { FaStar } from "react-icons/fa";
 import apiClient from "services/apiClient";
 import "./Book.css";
 import { Modal } from "components";
@@ -113,24 +116,37 @@ export default function Book() {
 						alt="book cover"
 						src={
 							book?.book_image ||
+							// book?.imageLinks?.large ||
 							book?.imageLinks?.thumbnail ||
-							book?.imageLinks?.large // ||
-							// test_book.imgUrl
+							test_book.imgUrl
 						}
 					/>
 					<div className="book-details">
 						<div className="book-details-head">
 							<h1>{book.title}</h1>
-							<h2 className="book-author">by {book.author || book.authors}</h2>
+							<h2 className="book-author">
+								by{" "}
+								{book.author || book?.authors?.map((author) => author + `, `)}
+							</h2>
 							{/* Need to change published date for top Sellers */}
 							<h3 className="pub-date">
 								Published {book.publishedDate || test_book.pubDate}
 							</h3>
 						</div>
 
-						<div class="book-details-lower">
+						<div className="book-details-lower">
+							{book_id && (
+								<span className="rating-avg">
+									<FaStar size="20" />
+									{book?.averageRating?.toFixed(1) || `Rating Not Available`}
+								</span>
+							)}
 							<h2>Description</h2>
-							<p className="book-desc">{book.description}</p>
+							{/* <p className="book-desc">{stripHTMLtags(book.description)}</p> */}
+							<p
+								className="book-desc"
+								dangerouslySetInnerHTML={{ __html: book?.description }}
+							/>
 							<a href="#modal-opened" class="link-1" id="modal-closed">
 								{/* <ActionButton link={`#`} text={"Add to List"} /> */}
 								<button className="btn">Add to list</button>
@@ -160,5 +176,10 @@ export default function Book() {
 		);
 	};
 
-	return <div className="Book">{renderBookInfo()}</div>;
+	return (
+		<div className="Book">
+			{renderBookInfo()}
+			{book_id ? <Ratings book_id={book_id} /> : null}
+		</div>
+	);
 }

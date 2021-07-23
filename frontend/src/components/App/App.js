@@ -7,6 +7,7 @@ import apiClient from "services/apiClient";
 
 import {
 	Account,
+	AddRating,
 	Register,
 	Login,
 	Navbar,
@@ -38,7 +39,6 @@ function App() {
 	const [topSellers, setTopSellers] = useState([]);
 	const [errors, setErrors] = useState(null);
 	const { user, setUser } = useAuthContext();
-	const [listContents, setListContents] = useState([]);
 
 	useEffect(() => {
 		const fetchTopSellers = async () => {
@@ -90,14 +90,13 @@ function App() {
 					<Route path="/account" element={<Account />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
+					<Route path="/set-rating/:status/:bookId" element={<AddRating />} />
 					<Route
-						path="/login"
-						element={<Login user={user} setUser={setUser} />}
+						path="/set-rating/:status/:bookId/:ratingId"
+						element={<AddRating />}
 					/>
-					<Route
-						path="/signup"
-						element={<Register user={user} setUser={setUser} />}
-					/>
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Register />} />
 					<Route path="/search" element={<SearchResults />} />
 					{user ? (
 						<Route path="/" element={<UserHome />} />

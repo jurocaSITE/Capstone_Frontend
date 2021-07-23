@@ -6,8 +6,10 @@
 	--main-clr: #d6955a;
 	--dark-accent: #d37942;
 	--dark-shade: #344356;
+	--dark-shade-darkest: #232e3c;
 
 	--light-shade-6-opacity: rgba(242, 239, 231, 0.6);
+	--error-color: rgba(245, 41, 41, 1);
 	--border-rad: 6px;
 	--default-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -27,8 +29,10 @@ body {
 h1,
 h2,
 h3,
+h4,
 p {
 	margin: 0;
+	font-weight: 400;
 }
 
 h1 {
@@ -36,14 +40,14 @@ h1 {
 	font-weight: 500;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 0.25rem;
 	height: 0.25rem;
 }
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
 	background: #060b26;
 }
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	background: var(--main-clr);
 }
 
