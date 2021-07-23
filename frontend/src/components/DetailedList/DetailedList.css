@@ -1,135 +1,9 @@
-/* .DetailedList {
-    color: white;
-}
-
-.DetailedList .content .column-names{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 33px;
-    color: white;
-    border-bottom: 1px solid rgb(223, 223, 222);
-    max-width: 90%;
-    margin-left: 5%;
-}
-
-.DetailedList .header{
-    padding-left: 4em;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: baseline;
-    margin-top: 2em;
-    margin-bottom: 4em;
-}
-
-.DetailedList .header .num-books{
-    margin-left: 5em;
-    color: var(--light-accent);
-}
-
-
-.DetailedList .content .column-names .title{
-    margin-left: 5.5em;
-}
-
-.DetailedList .content .column-names .date-added{
-    margin-left: 10em;
-}
-
-.DetailedList .content .column-names .page-count{
-    margin-right: 5.5em;
-}
-
-.DetailedList .content .book-info{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    color: white;
-    border: 1px solid rgb(223, 223, 222);
-    min-height: 90%;
-    margin: 2em 5%;
-    padding: 2em 0;
-    border-radius: var(--border-rad);
-}
-
-.DetailedList .content .book-info .preview{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-width: 14em;
-    max-width: 14em;
-}
-
-.DetailedList .content .book-info .title-and-author{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-width: 12em;
-    max-width: 12em;
-
-}
-
-.DetailedList .content .book-info .index{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 1.5em;
-}
-
-.DetailedList .content .book-info .dates{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 4em;
-    min-width: 10em;
-    max-width: 10em;
-}
-
-.DetailedList .content .book-info .tags{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 6em;
-    min-width: 16em;
-    max-width: 16em;
-}
-
-.DetailedList .content .book-info .page-count{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 5em;
-    min-width: 5em;
-}
-
-.DetailedList .content .book-info .settings{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-left: 1.5em;
-
-}
-
-.DetailedList img {
-    object-fit: contain;
-    cursor: pointer;
-    margin: 1em 4em;
-    max-height: 9em;
-    max-width: 6em;
-    border-radius: var(--border-rad);
-    box-shadow: var(--default-shadow);
-    transition: ease .5s;
-}
-.DetailedList img:hover {
-    transform: scale(1.1);
-} */
-
 .DetailedList {
     color: white;
+    height: 100vh;
 }
 
-.DetailedList .content .column-names{
+.DetailedList .list-contents .column-names{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -156,19 +30,19 @@
 }
 
 
-.DetailedList .content .column-names .title{
+.DetailedList .list-contents .column-names .title{
     margin-left: 5.5em;
 }
 
-.DetailedList .content .column-names .date-added{
+.DetailedList .list-contents .column-names .date-added{
     margin-left: 11em;
 }
 
-.DetailedList .content .column-names .page-count{
+.DetailedList .list-contents .column-names .page-count{
     margin-right: 5.5em;
 }
 
-.DetailedList .content .book-info{
+.DetailedList .list-contents .book-info{
     display: grid;
     grid-template-columns: [one] 1.15fr [two] 2.75fr [three] 4fr [four] 4fr [five] 6fr [six] 2fr [seven] 1.5fr[end];
     color: white;
@@ -179,63 +53,70 @@
     border-radius: var(--border-rad);
 }
 
-.DetailedList .content .book-info .index {
+.DetailedList .list-contents .book-info .empty-message{
+    grid-column-start: 1;
+    grid-column-end: end;
+    align-self: center;
+    justify-self: center;
+}
+
+.DetailedList .list-contents .book-info .index {
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .index .row{
+.DetailedList .list-contents .book-info .index .row{
     align-self: center;
     justify-self: center;
 
 }
 
-.DetailedList .content .book-info .preview{
+.DetailedList .list-contents .book-info .preview{
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .preview .row{
+.DetailedList .list-contents .book-info .preview .row{
     align-self: center;
     justify-self: center;
 }
 
 
-.DetailedList .content .book-info .title-and-author{
+.DetailedList .list-contents .book-info .title-and-author{
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .title-and-author .row{
+.DetailedList .list-contents .book-info .title-and-author .row{
     align-self: center;
     justify-self: flex-start;
 }
 
-.DetailedList .content .book-info .dates{
+.DetailedList .list-contents .book-info .dates{
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .dates .row{
+.DetailedList .list-contents .book-info .dates .row{
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .tags{
+.DetailedList .list-contents .book-info .tags{
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
-.DetailedList .content .book-info .tags .row{
+.DetailedList .list-contents .book-info .tags .row{
     display: grid;
     grid-auto-columns: 1fr;
     grid-row-gap: 2px;
@@ -243,31 +124,31 @@
     justify-self: center;
 }
 
-.DetailedList .content .book-info .tags .row .r{
+.DetailedList .list-contents .book-info .tags .row .r{
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .page-count{
+.DetailedList .list-contents .book-info .page-count{
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .page-count .row{
+.DetailedList .list-contents .book-info .page-count .row{
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .settings{
+.DetailedList .list-contents .book-info .settings{
     display: grid;
     grid-auto-rows: 210px;
     align-self: center;
     justify-self: center;
 }
 
-.DetailedList .content .book-info .settings .row{
+.DetailedList .list-contents .book-info .settings .row{
     align-self: center;
     justify-self: center;
 }
