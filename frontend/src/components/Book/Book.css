@@ -63,9 +63,12 @@
 .Book .book-details-lower .rating-avg svg {
     padding-right: .5em;
 }
-.Book .book-details p {
-    padding: 1em 0;
-    /* max-height: 2em; */
-    overflow: hidden;
+.Book .book-details .book-desc {
+    margin: 1em 0;
+    max-height: 15em;
+    overflow: auto;
     text-overflow: ellipsis;
+}
+.Book .book-desc::-webkit-scrollbar-thumb {
+	background: var(--light-accent);
 }

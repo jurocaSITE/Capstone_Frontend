@@ -36,14 +36,14 @@ h1 {
 	font-weight: 500;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 0.25rem;
 	height: 0.25rem;
 }
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
 	background: #060b26;
 }
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	background: var(--main-clr);
 }
 

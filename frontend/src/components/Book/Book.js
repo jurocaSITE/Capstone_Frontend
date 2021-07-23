@@ -113,7 +113,8 @@ export default function Book() {
                 </span>
               )}
               <h2>Description</h2>
-              <p className="book-desc">{stripHTMLtags(book.description)}</p>
+              {/* <p className="book-desc">{stripHTMLtags(book.description)}</p> */}
+              <p className="book-desc" dangerouslySetInnerHTML={{__html: book?.description }} />
               <ActionButton link={"#"} text={"Add to List"} />
             </div>
           </div>
