@@ -10,6 +10,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
     reviewTitle: "",
     reviewBody: "",
   });
+  let success = 0;
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "rating") {
@@ -42,12 +43,17 @@ export const useRatingForm = ({ bookId, ratingId }) => {
       reviewBody: form.reviewBody,
     });
 
-    if (error) setErrors((e) => ({ ...e, form: error }));
-    // if (data?.rating) {
-    //   console.log("Rating added...", data.rating);
-    // }
+    if (error) {
+      setErrors((e) => ({ ...e, form: error }));
+      success =  0
+    } 
+    if (data?.rating) {
+      console.log("Rating added...", data.rating);
+      success = 1
+    }
 
     setIsProcessing(false);
+    return success
   };
 
   const handleOnUpdate = async () => {
@@ -60,12 +66,17 @@ export const useRatingForm = ({ bookId, ratingId }) => {
       reviewBody: form.reviewBody,
     });
 
-    if (error) setErrors((e) => ({ ...e, form: error }));
-    // if (data?.rating) {
-    //   console.log("Rating updated...", data.rating);
-    // }
+    if (error) {
+      setErrors((e) => ({ ...e, form: error }));
+      success =  0
+    } 
+    if (data?.rating) {
+      console.log("Rating updated...", data.rating);
+      success = 1
+    }
 
     setIsProcessing(false);
+    return success
   };
 
   return {

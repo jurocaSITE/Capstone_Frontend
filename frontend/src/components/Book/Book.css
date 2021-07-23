@@ -55,6 +55,14 @@
 .Book .book-details-lower {
     margin-top: 1em;
 }
+.Book .book-details-lower .rating-avg {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1em;
+}
+.Book .book-details-lower .rating-avg svg {
+    padding-right: .5em;
+}
 .Book .book-details p {
     padding: 1em 0;
     /* max-height: 2em; */

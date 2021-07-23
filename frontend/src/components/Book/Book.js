@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ActionButton, Ratings } from "components";
+import { stripHTMLtags } from "utils/text";
+import { FaStar } from "react-icons/fa";
 import apiClient from "services/apiClient";
 import "./Book.css";
 
@@ -94,7 +96,9 @@ export default function Book() {
           <div className="book-details">
             <div className="book-details-head">
               <h1>{book.title}</h1>
-              <h2 className="book-author">by {book.author || book.authors}</h2>
+              <h2 className="book-author">
+                by {book.author || book?.authors?.map((author) => author + `, `)}
+              </h2>
               {/* Need to change published date for top Sellers */}
               <h3 className="pub-date">
                 Published {book.publishedDate || test_book.pubDate}
@@ -102,8 +106,14 @@ export default function Book() {
             </div>
 
             <div className="book-details-lower">
+              {book_id && (
+                <span className="rating-avg">
+                  <FaStar size="20" />
+                  {book?.averageRating?.toFixed(1) || `Rating Not Available`}
+                </span>
+              )}
               <h2>Description</h2>
-              <p className="book-desc">{book.description}</p>
+              <p className="book-desc">{stripHTMLtags(book.description)}</p>
               <ActionButton link={"#"} text={"Add to List"} />
             </div>
           </div>
@@ -115,9 +125,7 @@ export default function Book() {
   return (
     <div className="Book">
       {renderBookInfo()}
-      {book_id ? (
-        <Ratings book_id={book_id} />
-      ) : null}
+      {book_id ? <Ratings book_id={book_id} /> : null}
     </div>
   );
 }

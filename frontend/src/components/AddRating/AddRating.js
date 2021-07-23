@@ -77,8 +77,8 @@ export default function AddRating() {
               disabled={isProcessing}
               text={isProcessing ? "Processing..." : "Update"}
               clickFunc={async () => {
-                await handleOnUpdate();
-                if (errors.form === null) {
+                const success = await handleOnUpdate();
+                if (form) {
                   navigate(`/books/id/${bookId}`);
                 }
               }}
@@ -88,8 +88,8 @@ export default function AddRating() {
               disabled={isProcessing}
               text={isProcessing ? "Processing..." : "Submit"}
               clickFunc={async () => {
-                await handleOnSubmit();
-                if (errors.form) {
+                const success = await handleOnSubmit();
+                if (success) {
                   navigate(`/books/id/${bookId}`);
                 }
               }}
