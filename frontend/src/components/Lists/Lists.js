@@ -66,6 +66,8 @@ function Lists() {
 
 	settingLists();
 
+	console.log("default lists", defaultLists);
+
 	return (
 		<div className="Lists">
 			<div className="top">

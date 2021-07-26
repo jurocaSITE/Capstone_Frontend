@@ -3,8 +3,8 @@ import axios from "axios";
 class ApiClient {
 	constructor(remoteHostUrl) {
 		this.remoteHostUrl = remoteHostUrl;
-		this.token = null;
 		this.tokenName = "teca_token";
+		this.token = localStorage.getItem(this.tokenName);
 	}
 
 	setToken(token) {
@@ -69,6 +69,13 @@ class ApiClient {
 		return await this.request({ endpoint: `books/id/${id}`, method: `GET` });
 	}
 
+	async getBooksInList(list_id) {
+		return await this.request({
+			endpoint: `books/my-lists/${list_id}`,
+			method: `GET`,
+		});
+	}
+
 	async getTopSellers() {
 		return await this.request({ endpoint: `books/top-sellers`, method: `GET` });
 	}
@@ -97,19 +104,56 @@ class ApiClient {
 		this.logoutUser();
 	}
 
+	async getAllListsByUserId() {
+		return await this.request({
+			endpoint: `lists/get-all-lists`,
+			method: `GET`,
+		});
+	}
+
+	async createList(credentials) {
+		return await this.request({
+			endpoint: `lists/create-new-list`,
+			method: `POST`,
+			data: credentials,
+		});
+	}
+
+	async editList(list_id, credentials) {
+		return await this.request({
+			endpoint: `lists/edit/${list_id}`,
+			method: `PUT`,
+			data: credentials,
+		});
+	}
+
+	async deleteList(list_id) {
+		return await this.request({
+			endpoint: `lists/delete/${list_id}`,
+			method: `DELETE`,
+		});
+	}
+
+	async addBookToList(bookId, listId) {
+		return await this.request({
+			endpoint: `lists/${listId}/add-book/${bookId}`,
+			method: `POST`,
+		});
+	}
+
 	async getRatingsForBook(book_id) {
 		return await this.request({
 			endpoint: `ratings/book/${book_id}`,
 			method: `GET`,
 		});
-    }
-    
-    async getCurrentlyReadingListByUserId(user) {
+	}
+
+	async getCurrentlyReadingListByUserId(user) {
 		return await this.request({
 			endpoint: `lists/get-currently-reading`,
 			method: `GET`,
 		});
-    }
+	}
 
 	async createNewRatingForBook(book_id, rating) {
 		return await this.request({
@@ -131,6 +175,20 @@ class ApiClient {
 		return await this.request({
 			endpoint: `ratings/${rating_id}`,
 			method: `DELETE`,
+		});
+	}
+
+	async getListNameById(list_id) {
+		return await this.request({
+			endpoint: `lists/get-list-name/${list_id}`,
+			method: `GET`,
+		});
+	}
+
+	async getListContents(list_id) {
+		return await this.request({
+			endpoint: `lists/${list_id}/books`,
+			method: `GET`,
 		});
 	}
 }
