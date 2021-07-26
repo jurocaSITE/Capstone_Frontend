@@ -1,0 +1,20 @@
+.AuthorPage {
+	color: var(--light-shade);
+	min-height: 100vh;
+}
+
+.AuthorPage .author-image {
+	position: absolute;
+	width: 100vw;
+	height: 400px;
+    overflow: hidden;
+    background-image : linear-gradient(to bottom, 
+                     rgba(255,255,255, 0), 
+                     rgba(255,255,255, 1) 90%);
+}
+
+.AuthorPage .author-image .img {
+    object-fit: contain;
+    
+}
+

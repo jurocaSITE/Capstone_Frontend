@@ -61,6 +61,12 @@
 .Book .book-card .book-details-head .book-author {
 	align-self: flex-end;
 }
+
+/* mouse over link */
+a:hover {
+	color: var(--dark-accent);
+}
+
 .Book .book-card .book-details-head .pub-date {
 	/* align-self: flex-start; */
 	padding-top: 0.5em;

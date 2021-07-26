@@ -102,7 +102,7 @@ export default function DetailedList() {
 							{bookList.map((book) => (
 								<div className="row">
 									<img
-										alt="boook cover"
+										alt="book cover"
 										src={
 											book?.imageLinks?.large ||
 											book?.imageLinks?.medium ||
@@ -117,7 +117,7 @@ export default function DetailedList() {
 							{bookList.map((book) => (
 								<div className="row">
 									<h3>{book.title}</h3>
-									<h3>by {book.authors}</h3>
+									<h3>by <a href={`/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></h3>
 								</div>
 							))}
 						</div>

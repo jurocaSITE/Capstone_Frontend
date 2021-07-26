@@ -1,5 +1,5 @@
 .DetailedList {
-	color: white;
+	color: var(--light-shade);
 	min-height: 100vh;
 }
 
@@ -93,6 +93,11 @@
 .DetailedList .list-contents .book-info .title-and-author .row {
 	align-self: center;
 	justify-self: flex-start;
+}
+
+/* mouse over link */
+a:hover {
+	color: var(--dark-accent);
 }
 
 .DetailedList .list-contents .book-info .dates {
