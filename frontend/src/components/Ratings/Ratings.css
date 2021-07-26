@@ -74,6 +74,7 @@
 .Ratings .rating-review-content .meta {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: .9rem;
     margin-top: 1em;
     color: var(--light-accent);
@@ -91,4 +92,19 @@
 }
 .Ratings .meta svg:nth-child(2):hover {
     color: var(--error-color)
+}
+.Ratings .meta button {
+    cursor: pointer;
+    background: none;
+    border: solid 1px var(--error-color);
+    border-radius: var(--border-rad);
+    color: var(--error-color);
+    transition: ease .25s;
+    padding: .2em .5em;
+    font-family: inherit;
+}
+.Ratings .meta button:hover {
+    transform: scale(1.1);
+    background: var(--error-color);
+    color: var(--light-shade);
 }

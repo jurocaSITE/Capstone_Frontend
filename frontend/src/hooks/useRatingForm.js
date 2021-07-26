@@ -36,6 +36,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
   const handleOnSubmit = async () => {
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
+    success = 0
 
     const { data, error } = await apiClient.createNewRatingForBook(bookId, {
       rating: form.rating,
@@ -59,6 +60,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
   const handleOnUpdate = async () => {
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
+    success = 0
 
     const { data, error } = await apiClient.updateRatingForBook(ratingId, {
       rating: form.rating,

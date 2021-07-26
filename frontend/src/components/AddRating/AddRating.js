@@ -78,7 +78,7 @@ export default function AddRating() {
               text={isProcessing ? "Processing..." : "Update"}
               clickFunc={async () => {
                 const success = await handleOnUpdate();
-                if (form) {
+                if (success) {
                   navigate(`/books/id/${bookId}`);
                 }
               }}
