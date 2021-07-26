@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Ratings } from "components";
+import { Ratings, Genre } from "components";
 
 import { FaStar } from "react-icons/fa";
 import apiClient from "services/apiClient";
@@ -27,7 +27,7 @@ export default function Book() {
 	const [errors, setErrors] = useState(null);
 
 	const [lists, setLists] = useState([]);
-	const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const fetchListsByUserId = async () => {
@@ -65,7 +65,7 @@ export default function Book() {
 			}
 			if (data?.book) {
 				setErrors(null);
-				setBook(data.book);
+        setBook(data.book);
 			}
 
 			setIsFetching(false);
@@ -107,8 +107,37 @@ export default function Book() {
 					<p className="error">{String(errors)}</p>
 				</>
 			);
-		}
+    }
+    console.log(book?.categories)
 
+    const renderGenres = (categoryList) => {
+      const unique_categories = [];
+
+      if (book_id) {
+        for (let i = 0; i < categoryList?.length; i++) {
+          let split = categoryList[i].split("/");
+          for (let j = 0; j < split.length; j++) {
+            if (!unique_categories.includes(split[j])) {
+              unique_categories.push(split[j]);
+            }
+          }
+        }
+
+        return (
+          <div className="row">
+            {unique_categories.map((category) => {
+              return (
+                <div className="r">
+                  <Genre text={category} />
+                </div>
+              );
+            })}
+          </div>
+        );
+      } 
+
+    }
+    
 		return (
 			<>
 				<div className="book-card">
@@ -133,6 +162,11 @@ export default function Book() {
 								Published {book.publishedDate || test_book.pubDate}
 							</h3>
 						</div>
+
+            <div className="book-details-mid">
+                  {/* <h1>{book?.categories}</h1> */}
+                  <h1>{renderGenres(book?.categories)}</h1>
+              </div>
 
 						<div className="book-details-lower">
 							{book_id && (
