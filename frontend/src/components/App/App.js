@@ -99,7 +99,7 @@ function App() {
 					<Route path="/signup" element={<Register />} />
 					<Route path="/search" element={<SearchResults />} />
 					{user ? (
-						<Route path="/" element={<UserHome />} />
+						<Route path="/" element={<UserHome topSellers={topSellers}/>} />
 					) : (
 						<Route path="/" element={<Home topSellers={topSellers} />} />
 					)}

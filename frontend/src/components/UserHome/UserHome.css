@@ -1,8 +1,42 @@
 .UserHome {
-    display: flex;
-    flex-direction: column;
-
-    color: var(--light-shade);
-    padding: 1em;
     min-height: 100vh;
+    color: var(--light-shade);
 }
+
+.UserHome h1,
+.UserHome h2 {
+	margin: 0;
+}
+
+.UserHome .home-feed {
+	padding: 1em;
+	color: var(--light-shade);
+}
+
+
+.UserHome .home-feed{
+	padding: 1em;
+	color: var(--light-shade);
+}
+
+.UserHome .home-feed-books {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding-top: 2em;
+}
+
+
+.UserHome .top-feed{
+	padding: 1em;
+	color: var(--light-shade);
+}
+
+
+.UserHome .top-feed .top-sellers-feed-books {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding-top: 2em;
+}
+

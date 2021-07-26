@@ -102,7 +102,14 @@ class ApiClient {
 			endpoint: `ratings/book/${book_id}`,
 			method: `GET`,
 		});
-	}
+    }
+    
+    async getCurrentlyReadingListByUserId(user) {
+		return await this.request({
+			endpoint: `lists/get-currently-reading`,
+			method: `GET`,
+		});
+    }
 
 	async createNewRatingForBook(book_id, rating) {
 		return await this.request({
