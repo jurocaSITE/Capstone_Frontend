@@ -26,6 +26,7 @@
 
 .ListCard .information {
 	display: grid;
+	color: var(--dark-shade);
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 1fr;
 	margin: 10px;

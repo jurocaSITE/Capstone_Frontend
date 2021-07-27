@@ -8,13 +8,13 @@ import "./Book.css";
 import { Modal } from "components";
 
 const test_book = {
-	title: "All That Followed",
-	author: "Gabriel Urza",
+	title: "Book Title",
+	author: "Author Name",
 	pubDate: "01-10-1997",
 	description:
 		"This is a book about something and here is the description. Read it!",
 	imgUrl:
-		"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.raincoast.com%2Fimages%2Fuploads%2F9781627792431.jpg&f=1&nofb=1",
+		"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpre06.deviantart.net%2F4b09%2Fth%2Fpre%2Ff%2F2011%2F200%2Fb%2Ff%2Fgrey_custom_box_background_by_myfebronia-d40wsi8.png&f=1&nofb=1",
 };
 
 export default function Book() {

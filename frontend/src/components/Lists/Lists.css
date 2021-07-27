@@ -1,6 +1,6 @@
 .Lists {
 	background-color: var(--dark-shade);
-	/* height: 100vh; */
+	min-height: 100vh;
 }
 
 .Lists h1 {

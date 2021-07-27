@@ -17,13 +17,13 @@ function ListCardNoChange({ list }) {
 			</div>
 			<div className="information">
 				<h2>{list?.list_name}</h2>
-				<div className="by-and-more">
+				{/* <div className="by-and-more">
 					<div className="by-username">
-						By
+						By{" "} 
 						<br />
 						{user?.username}
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

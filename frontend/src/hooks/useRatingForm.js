@@ -49,7 +49,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
       success =  0
     } 
     if (data?.rating) {
-      console.log("Rating added...", data.rating);
+      setErrors((e) => ({ ...e, form: null }));
       success = 1
     }
 
@@ -73,7 +73,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
       success =  0
     } 
     if (data?.rating) {
-      console.log("Rating updated...", data.rating);
+      setErrors((e) => ({ ...e, form: null }));
       success = 1
     }
 

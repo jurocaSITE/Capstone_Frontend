@@ -27,3 +27,4 @@ export { default as Modal } from "./Modal/Modal";
 export { default as Account } from "./Account/Account";
 export { default as Ratings } from "./Ratings/Ratings";
 export { default as AddRating } from "./AddRating/AddRating";
+export { default as UpdateGenreInterests } from "./UpdateGenreInterests/UpdateGenreInterests";

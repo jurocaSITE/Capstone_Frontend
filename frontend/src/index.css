@@ -24,6 +24,7 @@ body {
 	font-family: "Poppins", sans-serif;
 	-moz-osx-font-smoothing: grayscale;
 	background: var(--dark-shade);
+	color: var(--light-shade)
 }
 
 h1,

@@ -191,6 +191,14 @@ class ApiClient {
 			method: `GET`,
 		});
 	}
+
+	async updateUserInterests(interests) {
+		return await this.request({
+			endpoint: `auth/update-genre-interests`,
+			method: `PUT`,
+      		data: interests
+		});
+	}
 }
 
 export default new ApiClient(
