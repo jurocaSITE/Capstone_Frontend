@@ -14,6 +14,7 @@
 	align-items: center;
 
 	background: var(--light-shade);
+	color: black;
 
 	padding: 2em 1em;
 	/* Might replace with media query */

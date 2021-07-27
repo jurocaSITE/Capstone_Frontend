@@ -9,7 +9,7 @@ import useDetectClickOut from "hooks/useDetectClickOut";
 
 export default function UserPortal() {
 	const navigate = useNavigate();
-	const { setUser } = useAuthContext();
+	const { user, setUser } = useAuthContext();
 	// const [showMenu, setShowMenu] = useState(false);
 	const [ errors, setErrors ] = useState(null);
 
@@ -32,6 +32,7 @@ export default function UserPortal() {
 			</div>
 			{show ? (
 				<ul ref={nodeRef} className="user-menu">
+					<li className="username"><strong>{user.username}</strong></li>
 					<Link to="/profile">
 						<li>Your Profile</li>
 					</Link>

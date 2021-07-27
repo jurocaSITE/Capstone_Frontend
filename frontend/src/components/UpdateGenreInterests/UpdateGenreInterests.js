@@ -2,12 +2,14 @@ import "./UpdateGenreInterests.css";
 import React from "react";
 import apiClient from "services/apiClient";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
 import { useAuthContext } from "contexts/auth";
 import { ActionButton } from "components";
 import { genres } from "services/genres";
 
 export default function UpdateGenreInterests() {
+	const navigate = useNavigate()
   const { user, setUser } = useAuthContext();
   const [interests, setInterests] = useState({});
   const [errors, setErrors] = useState({});
@@ -24,7 +26,7 @@ export default function UpdateGenreInterests() {
 
   const handleOnSubmit = async () => {
     const finalInterests = Object.keys(interests).filter((x) => interests[x]);
-	console.log("Submitting...finalInterests...", finalInterests)
+    console.log("Submitting...finalInterests...", finalInterests);
     setErrors((e) => ({ ...e, form: null }));
 
     const { data, error } = await apiClient.updateUserInterests({
@@ -37,6 +39,7 @@ export default function UpdateGenreInterests() {
     if (data?.genre_interests) {
       setErrors((e) => ({ ...e, form: null }));
       setUser((u) => ({ ...u, genre_interest: data.genre_interests }));
+	  navigate("/")
     }
   };
 
@@ -52,7 +55,11 @@ export default function UpdateGenreInterests() {
         <>
           <form className="interests-container">
             {genres?.map((x) => (
-              <label className="interest-card" htmlFor={x} key={x}>
+              <label
+                className={`interest-card ${interests[x] ? "checked" : ""}`}
+                htmlFor={x}
+                key={x}
+              >
                 <input
                   type="checkbox"
                   id={x}
@@ -60,7 +67,8 @@ export default function UpdateGenreInterests() {
                   value={x}
                   onChange={handleCheck}
                 />
-                {x} <FaRegCheckCircle />
+                {x}
+                {interests[x] ? <FaCheckCircle /> : <FaRegCheckCircle />}
               </label>
             ))}
           </form>

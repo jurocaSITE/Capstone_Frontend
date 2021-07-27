@@ -23,7 +23,7 @@ export default function Register() {
 		if (user?.email) {
 			navigate("/");
 		}
-	}, [user, navigate]);
+	}, []);
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "email") {
@@ -76,6 +76,7 @@ export default function Register() {
 		if (data?.user) {
 			setUser(data.user);
 			apiClient.setToken(data.token);
+			navigate("/update-interests")
 		}
 		setIsProcessing(false);
 	};
