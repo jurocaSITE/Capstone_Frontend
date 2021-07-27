@@ -56,7 +56,7 @@
 	margin-top: 1em;
 }
 
-.btn {
+.Book .btn {
 	background-color: var(--dark-accent);
 	border: none;
 	border-radius: var(--border-rad);
@@ -70,17 +70,17 @@
 	transition: ease 0.25s;
 }
 
-.btn:hover {
+.Book .btn:hover {
 	transform: scale(1.1);
 }
 
-.select-list {
+.Book .select-list {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.btn-select-list {
+.Book .btn-select-list {
 	padding: 1em;
 	background-color: var(--dark-accent);
 	border: none;
@@ -94,7 +94,7 @@
 	cursor: pointer;
 	transition: ease 0.25s;
 }
-.btn-select-list:hover {
+.Book .btn-select-list:hover {
 	transform: scale(1.1);
 }
 .Book .book-details-lower .rating-avg {

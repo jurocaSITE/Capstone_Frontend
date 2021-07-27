@@ -16,6 +16,7 @@ export default function SearchResults() {
   } = useSearchContext();
 
   useEffect(() => {
+    scrollToTop()
     setSearchResults([])
   }, [setSearchResults])
 

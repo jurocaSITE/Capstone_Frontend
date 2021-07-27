@@ -76,7 +76,7 @@
 	transform: scale(1.1);
 }
 
-.btn {
+.ListForm .btn {
 	background-color: var(--dark-accent);
 	border: none;
 	border-radius: var(--border-rad);
@@ -90,7 +90,7 @@
 	transition: ease 0.25s;
 }
 
-.btn:hover {
+.ListForm .btn:hover {
 	transform: scale(1.1);
 }
 

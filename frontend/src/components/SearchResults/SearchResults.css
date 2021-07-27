@@ -11,13 +11,18 @@
 {
     margin: 0 auto;
     margin-bottom: 1em;
+    text-align: center;
 }
 .SearchResults .search-feed 
 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    max-width: 95%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) );
+    /* grid-template-rows: auto; */
+    gap: 1em;
+    /* justify-content: space-around; */
+    justify-items: center;
+    /* align-items: center; */
 }
 .SearchResults .search-feed-buttons 
 {
