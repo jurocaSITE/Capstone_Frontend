@@ -43,6 +43,9 @@
 	opacity: 0.5;
 	border-radius: var(--border-rad);
 }
+.Lists .search-and-create .search-bar input {
+	color: var(--dark-shade-darkest);
+}
 
 .Lists .search-and-create .search-icon {
 	color: var(--light-shade);

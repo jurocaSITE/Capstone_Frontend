@@ -1,11 +1,11 @@
 .ListForm {
-	height: 100vh;
+	min-height: 100vh;
 	width: 100vw;
 	background: var(--dark-shade);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	/* padding: 2em 0; */
+	padding: 2em 0;
 }
 
 .ListForm .card {
@@ -47,7 +47,7 @@
 	border-radius: 6px;
 }
 
-.ListForm .card .error {
+/* .ListForm .card .error {
 	background: #fe5421;
 	background: var(--default-shadow);
 	color: rgba(245, 41, 41, 1);
@@ -55,8 +55,8 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	/* padding: 10px 20px; */
-}
+	padding: 10px 20px;
+} */
 
 .ListForm .card .form .delete-account {
 	background-color: rgb(220, 55, 55);

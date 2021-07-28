@@ -10,12 +10,8 @@ import useDetectClickOut from "hooks/useDetectClickOut";
 export default function UserPortal() {
 	const navigate = useNavigate();
 	const { user, setUser } = useAuthContext();
-	// const [showMenu, setShowMenu] = useState(false);
-	const [ errors, setErrors ] = useState(null);
-
 	const { show, nodeRef, triggerRef } = useDetectClickOut(false)
-
-	// const toggleMenu = () => setShowMenu(!showMenu);
+	const [ errors, setErrors ] = useState(null);
 
 	const handleOnSignOut = async () => {
 		await apiClient.logoutUser();

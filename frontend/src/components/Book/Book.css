@@ -44,11 +44,7 @@
 	align-items: flex-start;
 	width: fit-content;
 }
-.Book .book-card .book-details-head .book-author {
-	align-self: flex-end;
-}
 .Book .book-card .book-details-head .pub-date {
-	/* align-self: flex-start; */
 	padding-top: 0.5em;
 	color: var(--light-shade-6-opacity);
 }
@@ -100,10 +96,21 @@
 .Book .book-details-lower .rating-avg {
 	display: flex;
 	align-items: center;
-	padding-bottom: 1em;
+	padding: 1em 0;
 }
 .Book .book-details-lower .rating-avg svg {
 	padding-right: 0.5em;
+}
+.Book .book-details .categories {
+	display: flex;
+	flex-wrap: wrap;
+}
+.Book .categories .genre-tag div{
+	margin: .5em;
+	box-shadow: none;
+}
+.Book .categories .genre-tag div:first-child {
+	margin-left: 0;
 }
 .Book .book-details .book-desc {
 	margin: 1em 0;

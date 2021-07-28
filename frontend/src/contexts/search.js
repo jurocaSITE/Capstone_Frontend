@@ -9,9 +9,12 @@ export const SearchContextProvider = ({ children }) => {
     form,
     errors,
     isSearching,
+    filteredData,
     resetForm,
     setErrors,
     setIsSearching,
+    setFilteredData,
+    handleFilter,
     handleOnInputChange,
   } = useSearchForm();
 
@@ -20,9 +23,12 @@ export const SearchContextProvider = ({ children }) => {
     setSearchResults,
     form,
     errors,
+    filteredData,
     isSearching,
     resetForm,
     setErrors,
+    setFilteredData,
+    handleFilter,
     setIsSearching,
     handleOnInputChange,
   };

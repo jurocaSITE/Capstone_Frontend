@@ -88,7 +88,7 @@ function ListFormCreateNew() {
 	};
 
 	return (
-		<div className="ListForm">
+		<div className="ListFormCreateNew">
 			<div className="card">
 				<h2>Create New List</h2>
 

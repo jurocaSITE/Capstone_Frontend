@@ -5,103 +5,110 @@ import "./Login.css";
 import apiClient from "services/apiClient";
 
 export default function Login() {
-	const navigate = useNavigate();
-	const { user, setUser } = useAuthContext();
-	const [isProcessing, setIsProcessing] = useState(false);
-	const [errors, setErrors] = useState({});
-	const [form, setForm] = useState({
-		email: "",
-		password: "",
-	});
+  const navigate = useNavigate();
+  const { user, setUser } = useAuthContext();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-	useEffect(() => {
-		// if user is already logged in,
-		// redirect them to the home page
-		if (user?.email) {
-			navigate("/");
-		}
-	}, [user, navigate]);
+  useEffect(() => {
+    // if user is already logged in,
+    // redirect them to the home page
+    if (user?.email) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
-	const handleOnInputChange = (event) => {
-		if (event.target.name === "email") {
-			if (event.target.value.indexOf("@") === -1) {
-				setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
-			} else {
-				setErrors((e) => ({ ...e, email: null }));
-			}
-		}
+  const handleOnInputChange = (event) => {
+    if (event.target.name === "email") {
+      if (event.target.value.indexOf("@") === -1) {
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
+      } else {
+        setErrors((e) => ({ ...e, email: null }));
+      }
+    }
 
-		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
-	};
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+  };
 
-	const handleOnSubmit = async () => {
-		setIsProcessing(true);
-		setErrors((e) => ({ ...e, form: null }));
+  const handleOnSubmit = async () => {
+    setIsProcessing(true);
+    setErrors((e) => ({ ...e, form: null }));
 
-		const { data, error } = await apiClient.loginUser({
-			email: form.email,
-			password: form.password,
-		});
+    const { data, error } = await apiClient.loginUser({
+      email: form.email,
+      password: form.password,
+    });
 
-		if (error) setErrors((e) => ({ ...e, form: error }));
-		if (data?.user) {
-			setUser(data.user);
-			apiClient.setToken(data.token);
-		}
+    if (error) setErrors((e) => ({ ...e, form: error }));
+    if (data?.user) {
+      setUser(data.user);
+      apiClient.setToken(data.token);
+    }
 
-		setIsProcessing(false);
-	};
+    setIsProcessing(false);
+  };
 
-	return (
-		<div className="Login">
-			<div className="card">
-				<h2>Login</h2>
+  const keyPressEnter = (e) => {
+    if (e.keyCode === 13) {
+      handleOnSubmit();
+    }
+  };
 
-				{errors.form && <span className="error">{errors.form}</span>}
-				<br />
+  return (
+    <div className="Login">
+      <div className="card">
+        <h2>Login</h2>
 
-				<div className="form">
-					<div className="input-field">
-						<label htmlFor="email">Email*</label>
-						<input
-							type="email"
-							name="email"
-							placeholder="Enter email"
-							value={form.email}
-							onChange={handleOnInputChange}
-						/>
-						{errors.email && <span className="error">{errors.email}</span>}
-					</div>
+        {errors.form && <span className="error">{errors.form}</span>}
+        <br />
 
-					<div className="input-field">
-						<label htmlFor="password">Password*</label>
-						<input
-							type="password"
-							name="password"
-							placeholder="Enter password"
-							value={form.password}
-							onChange={handleOnInputChange}
-						/>
-						{errors.password && (
-							<span className="error">{errors.password}</span>
-						)}
-					</div>
+        <div className="form">
+          <div className="input-field">
+            <label htmlFor="email">Email*</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={form.email}
+              onChange={handleOnInputChange}
+            />
+            {errors.email && <span className="error">{errors.email}</span>}
+          </div>
 
-					<button
-						className="btn"
-						disabled={isProcessing}
-						onClick={handleOnSubmit}
-					>
-						{isProcessing ? "Loading..." : "Login"}
-					</button>
-				</div>
+          <div className="input-field">
+            <label htmlFor="password">Password*</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={form.password}
+              onChange={handleOnInputChange}
+			  onKeyDown={keyPressEnter}
+            />
+            {errors.password && (
+              <span className="error">{errors.password}</span>
+            )}
+          </div>
 
-				<div className="footer">
-					<p>
-						Don't have an account? <Link to="/signup">Sign Up</Link>
-					</p>
-				</div>
-			</div>
-		</div>
-	);
+          <button
+            className="btn"
+            disabled={isProcessing}
+            onClick={handleOnSubmit}
+          >
+            {isProcessing ? "Loading..." : "Login"}
+          </button>
+        </div>
+
+        <div className="footer">
+          <p>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }

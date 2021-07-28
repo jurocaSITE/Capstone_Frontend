@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom"
 import { BookPreview, ActionButton } from "components";
 import "./Home.css";
 
 const home_hero_img =
-	"https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
+  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
+const defaultBookCover = 
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.calendarclub.co.uk%2F-%2Fmedia%2Fproductimages%2F18%2F66%2F186694_main.jpg&f=1&nofb=1";
 
 // TODO: Maybe make separate component or folder for buttons
 
 export default function Home({ topSellers = [] }) {
   return (
     <div className="Home">
-      
       <div className="home-hero">
         <div className="home-hero-text">
           <h1>Welcome!</h1>
@@ -25,12 +27,24 @@ export default function Home({ topSellers = [] }) {
 
       <div className="home-feed">
         <h2>NYT Top Sellers</h2>
+        
         <div className="home-feed-books">
           {topSellers.map((book) => (
-            <BookPreview book={book} key={book.title} />
+            // <BookPreview book={book} key={book.title} />
+            <div className="preview">
+              <Link to={`/books/top/sellers/${book.title}`}>
+                <img
+                  alt="book cover"
+                  src={book?.book_image || defaultBookCover}
+                />
+              </Link>
+              <div className="book-details">
+                <h3>{book.title}</h3>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-		</div>
-	);
+    </div>
+  );
 }

@@ -104,9 +104,9 @@ export default function DetailedList() {
 									<img
 										alt="boook cover"
 										src={
-											book?.imageLinks?.large ||
-											book?.imageLinks?.medium ||
-											book?.imageLinks?.small ||
+											// book?.imageLinks?.large ||
+											// book?.imageLinks?.medium ||
+											// book?.imageLinks?.small ||
 											book?.imageLinks?.thumbnail
 										}
 									></img>

@@ -1,6 +1,6 @@
 import "./Ratings.css";
 import apiClient from "services/apiClient";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import {
@@ -10,11 +10,12 @@ import {
   FaRegEdit,
   FaTrashAlt,
 } from "react-icons/fa";
+import useDetectClickOut from "hooks/useDetectClickOut";
 import { useAuthContext } from "contexts/auth";
 
 export default function Ratings({ book_id }) {
   const { user } = useAuthContext();
-  const ratingsRef = useRef(null);
+  const { show, nodeRef, triggerRef } = useDetectClickOut(false);
   const [ratings, setRatings] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -47,12 +48,13 @@ export default function Ratings({ book_id }) {
   };
 
   const renderDelete = (x) => {
-    if (confirmDelete) {
+    if (show) {
       return (
         <button
+          ref={nodeRef}
           onClick={() => {
             deleteRating(x.id);
-            setConfirmDelete(!confirmDelete);
+            // setConfirmDelete(!confirmDelete);
           }}
           disabled={isDeleting}
         >
@@ -65,6 +67,7 @@ export default function Ratings({ book_id }) {
     return (
       <FaTrashAlt
         size={20}
+        ref={triggerRef}
         onClick={() => {
           setConfirmDelete(!confirmDelete);
         }}

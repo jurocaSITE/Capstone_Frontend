@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "services/apiClient";
 import { useSearchContext } from "contexts/search";
+import { useSearchForm } from "hooks/useSearchForm";
 import { BiSearch } from "react-icons/bi";
 import { IoCloseCircle } from "react-icons/io5";
 import "./SearchBar.css";
@@ -11,9 +12,7 @@ export default function SearchBar() {
   const {
     setSearchResults,
     form,
-    errors,
     isSearching,
-    resetForm,
     setErrors,
     setIsSearching,
     handleOnInputChange,
@@ -54,9 +53,7 @@ export default function SearchBar() {
         onChange={handleOnInputChange}
         onKeyDown={keyPressEnter}
       />
-      {/* {form.searchTerm.length > 0 && (
-        <IoCloseCircle className="close-icon" onClick={resetForm} />
-      )} */}
+
       <button
         className="search-btn"
         disabled={isSearching}

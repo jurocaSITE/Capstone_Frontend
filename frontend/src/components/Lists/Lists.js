@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
+import { useSearchForm } from "hooks/useSearchForm";
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Lists() {
 	const classes = useStyles();
+	const {filteredData, handleFilter} = useSearchForm()
 	const [lists, setLists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 	const [error, setError] = useState(null);
@@ -65,19 +67,23 @@ function Lists() {
 	};
 
 	settingLists();
-
-	console.log("default lists", defaultLists);
+	
+	const handleOnFilter = (e) => {
+		handleFilter(e, otherLists)
+	}
 
 	return (
 		<div className="Lists">
 			<div className="top">
 				<h1 className="title">Library</h1>
 			</div>
+
 			<div className="default-lists">
 				{defaultLists.map((list) => (
 					<ListCardNoChange key={list.id} list={list} className="list-card" />
 				))}
 			</div>
+
 			<div className="search-and-create">
 				<div className="search">
 					<div className="search-bar">
@@ -88,6 +94,7 @@ function Lists() {
 								input: classes.inputInput,
 							}}
 							inputProps={{ "aria-label": "search" }}
+							onChange={handleOnFilter}
 						/>
 					</div>
 					<button type="submit" className="search-icon">
@@ -97,14 +104,23 @@ function Lists() {
 
 				<div className="create-new-list">
 					<Link to={`/list/create-new`}>
-						<h1>Create New List +</h1>
+						<h2>Create New List +</h2>
 					</Link>
 				</div>
 			</div>
+
 			<div className="display-lists-area">
-				{otherLists.map((list) => (
+				{ filteredData ? filteredData.map((list) => (
 					<ListCard list={list} className="list-card" />
-				))}
+				)) : (
+					otherLists.map((list) => (
+						<ListCard list={list} className="list-card" />
+					))
+				)
+				}
+				{/* {otherLists.map((list) => (
+					<ListCard list={list} className="list-card" />
+				))} */}
 			</div>
 		</div>
 	);

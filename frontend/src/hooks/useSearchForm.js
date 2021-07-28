@@ -3,19 +3,25 @@ import { useNavigate } from "react-router";
 
 export const useSearchForm = () => {
   const [errors, setErrors] = useState({});
-  const [isSearching, setIsSearching] = useState(false)
+  const [filteredData, setFilteredData] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
   const [form, setForm] = useState({
-    searchTerm: ""
+    searchTerm: "",
   });
 
-//! potential function for filtering for lists
-//   const handleFilter = (event) => {
-//     const searchTerm = event.target.value
-//     const newFilter = data.filter((value) => {
-//         return value.title.toLowerCase().includes(searchTerm.toLowerCase())
-//     })
-//     setFilteredData(newFilter) // useState
-//   }
+  //! potential function for filtering for lists
+  const handleFilter = (event, data) => {
+    const searchTerm = event?.target?.value;
+    if (searchTerm === "") {
+      setFilteredData(null)
+      return
+    }
+
+    const newFilter = data?.filter((value) => {
+      return value?.list_name?.toLowerCase().includes(searchTerm?.toLowerCase());
+    });
+    setFilteredData(newFilter); // useState
+  };
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "search") {
@@ -30,10 +36,21 @@ export const useSearchForm = () => {
   };
 
   const resetForm = () => {
-      setForm({
-        searchTerm: ""
-      })
-  }
+    setForm({
+      searchTerm: "",
+    });
+  };
 
-  return { form, errors, isSearching, resetForm, setErrors, setIsSearching, handleOnInputChange };
+  return {
+    form,
+    errors,
+    isSearching,
+    filteredData,
+    resetForm,
+    setErrors,
+    setIsSearching,
+    setFilteredData,
+    handleFilter,
+    handleOnInputChange,
+  };
 };
