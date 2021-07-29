@@ -2,31 +2,39 @@ import "./ListCardNoChange.css";
 import React from "react";
 import { useAuthContext } from "contexts/auth";
 import { Link } from "react-router-dom";
+import { BiBookHeart } from "react-icons/bi";
+import { GoBook } from "react-icons/go";
+import { RiBook2Fill } from "react-icons/ri";
+import { FaBookDead } from "react-icons/fa"
 
-const defaultBookCover = "https://source.unsplash.com/random";
+// const defaultBookCover = "https://source.unsplash.com/random";
 
 function ListCardNoChange({ list }) {
-	const { user } = useAuthContext();
+  const { user } = useAuthContext();
 
-	return (
-		<div className="ListCardNoChange">
-			<div className="cover">
-				<Link to={`/my-lists/${list.id}`}>
-					<img alt="list cover" src={list?.image || defaultBookCover} />	
-				</Link>
-			</div>
-			<div className="information">
-				<h2>{list?.list_name}</h2>
-				{/* <div className="by-and-more">
+  return (
+    <div className="ListCardNoChange">
+      <div className="cover">
+        <Link to={`/my-lists/${list.id}`}>
+          {/* <img alt="list cover" src={list?.image || defaultBookCover} />	 */}
+          {/* <BiBookHeart /> */}
+          {/* <GoBook /> */}
+		  {/* <RiBook2Fill /> */}
+		  <FaBookDead />
+        </Link>
+      </div>
+      <div className="information">
+        <h2>{list?.list_name}</h2>
+        {/* <div className="by-and-more">
 					<div className="by-username">
 						By{" "} 
 						<br />
 						{user?.username}
 					</div>
 				</div> */}
-			</div>
-		</div>
-	);
+      </div>
+    </div>
+  );
 }
 
 export default ListCardNoChange;

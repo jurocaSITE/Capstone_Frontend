@@ -6,12 +6,14 @@ export default function ActionButton({
   text = "",
   altClass = null,
   clickFunc = null,
+  disable = false
 }) {
   return (
     <Link to={link}>
       <button
         onClick={clickFunc}
         className={`ActionButton ${altClass ? altClass : ``}`}
+        disabled={disable}
       >
         {text}
       </button>

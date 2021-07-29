@@ -148,21 +148,20 @@ export default function Book() {
                     })}
                   </div>
 
-				  <span className="rating-avg">
+                  <span className="rating-avg">
                     <FaStar size="20" />
                     {book?.averageRating?.toFixed(1) || `Rating Not Available`}
                   </span>
                 </>
               )}
               <h2>Description</h2>
-              {/* <p className="book-desc">{stripHTMLtags(book.description)}</p> */}
               <p
                 className="book-desc"
                 dangerouslySetInnerHTML={{ __html: book?.description }}
               />
               <a href="#modal-opened" class="link-1" id="modal-closed">
                 {/* <ActionButton link={`#`} text={"Add to List"} /> */}
-                {user && <button className="btn">Add to list</button>}
+                {user && book_id ? <button className="btn">Add to list</button> : null}
               </a>
             </div>
           </div>

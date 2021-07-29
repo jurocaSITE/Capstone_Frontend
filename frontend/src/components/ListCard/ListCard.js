@@ -28,11 +28,11 @@ function ListCard({ list }) {
 			<div className="information">
 				<h2>{list?.list_name}</h2>
 				<div className="by-and-more">
-					<div className="by-username">
+					{/* <div className="by-username">
 						By{" "}
-						{/* <br /> */}
+						<br />
 						{user?.username}
-					</div>
+					</div> */}
 					<div className="create-new-list">
 						<MoreHorizIcon ref={triggerRef} className="three-dots" />
 

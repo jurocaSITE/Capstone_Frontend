@@ -1,104 +1,89 @@
 .ListForm {
-	min-height: 100vh;
-	width: 100vw;
-	background: var(--dark-shade);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 2em 0;
+  min-height: 100vh;
+  width: 100vw;
+  background: var(--dark-shade);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 0;
 }
 
 .ListForm .card {
-	width: 620px;
-	padding: 24px 36px 0 36px;
-	background: var(--light-shade);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-radius: 6px;
+  width: 620px;
+  padding: 24px 36px 0 36px;
+  background: var(--light-shade);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: var(--border-rad);
+  color: var(--dark-shade-darkest);
 }
 
 .ListForm .card .form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 60%;
-	padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  padding-bottom: 30px;
 }
 
 .ListForm .card .form .input-field {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 80%;
-	margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  margin: 12px 0;
 }
 
 .ListForm .card .form .input-field label {
-	color: #696f79;
+  color: #696f79;
 }
 
 .ListForm .card .form .input-field input {
-	height: 52px;
-	padding: 0 15px;
-	font-size: 16px;
-	border: solid 1px var(--light-shade-6-opacity);
-	width: 100%;
-	border-radius: 6px;
-}
-
-/* .ListForm .card .error {
-	background: #fe5421;
-	background: var(--default-shadow);
-	color: rgba(245, 41, 41, 1);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 10px 20px;
-} */
-
-.ListForm .card .form .delete-account {
-	background-color: rgb(220, 55, 55);
-	border: none;
-	border-radius: var(--border-rad);
-	box-shadow: var(--default-shadow);
-	height: 60px;
-	width: 120px;
-	color: var(--light-shade);
-	font-size: 20px;
-	margin-top: 20px;
-	cursor: pointer;
-	transition: ease 0.25s;
-}
-
-.ListForm .card .form .delete-account:hover {
-	transform: scale(1.1);
-}
-
-.ListForm .btn {
-	background-color: var(--dark-accent);
-	border: none;
-	border-radius: var(--border-rad);
-	box-shadow: var(--default-shadow);
-	height: 40px;
-	width: 120px;
-	color: var(--light-shade);
-	font-size: 20px;
-	margin-top: 20px;
-	cursor: pointer;
-	transition: ease 0.25s;
-}
-
-.ListForm .btn:hover {
-	transform: scale(1.1);
+  height: 52px;
+  padding: 0 15px;
+  font-size: 16px;
+  border: solid 1px var(--light-shade-6-opacity);
+  width: 100%;
+  border-radius: 6px;
 }
 
 .ListForm .card .form .footer {
-	display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.ListForm .btn {
+  background-color: var(--dark-accent);
+  border: none;
+  border-radius: var(--border-rad);
+  box-shadow: var(--default-shadow);
+  padding: 0.5em 1em;
+  color: var(--light-shade);
+  font-size: 20px;
+  /* margin-top: 20px; */
+  cursor: pointer;
+  transition: ease 0.25s;
+}
+
+.ListForm .btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--default-shadow);
+}
+
+.ListForm .card .form .delete-account {
+  background-color: rgba(0, 0, 0, .2);
+  color: var(--dark-shade-darkest);
+  box-shadow: none;
+  white-space: nowrap;
+  margin-top: 1em;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .ListForm .cancel {
-	background-color: rgb(220, 55, 55);
-	margin-left: 10px;
+  background-color: rgb(220, 55, 55);
+  margin-left: 10px;
 }

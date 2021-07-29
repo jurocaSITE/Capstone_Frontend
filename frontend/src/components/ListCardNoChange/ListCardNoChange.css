@@ -1,19 +1,40 @@
 .ListCardNoChange {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	background-color: var(--light-shade);
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	width: 15em;
+	height: 15em;
+	padding: 1em;
+}
+/* .ListCardNoChange {
 	display: grid;
 	grid-template-rows: 2fr 1fr;
 	background-color: var(--light-shade);
 	border-radius: var(--border-rad);
 	box-shadow: var(--default-shadow);
-	width: 20em;
-	height: 20em;
-}
+	width: 15em;
+	height: 15em;
+	padding: 1em;
+} */
 
 .ListCardNoChange .cover {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--dark-shade);
 	padding: 10px;
 	height: 10em;
-	width: 18em;
+	max-width: 100%;
 	overflow: hidden;
-	margin: 0 auto;
+	/* margin: 0 auto; */
+	border-radius: var(--border-rad);
+}
+.ListCardNoChange .cover svg {
+	font-size: 7rem;
+	color: var(--light-accent);
 }
 
 .ListCardNoChange img {
@@ -24,14 +45,15 @@
 }
 
 .ListCardNoChange .information {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr;
-	margin: 10px;
+	margin: 0 auto;
+	padding: 1em 0;
 	color: var(--dark-shade)
 }
+.ListCardNoChange .information h2 {
+	font-weight: 600;
+}
 
-.ListCardNoChange .information .by-and-more {
+/* .ListCardNoChange .information .by-and-more {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr;
@@ -47,7 +69,7 @@
 	justify-content: flex-end;
 	align-items: flex-end;
 	position: relative;
-}
+} */
 
 .ListCardNoChange .information .by-and-more .create-new-list .three-dots {
 	font-size: 2.5rem;

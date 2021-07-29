@@ -28,7 +28,7 @@ export default function BookPreview({ book = {} }) {
         </Link>
         <div className="book-details">
           <h2>{book.title}</h2>
-          <h4>by {renderBookAuthors(book?.authors)}</h4>
+          <h4 className="authors">by {renderBookAuthors(book?.authors)}</h4>
           {/* <h4>by {book.authors}</h4> */}
           <span className="rating-avg">
             <FaStar size="20" />

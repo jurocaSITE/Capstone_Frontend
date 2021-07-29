@@ -18,11 +18,7 @@
     max-width: 95%;
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(350px, 1fr) );
-    /* grid-template-rows: auto; */
     gap: 1em;
-    /* justify-content: space-around; */
-    /* justify-items: center; */
-    /* align-items: center; */
 }
 .SearchResults .search-feed-buttons 
 {

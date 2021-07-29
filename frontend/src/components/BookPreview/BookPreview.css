@@ -9,15 +9,13 @@
     background: rgba(255, 255, 255, .1);
     border: solid 1px rgba(255, 255, 255, .3);
     border-radius: var(--border-rad);
+    overflow: hidden;
 }
 .BookPreview img {
     object-fit: contain;
     cursor: pointer;
     /* margin: 0 1em; */
-    /* min-height: 20em; */
-    /* max-height: 20em; */
-    max-height: 20em;
-    /* width: 13em; */
+    max-height: 12.5em;
     border-radius: var(--border-rad);
     box-shadow: var(--default-shadow);
     transition: ease .5s;
@@ -31,6 +29,16 @@
     flex-direction: column;
     flex-wrap: wrap;
     margin-left: 1em;
+}
+.BookPreview .book-details .authors {
+    max-height: 5em;
+    overflow: hidden;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.BookPreview .authors::-webkit-scrollbar {
+    display: none;
 }
 .BookPreview .rating-avg {
     margin-top: .5em;
