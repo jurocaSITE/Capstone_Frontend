@@ -6,6 +6,7 @@ import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 
 import {
+	About,
 	Account,
 	AddRating,
 	Register,
@@ -96,6 +97,7 @@ function App() {
 						path="/set-rating/:status/:bookId/:ratingId"
 						element={<AddRating />}
 					/>
+					<Route path="/about" element={<About />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
 					<Route path="/update-interests" element={<UpdateGenreInterests />} />

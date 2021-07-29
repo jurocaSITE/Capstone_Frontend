@@ -65,14 +65,15 @@ export default function Ratings({ book_id }) {
     }
 
     return (
+      <span className="trash-icon" ref={triggerRef}>
       <FaTrashAlt
         size={20}
-        ref={triggerRef}
         onClick={() => {
           setConfirmDelete(!confirmDelete);
         }}
         disabled={isDeleting}
       />
+      </span>
     );
   };
 
@@ -83,9 +84,12 @@ export default function Ratings({ book_id }) {
     if (error) {
       setErrors(error);
     }
-    if (data?.ratings) {
+    if (data?.rating) {
       setErrors(null);
-      // setRatings(data.ratings);
+      // return a new array without the deleted rating
+      // TODO: explore more efficient ways to remove an item from an array 
+      const newData = ratings.filter((r) => !(r.id === data.rating.id))
+      setRatings(newData)
     }
 
     setIsDeleting(false);

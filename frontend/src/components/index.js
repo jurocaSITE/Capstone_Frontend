@@ -28,3 +28,5 @@ export { default as Account } from "./Account/Account";
 export { default as Ratings } from "./Ratings/Ratings";
 export { default as AddRating } from "./AddRating/AddRating";
 export { default as UpdateGenreInterests } from "./UpdateGenreInterests/UpdateGenreInterests";
+export { default as About } from "./About/About";
+export { default as BookViewer } from "./BookViewer/BookViewer";

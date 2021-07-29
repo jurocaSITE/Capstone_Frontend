@@ -1,10 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import apiClient from "services/apiClient";
 import { useSearchContext } from "contexts/search";
-import { useSearchForm } from "hooks/useSearchForm";
 import { BiSearch } from "react-icons/bi";
-import { IoCloseCircle } from "react-icons/io5";
 import "./SearchBar.css";
 
 export default function SearchBar() {

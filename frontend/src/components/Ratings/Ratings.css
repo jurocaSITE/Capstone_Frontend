@@ -90,7 +90,7 @@
     transform: scale(1.2);
     opacity: 1;
 }
-.Ratings .meta svg:nth-child(2):hover {
+.Ratings .meta .trash-icon svg:hover {
     color: var(--error-color)
 }
 .Ratings .meta button {

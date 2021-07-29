@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ListCard, ListCardNoChange } from "components";
 import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import { BiSearch } from "react-icons/bi";
 import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
 import { useSearchForm } from "hooks/useSearchForm";
@@ -88,7 +88,7 @@ function Lists() {
 				<div className="search">
 					<div className="search-bar">
 						<InputBase
-							placeholder="Search…"
+							placeholder="Search In Lists by name..."
 							classes={{
 								root: classes.inputRoot,
 								input: classes.inputInput,
@@ -98,7 +98,7 @@ function Lists() {
 						/>
 					</div>
 					<button type="submit" className="search-icon">
-						<SearchIcon className="icon" />
+						<BiSearch className="icon" />
 					</button>
 				</div>
 
