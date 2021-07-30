@@ -22,6 +22,7 @@ export { default as ListSidebar } from "./ListSidebar/ListSidebar";
 export { default as ProfilePage } from "./ProfilePage/ProfilePage";
 export { default as ProfileListCard } from "./ProfileListCard/ProfileListCard";
 export { default as EditProfile } from "./EditProfile/EditProfile";
+export { default as Recover } from "./Recover/Recover";
 export { default as AuthorCard } from "./AuthorCard/AuthorCard";
 export { default as Modal } from "./Modal/Modal";
 export { default as Account } from "./Account/Account";

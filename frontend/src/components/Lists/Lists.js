@@ -66,8 +66,6 @@ function Lists() {
 
 	settingLists();
 
-	console.log("default lists", defaultLists);
-
 	return (
 		<div className="Lists">
 			<div className="top">
@@ -103,7 +101,7 @@ function Lists() {
 			</div>
 			<div className="display-lists-area">
 				{otherLists.map((list) => (
-					<ListCard list={list} className="list-card" />
+					<ListCard key={list.id} list={list} className="list-card" />
 				))}
 			</div>
 		</div>

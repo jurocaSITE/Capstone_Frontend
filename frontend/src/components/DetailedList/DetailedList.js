@@ -1,7 +1,7 @@
 import "./DetailedList.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { BookPreview, Genre } from "components";
+import { Genre } from "components";
 import apiClient from "services/apiClient";
 import moment from "moment";
 import { useParams } from "react-router-dom";

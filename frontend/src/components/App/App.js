@@ -6,19 +6,20 @@ import { AuthContextProvider, useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 
 import {
-	Account,
-	AddRating,
-	Register,
-	Login,
 	Navbar,
 	Footer,
 	Home,
+	AddRating,
+	Register,
+	Login,
+	ProfilePage,
+	Account,
+	EditProfile,
+	Recover,
 	UserHome,
 	Book,
 	SearchResults,
 	Lists,
-	ProfilePage,
-	EditProfile,
 	ListForm,
 	ListFormCreateNew,
 	DetailedList,
@@ -90,6 +91,7 @@ function App() {
 					<Route path="/account" element={<Account />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
+					<Route path="/recover" element={<Recover />} />
 					<Route path="/set-rating/:status/:bookId" element={<AddRating />} />
 					<Route
 						path="/set-rating/:status/:bookId/:ratingId"
@@ -99,7 +101,7 @@ function App() {
 					<Route path="/signup" element={<Register />} />
 					<Route path="/search" element={<SearchResults />} />
 					{user ? (
-						<Route path="/" element={<UserHome topSellers={topSellers}/>} />
+						<Route path="/" element={<UserHome topSellers={topSellers} />} />
 					) : (
 						<Route path="/" element={<Home topSellers={topSellers} />} />
 					)}

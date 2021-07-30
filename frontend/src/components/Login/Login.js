@@ -1,56 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useLoginForm } from "hooks/useLoginForm";
 import { useAuthContext } from "contexts/auth";
 import "./Login.css";
-import apiClient from "services/apiClient";
 
 export default function Login() {
-	const navigate = useNavigate();
 	const { user, setUser } = useAuthContext();
-	const [isProcessing, setIsProcessing] = useState(false);
-	const [errors, setErrors] = useState({});
-	const [form, setForm] = useState({
-		email: "",
-		password: "",
-	});
-
-	useEffect(() => {
-		// if user is already logged in,
-		// redirect them to the home page
-		if (user?.email) {
-			navigate("/");
-		}
-	}, [user, navigate]);
-
-	const handleOnInputChange = (event) => {
-		if (event.target.name === "email") {
-			if (event.target.value.indexOf("@") === -1) {
-				setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
-			} else {
-				setErrors((e) => ({ ...e, email: null }));
-			}
-		}
-
-		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
-	};
-
-	const handleOnSubmit = async () => {
-		setIsProcessing(true);
-		setErrors((e) => ({ ...e, form: null }));
-
-		const { data, error } = await apiClient.loginUser({
-			email: form.email,
-			password: form.password,
-		});
-
-		if (error) setErrors((e) => ({ ...e, form: error }));
-		if (data?.user) {
-			setUser(data.user);
-			apiClient.setToken(data.token);
-		}
-
-		setIsProcessing(false);
-	};
+	const { form, errors, isProcessing, handleOnInputChange, handleOnSubmit } =
+		useLoginForm({ user, setUser });
 
 	return (
 		<div className="Login">

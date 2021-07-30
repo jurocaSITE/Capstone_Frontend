@@ -104,6 +104,16 @@ class ApiClient {
 		this.logoutUser();
 	}
 
+	async recoverAccount(email) {
+		console.log(email.email);
+		const em = email.email;
+		return await this.request({
+			endpoint: `auth/recover`,
+			method: `POST`,
+			data: { em },
+		});
+	}
+
 	async getAllListsByUserId() {
 		return await this.request({
 			endpoint: `lists/get-all-lists`,

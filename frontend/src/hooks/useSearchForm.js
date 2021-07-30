@@ -1,39 +1,46 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 
 export const useSearchForm = () => {
-  const [errors, setErrors] = useState({});
-  const [isSearching, setIsSearching] = useState(false)
-  const [form, setForm] = useState({
-    searchTerm: ""
-  });
+	const [errors, setErrors] = useState({});
+	const [isSearching, setIsSearching] = useState(false);
+	const [form, setForm] = useState({
+		searchTerm: "",
+	});
 
-//! potential function for filtering for lists
-//   const handleFilter = (event) => {
-//     const searchTerm = event.target.value
-//     const newFilter = data.filter((value) => {
-//         return value.title.toLowerCase().includes(searchTerm.toLowerCase())
-//     })
-//     setFilteredData(newFilter) // useState
-//   }
+	//! potential function for filtering for lists
+	//   const handleFilter = (event) => {
+	//     const searchTerm = event.target.value
+	//     const newFilter = data.filter((value) => {
+	//         return value.title.toLowerCase().includes(searchTerm.toLowerCase())
+	//     })
+	//     setFilteredData(newFilter) // useState
+	//   }
 
-  const handleOnInputChange = (event) => {
-    if (event.target.name === "search") {
-      if (!event.target.value) {
-        setErrors((e) => ({ ...e, name: "This field cannot be empty." }));
-      } else {
-        setErrors((e) => ({ ...e, name: null }));
-      }
-    }
+	const handleOnInputChange = (event) => {
+		if (event.target.name === "search") {
+			if (!event.target.value) {
+				setErrors((e) => ({ ...e, name: "This field cannot be empty." }));
+			} else {
+				setErrors((e) => ({ ...e, name: null }));
+			}
+		}
 
-    setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
-  };
+		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+	};
 
-  const resetForm = () => {
-      setForm({
-        searchTerm: ""
-      })
-  }
+	const resetForm = () => {
+		setForm({
+			searchTerm: "",
+		});
+	};
 
-  return { form, errors, isSearching, resetForm, setErrors, setIsSearching, handleOnInputChange };
+	return {
+		form,
+		errors,
+		isSearching,
+		resetForm,
+		setErrors,
+		setIsSearching,
+		handleOnInputChange,
+	};
 };
