@@ -22,7 +22,7 @@ export default function AddRating() {
 
   return (
     <div className="AddRating">
-      <h1>Add Review</h1>
+      <h1>{ratingId ? `Update Review` : `Add Review`}</h1>
 
       <form autoComplete="off">
         {errors?.form && <span className="error">{errors.form}</span>}

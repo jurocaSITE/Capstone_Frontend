@@ -8,6 +8,7 @@
 	width: 15em;
 	height: 15em;
 	padding: 1em;
+	margin: 1em .25em;
 }
 /* .ListCardNoChange {
 	display: grid;
@@ -34,7 +35,11 @@
 }
 .ListCardNoChange .cover svg {
 	font-size: 7rem;
-	color: var(--light-accent);
+	fill: var(--light-accent);
+	transition: ease .25s;
+}
+.ListCardNoChange .cover a:hover svg {
+	font-size: 8rem;
 }
 
 .ListCardNoChange img {
