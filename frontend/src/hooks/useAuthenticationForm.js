@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // this has all of the logic that is shared between our login form and register form
 export const useAuthenticationForm = ({ user }) => {
 	const navigate = useNavigate();
+	const [passVisible, setPassVisible] = useState(false)
 	const [errors, setErrors] = useState({});
 	const [form, setForm] = useState({
 		first_name: "",
@@ -57,10 +58,15 @@ export const useAuthenticationForm = ({ user }) => {
 		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
 	};
 
+	const togglePassVisibility = () => setPassVisible(!passVisible);
+
 	return {
 		form,
 		errors,
+		passVisible,
 		setErrors,
+		setPassVisible,
 		handleOnInputChange,
+		togglePassVisibility
 	};
 };

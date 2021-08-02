@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuthenticationForm } from "hooks/useAuthenticationForm";
 
 export const useLoginForm = ({ user, setUser }) => {
-	const { form, errors, setErrors, handleOnInputChange } =
+	const { form, errors, passVisible, togglePassVisibility, setErrors, handleOnInputChange } =
 		useAuthenticationForm({ user });
 	const [isProcessing, setIsProcessing] = useState(false);
 
@@ -29,6 +29,8 @@ export const useLoginForm = ({ user, setUser }) => {
 		form,
 		errors,
 		isProcessing,
+		passVisible,
+		togglePassVisibility,
 		handleOnInputChange,
 		handleOnSubmit,
 	};

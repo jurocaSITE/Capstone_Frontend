@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useLoginForm } from "hooks/useLoginForm";
 import { useAuthContext } from "contexts/auth";
 import "./Login.css";
 
 export default function Login() {
-	const { user, setUser } = useAuthContext();
-	const { form, errors, isProcessing, handleOnInputChange, handleOnSubmit } =
-		useLoginForm({ user, setUser });
+  const { user, setUser } = useAuthContext();
+  const {
+    form,
+    errors,
+    isProcessing,
+    passVisible,
+    togglePassVisibility,
+    handleOnInputChange,
+    handleOnSubmit,
+  } = useLoginForm({ user, setUser });
 
   const keyPressEnter = (e) => {
     if (e.keyCode === 13) {
@@ -35,16 +43,19 @@ export default function Login() {
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
 
-          <div className="input-field">
+          <div className="input-field password">
             <label htmlFor="password">Password*</label>
             <input
-              type="password"
+              type={passVisible ? "text": "password"}
               name="password"
               placeholder="Enter password"
               value={form.password}
               onChange={handleOnInputChange}
-			  onKeyDown={keyPressEnter}
+              onKeyDown={keyPressEnter}
             />
+            <span className="pass-eye" onClick={togglePassVisibility}>
+              {passVisible ? <FaEye /> : <FaEyeSlash />}
+            </span>
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}

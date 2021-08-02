@@ -50,6 +50,20 @@
     border-radius: 6px;
 }
 
+.Login .input-field.password {
+    position: relative;
+}
+.Login .input-field.password .pass-eye {
+    position: absolute;
+    right: -20px;
+    top: 44px;
+    cursor: pointer;
+}
+.Login .pass-eye svg {
+    fill: var(--dark-shade);
+    font-size: 1.2rem;
+}
+
 .Login .card .form .btn {
     background-color: var(--dark-accent);
     border: none;
