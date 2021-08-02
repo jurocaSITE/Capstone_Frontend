@@ -88,7 +88,7 @@ function App() {
 						element={<ListFormCreateNew />}
 					/>
 					<Route path="/my-lists/:list_id" element={<DetailedList />} />
-					<Route path="/:author_name" element={<AuthorPage />} />
+					<Route path="/author/:author_name" element={<AuthorPage />} />
 					<Route path="/account" element={<Account />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />

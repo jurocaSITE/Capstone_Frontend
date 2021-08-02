@@ -49,6 +49,7 @@ function Lists() {
 	}, []);
 
 	const settingLists = () => {
+		
 		for (let i = 0; i < lists.length; i++) {
 			if (lists[i].list_name === "Want To Read") {
 				defaultLists.push(lists[i]);
@@ -60,6 +61,14 @@ function Lists() {
 				defaultLists.push(lists[i]);
 			} else {
 				otherLists.push(lists[i]);
+				otherLists.sort(function(a, b){
+					var nameA=a.list_name.toLowerCase(), nameB=b.list_name.toLowerCase();
+					if (nameA < nameB) //sort string ascending
+					 return -1;
+					if (nameA > nameB)
+					 return 1;
+					return 0; //default return value (no sorting)
+				   });
 			}
 		}
 	};
