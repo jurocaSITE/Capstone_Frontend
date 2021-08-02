@@ -24,7 +24,7 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (form.last_name === "") {
 			setErrors((e) => ({
 				...e,
-				last_name: "First Name Required.",
+				last_name: "Last Name Required.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -34,7 +34,7 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (form.username === "") {
 			setErrors((e) => ({
 				...e,
-				username: "First Name Required.",
+				username: "Username Required.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -44,7 +44,7 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (form.password === "") {
 			setErrors((e) => ({
 				...e,
-				password: "First Name Required.",
+				password: "Password Required.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -54,7 +54,7 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (form.email === "") {
 			setErrors((e) => ({
 				...e,
-				email: "First Name Required.",
+				email: "Email Required.",
 			}));
 			setIsProcessing(false);
 			return;

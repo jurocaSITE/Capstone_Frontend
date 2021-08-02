@@ -1,6 +1,6 @@
 import "./Account.css";
 import React, { useState } from "react";
-import EditProfile from "components/EditProfile/EditProfile";
+import { EditProfile, General } from "components";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
@@ -70,11 +70,7 @@ function Account() {
 					>
 						{/* <h2>General</h2>
 						<hr /> */}
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-							praesentium incidunt quia aspernatur quasi quidem facilis quo
-							nihil vel voluptatum?
-						</p>
+						<General className="general" />
 					</div>
 
 					<div

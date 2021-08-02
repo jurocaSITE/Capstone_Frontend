@@ -16,6 +16,7 @@ import {
 	Account,
 	EditProfile,
 	Recover,
+	PasswordReset,
 	UserHome,
 	Book,
 	SearchResults,
@@ -92,6 +93,7 @@ function App() {
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
 					<Route path="/recover" element={<Recover />} />
+					<Route path="/password-reset" element={<PasswordReset />} />
 					<Route path="/set-rating/:status/:bookId" element={<AddRating />} />
 					<Route
 						path="/set-rating/:status/:bookId/:ratingId"

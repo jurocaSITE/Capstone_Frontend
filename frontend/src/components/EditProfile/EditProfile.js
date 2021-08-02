@@ -8,13 +8,13 @@ function EditProfile() {
 	const navigate = useNavigate();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
-	const [form, setForm] = useState({
-		first_name: "",
-		last_name: "",
-		profile_picture: "",
-		date_of_birth: "",
-	});
 	const { user } = useAuthContext();
+	const [form, setForm] = useState({
+		first_name: user?.first_name,
+		last_name: user?.last_name,
+		profile_picture: user?.profile_picture,
+		date_of_birth: user?.date_of_birth,
+	});
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "first_name") {
@@ -137,7 +137,6 @@ function EditProfile() {
 						<input
 							type="text"
 							name="first_name"
-							placeholder={user?.first_name}
 							value={form.first_name}
 							onChange={handleOnInputChange}
 						/>
@@ -151,7 +150,6 @@ function EditProfile() {
 						<input
 							type="text"
 							name="last_name"
-							placeholder={user?.last_name}
 							value={form.last_name}
 							onChange={handleOnInputChange}
 						/>

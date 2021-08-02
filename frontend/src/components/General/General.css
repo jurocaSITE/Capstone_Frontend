@@ -1,0 +1,61 @@
+.General {
+	height: 100%;
+	display: grid;
+	/* grid-template-columns: 10% 80% 10%; */
+	grid-auto-columns: 10% auto 10%;
+	grid-template-areas:
+		"mt mt mt"
+		"mtl username mtr"
+		"mml email mmr"
+		"mbl password mbr";
+	/* "mb mb mb"; */
+	grid-auto-rows: minmax(3em, auto);
+}
+
+.General label {
+	color: #696f79;
+}
+
+.General input {
+	height: 52px;
+	padding: 0 15px;
+	font-size: 16px;
+	border: solid 1px var(--light-shade-6-opacity);
+	width: 100%;
+	border-radius: 6px;
+}
+
+.General .username-content {
+	grid-area: username;
+	height: 100%;
+}
+.General h3 {
+	font-weight: bold;
+	border-style: solid;
+	border-left: 0em;
+	border-right: 0em;
+	border-top: 0em;
+	border-color: var(--dark-accent);
+	margin-bottom: 1em;
+}
+.General .email-content {
+	grid-area: email;
+}
+.General .change-password-content {
+	grid-area: password;
+}
+
+.General .btn {
+	background-color: var(--dark-accent);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	height: 40px;
+	width: 100px;
+	color: var(--light-shade);
+	font-size: 1.3em;
+	/* margin-top: 20px; */
+	cursor: pointer;
+	transition: ease 0.25s;
+	margin-bottom: 2em;
+}
