@@ -1,6 +1,6 @@
 import "./Account.css";
 import React, { useState } from "react";
-import { EditProfile, ActionButton } from "components";
+import { EditProfile, ActionButton, General } from "components";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
@@ -68,7 +68,8 @@ function Account() {
               toggleState === 1 ? "content  active-content" : "content"
             }
           >
-            <h2>General</h2>
+            {/* <h2>General</h2> */}
+            <General className="general" />
             <hr />
             <h3>Update Genre Interests</h3>
             <p>Click the link below to modify your preferred genres.</p>

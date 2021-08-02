@@ -85,6 +85,47 @@ class ApiClient {
 		});
 	}
 
+	async changeUserUsername(credentials) {
+		return await this.request({
+			endpoint: `auth/change-username`,
+			method: `PUT`,
+			data: credentials,
+		});
+	}
+
+	async changeUserEmail(credentials) {
+		return await this.request({
+			endpoint: `auth/change-email`,
+			method: `PUT`,
+			data: credentials,
+		});
+	}
+
+	async changeUserPassword(credentials) {
+		return await this.request({
+			endpoint: `auth/change-password`,
+			method: `PUT`,
+			data: credentials,
+		});
+	}
+
+	async recoverAccount(email) {
+		const em = email.email;
+		return await this.request({
+			endpoint: `auth/recover`,
+			method: `POST`,
+			data: { em },
+		});
+	}
+
+	async resetPassword({ token, newPassword }) {
+		return await this.request({
+			endpoint: `auth/password-reset?token=${token}`,
+			method: `POST`,
+			data: newPassword,
+		});
+	}
+
 	/* ----- Book Endpoints ----- */
 
 	async getBooksByKeyword(keyword, offset = 0) {

@@ -14,12 +14,14 @@ import {
 	Navbar,
 	Footer,
 	Home,
+	ProfilePage,
+	EditProfile,
+	Recover,
+	PasswordReset,
 	UserHome,
 	Book,
 	SearchResults,
 	Lists,
-	ProfilePage,
-	EditProfile,
 	ListForm,
 	ListFormCreateNew,
 	DetailedList,
@@ -92,6 +94,8 @@ function App() {
 					<Route path="/account" element={<Account />} />
 					<Route path="/profile" element={<ProfilePage />} />
 					<Route path="/edit-profile" element={<EditProfile />} />
+					<Route path="/recover" element={<Recover />} />
+					<Route path="/password-reset" element={<PasswordReset />} />
 					<Route path="/set-rating/:status/:bookId" element={<AddRating />} />
 					<Route
 						path="/set-rating/:status/:bookId/:ratingId"
@@ -103,7 +107,7 @@ function App() {
 					<Route path="/update-interests" element={<UpdateGenreInterests />} />
 					<Route path="/search" element={<SearchResults />} />
 					{user ? (
-						<Route path="/" element={<UserHome topSellers={topSellers}/>} />
+						<Route path="/" element={<UserHome topSellers={topSellers} />} />
 					) : (
 						<Route path="/" element={<Home topSellers={topSellers} />} />
 					)}

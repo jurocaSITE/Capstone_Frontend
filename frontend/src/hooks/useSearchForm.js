@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 
 export const useSearchForm = () => {
   const [errors, setErrors] = useState({});
@@ -23,17 +22,17 @@ export const useSearchForm = () => {
     setFilteredData(newFilter); // useState
   };
 
-  const handleOnInputChange = (event) => {
-    if (event.target.name === "search") {
-      if (!event.target.value) {
-        setErrors((e) => ({ ...e, name: "This field cannot be empty." }));
-      } else {
-        setErrors((e) => ({ ...e, name: null }));
-      }
-    }
+	const handleOnInputChange = (event) => {
+		if (event.target.name === "search") {
+			if (!event.target.value) {
+				setErrors((e) => ({ ...e, name: "This field cannot be empty." }));
+			} else {
+				setErrors((e) => ({ ...e, name: null }));
+			}
+		}
 
-    setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
-  };
+		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+	};
 
   const resetForm = () => {
     setForm({

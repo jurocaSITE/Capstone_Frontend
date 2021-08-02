@@ -1,16 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
-import { useAuthContext } from "contexts/auth";
 import "./ListSidebar.css";
 
 export default function ListSidebar() {
-	const navigate = useNavigate();
-	const { setUser } = useAuthContext();
 	const [showMenu, setShowMenu] = useState(false);
 
 	const toggleMenu = () => setShowMenu(!showMenu);
-
 
 	return (
 		<div className="UserPortal">

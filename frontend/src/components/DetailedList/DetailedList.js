@@ -1,7 +1,7 @@
 import "./DetailedList.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { BookPreview, Genre } from "components";
+import { Genre } from "components";
 import apiClient from "services/apiClient";
 import moment from "moment";
 import { useParams } from "react-router-dom";
@@ -31,12 +31,10 @@ export default function DetailedList() {
 			const { data, error } = await apiClient.getBooksInList(list_id);
 			if (error) {
 				setErrors(error);
-				console.log("book data is ", data);
 			}
 			if (data?.books_in_list) {
 				setErrors(null);
 				setBookList(data.books_in_list);
-				console.log("data.books_in_list is ", data.books_in_list);
 			}
 		};
 
@@ -48,11 +46,9 @@ export default function DetailedList() {
 			if (data?.list_contents) {
 				setErrors(null);
 				setListContents(data.list_contents);
-				console.log("listContents is ", listContents);
 			}
 			if (data?.list_contents.length > 0) {
 				setIsEmpty(false);
-				console.log("isEmpty is ", isEmpty);
 			}
 		};
 
