@@ -5,11 +5,16 @@
 }
 .SearchBar input {
   height: 2em;
-  width: 25em;
+  min-width: 17em;
 
   background: var(--light-shade-6-opacity);
   border: none;
   border-radius: var(--border-rad);
+}
+@media screen and (min-width: 860px) {
+  .SearchBar input {
+    width: 25em;
+  }
 }
 .SearchBar input[type="search" i] {
   padding-left: 1em;

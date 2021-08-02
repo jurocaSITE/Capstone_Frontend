@@ -1,12 +1,14 @@
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
 
 export default function Register() {
   const navigate = useNavigate();
   const { user, setUser } = useAuthContext();
+  const [passVisibile, setPassVisible] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
@@ -24,6 +26,8 @@ export default function Register() {
       navigate("/");
     }
   }, []);
+
+  const togglePassVisibility = () => setPassVisible(!passVisibile);
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
@@ -154,17 +158,20 @@ export default function Register() {
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
 
-          <div className="input-field">
+          <div className="input-field password">
             <label htmlFor="password">Password*</label>
             <input
-              type="password"
+              type={passVisibile ? "text" : "password"}
               name="password"
               placeholder="Enter a secure password"
               value={form.password}
               onChange={handleOnInputChange}
-			  onKeyDown={keyPressEnter}
+              onKeyDown={keyPressEnter}
               required
             />
+            <span className="pass-eye" onClick={togglePassVisibility}>
+              {passVisibile ? <FaEye /> : <FaEyeSlash />}
+            </span>
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}

@@ -4,7 +4,7 @@
 const renderBookAuthors = (authors) => {
   const len = authors?.length;
   return authors?.map((author, i) => (
-    <>{i === len - 1 ? author : <>{author + ", "}</>}</>
+    <span key={i}>{i === len - 1 ? author : <>{author + ", "}</>}</span>
   ));
 };
 

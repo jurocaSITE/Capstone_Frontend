@@ -49,6 +49,20 @@
     border-radius: 6px;
 }
 
+.Register .input-field.password {
+    position: relative;
+}
+.Register .input-field.password .pass-eye {
+    position: absolute;
+    right: -20px;
+    top: 44px;
+    cursor: pointer;
+}
+.Register .pass-eye svg {
+    fill: var(--dark-shade);
+    font-size: 1.2rem;
+}
+
 .Register .card .error {
     background: #fe5421;
     background: rgba(245, 41, 41, 0.1);

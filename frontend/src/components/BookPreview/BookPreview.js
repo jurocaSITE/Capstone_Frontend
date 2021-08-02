@@ -37,7 +37,7 @@ export default function BookPreview({ book = {} }) {
           <div className="categories">
             {renderBookCategories(book?.categories).map((category) => {
               return (
-                <div className="genre-tag">
+                <div className="genre-tag" key={category}>
                   <Genre text={category} />
                 </div>
               );

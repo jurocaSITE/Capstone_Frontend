@@ -131,7 +131,7 @@ export default function Book() {
               </h2>
               {/* Need to change published date for top Sellers */}
               <h3 className="pub-date">
-                Published {book.publishedDate || test_book.pubDate}
+                {book?.publishedDate && ( <>Published {book.publishedDate}</>)}
               </h3>
             </div>
 
@@ -141,7 +141,7 @@ export default function Book() {
                   <div className="categories">
                     {renderBookCategories(book?.categories).map((category) => {
                       return (
-                        <div className="genre-tag">
+                        <div className="genre-tag" key={category}>
                           <Genre text={category} />
                         </div>
                       );
@@ -159,7 +159,7 @@ export default function Book() {
                 className="book-desc"
                 dangerouslySetInnerHTML={{ __html: book?.description }}
               />
-              <a href="#modal-opened" class="link-1" id="modal-closed">
+              <a href="#modal-opened" className="link-1" id="modal-closed">
                 {/* <ActionButton link={`#`} text={"Add to List"} /> */}
                 {user && book_id ? <button className="btn">Add to list</button> : null}
               </a>

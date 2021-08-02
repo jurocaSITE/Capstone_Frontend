@@ -8,6 +8,8 @@ import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
 import { useSearchForm } from "hooks/useSearchForm";
 
+// TODO: if no user logged in, page only renders Unauthorized message
+
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
 		color: "inherit",

@@ -66,7 +66,8 @@
 	border: none;
 }
 .Account .update-interests-btn {
-	padding: .5em 1em;
+	padding: .25em .75em;
+	margin-top: 1em;
 }
 .content-tabs {
 	grid-column: 3;
@@ -95,21 +96,27 @@
 	justify-content: center;
 	align-items: center;
 }
-
+.Account .delete-account-body {
+	text-align: center;
+}
 .delete-account {
-	background-color: rgb(220, 55, 55);
+	background: rgba(0, 0, 0, .2); 
 	border: none;
 	border-radius: var(--border-rad);
-	box-shadow: var(--default-shadow);
 	/* height: 60px;
 	width: 120px; */
-	color: var(--light-shade);
+	color: var(--dark-shade);
 	font-size: 20px;
-	margin-bottom: 2em;
-	cursor: pointer;
+	margin-top: 1em;
 	transition: ease 0.25s;
 	padding: .5em 2em;
 }
-/* .delete-account-body {
-	margin: 2em 2em 0 2em;
-} */
+.delete-account:hover::after {
+	content: ' 😢'
+}
+.delete-account:hover {
+	background:rgb(220, 55, 55);
+	color: var(--light-shade);
+	box-shadow: var(--default-shadow);
+	transform: scale(1.1);
+}

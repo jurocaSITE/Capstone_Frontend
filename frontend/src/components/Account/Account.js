@@ -101,8 +101,8 @@ function Account() {
           >
             <div className="delete-btn">
               <p className="delete-account-body">
-                Note that this is a permanent acction, are you sure you want to
-                delete your account?
+                Please note that this is a permanent action. All of your data on the website (lists, ratings, reviews)
+                will be lost forever. <br/> Are you sure you want to delete your account?
               </p>
               <Link to="/">
                 <button
