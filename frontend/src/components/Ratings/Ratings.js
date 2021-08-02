@@ -12,10 +12,12 @@ import {
 } from "react-icons/fa";
 import useDetectClickOut from "hooks/useDetectClickOut";
 import { useAuthContext } from "contexts/auth";
+import { Replies } from "components";
 
 export default function Ratings({ book_id }) {
   const { user } = useAuthContext();
   const { show, nodeRef, triggerRef } = useDetectClickOut(false);
+  // const { show, nodeRef, triggerRef } = useDetectClickOut(false);
   const [ratings, setRatings] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -66,13 +68,13 @@ export default function Ratings({ book_id }) {
 
     return (
       <span className="trash-icon" ref={triggerRef}>
-      <FaTrashAlt
-        size={20}
-        onClick={() => {
-          setConfirmDelete(!confirmDelete);
-        }}
-        disabled={isDeleting}
-      />
+        <FaTrashAlt
+          size={20}
+          onClick={() => {
+            setConfirmDelete(!confirmDelete);
+          }}
+          disabled={isDeleting}
+        />
       </span>
     );
   };
@@ -87,9 +89,9 @@ export default function Ratings({ book_id }) {
     if (data?.rating) {
       setErrors(null);
       // return a new array without the deleted rating
-      // TODO: explore more efficient ways to remove an item from an array 
-      const newData = ratings.filter((r) => !(r.id === data.rating.id))
-      setRatings(newData)
+      // TODO: explore more efficient ways to remove an item from an array
+      const newData = ratings.filter((r) => !(r.id === data.rating.id));
+      setRatings(newData);
     }
 
     setIsDeleting(false);
@@ -106,42 +108,50 @@ export default function Ratings({ book_id }) {
 
       <div className="ratings-feed-container">
         {ratings.map((x) => (
-          <div className="rating-review" key={x.id}>
-            <div className="rating-review-user">
-              {userOwnsRating(x) ? (
-                <>
-                  <FaUser size="30" />
-                  <h3>You</h3>
-                </>
-              ) : (
-                <>
-                  <FaRegUser size="30" />
-                  <h3>{x.username}</h3>
-                </>
-              )}
+          <div className="rating-review-replies">
+            <div className="rating-review" key={x.id}>
+              <div className="rating-review-user">
+                {userOwnsRating(x) ? (
+                  <>
+                    <FaUser size="30" />
+                    <h3>You</h3>
+                  </>
+                ) : (
+                  <>
+                    <FaRegUser size="30" />
+                    <h3>{x.username}</h3>
+                  </>
+                )}
+              </div>
+
+              <div className="rating-review-content">
+                <span className="rating-review-content-head">
+                  <h2>{x.reviewTitle}</h2>
+                  <p>
+                    <FaRegStar /> {x.rating}
+                  </p>
+                </span>
+                <p>{x.reviewBody}</p>
+                <span className="meta">
+                  {moment(x.updatedAt).format("lll")}
+                  {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+                  <span className="meta-actions">
+                    {user && userOwnsRating(x) ? (
+                      <>
+                        <Link to={`/set-rating/update/${book_id}/${x.id}`}>
+                          <FaRegEdit size={20} />
+                        </Link>
+                        {renderDelete(x)}
+                      </>
+                    ) : (
+                      <button>Reply</button>
+                    )}
+                  </span>
+                </span>
+              </div>
             </div>
 
-            <div className="rating-review-content">
-              <span className="rating-review-content-head">
-                <h2>{x.reviewTitle}</h2>
-                <p>
-                  <FaRegStar /> {x.rating}
-                </p>
-              </span>
-              <p>{x.reviewBody}</p>
-              <span className="meta">
-                {moment(x.updatedAt).format("lll")}
-                {x.updatedAt !== x.createdAt ? ` (edited)` : null}
-                {userOwnsRating(x) && (
-                  <span className="meta-actions">
-                    <Link to={`/set-rating/update/${book_id}/${x.id}`}>
-                      <FaRegEdit size={20} />
-                    </Link>
-                    {renderDelete(x)}
-                  </span>
-                )}
-              </span>
-            </div>
+            <Replies rating_id={x.id} />
           </div>
         ))}
       </div>

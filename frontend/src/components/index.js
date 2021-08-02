@@ -30,3 +30,4 @@ export { default as AddRating } from "./AddRating/AddRating";
 export { default as UpdateGenreInterests } from "./UpdateGenreInterests/UpdateGenreInterests";
 export { default as About } from "./About/About";
 export { default as BookViewer } from "./BookViewer/BookViewer";
+export { default as Replies } from "./Replies/Replies";

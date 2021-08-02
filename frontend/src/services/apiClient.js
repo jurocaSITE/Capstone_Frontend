@@ -33,6 +33,8 @@ class ApiClient {
 		}
 	}
 
+	/* ----- User Endpoints ----- */
+
 	async fetchUserFromToken() {
 		return await this.request({ endpoint: `auth/me`, method: `GET` });
 	}
@@ -57,6 +59,33 @@ class ApiClient {
 			data: credentials,
 		});
 	}
+
+	async editUserProfile(credentials) {
+		return await this.request({
+			endpoint: `auth/update-personal-information`,
+			method: `PUT`,
+			data: credentials,
+		});
+	}
+
+	async deleteUserProfile() {
+		await this.request({
+			endpoint: `auth/delete-account`,
+			method: `DELETE`,
+		});
+
+		this.logoutUser();
+	}
+
+	async updateUserInterests(interests) {
+		return await this.request({
+			endpoint: `auth/update-genre-interests`,
+			method: `PUT`,
+      		data: interests
+		});
+	}
+
+	/* ----- Book Endpoints ----- */
 
 	async getBooksByKeyword(keyword, offset = 0) {
 		return await this.request({
@@ -87,22 +116,7 @@ class ApiClient {
 		});
 	}
 
-	async editUserProfile(credentials) {
-		return await this.request({
-			endpoint: `auth/update-personal-information`,
-			method: `PUT`,
-			data: credentials,
-		});
-	}
-
-	async deleteUserProfile() {
-		await this.request({
-			endpoint: `auth/delete-account`,
-			method: `DELETE`,
-		});
-
-		this.logoutUser();
-	}
+	/* ----- List Endpoints ----- */
 
 	async getAllListsByUserId() {
 		return await this.request({
@@ -141,16 +155,32 @@ class ApiClient {
 		});
 	}
 
-	async getRatingsForBook(book_id) {
+	async getCurrentlyReadingListByUserId(user) {
 		return await this.request({
-			endpoint: `ratings/book/${book_id}`,
+			endpoint: `lists/get-currently-reading`,
 			method: `GET`,
 		});
 	}
 
-	async getCurrentlyReadingListByUserId(user) {
+	async getListNameById(list_id) {
 		return await this.request({
-			endpoint: `lists/get-currently-reading`,
+			endpoint: `lists/get-list-name/${list_id}`,
+			method: `GET`,
+		});
+	}
+
+	async getListContents(list_id) {
+		return await this.request({
+			endpoint: `lists/${list_id}/books`,
+			method: `GET`,
+		});
+	}
+
+	/* ----- Rating Endpoints ----- */
+
+	async getRatingsForBook(book_id) {
+		return await this.request({
+			endpoint: `ratings/book/${book_id}`,
 			method: `GET`,
 		});
 	}
@@ -177,26 +207,36 @@ class ApiClient {
 			method: `DELETE`,
 		});
 	}
+	
+	/* ----- Reply Endpoints ----- */
 
-	async getListNameById(list_id) {
+	async getRepliesForRating(rating_id) {
 		return await this.request({
-			endpoint: `lists/get-list-name/${list_id}`,
+			endpoint: `reply/rating/${rating_id}`,
 			method: `GET`,
 		});
 	}
 
-	async getListContents(list_id) {
+	async createNewReplyForRating(rating_id, reply) {
 		return await this.request({
-			endpoint: `lists/${list_id}/books`,
-			method: `GET`,
+			endpoint: `reply/rating/${rating_id}`,
+			method: `POST`,
+			data: reply,
 		});
 	}
 
-	async updateUserInterests(interests) {
+	async updateReplyForRating(reply_id, update_body) {
 		return await this.request({
-			endpoint: `auth/update-genre-interests`,
-			method: `PUT`,
-      		data: interests
+			endpoint: `reply/${reply_id}`,
+			method: `PATCH`,
+			data: update_body,
+		});
+	}
+
+	async deleteReplyForRating(reply_id) {
+		return await this.request({
+			endpoint: `reply/${reply_id}`,
+			method: `DELETE`,
 		});
 	}
 }
