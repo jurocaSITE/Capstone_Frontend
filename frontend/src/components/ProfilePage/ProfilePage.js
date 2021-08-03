@@ -65,11 +65,11 @@ function ProfilePage() {
 				</div>
 				<div className="user-information">
 					<h1>{user?.username}</h1>
-					<div className="more-info">
+					{/* <div className="more-info">
 						<p>15 Reading lists</p>
 						<p>144 followers</p>
 						<p>320 following</p>
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className="top-authors">
@@ -98,10 +98,10 @@ function ProfilePage() {
 					<BookPreview />
 				</div>
 			</div>
-			<div className="my-reviews">
+			{/* <div className="my-reviews">
 				<h2>My Reviews</h2>
 				<div className="reviews"></div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
