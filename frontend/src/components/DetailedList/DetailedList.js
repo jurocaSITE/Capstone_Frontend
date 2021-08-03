@@ -1,11 +1,9 @@
 import "./DetailedList.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { BookPreview, Genre } from "components";
+import { DetailedListRow} from "components";
 import apiClient from "services/apiClient";
-import moment from "moment";
 import { useParams } from "react-router-dom";
-import ListSidebar from "components/ListSidebar/ListSidebar";
 
 export default function DetailedList() {
 	const [listContents, setListContents] = useState([]);
@@ -13,8 +11,10 @@ export default function DetailedList() {
 	const [errors, setErrors] = useState(null);
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
-	const [isEmpty, setIsEmpty] = useState(true);
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [isFetching, setIsFetching] = useState(false);
 
+    
 	useEffect(() => {
 		const fetchListName = async () => {
 			const { data, error } = await apiClient.getListNameById(list_id);
@@ -61,6 +61,14 @@ export default function DetailedList() {
 		fetchListContents();
 	}, []); //use effect block runs whenever the dependency changes (the stuff in the array)
 
+    const addToList = async (bookId, listId) => {
+		setIsFetching(true);
+
+		const { data, error } = await apiClient.addBookToList(bookId, listId);
+
+		setIsFetching(false);
+	};
+
 	return (
 		<div className="DetailedList">
 			<div className="header">
@@ -92,13 +100,19 @@ export default function DetailedList() {
 				) : (
 					<div className="book-info">
 						<div className="index">
-							{listContents.map((book, index) => (
+							{/* {listContents.map((book, index) => (
 								<div className="row">
 									<h2>{index + 1}</h2>
 								</div>
+								
+							))} */}
+							{bookList.map((book) => (
+								<div className="row">
+									<DetailedListRow book={book}/>
+								</div>	
 							))}
 						</div>
-						<div className="preview">
+						{/* <div className="preview">
 							{bookList.map((book) => (
 								<div className="row">
 									<img
@@ -117,7 +131,7 @@ export default function DetailedList() {
 							{bookList.map((book) => (
 								<div className="row">
 									<h3>{book.title}</h3>
-									<h3>by <a href={`/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></h3>
+									<h3>by <a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></h3>
 								</div>
 							))}
 						</div>
@@ -166,10 +180,10 @@ export default function DetailedList() {
 						<div className="settings">
 							{bookList.map((book) => (
 								<div className="row">
-									<ListSidebar />
+                                    <ListSidebar />
 								</div>
 							))}
-						</div>
+						</div> */}
 					</div>
 				)}
 			</div>

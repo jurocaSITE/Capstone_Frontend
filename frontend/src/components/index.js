@@ -17,6 +17,7 @@ export { default as ListCardNoChange } from "./ListCardNoChange/ListCardNoChange
 export { default as ListForm } from "./ListForm/ListForm";
 export { default as ListFormCreateNew } from "./ListFormCreateNew/ListFormCreateNew";
 export { default as DetailedList } from "./DetailedList/DetailedList";
+export { default as DetailedListRow } from "./DetailedListRow/DetailedListRow";
 export { default as Genre } from "./Genre/Genre";
 export { default as ListSidebar } from "./ListSidebar/ListSidebar";
 export { default as AuthorPage } from "./AuthorPage/AuthorPage";
