@@ -1,5 +1,5 @@
 .Replies {
-    max-height: 20em;
+    /* max-height: 20em; */
     max-width: 60%;
 
     align-self: flex-end;
@@ -7,9 +7,13 @@
 
 .Replies .reply-container {
     padding: 1em;
+    margin: .5em 0;
 
     border: solid 1px var(--light-shade);
     border-radius: var(--border-rad);
+}
+.Replies .reply-container:first-child {
+    margin-top: 0;
 }
 
 .Replies .reply-meta {
@@ -24,5 +28,11 @@
     margin-left: 2em;
 }
 .Replies .meta-actions button {
-    margin: 0 .5em;
+    margin: 0 .25em;
+    background: none;
+    padding: .2em .5em;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--border-rad);
+    color: var(--light-shade-8-opacity);
 }

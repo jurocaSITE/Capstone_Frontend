@@ -2,13 +2,23 @@ import "./Replies.css";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import apiClient from "services/apiClient";
+import { useReplyForm } from "hooks/useReplyForm";
 import { useAuthContext } from "contexts/auth";
 
-function Replies({ rating_id }) {
+function Replies({ ratingId }) {
   const { user } = useAuthContext();
   const [replies, setReplies] = useState([]);
   const [isFetching, setIsFetching] = useState([]);
   const [errors, setErrors] = useState(null);
+  const {
+    form,
+    isProcessing,
+    setIsProcessing,
+    resetForm,
+    handleOnInputChange,
+    handleOnUpdate,
+    handleOnDelete
+  } = useReplyForm({ ratingId, replyId: 0 });
 
   const userOwnsReply = (reply) => {
     if (user?.id === reply?.userId) {
@@ -23,7 +33,7 @@ function Replies({ rating_id }) {
       setIsFetching(true);
       setErrors(null);
 
-      const { data, error } = await apiClient.getRepliesForRating(rating_id);
+      const { data, error } = await apiClient.getRepliesForRating(ratingId);
       if (error) {
         setErrors((e) => ({ ...e, reply: error }));
       }
@@ -36,7 +46,19 @@ function Replies({ rating_id }) {
     };
 
     fetchReplies();
-  }, [rating_id]);
+  }, [ratingId]);
+
+  const updateOnDelete = async (replyId) => {
+		setIsProcessing(true);
+    // most logic handled by useReplyForm custom hook
+		const deletedItem = await handleOnDelete(replyId)
+		if (deletedItem) {
+      // TODO: explore more efficient ways to remove an item from an array
+      const newData = replies.filter((r) => !(r.id === deletedItem.id));
+      setReplies(newData);
+		}
+		setIsProcessing(false);
+	};
 
   return (
     <div className="Replies">
@@ -52,7 +74,13 @@ function Replies({ rating_id }) {
             {userOwnsReply(x) && (
               <span className="meta-actions">
                 <button className="edit-reply-btn">Edit</button>
-                <button className="delete-reply-btn">Delete</button>
+                <button
+                  className="delete-reply-btn"
+                  onClick={() => updateOnDelete(x.id)}
+                  disabled={isProcessing}
+                >
+                  Delete
+                </button>
               </span>
             )}
           </span>

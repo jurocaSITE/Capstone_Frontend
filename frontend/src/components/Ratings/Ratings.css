@@ -15,10 +15,6 @@
     display: flex;
     align-items: center;
     margin-left: auto;
-    /* cursor: pointer;
-    background: none;
-    border: none;
-    color: inherit; */
     transition: ease .25s;
 }
 .Ratings .ratings-head a:hover {
@@ -47,14 +43,12 @@
     display: flex;
     align-items: center;
     margin: .5em 0;
+    position: relative;
 }
 .Ratings .rating-review-user 
 {  
     flex: 1;
     text-align: center;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
     padding-right: .5em;
     overflow: hidden;
 }
@@ -84,6 +78,15 @@
     margin-top: 1em;
     color: var(--light-accent);
 }
+.Ratings .meta button {
+    background: none;
+    padding: .2em .5em;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--border-rad);
+    color: var(--light-shade-8-opacity);
+}
+
 .Ratings .meta svg {
     cursor: pointer;
     margin: 0 .5em;
@@ -98,17 +101,12 @@
 .Ratings .meta .trash-icon svg:hover {
     color: var(--error-color)
 }
-.Ratings .meta button {
-    cursor: pointer;
-    background: none;
+.Ratings .meta .confirm-delete-btn {
     border: solid 1px var(--error-color);
-    border-radius: var(--border-rad);
     color: var(--error-color);
     transition: ease .25s;
-    padding: .2em .5em;
-    font-family: inherit;
 }
-.Ratings .meta button:hover {
+.Ratings .meta .confirm-delete-btn:hover {
     transform: scale(1.1);
     background: var(--error-color);
     color: var(--light-shade);

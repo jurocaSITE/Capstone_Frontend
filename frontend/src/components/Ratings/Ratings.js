@@ -11,13 +11,13 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import useDetectClickOut from "hooks/useDetectClickOut";
+import { useReplyForm } from "hooks/useReplyForm";
 import { useAuthContext } from "contexts/auth";
-import { Replies } from "components";
+import { Replies, ReplyForm } from "components";
 
 export default function Ratings({ book_id }) {
   const { user } = useAuthContext();
   const { show, nodeRef, triggerRef } = useDetectClickOut(false);
-  // const { show, nodeRef, triggerRef } = useDetectClickOut(false);
   const [ratings, setRatings] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -54,15 +54,14 @@ export default function Ratings({ book_id }) {
       return (
         <button
           ref={nodeRef}
+          className="confirm-delete-btn"
           onClick={() => {
             deleteRating(x.id);
-            // setConfirmDelete(!confirmDelete);
           }}
           disabled={isDeleting}
         >
           Delete?
         </button>
-        // deleteRating(x.id);
       );
     }
 
@@ -135,26 +134,77 @@ export default function Ratings({ book_id }) {
                 <span className="meta">
                   {moment(x.updatedAt).format("lll")}
                   {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+
                   <span className="meta-actions">
-                    {user && userOwnsRating(x) ? (
+                    {userOwnsRating(x) && (
                       <>
                         <Link to={`/set-rating/update/${book_id}/${x.id}`}>
                           <FaRegEdit size={20} />
                         </Link>
                         {renderDelete(x)}
                       </>
-                    ) : (
-                      <button>Reply</button>
+                    )}
+                    {user && !userOwnsRating(x) && (
+                      <ReplyForm ratingId={x.id} />
                     )}
                   </span>
                 </span>
               </div>
             </div>
 
-            <Replies rating_id={x.id} />
+            <Replies ratingId={x.id} />
           </div>
         ))}
       </div>
     </div>
   );
 }
+
+// function ReplyForm({ ratingId }) {
+//   const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
+//   const {
+//     form,
+//     errors,
+//     isProcessing,
+//     resetForm,
+//     handleOnInputChange,
+//     handleOnSubmit,
+//     handleOnUpdate,
+//   } = useReplyForm({ ratingId, replyId: 0 });
+
+//   return (
+//     <div className="ReplyForm">
+//       <button ref={triggerRef}>Reply</button>
+
+//       {show && (
+//         <div ref={nodeRef} className="reply-card">
+//           <form>
+//             <label htmlFor="replyBody">Reply Body</label>
+//             {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
+//             <textarea
+//               name="replyBody"
+//               placeholder="Add a Public Reply..."
+//               rows="4"
+//               cols="30"
+//               value={form.replyBody}
+//               onChange={handleOnInputChange}
+//               required
+//             />
+
+//             <span className="form-actions">
+//               <button className="submit-reply-btn" onClick={handleOnSubmit}>
+//                 Submit
+//               </button>
+//               <button
+//                 className="cancel-reply-btn"
+//                 onClick={() => {resetForm(); setShow(false)}}
+//               >
+//                 Cancel
+//               </button>
+//             </span>
+//           </form>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }

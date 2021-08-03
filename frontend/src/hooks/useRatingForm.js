@@ -8,6 +8,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 		rating: 0,
 		reviewTitle: "",
 		reviewBody: "",
+		replyBody: ""
 	});
 	let success = 0;
 
