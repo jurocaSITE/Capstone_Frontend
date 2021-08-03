@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Ratings } from "components";
-
+import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import apiClient from "services/apiClient";
 import "./Book.css";
@@ -29,6 +29,8 @@ export default function Book() {
 	const [lists, setLists] = useState([]);
 	const [error, setError] = useState(null);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		const fetchListsByUserId = async () => {
 			setIsFetching(true);
@@ -45,12 +47,16 @@ export default function Book() {
 		fetchListsByUserId();
 	}, []);
 
-	const addToList = async (bookId, listId) => {
+	const addToList = async (bookId, listId, listName) => {
 		setIsFetching(true);
 
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
 
 		setIsFetching(false);
+
+		if (listName === "Finished") {
+			navigate(`/set-rating/add/${bookId}`);
+		}
 	};
 
 	useEffect(() => {
@@ -161,7 +167,7 @@ export default function Book() {
 								className="btn-select-list"
 								key={list.id}
 								onClick={() => {
-									addToList(book.id, list.id);
+									addToList(book.id, list.id, list.list_name);
 								}}
 							>
 								{list.list_name}
