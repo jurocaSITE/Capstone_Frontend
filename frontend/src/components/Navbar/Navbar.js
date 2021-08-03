@@ -1,15 +1,22 @@
 import React from "react";
-import { useState } from "react";
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link, useNavigate } from "react-router-dom";
 import { UserPortal, SearchBar } from "components";
 import { useAuthContext } from "contexts/auth";
 import { FaBars } from "react-icons/fa";
 import useDetectClickOut from "hooks/useDetectClickOut";
+import apiClient from "services/apiClient";
 import "./Navbar.css";
 
 export default function Navbar({ appRef }) {
-  const { user } = useAuthContext();
+  const navigate = useNavigate()
+  const { user, setUser } = useAuthContext();
   const { show, nodeRef, triggerRef } = useDetectClickOut(false);
+
+  const handleOnSignOut = async () => {
+    await apiClient.logoutUser();
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <nav className="Navbar">
@@ -37,16 +44,25 @@ export default function Navbar({ appRef }) {
                     Home
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/community" activeClassName="active" end>
                     Community
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/my-lists" activeClassName="active" end>
                     My Lists
                   </Link>
                 </li>
+                <Link to="/profile">
+                  <li>Your Profile</li>
+                </Link>
+                <Link to="/account">
+                  <li>Account</li>
+                </Link>
+                <Link to="/">
+                  <li className="sign-out" onClick={handleOnSignOut}>Sign Out</li>
+                </Link>
               </ul>
             )}
           </div>
@@ -76,11 +92,11 @@ export default function Navbar({ appRef }) {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/community" activeClassName="active" end>
                   Community
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/my-lists" activeClassName="active" end>
                   My Lists

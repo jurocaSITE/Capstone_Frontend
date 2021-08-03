@@ -18,24 +18,8 @@
 	color: var(--light-shade);
 }
 
-.UserHome .home-feed-books {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	padding-top: 2em;
-}
-
-
 .UserHome .top-feed{
 	padding: 1em;
 	color: var(--light-shade);
-}
-
-
-.UserHome .top-feed .top-sellers-feed-books {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	padding-top: 2em;
 }
 

@@ -50,7 +50,6 @@ export default function UserHome({ topSellers = [] }) {
         {/* CSS styling for home-feed in Home.css to avoid repetition */}
         <div className="home-feed-books">
           {topSellers.map((book) => (
-            // <BookPreview book={book} key={book.title} />
             <div className="preview">
               <Link to={`/books/top/sellers/${book.title}`}>
                 <img

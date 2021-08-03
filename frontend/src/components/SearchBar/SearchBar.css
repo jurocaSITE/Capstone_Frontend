@@ -5,20 +5,20 @@
 }
 .SearchBar input {
   height: 2em;
-  min-width: 17em;
+  min-width: 19em;
 
   background: var(--light-shade-6-opacity);
   border: none;
   border-radius: var(--border-rad);
 }
-@media screen and (min-width: 860px) {
+@media screen and (min-width: 850px) {
   .SearchBar input {
     width: 25em;
   }
 }
 .SearchBar input[type="search" i] {
   padding-left: 1em;
-  padding-right: .5em;
+  padding-right: 0.5em;
   font-family: inherit;
 }
 /* .SearchBar input[type="search"]::-webkit-search-cancel-button {

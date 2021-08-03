@@ -56,8 +56,10 @@
 .Navbar .pages li {
   transition: ease .25s;
 }
-.Navbar .pages li:hover {
-  transform: scale(1.2);
+@media screen and (max-width: 768px) {
+  .Navbar .pages li:hover {
+    transform: scale(1.2);
+  }
 }
 
 @media screen and (min-width: 768px) {

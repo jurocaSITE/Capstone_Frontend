@@ -16,9 +16,9 @@ export default function Home({ topSellers = [] }) {
         <div className="home-hero-text">
           <h1>Welcome!</h1>
           <p>
-            This is a description about the website: what you can do, some core
-            features, and much more. Please sign up to explore everything the
-            site has to offer.
+            Thank you for visiting teca! This is your hub for all things literature:
+            search for books, see ratings, create lists of books and so much more.
+            Please sign up to explore everything the site has to offer.
           </p>
           <ActionButton link={"/signup"} text={"Sign up now!"} />
         </div>
@@ -30,7 +30,6 @@ export default function Home({ topSellers = [] }) {
         
         <div className="home-feed-books">
           {topSellers.map((book) => (
-            // <BookPreview book={book} key={book.title} />
             <div className="preview">
               <Link to={`/books/top/sellers/${book.title}`}>
                 <img

@@ -99,14 +99,14 @@ function Lists() {
 							onChange={handleOnFilter}
 						/>
 					</div>
-					<button type="submit" className="search-icon">
+					{/* <button type="submit" className="search-icon">
 						<BiSearch className="icon" />
-					</button>
+					</button> */}
 				</div>
 
 				<div className="create-new-list">
 					<Link to={`/list/create-new`}>
-						<h2>Create New List +</h2>
+						<h2 alt="Create New List Button">+</h2>
 					</Link>
 				</div>
 			</div>
@@ -120,9 +120,6 @@ function Lists() {
 					))
 				)
 				}
-				{/* {otherLists.map((list) => (
-					<ListCard list={list} className="list-card" />
-				))} */}
 			</div>
 		</div>
 	);
