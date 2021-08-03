@@ -26,7 +26,6 @@ export const usePasswordResetForm = (token) => {
 		}
 
 		// we want to send 2 things, the password and the token to hit the endpoint
-		console.log("usePasswordResetForm form.password: ", form.password);
 		const { data, error } = await apiClient.resetPassword({
 			token,
 			newPassword: form.password,
@@ -34,7 +33,7 @@ export const usePasswordResetForm = (token) => {
 		if (error) {
 			setErrors((e) => ({ ...e, form: error }));
 		}
-		if (data?.message) setMessage(data.nessage);
+		if (data?.message) setMessage(data.message);
 
 		setIsProcessing(false);
 	};

@@ -4,12 +4,13 @@ import { EditProfile, ActionButton, General } from "components";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 function Account() {
-  const navigate = useNavigate();
-  const { setUser } = useAuthContext();
-  const [errors, setErrors] = useState({});
-  const [toggleState, setToggleState] = useState(1);
+	const navigate = useNavigate();
+	const { user, setUser } = useAuthContext();
+	const [errors, setErrors] = useState({});
+	const [toggleState, setToggleState] = useState(1);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -28,13 +29,16 @@ function Account() {
     handleOnSignOut();
   };
 
-  return (
-    <div className="Account">
-      <section className="header">
-        <h1>Account</h1>
-        <p>Update your profile and set your account preferences</p>
-      </section>
-      {/*<section className="card-content">
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
+	return (
+		<div className="Account">
+			<section className="header">
+				<h1>Account</h1>
+				<p>Update your profile and set your account preferences</p>
+			</section>
+			{/*<section className="card-content">
 				<div className="card">
 					<h1>hola</h1>
 					<h1>hola</h1>

@@ -14,12 +14,12 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (form.first_name === "") {
 			setErrors((e) => ({
 				...e,
-				first_name: "First Name Required.",
+				first_name_error: "First Name Required.",
 			}));
 			setIsProcessing(false);
 			return;
 		} else {
-			setErrors((e) => ({ ...e, first_name: null }));
+			setErrors((e) => ({ ...e, first_name_error: null }));
 		}
 		if (form.last_name === "") {
 			setErrors((e) => ({
@@ -54,12 +54,12 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (form.email === "") {
 			setErrors((e) => ({
 				...e,
-				email: "Email Required.",
+				email_error: "Email Required.",
 			}));
 			setIsProcessing(false);
 			return;
 		} else {
-			setErrors((e) => ({ ...e, email: null }));
+			setErrors((e) => ({ ...e, email_error: null }));
 		}
 
 		const { data, error } = await apiClient.registerUser({

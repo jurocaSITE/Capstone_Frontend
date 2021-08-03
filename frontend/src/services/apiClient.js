@@ -122,7 +122,7 @@ class ApiClient {
 		return await this.request({
 			endpoint: `auth/password-reset?token=${token}`,
 			method: `POST`,
-			data: newPassword,
+			data: { newPassword },
 		});
 	}
 

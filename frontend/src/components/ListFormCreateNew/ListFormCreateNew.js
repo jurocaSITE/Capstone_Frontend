@@ -2,9 +2,12 @@ import "./ListFormCreateNew.css";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
+import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 function ListFormCreateNew() {
 	const navigate = useNavigate();
+	const { user, setUser } = useAuthContext();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
 	const [form, setForm] = useState({
@@ -14,25 +17,60 @@ function ListFormCreateNew() {
 	const { bookId } = useParams(); // searches for a book id patam if not sets to null
 	const [isFetching, setIsFetching] = useState(false);
 
+	// throw error if the user tries to name a list with a default name
+	const defaultListNames = [
+		"Want To Read",
+		"Currently Reading",
+		"Did Not Finish",
+		"Finished",
+	];
+
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					list_name_error: "Please enter a new list name or cancel.",
+					list_name_error: " Enter a new list name or cancel.",
+				}));
+				// throw error if the user tries to name a list with a default name
+			} else if (event.target.value.toLocaleLowerCase() === "finished") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (
+				event.target.value.toLocaleLowerCase() === "currently reading"
+			) {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (event.target.value.toLocaleLowerCase() === "want to read") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (event.target.value.toLocaleLowerCase() === "did not finish") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
 				}));
 			} else {
-				setErrors((e) => ({ ...e, dateError: null }));
+				setErrors((e) => ({ ...e, list_name_error: null }));
 			}
 		}
 		if (event.target.name === "image") {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					image_error: "Please enter an image URL or cancel.",
+					image_error: "Enter an image URL or cancel.",
 				}));
 			} else {
-				setErrors((e) => ({ ...e, dateError: null }));
+				setErrors((e) => ({ ...e, image_error: null }));
 			}
 		}
 
@@ -81,12 +119,15 @@ function ListFormCreateNew() {
 		}
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
-
+		else {
+			navigate("/my-lists");
+		}
 		setIsProcessing(false);
-
-		navigate("/my-lists");
 	};
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="ListFormCreateNew">
 			<div className="card">

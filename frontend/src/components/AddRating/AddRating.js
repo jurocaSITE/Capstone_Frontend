@@ -5,9 +5,12 @@ import { FaRegStar } from "react-icons/fa";
 // import apiClient from "services/apiClient";
 import { useRatingForm } from "hooks/useRatingForm";
 import { ActionButton } from "components";
+import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 export default function AddRating() {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
   const { status, bookId, ratingId } = useParams();
   const {
     form,
@@ -20,6 +23,9 @@ export default function AddRating() {
 
   const userOwnsRating = status === "update";
 
+  if (!user?.email) {
+    return <NotAllowed />;
+  }
   return (
     <div className="AddRating">
       <h1>{ratingId ? `Update Review` : `Add Review`}</h1>

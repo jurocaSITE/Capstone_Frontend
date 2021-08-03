@@ -2,8 +2,11 @@ import "./ListForm.css";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
+import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 function ListForm() {
+  const { user, setUser } = useAuthContext();
   const { list_id } = useParams();
   const { listName } = useParams();
   const navigate = useNavigate();
@@ -81,6 +84,10 @@ function ListForm() {
     navigate("/my-lists");
   };
 
+  if (!user?.email) {
+    return <NotAllowed />;
+  }
+
   return (
     <div className="ListForm">
       <div className="card">
@@ -109,31 +116,14 @@ function ListForm() {
               <span className="error">{errors.image_error}</span>
             )}
             <label htmlFor="image">New Cover</label>
-            {/* <input
-              type="file"
-              name="image"
-			  id="image"
-              accept="image/*"
-              value={form.image}
-              onChange={handleOnInputChange}
-            /> */}
             <input
               type="text"
-              // type="file"
               name="image"
               placeholder="Enter a image URL"
               value={form.image}
               onChange={handleOnInputChange}
             />
           </div>
-
-          {/* <div>
-            <Link to="/my-lists">
-              <button className="btn delete-account" onClick={handleOnDelete}>
-                Delete List
-              </button>
-            </Link>
-          </div> */}
 
           <div className="footer">
             <span className="main-action-btns">

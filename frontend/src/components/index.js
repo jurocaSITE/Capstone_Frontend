@@ -35,3 +35,5 @@ export { default as BookViewer } from "./BookViewer/BookViewer";
 export { default as Replies } from "./Replies/Replies";
 export { default as General } from "./General/General";
 export { default as ReplyForm } from "./ReplyForm/ReplyForm";
+export { default as NotFound } from "./NotFound/NotFound";
+export { default as NotAllowed } from "./NotAllowed/NotAllowed";

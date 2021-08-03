@@ -5,14 +5,14 @@
 	grid-auto-columns: 10% auto 10%;
 	grid-template-areas:
 		/* "mt mt mt" */
-		"mtl username mtr"
-		"mml email mmr"
+		"mtl email mtr"
+		"mml username mmr"
 		"mbl password mbr";
 	/* "mb mb mb"; */
 	grid-auto-rows: minmax(3em, auto);
 }
 
-.General label {
+.General h4 {
 	color: #696f79;
 }
 
@@ -60,4 +60,9 @@
 	transition: ease 0.25s;
 	margin-bottom: 2em;
 	margin-top: 1em;
+}
+
+.General .cancel {
+	background-color: rgb(220, 55, 55);
+	margin-left: 10px;
 }

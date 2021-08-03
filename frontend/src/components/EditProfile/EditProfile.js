@@ -3,25 +3,38 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
+import moment from "moment";
 
 function EditProfile() {
 	const navigate = useNavigate();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
-	const { user } = useAuthContext();
+	const { user, setUser } = useAuthContext();
 	const [form, setForm] = useState({
 		first_name: user?.first_name,
 		last_name: user?.last_name,
-		profile_picture: user?.profile_picture,
-		date_of_birth: user?.date_of_birth,
+		profile_picture: user?.profile_picture || "",
+		date_of_birth: "",
 	});
+	//TODO: DELETE THESE CONSOLE LOGS
+	// console.log(user?.date_of_birth);
+	// console.log(moment(user?.date_of_birth).format("YYYY/MM/DD"));
+	const birthDate = moment(user?.date_of_birth).format("MM/DD/YYYY");
+
+	const fetchUser = async () => {
+		const { data, error } = await apiClient.fetchUserFromToken();
+		if (data) setUser(data.user);
+		if (error) setErrors(error);
+	};
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "first_name") {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					first_name_error: "Please enter a new first name or cancel.",
+					first_name_error:
+						"Please enter a new first name or go back to profile.",
 				}));
 			} else {
 				setErrors((e) => ({ ...e, first_name_error: null }));
@@ -31,7 +44,8 @@ function EditProfile() {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					last_name_error: "Please enter a new last name or cancel.",
+					last_name_error:
+						"Please enter a new last name or go back to profile.",
 				}));
 			} else {
 				setErrors((e) => ({ ...e, last_name_error: null }));
@@ -41,7 +55,8 @@ function EditProfile() {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					profile_picture_error: "Please enter a new image URL or cancel.",
+					profile_picture_error:
+						"Please enter a new image URL or go back to profile.",
 				}));
 			} else {
 				setErrors((e) => ({ ...e, profile_picture_error: null }));
@@ -51,7 +66,8 @@ function EditProfile() {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					date_of_birth_error: "Please enter a new date of birth or cancel.",
+					date_of_birth_error:
+						"Please enter a new date of birth or go back to profile.",
 				}));
 			} else {
 				setErrors((e) => ({ ...e, date_of_birth_error: null }));
@@ -68,7 +84,8 @@ function EditProfile() {
 		if (form.first_name === "") {
 			setErrors((e) => ({
 				...e,
-				first_name_error: "Please enter a new first name or cancel.",
+				first_name_error:
+					"Please enter a new first name or go back to profile.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -78,7 +95,7 @@ function EditProfile() {
 		if (form.last_name === "") {
 			setErrors((e) => ({
 				...e,
-				last_name_error: "Please enter a new last name or cancel.",
+				last_name_error: "Please enter a new last name or go back to profile.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -88,7 +105,8 @@ function EditProfile() {
 		if (form.profile_picture === "") {
 			setErrors((e) => ({
 				...e,
-				profile_picture_error: "Please enter a new image URL or cancel.",
+				profile_picture_error:
+					"Please enter a new image URL or go back to profile.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -98,7 +116,8 @@ function EditProfile() {
 		if (form.date_of_birth === "") {
 			setErrors((e) => ({
 				...e,
-				date_of_birth_error: "Please enter a new date of birth or cancel.",
+				date_of_birth_error:
+					"Please enter a new date of birth or go back to profile.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -114,12 +133,17 @@ function EditProfile() {
 		});
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
+		else {
+			fetchUser();
+			navigate("/profile");
+		}
 
 		setIsProcessing(false);
-
-		navigate("/profile");
 	};
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="EditProfile">
 			<div className="card">
@@ -174,7 +198,12 @@ function EditProfile() {
 						{errors.date_of_birth_error && (
 							<span className="error">{errors.date_of_birth_error}</span>
 						)}
-						<label htmlFor="date_of_birth">Date of Birth</label>
+						<label htmlFor="date_of_birth">
+							Date of Birth:{" "}
+							{user?.date_of_birth
+								? birthDate
+								: "You haven't added your birthday yet!"}
+						</label>
 						<input
 							type="date"
 							name="date_of_birth"

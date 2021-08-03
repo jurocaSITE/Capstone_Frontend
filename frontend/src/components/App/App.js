@@ -8,6 +8,7 @@ import apiClient from "services/apiClient";
 import {
 	About,
 	Account,
+	NotFound,
 	AddRating,
 	Register,
 	Login,
@@ -81,6 +82,7 @@ function App() {
 			<BrowserRouter>
 				<Navbar />
 				<Routes>
+					<Route path="*" element={<NotFound user={user} error={errors} />} />
 					<Route path="/books/id/:book_id" element={<Book />} />
 					<Route path="/books/top/sellers/:title" element={<Book />} />
 					<Route path="/my-lists" element={<Lists />} />

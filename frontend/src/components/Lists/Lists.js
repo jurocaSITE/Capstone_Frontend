@@ -1,6 +1,6 @@
 import "./Lists.css";
 import React, { useEffect, useState } from "react";
-import { ListCard, ListCardNoChange } from "components";
+import { ListCard, ListCardNoChange, NotAllowed } from "components";
 import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
 import { BiSearch } from "react-icons/bi";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useSearchForm } from "hooks/useSearchForm";
 
 // TODO: if no user logged in, page only renders Unauthorized message
+import { useAuthContext } from "contexts/auth";
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 function Lists() {
 	const classes = useStyles();
 	const {filteredData, handleFilter} = useSearchForm()
+	const { user } = useAuthContext();
 	const [lists, setLists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 	const [error, setError] = useState(null);
@@ -74,6 +76,9 @@ function Lists() {
 		handleFilter(e, otherLists)
 	}
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="Lists">
 			<div className="top">
