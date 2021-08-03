@@ -25,9 +25,8 @@ export default function Book() {
 	const [book, setBook] = useState({});
 	const [isFetching, setIsFetching] = useState(false);
 	const [errors, setErrors] = useState(null);
-
+	const [babyError, setBabyError] = useState({});
 	const [lists, setLists] = useState([]);
-  const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const fetchListsByUserId = async () => {
@@ -36,7 +35,7 @@ export default function Book() {
 				const allLists = await apiClient.getAllListsByUserId();
 				setLists(allLists.data.all_lists);
 			} catch (error) {
-				setError(error);
+				setErrors(error);
 			}
 
 			setIsFetching(false);
@@ -50,6 +49,10 @@ export default function Book() {
 
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
 
+		if (error) {
+			setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
+			console.log("error is", error)
+		}
 		setIsFetching(false);
 	};
 
@@ -65,7 +68,7 @@ export default function Book() {
 			}
 			if (data?.book) {
 				setErrors(null);
-        setBook(data.book);
+        		setBook(data.book);
 			}
 
 			setIsFetching(false);
@@ -107,8 +110,7 @@ export default function Book() {
 					<p className="error">{String(errors)}</p>
 				</>
 			);
-    }
-    console.log(book?.categories)
+			}
 
     const renderGenres = (categoryList) => {
       const unique_categories = [];
@@ -155,7 +157,7 @@ export default function Book() {
 							<h1>{book.title}</h1>
 							<h2 className="book-author">
 								by{" "}
-								{book.author || book?.authors?.map((author) => author + `, `)}
+								<u><a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></u>
 							</h2>
 							{/* Need to change published date for top Sellers */}
 							<h3 className="pub-date">
@@ -196,11 +198,19 @@ export default function Book() {
 								key={list.id}
 								onClick={() => {
 									addToList(book.id, list.id);
+									// if(babyError.modal !== "Cannot add duplicate book."){
+									// 	addToList(book.id, list.id);
+									// } else {
+									// 	console.log("Hello")
+									// }
 								}}
-							>
+							>	
+
 								{list.list_name}
 							</button>
+							
 						))}
+						
 						<Link to={`/list/create-new/${book.id}`}>
 							<button className="btn-select-list">Create New List +</button>
 						</Link>
