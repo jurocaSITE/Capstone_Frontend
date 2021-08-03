@@ -24,6 +24,7 @@ export default function Book() {
   const { title } = useParams(); // searches url for title param if topSeller else null
   const { book_id } = useParams(); // searches url for book_id param if book else null
   const { user } = useAuthContext();
+  const [babyError, setBabyError] = useState({});
 
   const [book, setBook] = useState({});
   const [isFetchingBook, setIsFetchingBook] = useState(false);
@@ -53,6 +54,8 @@ export default function Book() {
     const { data, error } = await apiClient.addBookToList(bookId, listId);
     if (error) {
       setErrors(error);
+      setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
+			console.log("error is", error)
     }
     setIsFetchingLists(false);
     if (listName === "Finished") {
@@ -132,6 +135,7 @@ export default function Book() {
               <h1>{book.title}</h1>
               <h2 className="book-author">
                 by {book.author || renderBookAuthors(book?.authors)}
+                {/* <u><a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></u> */}
               </h2>
               {/* Need to change published date for top Sellers */}
               <h3 className="pub-date">
@@ -179,6 +183,11 @@ export default function Book() {
                 key={list.id}
                 onClick={() => {
                   addToList(book.id, list.id, list.list_name);
+                  // if(babyError.modal !== "Cannot add duplicate book."){
+									// 	addToList(book.id, list.id);
+									// } else {
+									// 	console.log("Hello")
+									// }
                 }}
               >
                 {list.list_name}

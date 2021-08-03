@@ -1,0 +1,41 @@
+.DetailedListRow {
+	color: var(--light-shade);
+    min-width: 89.5vw;
+
+}
+
+.DetailedListRow .information {
+	display: grid;
+	grid-template-columns: [one] .5fr [two] 2.5fr [three] 2fr [four] 3fr [five] 1fr [six] .2fr;
+    color: white;
+    padding: 1em;
+    border-radius: var(--border-rad);
+}
+
+.DetailedListRow .information .row-item{
+	display: grid;
+    align-self: center;
+    padding: 0em 1.5em;
+}
+
+.DetailedListRow .information .row-item .tab{
+	margin-left: 45px;
+}
+
+.DetailedListRow .information .row-item .options {
+    position: absolute;
+    height: 80px;
+    width: 40px;
+	padding: 1em 2em;
+	background-color: var(--light-shade);
+	border-radius: var(--border-rad);
+}
+
+.DetailedListRow .information .row-item .options .btn{
+    position: absolute;
+    font-size: 95%;
+    top: 0;
+    left: 14px;
+    width: 5em;
+    height: 2em;
+}

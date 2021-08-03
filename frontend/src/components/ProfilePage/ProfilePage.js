@@ -58,7 +58,7 @@ function ProfilePage() {
 			<div className="user-information-and-image">
 				<div className="user-image">
 					<img
-						className="imgage"
+						className="image"
 						alt="user profile"
 						src={user?.profile_picture || defaultUserPicture}
 					/>

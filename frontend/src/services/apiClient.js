@@ -194,6 +194,13 @@ class ApiClient {
 			endpoint: `lists/${listId}/add-book/${bookId}`,
 			method: `POST`,
 		});
+    }
+    
+    async deleteBookById(list_id, book_id) {
+		return await this.request({
+			endpoint: `lists/${list_id}/delete-book/${book_id}`,
+			method: `DELETE`,
+		});
 	}
 
 	async getCurrentlyReadingListByUserId(user) {

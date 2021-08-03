@@ -1,0 +1,53 @@
+.AuthorPage {
+	color: var(--light-shade);
+	min-height: 100vh;
+}
+
+.AuthorPage .container {
+    position: relative;
+ }
+
+ .AuthorPage .container img {
+    min-width: 100vh;
+    opacity: 0.6;
+ }
+
+ .AuthorPage .container .author-header-name {
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+}
+
+.AuthorPage .container h1 {
+    font-size: 600%;
+}
+
+.AuthorPage .container .monthy-readers {
+    position: absolute;
+    bottom: 12px;
+    left: 35px;
+}
+
+.AuthorPage .information .books-by-and-about-author {
+	padding: 1em;
+	color: var(--light-shade);
+}
+.AuthorPage .information .books-by-and-about-author h2 {
+	font-weight: 500;
+}
+.AuthorPage .information .books-by-and-about-author .books {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+    padding-top: 2em;
+    flex-wrap: wrap;
+}
+
+.AuthorPage .information .books-by-and-about-author .empty-message {
+    border: 1px solid rgb(223, 223, 222);
+    border-radius: var(--border-rad);
+    padding: 1em;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+}

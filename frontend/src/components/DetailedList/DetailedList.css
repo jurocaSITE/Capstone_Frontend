@@ -1,5 +1,5 @@
 .DetailedList {
-	color: white;
+	color: var(--light-shade);
 	min-height: 100vh;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .DetailedList .list-contents .column-names .title {
-	margin-left: 5.5em;
+	margin-left: 2em;
 }
 
 .DetailedList .list-contents .column-names .date-added {
@@ -93,6 +93,11 @@
 .DetailedList .list-contents .book-info .title-and-author .row {
 	align-self: center;
 	justify-self: flex-start;
+}
+
+/* mouse over link */
+a:hover {
+	color: var(--dark-accent);
 }
 
 .DetailedList .list-contents .book-info .dates {

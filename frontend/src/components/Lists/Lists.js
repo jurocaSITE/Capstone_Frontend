@@ -37,6 +37,7 @@ function Lists() {
 	const [error, setError] = useState(null);
 	let defaultLists = [];
 	let otherLists = [];
+	// let copyLists = []
 
 	useEffect(() => {
 		const fetchListsByUserId = async () => {
@@ -55,6 +56,7 @@ function Lists() {
 	}, []);
 
 	const settingLists = () => {
+		
 		for (let i = 0; i < lists.length; i++) {
 			if (lists[i].list_name === "Want To Read") {
 				defaultLists.push(lists[i]);
@@ -66,6 +68,7 @@ function Lists() {
 				defaultLists.push(lists[i]);
 			} else {
 				otherLists.push(lists[i]);
+				// copyLists.push(lists[i]);
 			}
 		}
 	};
@@ -79,6 +82,15 @@ function Lists() {
 	if (!user?.email) {
 		return <NotAllowed />;
 	}
+	// const alphabeticallySortedLists = copyLists.sort(function(a, b){
+	// 				var nameA=a.list_name.toLowerCase(), nameB=b.list_name.toLowerCase();
+	// 				if (nameA < nameB) //sort string ascending
+	// 				 return -1;
+	// 				if (nameA > nameB)
+	// 				 return 1;
+	// 				return 0; //default return value (no sorting)
+	// 			   });
+
 	return (
 		<div className="Lists">
 			<div className="top">
@@ -125,6 +137,9 @@ function Lists() {
 					))
 				)
 				}
+				{/* {alphabeticallySortedLists.map((list) => (
+					<ListCard list={list} className="list-card" />
+				))} */}
 			</div>
 		</div>
 	);
