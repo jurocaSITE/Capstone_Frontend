@@ -3,18 +3,29 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
+import moment from "moment";
 
 function EditProfile() {
 	const navigate = useNavigate();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
-	const { user } = useAuthContext();
+	const { user, setUser } = useAuthContext();
 	const [form, setForm] = useState({
 		first_name: user?.first_name,
 		last_name: user?.last_name,
 		profile_picture: user?.profile_picture,
-		date_of_birth: user?.date_of_birth,
+		date_of_birth: "",
 	});
+	//TODO: DELETE THESE CONSOLE LOGS
+	// console.log(user?.date_of_birth);
+	// console.log(moment(user?.date_of_birth).format("YYYY/MM/DD"));
+	// {moment(user?.date_of_birth).format("MM/DD/YYYY")}
+
+	const fetchUser = async () => {
+		const { data, error } = await apiClient.fetchUserFromToken();
+		if (data) setUser(data.user);
+		if (error) setErrors(error);
+	};
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "first_name") {
@@ -114,6 +125,10 @@ function EditProfile() {
 		});
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
+		else {
+			fetchUser();
+			navigate("/profile");
+		}
 
 		setIsProcessing(false);
 

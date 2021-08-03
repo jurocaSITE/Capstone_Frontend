@@ -2,21 +2,26 @@ import "./General.css";
 import React, { useState } from "react";
 import { useAuthContext } from "contexts/auth";
 import apiClient from "services/apiClient";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function General() {
 	const navigate = useNavigate();
+	const [value, setValue] = useState();
 	const { user, setUser } = useAuthContext();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
 	const [form, setForm] = useState({
 		username: user?.username,
-		email: user?.email,
 		new_password: "",
 		current_password_username: "",
-		current_password_email: "",
 		current_password_password: "",
 	});
+
+	const fetchUser = async () => {
+		const { data, error } = await apiClient.fetchUserFromToken();
+		if (data) setUser(data.user);
+		if (error) setErrors(error);
+	};
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "username") {
@@ -27,22 +32,6 @@ function General() {
 				}));
 			} else {
 				setErrors((e) => ({ ...e, username_error: null }));
-			}
-		}
-		if (event.target.name === "email") {
-			if (event.target.value.indexOf("@") === -1) {
-				setErrors((e) => ({
-					...e,
-					email_error: "Please enter a valid email.",
-				}));
-			}
-			if (event.target.value === "") {
-				setErrors((e) => ({
-					...e,
-					email_error: "Please enter a new email.",
-				}));
-			} else {
-				setErrors((e) => ({ ...e, email_error: null }));
 			}
 		}
 		if (event.target.name === "new_password") {
@@ -64,16 +53,6 @@ function General() {
 				}));
 			} else {
 				setErrors((e) => ({ ...e, current_password_username_error: null }));
-			}
-		}
-		if (event.target.name === "current_password_email") {
-			if (event.target.value === "") {
-				setErrors((e) => ({
-					...e,
-					current_password_email_error: "Please enter your current password.",
-				}));
-			} else {
-				setErrors((e) => ({ ...e, current_password_email_error: null }));
 			}
 		}
 		if (event.target.name === "current_password_password") {
@@ -122,46 +101,10 @@ function General() {
 		});
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
-
-		setIsProcessing(false);
-	};
-
-	const handleOnSubmitEmail = async () => {
-		setIsProcessing(true);
-		setErrors((e) => ({ ...e, form: null }));
-
-		if (form.email === "") {
-			setErrors((e) => ({
-				...e,
-				email_error: "Please enter a new email.",
-			}));
-			setIsProcessing(false);
-			return;
-		} else {
-			setErrors((e) => ({ ...e, email_error: null }));
+		else {
+			fetchUser();
+			navigate("/profile");
 		}
-		if (form.current_password_email === "") {
-			setErrors((e) => ({
-				...e,
-				current_password_email_error: "Please enter your current password.",
-			}));
-			setIsProcessing(false);
-			return;
-		} else {
-			setErrors((e) => ({ ...e, current_password_email_error: null }));
-		}
-
-		const { data, error } = await apiClient.changeUserEmail({
-			email: form.email,
-			password: form.current_password_email,
-		});
-
-		const { dataUser, errorUser } = await apiClient.loginUser({
-			email: form.email,
-			password: form.current_password_email,
-		});
-
-		if (error) setErrors((e) => ({ ...e, form: error }));
 
 		setIsProcessing(false);
 	};
@@ -197,12 +140,22 @@ function General() {
 		});
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
+		else {
+			fetchUser();
+			navigate("/profile");
+		}
 
 		setIsProcessing(false);
 	};
 
 	return (
 		<div className="General">
+			<div className="email-content">
+				<h3>Email</h3>
+				<h4>EMAIL</h4>
+				<p>{user?.email}</p>
+			</div>
+
 			<div className="username-content">
 				{errors.form && <span className="error">{errors?.form}</span>}
 				<br />
@@ -239,41 +192,11 @@ function General() {
 				>
 					{isProcessing ? "Loading..." : "Save"}
 				</button>
+				<Link to={`/profile`}>
+					<button className="btn cancel">Cancel</button>
+				</Link>
 			</div>
 
-			<div className="email-content">
-				<h3>Email</h3>
-				<label htmlFor="email">EMAIL</label>
-				{errors.email_error && (
-					<span className="error">{errors.email_error}</span>
-				)}
-				<input
-					type="text"
-					name="email"
-					placeholder="Enter new email"
-					value={form.email}
-					onChange={handleOnInputChange}
-				/>
-				<label htmlFor="current_password_email">Verify password</label>
-				{errors.current_password_email_error && (
-					<span className="error">{errors.current_password_email_error}</span>
-				)}
-				<input
-					type="password"
-					name="current_password_email"
-					placeholder="Enter current password"
-					value={form.current_password_email}
-					onChange={handleOnInputChange}
-				/>
-
-				<button
-					className="btn"
-					disabled={isProcessing}
-					onClick={handleOnSubmitEmail}
-				>
-					{isProcessing ? "Loading..." : "Save"}
-				</button>
-			</div>
 			<div className="change-password-content">
 				<h3>Change Password</h3>
 				<label htmlFor="new_password">New password</label>
@@ -307,6 +230,11 @@ function General() {
 				>
 					{isProcessing ? "Loading..." : "Save"}
 				</button>
+				<Link to={`/profile`}>
+					<button className="btn cancel">Cancel</button>
+				</Link>
+				{errors.form && <span className="error">{errors?.form}</span>}
+				<br />
 			</div>
 		</div>
 	);

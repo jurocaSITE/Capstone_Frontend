@@ -14,8 +14,28 @@ function ListFormCreateNew() {
 	const { bookId } = useParams(); // searches for a book id patam if not sets to null
 	const [isFetching, setIsFetching] = useState(false);
 
+	// throw error if the user tries to name a list with a default name
+	const defaultListNames = [
+		"Want To Read",
+		"Currently Reading",
+		"Did Not Finish",
+		"Finished",
+	];
+
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
+			// throw error if the user tries to name a list with a default name
+			defaultListNames.forEach((name) => {
+				if (
+					event.target.value.toLocaleLowerCase() === name.toLocaleLowerCase()
+				) {
+					setErrors((e) => ({
+						...e,
+						list_name_error:
+							"User are not allowed to create lists with the same name as a default list.",
+					}));
+				}
+			});
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
@@ -43,6 +63,15 @@ function ListFormCreateNew() {
 		setIsProcessing(true);
 		setErrors((e) => ({ ...e, form: null }));
 
+		defaultListNames.forEach((name) => {
+			if (form.list_name.toLocaleLowerCase() === name.toLocaleLowerCase()) {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			}
+		});
 		if (form.list_name === "") {
 			setErrors((e) => ({
 				...e,
