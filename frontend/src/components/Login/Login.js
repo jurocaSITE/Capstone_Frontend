@@ -55,6 +55,8 @@ export default function Login() {
 				<div className="footer">
 					<p>
 						Don't have an account? <Link to="/signup">Sign Up</Link>
+						<br />
+						Forgot your password? Reset it <Link to="/recover">here</Link>
 					</p>
 				</div>
 			</div>
