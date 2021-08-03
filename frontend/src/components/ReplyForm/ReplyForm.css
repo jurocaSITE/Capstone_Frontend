@@ -1,4 +1,4 @@
-.ReplyForm .reply-card {
+.ReplyForm .form-card {
     /* .rating-review is relative */
     position: absolute;
     right: 100px;
@@ -11,10 +11,6 @@
     color: black;
     border-radius: var(--border-rad);
     padding: .5em;
-}
-.ReplyForm form {
-    display: flex;
-    flex-direction: column;
 }
 .ReplyForm textarea {
     font-family: inherit;

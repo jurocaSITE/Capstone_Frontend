@@ -18,8 +18,7 @@ function ReplyForm({ ratingId }) {
       <button ref={triggerRef}>Reply</button>
 
       {show && (
-        <div ref={nodeRef} className="reply-card">
-          <form>
+        <form ref={nodeRef} className="form-card">
             <label htmlFor="replyBody">Reply Body</label>
             {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
             <textarea
@@ -50,8 +49,7 @@ function ReplyForm({ ratingId }) {
                 Cancel
               </button>
             </span>
-          </form>
-        </div>
+        </form>
       )}
     </div>
   );
