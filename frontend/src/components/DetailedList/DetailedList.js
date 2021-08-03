@@ -6,8 +6,11 @@ import apiClient from "services/apiClient";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import ListSidebar from "components/ListSidebar/ListSidebar";
+import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 export default function DetailedList() {
+	const { user, setUser } = useAuthContext();
 	const [listContents, setListContents] = useState([]);
 	const [listName, setListName] = useState([]);
 	const [errors, setErrors] = useState(null);
@@ -57,6 +60,9 @@ export default function DetailedList() {
 		fetchListContents();
 	}, []); //use effect block runs whenever the dependency changes (the stuff in the array)
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="DetailedList">
 			<div className="header">

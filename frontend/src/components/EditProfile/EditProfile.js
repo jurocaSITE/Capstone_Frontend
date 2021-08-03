@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 import moment from "moment";
 
 function EditProfile() {
@@ -135,6 +136,9 @@ function EditProfile() {
 		navigate("/profile");
 	};
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="EditProfile">
 			<div className="card">

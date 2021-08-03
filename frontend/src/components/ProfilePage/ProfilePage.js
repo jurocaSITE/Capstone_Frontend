@@ -2,6 +2,7 @@ import "./ProfilePage.css";
 import React, { useEffect, useState } from "react";
 import { AuthorCard, BookPreview, ProfileListCard } from "components";
 import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 import apiClient from "services/apiClient";
 
 const defaultUserPicture = "https://source.unsplash.com/random";
@@ -48,6 +49,9 @@ function ProfilePage() {
 
 	settingLists();
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="ProfilePage">
 			<div className="white-chunk"></div>

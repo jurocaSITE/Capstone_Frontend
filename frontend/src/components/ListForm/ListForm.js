@@ -2,8 +2,11 @@ import "./ListForm.css";
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
+import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 function ListForm() {
+	const { user, setUser } = useAuthContext();
 	const { list_id } = useParams();
 	const { listName } = useParams();
 	const navigate = useNavigate();
@@ -81,6 +84,9 @@ function ListForm() {
 		navigate("/my-lists");
 	};
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="ListForm">
 			<div className="card">

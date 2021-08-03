@@ -41,6 +41,11 @@ export default function Login() {
 						{errors.password && (
 							<span className="error">{errors.password}</span>
 						)}
+						<div className="footer">
+							<p>
+								Forgot your password? Reset it <Link to="/recover">here</Link>
+							</p>
+						</div>
 					</div>
 
 					<button
@@ -55,8 +60,6 @@ export default function Login() {
 				<div className="footer">
 					<p>
 						Don't have an account? <Link to="/signup">Sign Up</Link>
-						<br />
-						Forgot your password? Reset it <Link to="/recover">here</Link>
 					</p>
 				</div>
 			</div>

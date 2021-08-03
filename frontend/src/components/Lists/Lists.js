@@ -1,11 +1,12 @@
 import "./Lists.css";
 import React, { useEffect, useState } from "react";
-import { ListCard, ListCardNoChange } from "components";
+import { ListCard, ListCardNoChange, NotAllowed } from "components";
 import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "contexts/auth";
 
 const useStyles = makeStyles((theme) => ({
 	inputRoot: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Lists() {
 	const classes = useStyles();
+	const { user } = useAuthContext();
 	const [lists, setLists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 	const [error, setError] = useState(null);
@@ -66,6 +68,9 @@ function Lists() {
 
 	settingLists();
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="Lists">
 			<div className="top">

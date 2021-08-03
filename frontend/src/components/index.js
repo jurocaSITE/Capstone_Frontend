@@ -30,3 +30,5 @@ export { default as Account } from "./Account/Account";
 export { default as Ratings } from "./Ratings/Ratings";
 export { default as AddRating } from "./AddRating/AddRating";
 export { default as General } from "./General/General";
+export { default as NotFound } from "./NotFound/NotFound";
+export { default as NotAllowed } from "./NotAllowed/NotAllowed";

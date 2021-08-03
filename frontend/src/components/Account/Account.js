@@ -4,10 +4,11 @@ import { EditProfile, General } from "components";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
+import { NotAllowed } from "components";
 
 function Account() {
 	const navigate = useNavigate();
-	const { setUser } = useAuthContext();
+	const { user, setUser } = useAuthContext();
 	const [errors, setErrors] = useState({});
 	const [toggleState, setToggleState] = useState(1);
 
@@ -28,6 +29,9 @@ function Account() {
 		handleOnSignOut();
 	};
 
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 	return (
 		<div className="Account">
 			<section className="header">
