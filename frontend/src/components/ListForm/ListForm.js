@@ -24,6 +24,32 @@ function ListForm() {
 					...e,
 					list_name_error: "Please enter a new list name or cancel.",
 				}));
+			} else if (event.target.value.toLocaleLowerCase() === "finished") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (
+				event.target.value.toLocaleLowerCase() === "currently reading"
+			) {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (event.target.value.toLocaleLowerCase() === "want to read") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (event.target.value.toLocaleLowerCase() === "did not finish") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
 			} else {
 				setErrors((e) => ({ ...e, list_name_error: null }));
 			}
@@ -42,7 +68,7 @@ function ListForm() {
 		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
 	};
 
-	const handleOnSubmit = async () => {
+	const handleOnSubmit = async (event) => {
 		setIsProcessing(true);
 		setErrors((e) => ({ ...e, form: null }));
 
@@ -50,6 +76,38 @@ function ListForm() {
 			setErrors((e) => ({
 				...e,
 				list_name_error: "Please enter a new list name or cancel.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else if (event.target.value.toLocaleLowerCase() === "finished") {
+			setErrors((e) => ({
+				...e,
+				list_name_error:
+					"User are not allowed to create lists with the same name as a default list.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else if (event.target.value.toLocaleLowerCase() === "currently reading") {
+			setErrors((e) => ({
+				...e,
+				list_name_error:
+					"User are not allowed to create lists with the same name as a default list.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else if (event.target.value.toLocaleLowerCase() === "want to read") {
+			setErrors((e) => ({
+				...e,
+				list_name_error:
+					"User are not allowed to create lists with the same name as a default list.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else if (event.target.value.toLocaleLowerCase() === "did not finish") {
+			setErrors((e) => ({
+				...e,
+				list_name_error:
+					"User are not allowed to create lists with the same name as a default list.",
 			}));
 			setIsProcessing(false);
 			return;
@@ -73,10 +131,10 @@ function ListForm() {
 		});
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
-
+		else {
+			navigate("/my-lists");
+		}
 		setIsProcessing(false);
-
-		navigate("/my-lists");
 	};
 
 	const handleOneDelete = async (event) => {
