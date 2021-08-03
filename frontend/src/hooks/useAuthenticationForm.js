@@ -24,33 +24,46 @@ export const useAuthenticationForm = ({ user }) => {
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "email") {
 			if (event.target.value.indexOf("@") === -1) {
-				setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
+				setErrors((e) => ({
+					...e,
+					email_error: "Please enter a valid email.",
+				}));
 			}
 			if (event.target.value === "") {
-				setErrors((e) => ({ ...e, email: "Missing email." }));
+				setErrors((e) => ({ ...e, email_error: "Missing email." }));
 			} else {
-				setErrors((e) => ({ ...e, email: null }));
+				setErrors((e) => ({ ...e, email_error: null }));
 			}
 		}
 
 		if (event.target.name === "first_name") {
-			if (event.target.value.length === 0) {
-				setErrors((e) => ({ ...e, first_name: "Missing first name." }));
+			if (event.target.value === "") {
+				setErrors((e) => ({ ...e, first_name_error: "Missing first name." }));
+			} else {
+				setErrors((e) => ({ ...e, first_name_error: null }));
 			}
 		}
+
 		if (event.target.name === "last_name") {
-			if (event.target.value.length === 0) {
+			if (event.target.value === "") {
 				setErrors((e) => ({ ...e, last_name: "Missing last name." }));
+			} else {
+				setErrors((e) => ({ ...e, last_name: null }));
 			}
 		}
+
 		if (event.target.name === "username") {
-			if (event.target.value.length === 0) {
+			if (event.target.value === "") {
 				setErrors((e) => ({ ...e, username: "Missing username." }));
+			} else {
+				setErrors((e) => ({ ...e, username: null }));
 			}
 		}
 		if (event.target.name === "password") {
-			if (event.target.value.length === 0) {
+			if (event.target.value === "") {
 				setErrors((e) => ({ ...e, password: "Missing password." }));
+			} else {
+				setErrors((e) => ({ ...e, password: null }));
 			}
 		}
 

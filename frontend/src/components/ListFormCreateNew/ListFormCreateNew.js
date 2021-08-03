@@ -27,35 +27,50 @@ function ListFormCreateNew() {
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
-			// throw error if the user tries to name a list with a default name
-			defaultListNames.forEach((name) => {
-				if (
-					event.target.value.toLocaleLowerCase() === name.toLocaleLowerCase()
-				) {
-					setErrors((e) => ({
-						...e,
-						list_name_error:
-							"User are not allowed to create lists with the same name as a default list.",
-					}));
-				}
-			});
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					list_name_error: "Please enter a new list name or cancel.",
+					list_name_error: " Enter a new list name or cancel.",
+				}));
+				// throw error if the user tries to name a list with a default name
+			} else if (event.target.value.toLocaleLowerCase() === "finished") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (
+				event.target.value.toLocaleLowerCase() === "currently reading"
+			) {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (event.target.value.toLocaleLowerCase() === "want to read") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
+			} else if (event.target.value.toLocaleLowerCase() === "did not finish") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
 				}));
 			} else {
-				setErrors((e) => ({ ...e, dateError: null }));
+				setErrors((e) => ({ ...e, list_name_error: null }));
 			}
 		}
 		if (event.target.name === "image") {
 			if (event.target.value === "") {
 				setErrors((e) => ({
 					...e,
-					image_error: "Please enter an image URL or cancel.",
+					image_error: "Enter an image URL or cancel.",
 				}));
 			} else {
-				setErrors((e) => ({ ...e, dateError: null }));
+				setErrors((e) => ({ ...e, image_error: null }));
 			}
 		}
 
@@ -66,15 +81,6 @@ function ListFormCreateNew() {
 		setIsProcessing(true);
 		setErrors((e) => ({ ...e, form: null }));
 
-		defaultListNames.forEach((name) => {
-			if (form.list_name.toLocaleLowerCase() === name.toLocaleLowerCase()) {
-				setErrors((e) => ({
-					...e,
-					list_name_error:
-						"User are not allowed to create lists with the same name as a default list.",
-				}));
-			}
-		});
 		if (form.list_name === "") {
 			setErrors((e) => ({
 				...e,
@@ -113,10 +119,10 @@ function ListFormCreateNew() {
 		}
 
 		if (error) setErrors((e) => ({ ...e, form: error }));
-
+		else {
+			navigate("/my-lists");
+		}
 		setIsProcessing(false);
-
-		navigate("/my-lists");
 	};
 
 	if (!user?.email) {

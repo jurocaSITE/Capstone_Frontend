@@ -27,8 +27,8 @@ export default function Register() {
 							onChange={handleOnInputChange}
 							required
 						/>
-						{errors.first_name && (
-							<span className="error">{errors.first_name}</span>
+						{errors.first_name_error && (
+							<span className="error">{errors.first_name_error}</span>
 						)}
 					</div>
 
@@ -72,7 +72,9 @@ export default function Register() {
 							onChange={handleOnInputChange}
 							required
 						/>
-						{errors.email && <span className="error">{errors.email}</span>}
+						{errors.email_error && (
+							<span className="error">{errors.email_error}</span>
+						)}
 					</div>
 
 					<div className="input-field">

@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function General() {
 	const navigate = useNavigate();
-	const [value, setValue] = useState();
 	const { user, setUser } = useAuthContext();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
