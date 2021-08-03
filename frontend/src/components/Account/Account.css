@@ -51,11 +51,11 @@
 	border-bottom: 1px solid transparent;
 }
 
-.active-tabs::before {
+.active-tabs::after {
 	content: "";
 	display: block;
 	position: absolute;
-	top: -5px;
+	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
 	width: calc(100% + 2px);

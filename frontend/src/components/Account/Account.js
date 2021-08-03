@@ -58,6 +58,12 @@ function Account() {
             className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
             onClick={() => toggleTab(3)}
           >
+            Update Interests
+          </button>
+          <button
+            className={toggleState === 4 ? "tabs active-tabs" : "tabs"}
+            onClick={() => toggleTab(4)}
+          >
             Delete account
           </button>
         </div>
@@ -70,14 +76,6 @@ function Account() {
           >
             {/* <h2>General</h2> */}
             <General className="general" />
-            <hr />
-            <h3>Update Genre Interests</h3>
-            <p>Click the link below to modify your preferred genres.</p>
-            <ActionButton
-              altClass={`update-interests-btn`}
-              text={`Update Interests`}
-              link={`/update-interests`}
-            />
           </div>
 
           <div
@@ -100,10 +98,26 @@ function Account() {
               toggleState === 3 ? "content  active-content" : "content"
             }
           >
+            <h3>Update Genre Interests</h3>
+            <hr />
+            <p>Click the link below to modify your preferred genres.</p>
+            <ActionButton
+              altClass={`update-interests-btn`}
+              text={`Update Interests`}
+              link={`/update-interests`}
+            />
+          </div>
+
+          <div
+            className={
+              toggleState === 4 ? "content  active-content" : "content"
+            }
+          >
             <div className="delete-btn">
               <p className="delete-account-body">
-                Please note that this is a permanent action. All of your data on the website (lists, ratings, reviews)
-                will be lost forever. <br/> Are you sure you want to delete your account?
+                Please note that this is a permanent action. All of your data on
+                the website (lists, ratings, reviews) will be lost forever.{" "}
+                <br /> Are you sure you want to delete your account?
               </p>
               <Link to="/">
                 <button
