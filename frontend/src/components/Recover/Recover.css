@@ -17,6 +17,7 @@
 	align-items: center;
 	border-radius: 6px;
 	padding-bottom: 2em;
+	color: var(--dark-shade-darkest);
 }
 
 .Recover .card .form {
