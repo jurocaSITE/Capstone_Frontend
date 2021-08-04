@@ -40,9 +40,9 @@ export default function AuthorPage() {
 
                 // THIS BLOCK FILTERS THE DATA.BOOKS TO ONLY KEEP BOOKS BY THE AUTHOR
 
-                for (let i = 0; i < data.books.length; i++){ 
-                    for (let j = 0; j < data.books[i].authors.length; j++){
-                        if (data.books[i].authors[j] === author_name) {
+                for (let i = 0; i < data?.books?.length; i++){ 
+                    for (let j = 0; j < data?.books[i]?.authors?.length; j++){
+                        if (data?.books[i]?.authors[j] === author_name) {
                             books_by_author.push(data.books[i]);
                         }
                     }
@@ -52,18 +52,18 @@ export default function AuthorPage() {
                 // THIS BLOCK FILTERS THE DATA.BOOKS TO ONLY KEEP BOOKS ABOUT THE AUTHOR
 
                 for (let i = 0; i < data.books.length; i++){ 
-                    if (data.books[i].title.includes(author_name)) {
+                    if (data.books[i]?.title?.includes(author_name)) {
                         books_about_author.push(data.books[i]);
                     }
                 } 
                 setBooksAboutAuthor(books_about_author);
 
-                if (books_by_author.length > 0){
+                if (books_by_author?.length > 0){
                     setIsBooksByAuthorEmpty(false);
                     console.log("isBooksByAuthorEmpty",isBooksByAuthorEmpty)
                 }
 
-                if (books_about_author.length > 0){
+                if (books_about_author?.length > 0){
                     setIsBooksAboutAuthorEmpty(false);
                     console.log("isBooksAboutAuthorEmpty",isBooksAboutAuthorEmpty)
                 }

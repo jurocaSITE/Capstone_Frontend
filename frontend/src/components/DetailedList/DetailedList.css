@@ -96,7 +96,7 @@
 }
 
 /* mouse over link */
-a:hover {
+.DetailedList a:hover {
 	color: var(--dark-accent);
 }
 

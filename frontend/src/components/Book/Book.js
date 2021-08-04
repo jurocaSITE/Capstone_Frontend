@@ -55,12 +55,12 @@ export default function Book() {
     if (error) {
       setErrors(error);
       setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
-			console.log("error is", error)
+      console.log("error is", error);
     }
     setIsFetchingLists(false);
     if (listName === "Finished") {
-			navigate(`/set-rating/add/${bookId}`);
-		}
+      navigate(`/set-rating/add/${bookId}`);
+    }
   };
 
   useEffect(() => {
@@ -134,12 +134,17 @@ export default function Book() {
             <div className="book-details-head">
               <h1>{book.title}</h1>
               <h2 className="book-author">
-                by {book.author || renderBookAuthors(book?.authors)}
-                {/* <u><a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></u> */}
+                {/* by {book.author || renderBookAuthors(book?.authors)} */}
+                <u>
+                  <a href={`/author/${book.author || book.authors}`}>
+                    {" "}
+                    {book.author || renderBookAuthors(book?.authors)}{" "}
+                  </a>
+                </u>
               </h2>
               {/* Need to change published date for top Sellers */}
               <h3 className="pub-date">
-                {book?.publishedDate && ( <>Published {book.publishedDate}</>)}
+                {book?.publishedDate && <>Published {book.publishedDate}</>}
               </h3>
             </div>
 
@@ -169,7 +174,9 @@ export default function Book() {
               />
               <a href="#modal-opened" className="link-1" id="modal-closed">
                 {/* <ActionButton link={`#`} text={"Add to List"} /> */}
-                {user && book_id ? <button className="btn">Add to list</button> : null}
+                {user && book_id ? (
+                  <button className="btn">Add to list</button>
+                ) : null}
               </a>
             </div>
           </div>
@@ -184,10 +191,10 @@ export default function Book() {
                 onClick={() => {
                   addToList(book.id, list.id, list.list_name);
                   // if(babyError.modal !== "Cannot add duplicate book."){
-									// 	addToList(book.id, list.id);
-									// } else {
-									// 	console.log("Hello")
-									// }
+                  // 	addToList(book.id, list.id);
+                  // } else {
+                  // 	console.log("Hello")
+                  // }
                 }}
               >
                 {list.list_name}
