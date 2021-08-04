@@ -13,7 +13,7 @@ function ListForm() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
-    list_name: "",
+    list_name: listName,
     image: "",
   });
 
