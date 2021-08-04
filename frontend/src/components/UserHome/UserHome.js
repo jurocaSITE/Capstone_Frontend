@@ -32,8 +32,6 @@ export default function UserHome({ topSellers = [] }) {
       if (data?.currently_reading) {
         setError(null);
         currentlyReadingListId = data.currently_reading.id;
-        console.log(data.currently_reading);
-        console.log(fetchBooksInList(currentlyReadingListId));
         fetchBooksInList(currentlyReadingListId);
       }
     };
