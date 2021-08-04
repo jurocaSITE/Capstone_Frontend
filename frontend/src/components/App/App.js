@@ -27,7 +27,7 @@ import {
 	ListFormCreateNew,
 	DetailedList,
 	UpdateGenreInterests,
-	AuthorPage
+	AuthorPage,
 } from "components";
 
 // this is for global context so all components can access searchResults, user

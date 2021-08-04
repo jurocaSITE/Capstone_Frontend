@@ -9,7 +9,7 @@ const defaultBookCover = "https://source.unsplash.com/random";
 
 function ListCard({ list }) {
 	const { user } = useAuthContext();
-	const { show, nodeRef, triggerRef } = useDetectClickOut(false)
+	const { show, nodeRef, triggerRef } = useDetectClickOut(false);
 	// const [expanded, setExpanded] = React.useState(false);
 
 	// const handleExpandClick = () => {
@@ -22,7 +22,7 @@ function ListCard({ list }) {
 		<div className="ListCard">
 			<div className="cover">
 				<Link to={`/my-lists/${list.id}`}>
-					<img alt="list cover" src={list?.image || defaultBookCover} />	
+					<img alt="list cover" src={list?.image || defaultBookCover} />
 				</Link>
 			</div>
 			<div className="information">
