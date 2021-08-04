@@ -16,6 +16,7 @@
     position: absolute;
     bottom: 20px;
     left: 30px;
+    color: var(--light-shade);
 }
 
 .AuthorPage .container h1 {
@@ -26,6 +27,7 @@
     position: absolute;
     bottom: 12px;
     left: 35px;
+    color: var(--light-shade);
 }
 
 .AuthorPage .information .books-by-and-about-author {

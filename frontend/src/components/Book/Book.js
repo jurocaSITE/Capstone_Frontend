@@ -74,7 +74,8 @@ export default function Book() {
       }
       if (data?.book) {
         setErrors(null);
-        setBook(data.book);
+		setBook(data.book);
+		console.log(data.book.authors)
       }
 
       setIsFetchingBook(false);
