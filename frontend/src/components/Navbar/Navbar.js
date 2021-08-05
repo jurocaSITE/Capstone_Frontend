@@ -30,10 +30,10 @@ export default function Navbar({ appRef }) {
           <div ref={nodeRef} className="bars-menu">
             {!user && (
               <>
-                <Link to="/" activeClassName="active" end>
-                  Home
-                </Link>
                 <span className="user-buttons">
+                  <Link to="/" activeClassName="active" end>
+                    Home
+                  </Link>
                   <Link to="/login">Login</Link>
                   <Link to="/signup">Sign up</Link>
                 </span>

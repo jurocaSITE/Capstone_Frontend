@@ -1,53 +1,75 @@
 .AuthorPage {
-	color: var(--light-shade);
-	min-height: 100vh;
+  color: var(--light-shade);
+  min-height: 100vh;
 }
 
 .AuthorPage .container {
-    position: relative;
- }
-
- .AuthorPage .container img {
-    min-width: 100vh;
-    opacity: 0.6;
- }
-
- .AuthorPage .container .author-header-name {
-    position: absolute;
-    bottom: 20px;
-    left: 30px;
+  width: 100%;
+  height: 20em;
+  /* position: relative; */
+  display: flex;
+  align-items: flex-end;
 }
+
+/* .AuthorPage .container img {
+  object-fit: cover;
+  width: 100vw;
+  opacity: 0.6;
+} */
+
+.AuthorPage .author-header {
+    /* background: linear-gradient(to top, var(--dark-shade), rgba(85, 103, 128, 0)); */
+    background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+    color: var(--light-shade);
+    width: 100%;
+    padding: .5em;
+    padding-top: 0;
+}
+
+/* .AuthorPage .container .author-header-name {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+} */
 
 .AuthorPage .container h1 {
-    font-size: 600%;
+  font-size: 600%;
 }
 
-.AuthorPage .container .monthy-readers {
-    position: absolute;
-    bottom: 12px;
-    left: 35px;
-}
+/* .AuthorPage .container .monthy-readers {
+  position: absolute;
+  bottom: 12px;
+  left: 35px;
+} */
 
 .AuthorPage .information .books-by-and-about-author {
-	padding: 1em;
-	color: var(--light-shade);
+  padding: 1em;
+  color: var(--light-shade);
 }
 .AuthorPage .information .books-by-and-about-author h2 {
-	font-weight: 500;
+  font-weight: 500;
 }
 .AuthorPage .information .books-by-and-about-author .books {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-    padding-top: 2em;
-    flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat( auto-fill, minmax(350px, 1fr) );
+  gap: .5em;
+}
+/* .AuthorPage .information .books-by-and-about-author .books {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 2em;
+  flex-wrap: wrap;
+} */
+.AuthorPage .books-by-and-about-author .books .BookPreview {
+    margin: .5em .25em;
 }
 
 .AuthorPage .information .books-by-and-about-author .empty-message {
-    border: 1px solid rgb(223, 223, 222);
-    border-radius: var(--border-rad);
-    padding: 1em;
-    display: flex;
-	align-items: center;
-	justify-content: center;
+  border: 1px solid rgb(223, 223, 222);
+  border-radius: var(--border-rad);
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

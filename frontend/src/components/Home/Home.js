@@ -10,6 +10,8 @@ const defaultBookCover =
 // TODO: Maybe make separate component or folder for buttons
 
 export default function Home({ topSellers = [] }) {
+  console.log("process env REACT_APP_REMOTE_HOST...", process.env.REACT_APP_REMOTE_HOST_URL)
+  console.log("top sellers in home...", topSellers)
   return (
     <div className="Home">
       <div className="home-hero">

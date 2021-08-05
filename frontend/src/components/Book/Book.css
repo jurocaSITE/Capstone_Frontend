@@ -120,6 +120,7 @@
 }
 .Book .book-details .book-desc {
 	margin: 1em 0;
+	padding-right: .25em;
 	max-height: 15em;
 	overflow: auto;
 	text-overflow: ellipsis;
