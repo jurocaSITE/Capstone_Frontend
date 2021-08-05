@@ -17,7 +17,7 @@ export default function UpdateGenreInterests() {
   // the useEffect checks users previous interests if they exist
   useEffect(() => {
     const userInterestsExist = async () => {
-      if (user?.genre_interest) {
+      if (user?.genre_interest?.length > 0) {
         user.genre_interest.forEach((genre) => {
           setInterests((i) => ({ ...i, [genre]: true }));
         })
@@ -25,21 +25,23 @@ export default function UpdateGenreInterests() {
     }
 
     userInterestsExist()
-  }, [user?.genre_interest])
+  }, [user, user.genre_interest])
 
   const handleCheck = (e) => {
     const { name, checked } = e.target;
-    if (checked) {
-      setInterests((i) => ({ ...i, [name]: checked }));
+    if(interests[name] === true && checked === true) {
+      e.target.checked = false
     }
-    if (!checked) {
-      setInterests((i) => ({ ...i, [name]: checked }));
+    if (e.target.checked) {
+      setInterests((i) => ({ ...i, [name]: e.target.checked }));
+    }
+    if (!e.target.checked) {
+      setInterests((i) => ({ ...i, [name]: e.target.checked }));
     }
   };
 
   const handleOnSubmit = async () => {
     const finalInterests = Object.keys(interests).filter((x) => interests[x]);
-    console.log("Submitting...finalInterests...", finalInterests);
     setErrors((e) => ({ ...e, form: null }));
 
     const { data, error } = await apiClient.updateUserInterests({
@@ -51,8 +53,8 @@ export default function UpdateGenreInterests() {
     }
     if (data?.genre_interests) {
       setErrors((e) => ({ ...e, form: null }));
-      setUser((u) => ({ ...u, genre_interest: data.genre_interests }));
-	  navigate("/")
+      setUser((u) => ({ ...u, genre_interest: data.genre_interests.genre_interests }));
+	    navigate("/")
     }
   };
 
