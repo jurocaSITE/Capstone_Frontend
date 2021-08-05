@@ -10,6 +10,7 @@
     color: white;
     padding: 1em;
     border-radius: var(--border-rad);
+
 }
 
 .DetailedListRow .information .row-item{
@@ -26,16 +27,26 @@
     position: absolute;
     height: 80px;
     width: 40px;
-	padding: 1em 2em;
+	padding: 0em 1em;
 	background-color: var(--light-shade);
 	border-radius: var(--border-rad);
 }
 
-.DetailedListRow .information .row-item .options .btn{
+/* .DetailedListRow .information .row-item .options .btn{
     position: absolute;
     font-size: 95%;
     top: 0;
     left: 14px;
     width: 5em;
     height: 2em;
+} */
+
+.DetailedListRow .information .row-item .options .btn{
+    margin-left: -.9em;
+}
+
+.DetailedListRow .information .row-item .options .btn:hover
+{
+    border-radius: var(--border-rad);
+    padding: -1em 0em;
 }

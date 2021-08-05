@@ -37,6 +37,7 @@ export default function DetailedList() {
 			}
 			if (data?.books_in_list) {
 				setErrors(null);
+				// console.log("books in list", data.books_in_list)
 				setBookList(data.books_in_list);
 			}
 		};
