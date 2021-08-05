@@ -91,12 +91,7 @@ function ProfilePage() {
 			</div>
 			<div className="currently-reading">
 				<h2>Currently Reading</h2>
-				<div className="books">
-					<BookPreview />
-					<BookPreview />
-					<BookPreview />
-					<BookPreview />
-				</div>
+				<div className="books"></div>
 			</div>
 			{/* <div className="my-reviews">
 				<h2>My Reviews</h2>

@@ -20,20 +20,23 @@ function ListCard({ list }) {
 
 	return (
 		<div className="ListCard">
-			<div className="cover">
-				<Link to={`/my-lists/${list.id}`}>
+			<Link className="ListCard-Link" to={`/my-lists/${list.id}`}>
+				<div className="cover">
+					{/* <Link to={`/my-lists/${list.id}`}> */}
 					<img alt="list cover" src={list?.image || defaultBookCover} />
-				</Link>
-			</div>
-			<div className="information">
-				<h2>{list?.list_name}</h2>
-				<div className="by-and-more">
+					{/* </Link> */}
+				</div>
+				<div className="information">
+					{/* <Link className="list-name-link" to={`/my-lists/${list.id}`}> */}
+					<h2>{list?.list_name}</h2>
+					{/* </Link> */}
+					{/* <div className="by-and-more"> */}
 					{/* <div className="by-username">
 						By{" "}
 						<br />
 						{user?.username}
 					</div> */}
-					<div className="create-new-list">
+					{/* <div className="create-new-list">
 						<MoreHorizIcon ref={triggerRef} className="three-dots" />
 
 						{show && (
@@ -43,8 +46,20 @@ function ListCard({ list }) {
 								</Link>
 							</ul>
 						)}
-					</div>
+					</div> */}
+					{/* </div> */}
 				</div>
+			</Link>
+			<div className="create-new-list">
+				<MoreHorizIcon ref={triggerRef} className="three-dots" />
+
+				{show && (
+					<ul ref={nodeRef} className="options">
+						<Link to={`/list/edit/${list.id}/${list.list_name}`}>
+							<li>Edit</li>
+						</Link>
+					</ul>
+				)}
 			</div>
 		</div>
 	);
