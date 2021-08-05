@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import apiClient from "services/apiClient";
 import { useReplyForm } from "hooks/useReplyForm";
+import useDetectClickOut from "hooks/useDetectClickOut";
 import { useAuthContext } from "contexts/auth";
 
-function Replies({ ratingId }) {
+export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
   const { user } = useAuthContext();
-  const [replies, setReplies] = useState([]);
+  const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
+  // const [replies, setReplies] = useState([]);
   const [isFetching, setIsFetching] = useState([]);
   const [errors, setErrors] = useState(null);
   const {
@@ -39,7 +41,7 @@ function Replies({ ratingId }) {
       }
       if (data?.replies) {
         setErrors((e) => ({ ...e, reply: null }));
-        setReplies(data.replies);
+        setReplies((r) => ({...r, [repliesIdx]: data.replies}));
       }
 
       setIsFetching(false);
@@ -54,8 +56,8 @@ function Replies({ ratingId }) {
 		const deletedItem = await handleOnDelete(replyId)
 		if (deletedItem) {
       // TODO: explore more efficient ways to remove an item from an array
-      const newData = replies.filter((r) => !(r.id === deletedItem.id));
-      setReplies(newData);
+      const newData = replies[repliesIdx].filter((r) => !(r.id === deletedItem.id));
+      setReplies((r) => ({...r, [repliesIdx]: newData}));
 		}
 		setIsProcessing(false);
 	};
@@ -64,7 +66,7 @@ function Replies({ ratingId }) {
     <div className="Replies">
       {/* {errors?.reply && <span className="error">{errors.reply}</span>} */}
 
-      {replies.map((x) => (
+      {replies[repliesIdx]?.map((x) => (
         <div className="reply-container">
           <p>{x.replyBody}</p>
           <span className="reply-meta">
@@ -90,4 +92,46 @@ function Replies({ ratingId }) {
   );
 }
 
-export default Replies;
+// function EditReplyForm() {
+//   // const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
+//   return (
+//     <>
+//     {show && (
+//       <form ref={nodeRef} className="form-card">
+//         <label htmlFor="replyBody">Reply Body</label>
+//         {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
+//         <textarea
+//           name="replyBody"
+//           placeholder="Add a Public Reply..."
+//           rows="4"
+//           cols="30"
+//           // value={form.replyBody}
+//           // onChange={handleOnInputChange}
+//           required
+//         />
+
+//         <span className="form-actions">
+//           <button
+//             className="submit-reply-btn"
+//             // onClick={() => {
+//             //   handleOnSubmit(setShow, replies, setReplies, repliesIdx);
+//             // }}
+//             // disabled={isProcessing}
+//           >
+//             Submit
+//           </button>
+//           <button
+//             className="cancel-reply-btn"
+//             // onClick={() => {
+//             //   resetForm();
+//             //   setShow(false);
+//             // }}
+//           >
+//             Cancel
+//           </button>
+//         </span>
+//       </form>
+//     )}
+//     </>
+//   )
+// }

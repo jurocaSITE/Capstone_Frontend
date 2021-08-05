@@ -11,7 +11,6 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import useDetectClickOut from "hooks/useDetectClickOut";
-import { useReplyForm } from "hooks/useReplyForm";
 import { useAuthContext } from "contexts/auth";
 import { Replies, ReplyForm } from "components";
 
@@ -19,6 +18,7 @@ export default function Ratings({ book_id }) {
   const { user } = useAuthContext();
   const { show, nodeRef, triggerRef } = useDetectClickOut(false);
   const [ratings, setRatings] = useState([]);
+  const [replies, setReplies] = useState({});
   const [isFetching, setIsFetching] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -106,9 +106,9 @@ export default function Ratings({ book_id }) {
       {isFetching && <div className="loader"></div>}
 
       <div className="ratings-feed-container">
-        {ratings.map((x) => (
-          <div className="rating-review-replies">
-            <div className="rating-review" key={x.id}>
+        {ratings.map((x, idx) => (
+          <div className="rating-review-replies" key={x.id}>
+            <div className="rating-review">
               <div className="rating-review-user">
                 {userOwnsRating(x) ? (
                   <>
@@ -145,14 +145,24 @@ export default function Ratings({ book_id }) {
                       </>
                     )}
                     {user && !userOwnsRating(x) && (
-                      <ReplyForm ratingId={x.id} />
+                      <ReplyForm
+                        ratingId={x.id}
+                        replies={replies}
+                        setReplies={setReplies}
+                        repliesIdx={idx}
+                      />
                     )}
                   </span>
                 </span>
               </div>
             </div>
 
-            <Replies ratingId={x.id} />
+            <Replies
+              ratingId={x.id}
+              replies={replies}
+              setReplies={setReplies}
+              repliesIdx={idx}
+            />
           </div>
         ))}
       </div>
