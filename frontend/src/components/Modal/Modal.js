@@ -1,10 +1,10 @@
 import "./Modal.css";
 import React from "react";
 
-function Modal({ children }) {
+function Modal({ children, id="modal-opened"}) {
 	return (
 		<div className="Modal">
-			<div className="modal-container" id="modal-opened">
+			<div className="modal-container" id={id}>
 				<div className="modal">
 					<a href="#modal-closed" className="link-2 modal__btn">
 						X

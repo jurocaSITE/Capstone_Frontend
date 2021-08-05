@@ -1,15 +1,22 @@
 import "./DetailedListRow.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { BookPreview, Genre } from "components";
+import { Genre, Modal } from "components";
 import apiClient from "services/apiClient";
 import moment from "moment";
+import { useAuthContext } from "contexts/auth";
 import { useParams } from "react-router-dom";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 export default function DetailedListRow({ book }) {
-    const { list_id } = useParams(); // searches url for book_id param if book else null
-	const [expanded, setExpanded] = React.useState(false);
+    const { list_id } = useParams(); // searches url for list_id param if list else null
+    const [expanded, setExpanded] = React.useState(false);
+    const [lists, setLists] = useState([]);
+    const [errors, setErrors] = useState(null);
+    const [isFetchingLists, setIsFetchingLists] = useState(false);
+    const [babyError, setBabyError] = useState({});
+    const { user } = useAuthContext();
+
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
     };
@@ -21,6 +28,35 @@ export default function DetailedListRow({ book }) {
     const handleOnDelete = async (event) => {
         await apiClient.deleteBookById(list_id, book.id);
     };
+
+    const handleOnTransfer = async (listId) => {
+        setIsFetchingLists(true);
+        const { data, error } = await apiClient.addBookToList(book.id, listId);
+        if (error) {
+            setErrors(error);
+            console.log(error)
+            setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
+        }
+        if (!error){
+            handleOnDelete();
+        }
+    };
+
+    useEffect(() => {
+        const fetchListsByUserId = async () => {
+        setIsFetchingLists(true);
+        try {
+            const allLists = await apiClient.getAllListsByUserId();
+            setLists(allLists.data.all_lists);
+        } catch (error) {
+            setErrors(error);
+        }
+
+        setIsFetchingLists(false);
+        };
+
+        fetchListsByUserId();
+    }, []);
 
     // const splitCategories = async (categories) => {
     //     const unique_categories = [];
@@ -34,8 +70,7 @@ export default function DetailedListRow({ book }) {
     //         }
     //     }
     // };
-
-	return (
+    return (
 		<div className="DetailedListRow">
 
 			<div className="information">
@@ -58,7 +93,7 @@ export default function DetailedListRow({ book }) {
 				<div className="row-item">
                     <h3>{book.title}</h3>
                     <br></br>
-                    <h3 className="tab">by <u><a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author + " " )} </a></u></h3>
+                    <h3 className="tab">by <a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author + " " )} </a></h3>
 				</div>
 
                 <div className="row-item">
@@ -80,10 +115,14 @@ export default function DetailedListRow({ book }) {
                                     <button className="btn" onClick={handleOnDelete}>
                                         Remove
                                     </button>
+                                    <a href={`#modal-opened-${book.id}`} className="link-1" id="modal-closed">
+                                        {user && book.id ? <button className="btn">Transfer {book.title}</button> : null}
+                                    </a>
+                                    
                             </ul>
                         )}
                 </div>
-
+            
                 {/* <div className="edit">
                     <MoreHorizIcon className="three-dots" onClick={toggleMenu} />
 
@@ -96,6 +135,24 @@ export default function DetailedListRow({ book }) {
                     )}
                 </div> */}
 			</div>
+             <Modal id={`modal-opened-${book.id}`}>
+                {lists.map((list) => (
+                <button
+                    className="btn-select-list"
+                    key={list.id}
+                    onClick={() => {
+                        // console.log("errors is", errors)
+                        // console.log("this should be false", (errors === "Cannot add duplicate book."))
+                        // console.log("babyError is", babyError)
+                            handleOnTransfer(list.id);   
+                            console.log("book.id", book.id, "book title is", book.title)
+                            console.log("transfer and delete should have successfully happened")                       
+                    }}
+                >
+                {list.list_name}
+                </button>
+                ))}
+            </Modal> 
 		</div>
 	);
 }

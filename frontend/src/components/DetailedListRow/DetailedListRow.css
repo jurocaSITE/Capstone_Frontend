@@ -19,8 +19,18 @@
     padding: 0em 1.5em;
 }
 
-.DetailedListRow .information .row-item .tab{
-	margin-left: 45px;
+.DetailedListRow .information .row-item .tab a{
+    color: var(--dark-accent);
+}
+
+.DetailedListRow .information .row-item .tab a:hover{
+    text-decoration: underline;
+}
+
+.DetailedListRow .information .row-item .three-dots:hover
+{
+    cursor: pointer;
+    color: var(--dark-accent);
 }
 
 .DetailedListRow .information .row-item .options {

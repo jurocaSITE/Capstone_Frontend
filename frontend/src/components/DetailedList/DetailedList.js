@@ -85,7 +85,7 @@ export default function DetailedList() {
 
 			<div className="list-contents">
 				<div className="column-names">
-					<h3 className="title">Title</h3>
+					<h3 className="title">Title and Author</h3>
 					<h3 className="date-added">Date Added</h3>
 					<h3 className="tags">Tags</h3>
 					<h3 className="page-count">Page Count</h3>
