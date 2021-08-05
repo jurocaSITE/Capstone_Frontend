@@ -29,9 +29,9 @@
 	box-shadow: var(--default-shadow);
 	transition: ease 0.5s;
 }
-.Book .book-card img:hover {
+/* .Book .book-card img:hover {
 	transform: scale(1.05);
-}
+} */
 .Book .book-card .book-details {
 	display: flex;
 	flex-direction: column;

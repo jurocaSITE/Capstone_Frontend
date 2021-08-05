@@ -1,7 +1,7 @@
 import "./UpdateGenreInterests.css";
 import React from "react";
 import apiClient from "services/apiClient";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
 import { useAuthContext } from "contexts/auth";
@@ -13,6 +13,19 @@ export default function UpdateGenreInterests() {
   const { user, setUser } = useAuthContext();
   const [interests, setInterests] = useState({});
   const [errors, setErrors] = useState({});
+
+  // the useEffect checks users previous interests if they exist
+  useEffect(() => {
+    const userInterestsExist = async () => {
+      if (user?.genre_interest) {
+        user.genre_interest.forEach((genre) => {
+          setInterests((i) => ({ ...i, [genre]: true }));
+        })
+      }
+    }
+
+    userInterestsExist()
+  }, [user?.genre_interest])
 
   const handleCheck = (e) => {
     const { name, checked } = e.target;
