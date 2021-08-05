@@ -53,7 +53,7 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
 
       {repliesExist ? (
         <button className="show-replies-toggle" onClick={toggleShowReplies}>
-          {showReplies ? "Hide Replies" : "Show Replies"}
+          {showReplies ? `Hide ${repliesExist} Replies` : `View ${repliesExist} Replies`}
         </button>
       ) : null}
 
