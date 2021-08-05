@@ -7,8 +7,6 @@ import { BiSearch } from "react-icons/bi";
 import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
 import { useSearchForm } from "hooks/useSearchForm";
-
-// TODO: if no user logged in, page only renders Unauthorized message
 import { useAuthContext } from "contexts/auth";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Lists() {
 	const classes = useStyles();
-	const {filteredData, handleFilter} = useSearchForm()
+	const { filteredData, handleFilter } = useSearchForm();
 	const { user } = useAuthContext();
 	const [lists, setLists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
@@ -56,7 +54,6 @@ function Lists() {
 	}, []);
 
 	const settingLists = () => {
-		
 		for (let i = 0; i < lists.length; i++) {
 			if (lists[i].list_name === "Want To Read") {
 				defaultLists.push(lists[i]);
@@ -74,10 +71,10 @@ function Lists() {
 	};
 
 	settingLists();
-	
+
 	const handleOnFilter = (e) => {
-		handleFilter(e, otherLists)
-	}
+		handleFilter(e, otherLists);
+	};
 
 	if (!user?.email) {
 		return <NotAllowed />;
@@ -129,14 +126,13 @@ function Lists() {
 			</div>
 
 			<div className="display-lists-area">
-				{ filteredData ? filteredData.map((list) => (
-					<ListCard list={list} className="list-card" />
-				)) : (
-					otherLists.map((list) => (
-						<ListCard list={list} className="list-card" />
-					))
-				)
-				}
+				{filteredData
+					? filteredData.map((list) => (
+							<ListCard list={list} className="list-card" />
+					  ))
+					: otherLists.map((list) => (
+							<ListCard list={list} className="list-card" />
+					  ))}
 				{/* {alphabeticallySortedLists.map((list) => (
 					<ListCard list={list} className="list-card" />
 				))} */}

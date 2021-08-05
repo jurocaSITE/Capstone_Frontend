@@ -23,7 +23,7 @@
 	border: solid 1px var(--light-shade-6-opacity);
 	width: 100%;
 	border-radius: 6px;
-	margin: .4em 0;
+	margin: 0.4em 0;
 }
 
 .General .username-content {
@@ -65,4 +65,14 @@
 .General .cancel {
 	background-color: rgb(220, 55, 55);
 	margin-left: 10px;
+}
+
+.General .sucess-message {
+	background: #c6fb91;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
 }

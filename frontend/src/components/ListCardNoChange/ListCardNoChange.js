@@ -6,31 +6,29 @@ import { GoBook } from "react-icons/go";
 import { RiBook2Fill } from "react-icons/ri";
 import { FaBookDead } from "react-icons/fa";
 
-// const defaultBookCover = "https://source.unsplash.com/random";
-
 function ListCardNoChange({ list }) {
-  const renderIcon = () => {
-    if (list?.list_name === "Want To Read") {
-      return <BiBookHeart />;
-    } else if (list?.list_name === "Currently Reading") {
-      return <GoBook />;
-    } else if (list?.list_name === "Did Not Finish") {
-      return <FaBookDead />;
-    } else if (list?.list_name === "Finished") {
-      return <RiBook2Fill />;
-    }
-  };
+	const renderIcon = () => {
+		if (list?.list_name === "Want To Read") {
+			return <BiBookHeart />;
+		} else if (list?.list_name === "Currently Reading") {
+			return <GoBook />;
+		} else if (list?.list_name === "Did Not Finish") {
+			return <FaBookDead />;
+		} else if (list?.list_name === "Finished") {
+			return <RiBook2Fill />;
+		}
+	};
 
-  return (
-    <div className="ListCardNoChange">
-      <div className="cover">
-        <Link to={`/my-lists/${list.id}`}>{renderIcon()}</Link>
-      </div>
-      <div className="information">
-        <h2>{list?.list_name}</h2>
-      </div>
-    </div>
-  );
+	return (
+		<div className="ListCardNoChange">
+			<div className="cover">
+				<Link to={`/my-lists/${list.id}`}>{renderIcon()}</Link>
+			</div>
+			<div className="information">
+				<h2>{list?.list_name}</h2>
+			</div>
+		</div>
+	);
 }
 
 export default ListCardNoChange;

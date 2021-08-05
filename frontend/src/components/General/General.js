@@ -9,6 +9,7 @@ function General() {
 	const { user, setUser } = useAuthContext();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
+	const [successMessage, setSuccessMessage] = useState(false);
 	const [form, setForm] = useState({
 		username: user?.username,
 		new_password: "",
@@ -102,7 +103,17 @@ function General() {
 		if (error) setErrors((e) => ({ ...e, form: error }));
 		else {
 			fetchUser();
-			navigate("/profile");
+			setSuccessMessage(true);
+			setTimeout(() => {
+				setSuccessMessage(false);
+			}, 5000);
+			setForm({
+				username: user?.username,
+				new_password: "",
+				current_password_username: "",
+				current_password_password: "",
+			});
+			navigate("/account");
 		}
 
 		setIsProcessing(false);
@@ -141,7 +152,17 @@ function General() {
 		if (error) setErrors((e) => ({ ...e, form: error }));
 		else {
 			fetchUser();
-			navigate("/profile");
+			setSuccessMessage(true);
+			setTimeout(() => {
+				setSuccessMessage(false);
+			}, 5000);
+			setForm({
+				username: user?.username,
+				new_password: "",
+				current_password_username: "",
+				current_password_password: "",
+			});
+			navigate("/account");
 		}
 
 		setIsProcessing(false);
@@ -156,6 +177,11 @@ function General() {
 			</div>
 
 			<div className="username-content">
+				{successMessage && (
+					<span className="sucess-message">
+						{successMessage ? "Sucessfully updated" : ""}
+					</span>
+				)}
 				{errors.form && <span className="error">{errors?.form}</span>}
 				<br />
 				<h3>Username</h3>
@@ -209,7 +235,7 @@ function General() {
 					value={form.new_password}
 					onChange={handleOnInputChange}
 				/>
-				<label htmlFor="current_password_password">Verify password</label>
+				<label htmlFor="current_password_password">Old password</label>
 				{errors.current_password_password_error && (
 					<span className="error">
 						{errors.current_password_password_error}
@@ -218,7 +244,7 @@ function General() {
 				<input
 					type="password"
 					name="current_password_password"
-					placeholder="Enter current password"
+					placeholder="Enter old password"
 					value={form.current_password_password}
 					onChange={handleOnInputChange}
 				/>
