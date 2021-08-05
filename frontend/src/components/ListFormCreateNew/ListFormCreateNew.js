@@ -63,16 +63,6 @@ function ListFormCreateNew() {
 				setErrors((e) => ({ ...e, list_name_error: null }));
 			}
 		}
-		// if (event.target.name === "image") {
-		// 	if (event.target.value === "") {
-		// 		setErrors((e) => ({
-		// 			...e,
-		// 			image_error: "Enter an image URL or cancel.",
-		// 		}));
-		// 	} else {
-		// 		setErrors((e) => ({ ...e, image_error: null }));
-		// 	}
-		// }
 
 		setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
 	};
@@ -91,16 +81,6 @@ function ListFormCreateNew() {
 		} else {
 			setErrors((e) => ({ ...e, list_name_error: null }));
 		}
-		// if (form.image === "") {
-		// 	setErrors((e) => ({
-		// 		...e,
-		// 		image_error: "Please enter an image URL or cancel.",
-		// 	}));
-		// 	setIsProcessing(false);
-		// 	return;
-		// } else {
-		// 	setErrors((e) => ({ ...e, image_error: null }));
-		// }
 
 		let img = "";
 		if (form.image == "") {
