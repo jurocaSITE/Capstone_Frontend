@@ -8,9 +8,10 @@ import { useAuthContext } from "contexts/auth";
 
 export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
   const { user } = useAuthContext();
+  const [showReplies, setShowReplies] = useState(false);
   const [isFetching, setIsFetching] = useState([]);
   const [errors, setErrors] = useState(null);
-  const { isProcessing, setIsProcessing, handleOnDelete } = useReplyForm({
+  const { isProcessing, handleOnDelete } = useReplyForm({
     ratingId,
   });
 
@@ -21,6 +22,8 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
       return false;
     }
   };
+
+  const repliesExist = replies[repliesIdx]?.length;
 
   useEffect(() => {
     const fetchReplies = async () => {
@@ -42,53 +45,51 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
     fetchReplies();
   }, [ratingId, repliesIdx, setReplies]);
 
-  const updateOnDelete = async (replyId) => {
-    setIsProcessing(true);
-    // most logic handled by useReplyForm custom hook
-    const deletedItem = await handleOnDelete(replyId);
-    if (deletedItem) {
-      // TODO: explore more efficient ways to remove an item from an array
-      const newData = replies[repliesIdx].filter(
-        (r) => !(r.id === deletedItem.id)
-      );
-      setReplies((r) => ({ ...r, [repliesIdx]: newData }));
-    }
-    setIsProcessing(false);
-  };
+  const toggleShowReplies = () => setShowReplies(!showReplies);
 
   return (
     <div className="Replies">
       {/* {errors?.reply && <span className="error">{errors.reply}</span>} */}
 
-      {replies[repliesIdx]?.map((x) => (
-        <div className="reply-container">
-          <p>{x.replyBody}</p>
-          <span className="reply-meta">
-            {moment(x.updatedAt).format("lll")}
-            {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+      {repliesExist ? (
+        <button className="show-replies-toggle" onClick={toggleShowReplies}>
+          {showReplies ? "Hide Replies" : "Show Replies"}
+        </button>
+      ) : null}
 
-            {userOwnsReply(x) && (
-              <span className="meta-actions">
-                <EditReplyForm
-                  ratingId={ratingId}
-                  replyId={x.id}
-                  replyBody={x.replyBody}
-                  replies={replies}
-                  setReplies={setReplies}
-                  repliesIdx={repliesIdx}
-                />
-                <button
-                  className="delete-reply-btn"
-                  onClick={() => updateOnDelete(x.id)}
-                  disabled={isProcessing}
-                >
-                  Delete
-                </button>
-              </span>
-            )}
-          </span>
-        </div>
-      ))}
+      <div hidden={!showReplies} className="replies-feed-container">
+        {replies[repliesIdx]?.map((x) => (
+          <div className="reply-container">
+            <p>{x.replyBody}</p>
+            <span className="reply-meta">
+              {moment(x.updatedAt).format("lll")}
+              {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+
+              {userOwnsReply(x) && (
+                <span className="meta-actions">
+                  <EditReplyForm
+                    ratingId={ratingId}
+                    replyId={x.id}
+                    replyBody={x.replyBody}
+                    replies={replies}
+                    setReplies={setReplies}
+                    repliesIdx={repliesIdx}
+                  />
+                  <button
+                    className="delete-reply-btn"
+                    onClick={() =>
+                      handleOnDelete(x.id, replies, setReplies, repliesIdx)
+                    }
+                    disabled={isProcessing}
+                  >
+                    Delete
+                  </button>
+                </span>
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

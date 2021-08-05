@@ -102,24 +102,24 @@ export const useReplyForm = ({ ratingId }) => {
     setIsProcessing(false);
   };
 
-  const handleOnDelete = async (replyId) => {
-    // setIsProcessing(true);
+  const handleOnDelete = async (replyId, replies, setReplies, repliesIdx) => {
+    setIsProcessing(true);
     setErrors((e) => ({ ...e, reply: null }));
-    let deletedItem = null;
 
     const { data, error } = await apiClient.deleteReplyForRating(replyId);
 
     if (error) {
       setErrors((e) => ({ ...e, reply: error }));
-      deletedItem = null;
     }
     if (data?.reply) {
-      console.log("Reply deleted...", data.reply);
-      deletedItem = data.reply;
+      // TODO: explore more efficient ways to remove an item from an array
+      const newData = replies[repliesIdx].filter(
+        (r) => !(r.id === data.reply.id)
+      );
+      setReplies((r) => ({ ...r, [repliesIdx]: newData }));
     }
 
-    // setIsProcessing(false);
-    return deletedItem;
+    setIsProcessing(false);
   };
 
   return {
