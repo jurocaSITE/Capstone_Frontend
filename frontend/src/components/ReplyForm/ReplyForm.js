@@ -21,7 +21,7 @@ function ReplyForm({ ratingId, replies, setReplies, repliesIdx }) {
 
       {show && (
         <form ref={nodeRef} className="form-card">
-          <label htmlFor="replyBody">Reply Body</label>
+          <label hidden htmlFor="replyBody">Reply Body</label>
           {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
           <textarea
             name="replyBody"

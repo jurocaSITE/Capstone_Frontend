@@ -8,19 +8,11 @@ import { useAuthContext } from "contexts/auth";
 
 export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
   const { user } = useAuthContext();
-  const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
-  // const [replies, setReplies] = useState([]);
   const [isFetching, setIsFetching] = useState([]);
   const [errors, setErrors] = useState(null);
-  const {
-    form,
-    isProcessing,
-    setIsProcessing,
-    resetForm,
-    handleOnInputChange,
-    handleOnUpdate,
-    handleOnDelete
-  } = useReplyForm({ ratingId, replyId: 0 });
+  const { isProcessing, setIsProcessing, handleOnDelete } = useReplyForm({
+    ratingId,
+  });
 
   const userOwnsReply = (reply) => {
     if (user?.id === reply?.userId) {
@@ -41,26 +33,28 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
       }
       if (data?.replies) {
         setErrors((e) => ({ ...e, reply: null }));
-        setReplies((r) => ({...r, [repliesIdx]: data.replies}));
+        setReplies((r) => ({ ...r, [repliesIdx]: data.replies }));
       }
 
       setIsFetching(false);
     };
 
     fetchReplies();
-  }, [ratingId]);
+  }, [ratingId, repliesIdx, setReplies]);
 
   const updateOnDelete = async (replyId) => {
-		setIsProcessing(true);
+    setIsProcessing(true);
     // most logic handled by useReplyForm custom hook
-		const deletedItem = await handleOnDelete(replyId)
-		if (deletedItem) {
+    const deletedItem = await handleOnDelete(replyId);
+    if (deletedItem) {
       // TODO: explore more efficient ways to remove an item from an array
-      const newData = replies[repliesIdx].filter((r) => !(r.id === deletedItem.id));
-      setReplies((r) => ({...r, [repliesIdx]: newData}));
-		}
-		setIsProcessing(false);
-	};
+      const newData = replies[repliesIdx].filter(
+        (r) => !(r.id === deletedItem.id)
+      );
+      setReplies((r) => ({ ...r, [repliesIdx]: newData }));
+    }
+    setIsProcessing(false);
+  };
 
   return (
     <div className="Replies">
@@ -75,7 +69,14 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
 
             {userOwnsReply(x) && (
               <span className="meta-actions">
-                <button className="edit-reply-btn">Edit</button>
+                <EditReplyForm
+                  ratingId={ratingId}
+                  replyId={x.id}
+                  replyBody={x.replyBody}
+                  replies={replies}
+                  setReplies={setReplies}
+                  repliesIdx={repliesIdx}
+                />
                 <button
                   className="delete-reply-btn"
                   onClick={() => updateOnDelete(x.id)}
@@ -92,46 +93,78 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
   );
 }
 
-// function EditReplyForm() {
-//   // const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
-//   return (
-//     <>
-//     {show && (
-//       <form ref={nodeRef} className="form-card">
-//         <label htmlFor="replyBody">Reply Body</label>
-//         {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
-//         <textarea
-//           name="replyBody"
-//           placeholder="Add a Public Reply..."
-//           rows="4"
-//           cols="30"
-//           // value={form.replyBody}
-//           // onChange={handleOnInputChange}
-//           required
-//         />
+function EditReplyForm({
+  ratingId,
+  replyId,
+  replyBody,
+  replies,
+  setReplies,
+  repliesIdx,
+}) {
+  const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
+  const {
+    form,
+    isProcessing,
+    setForm,
+    resetForm,
+    handleOnInputChange,
+    handleOnUpdate,
+  } = useReplyForm({ ratingId });
 
-//         <span className="form-actions">
-//           <button
-//             className="submit-reply-btn"
-//             // onClick={() => {
-//             //   handleOnSubmit(setShow, replies, setReplies, repliesIdx);
-//             // }}
-//             // disabled={isProcessing}
-//           >
-//             Submit
-//           </button>
-//           <button
-//             className="cancel-reply-btn"
-//             // onClick={() => {
-//             //   resetForm();
-//             //   setShow(false);
-//             // }}
-//           >
-//             Cancel
-//           </button>
-//         </span>
-//       </form>
-//     )}
-//     </>
-//   )
-// }
+  useEffect(() => {
+    setForm({
+      replyBody: replyBody,
+    });
+  }, [replyBody, setForm]);
+
+  return (
+    <span className="EditReplyForm">
+      <button ref={triggerRef}>Edit</button>
+
+      {show && (
+        <div ref={nodeRef} className="form-card">
+          <label hidden htmlFor="replyBody">
+            Update Reply
+          </label>
+          {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
+          <textarea
+            name="replyBody"
+            placeholder="Add a Public Reply..."
+            rows="4"
+            cols="30"
+            value={form.replyBody}
+            onChange={handleOnInputChange}
+          />
+
+          <span className="form-actions">
+            <button
+              className="submit-reply-btn"
+              onClick={() => {
+                handleOnUpdate(
+                  setShow,
+                  replyId,
+                  replies,
+                  setReplies,
+                  repliesIdx
+                );
+              }}
+              disabled={isProcessing}
+            >
+              Update
+            </button>
+            <button
+              className="cancel-reply-btn"
+              onClick={() => {
+                resetForm();
+                setShow(false);
+              }}
+              disabled={isProcessing}
+            >
+              Cancel
+            </button>
+          </span>
+        </div>
+      )}
+    </span>
+  );
+}
