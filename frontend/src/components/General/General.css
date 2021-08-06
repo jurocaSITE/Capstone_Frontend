@@ -16,6 +16,19 @@
 	color: #696f79;
 }
 
+.General .reveal-password {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width:max-content;
+}
+.General .reveal-password input[type="checkbox"] {
+	min-width: 18px;
+	width: auto;
+	flex: .25;
+	margin: 0 .5em;
+}
+
 .General input {
 	height: 52px;
 	padding: 0 15px;

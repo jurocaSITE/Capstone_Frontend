@@ -17,9 +17,6 @@ function EditProfile() {
 		profile_picture: user?.profile_picture || "",
 		date_of_birth: "",
 	});
-	//TODO: DELETE THESE CONSOLE LOGS
-	// console.log(user?.date_of_birth);
-	// console.log(moment(user?.date_of_birth).format("YYYY/MM/DD"));
 	const birthDate = moment(user?.date_of_birth).format("MM/DD/YYYY");
 
 	const fetchUser = async () => {

@@ -78,7 +78,6 @@ function Account() {
               toggleState === 1 ? "content  active-content" : "content"
             }
           >
-            {/* <h2>General</h2> */}
             <General className="general" />
           </div>
 
@@ -87,13 +86,6 @@ function Account() {
               toggleState === 2 ? "content  active-content" : "content"
             }
           >
-            {/* <h2>Profile</h2>
-						<hr /> */}
-            {/* <p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-						voluptatum qui adipisci.
-					</p> */}
-
             <EditProfile className="edit-profile" />
           </div>
 

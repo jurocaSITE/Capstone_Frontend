@@ -59,6 +59,7 @@ function Recover() {
 			navigate("/login");
 		}, 3000);
 	};
+	
 	return (
 		<div className="Recover">
 			<div className="card">
