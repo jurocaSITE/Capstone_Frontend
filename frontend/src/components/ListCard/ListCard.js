@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 // import { useAuthContext } from "contexts/auth";
 import useDetectClickOut from "hooks/useDetectClickOut";
 
-const defaultBookCover = "https://source.unsplash.com/random";
+const defaultBookCover =
+	"hhttps://images.unsplash.com/photo-1548504769-900b70ed122e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
 
 function ListCard({ list }) {
 	// const { user } = useAuthContext();
