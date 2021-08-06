@@ -123,17 +123,6 @@ export default function DetailedListRow({ book }) {
                         )}
                 </div>
             
-                {/* <div className="edit">
-                    <MoreHorizIcon className="three-dots" onClick={toggleMenu} />
-
-                    {showMenu && (
-                        <ul className="options">
-                            <Link to={`/list/edit/${list.id}/${list.list_name}`}>
-                                <li>Edit</li>
-                            </Link>
-                        </ul>
-                    )}
-                </div> */}
 			</div>
              <Modal id={`modal-opened-${book.id}`}>
                 {lists.map((list) => (
