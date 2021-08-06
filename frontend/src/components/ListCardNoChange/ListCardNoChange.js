@@ -20,14 +20,16 @@ function ListCardNoChange({ list }) {
 	};
 
 	return (
-		<div className="ListCardNoChange">
-			<div className="cover">
-				<Link to={`/my-lists/${list.id}`}>{renderIcon()}</Link>
-			</div>
-			<div className="information">
-				<h2>{list?.list_name}</h2>
-			</div>
-		</div>
+		<>
+			<Link to={`/my-lists/${list.id}`}>
+				<div className="ListCardNoChange">
+					<div className="cover">{renderIcon()}</div>
+					<div className="information">
+						<h2>{list?.list_name}</h2>
+					</div>
+				</div>
+			</Link>
+		</>
 	);
 }
 
