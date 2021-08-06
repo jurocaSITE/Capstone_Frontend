@@ -4,6 +4,7 @@ import { AuthorCard, BookPreview, ProfileListCard } from "components";
 import { useAuthContext } from "contexts/auth";
 import { NotAllowed } from "components";
 import apiClient from "services/apiClient";
+import { Link } from "react-router-dom";
 
 const defaultUserPicture =
 	"https://images.unsplash.com/photo-1557672211-0741026eacfb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
@@ -13,6 +14,10 @@ function ProfilePage() {
 	const [lists, setLists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 	const [error, setError] = useState(null);
+	const [bookList, setBookList] = useState([]);
+	const [isEmpty, setIsEmpty] = useState(false);
+  
+	let currentlyReadingListId = "";
 	let defaultLists = [];
 	let otherLists = [];
 
@@ -28,6 +33,39 @@ function ProfilePage() {
 
 			setIsFetching(false);
 		};
+
+		const fetchBooksInList = async (listId) => {
+			const { data, error } = await apiClient.getBooksInList(listId);
+			if (error) {
+			  setError(error);
+			}
+			if (data?.books_in_list) {
+			  setError(null);
+			  setBookList(data.books_in_list);
+			  console.log("currentlyReading",data.books_in_list);
+			}
+			if (data?.books_in_list[0] === 0){
+			  setIsEmpty(true);
+			}
+		  };
+	  
+		  const fetchCurrentlyReadingByUserId = async () => {
+			const { data, error } = await apiClient.getCurrentlyReadingListByUserId();
+			if (error) {
+			  setError(error);
+			}
+			if (data?.currently_reading) {
+			  setError(null);
+			  currentlyReadingListId = data.currently_reading.id;
+			  // console.log("data.currently_reading", data.currently_reading);
+			  // console.log("fetchBooksInList(currentlyReadingListId)",fetchBooksInList(currentlyReadingListId));
+			  fetchBooksInList(currentlyReadingListId);
+			  console.log("bookListLength is", bookList[0])
+			}
+		  };
+	  
+		  fetchBooksInList();
+		  fetchCurrentlyReadingByUserId();
 
 		fetchListsByUserId();
 	}, []);
@@ -92,7 +130,19 @@ function ProfilePage() {
 			</div>
 			<div className="currently-reading">
 				<h2>Currently Reading</h2>
-				<div className="books"></div>
+				<div className="books">
+				{(isEmpty===true) ? (
+                    <div className="empty-message">
+                        <h2>Your list doesn't have any books in it! Add books to change this.</h2>
+                    </div>
+				) : (
+					<div className="home-feed-books">
+					{bookList.map((book) => (
+						<BookPreview book={book} key={book.title} />
+					))}
+					</div>
+					)}
+				</div>
 			</div>
 			{/* <div className="my-reviews">
 				<h2>My Reviews</h2>

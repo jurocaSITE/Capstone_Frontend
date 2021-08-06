@@ -5,13 +5,15 @@ import { useSearchContext } from "contexts/search";
 import apiClient from "services/apiClient";
 import { useParams } from "react-router-dom";
 
-const defaultUserPicture = "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
+const defaultUserPicture =
+  "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
 
 export default function AuthorPage() {
   let offset = 0;
   const { author_name } = useParams();
   const { errors, setErrors } = useSearchContext();
   const [booksByAuthor, setBooksByAuthor] = useState([]);
+  const [booksRelatedToAuth, setBooksRelatedToAuth] = useState([]);
   const [booksAboutAuthor, setBooksAboutAuthor] = useState([]);
   const [isBooksByAuthorEmpty, setIsBooksByAuthorEmpty] = useState(true);
   const [isBooksAboutAuthorEmpty, setIsBooksAboutAuthorEmpty] = useState(true);
@@ -31,6 +33,7 @@ export default function AuthorPage() {
       }
       if (data?.books) {
         setErrors(null);
+        setBooksRelatedToAuth(data.books);
 
         // console.log("data.books", data.books)
         // console.log("data.books[0].authors", data.books[0].authors, "compare to: author_name ", author_name)
@@ -80,25 +83,51 @@ export default function AuthorPage() {
       >
         {/* <img className="img" alt="author profile" src={defaultUserPicture} /> */}
         <div className="author-header">
-            <h1>{author_name}</h1>
-            <h3>1,860,293 monthly readers</h3>
+          <h1>{author_name}</h1>
+          <h3>1,860,293 monthly readers</h3>
         </div>
       </div>
 
       <div className="information">
         <div className="books-by-and-about-author">
-          <h2>{author_name}'s bibliography</h2>
+          <h2>Books related to: {author_name}</h2>
           {isBooksByAuthorEmpty === false ? (
             <div className="books">
-              {booksByAuthor.map((book) => (
+              {booksRelatedToAuth.map((book) => (
                 <BookPreview book={book} key={book.title} />
               ))}
             </div>
           ) : (
             <div className="empty-message">
-              <h2>We did not find any books by this author.</h2>
+              <h2>We did not find any books related to this author.</h2>
             </div>
           )}
+
+          {/* <h2>{author_name}'s bibliography</h2>
+                    {isBooksByAuthorEmpty === false ? (
+                        <div className="books">
+                            {booksByAuthor.map((book) => (
+                                <BookPreview book={book} key={book.title} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="empty-message">
+                            <h2>We did not find any books by this author.</h2>
+                        </div>
+                    )} */}
+
+          {/* <h2>Books written about {author_name}</h2>
+                    {isBooksAboutAuthorEmpty === false ? (
+                        <div className="books">
+                            {booksAboutAuthor.map((book) => (
+                                <BookPreview book={book} key={book.title} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="empty-message">
+                            <h2>We did not find any books about this author.</h2>
+                        </div>
+                    )} */}
 
           <h2>Books written about {author_name}</h2>
           {isBooksAboutAuthorEmpty === false ? (

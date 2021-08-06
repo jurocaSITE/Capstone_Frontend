@@ -19,8 +19,18 @@
     padding: 0em 1.5em;
 }
 
-.DetailedListRow .information .row-item .tab{
-	margin-left: 45px;
+.DetailedListRow .information .row-item .tab a{
+    color: var(--dark-accent);
+}
+
+.DetailedListRow .information .row-item .tab a:hover{
+    text-decoration: underline;
+}
+
+.DetailedListRow .information .row-item .three-dots:hover
+{
+    cursor: pointer;
+    color: var(--dark-accent);
 }
 
 .DetailedListRow .information .row-item .options {
@@ -49,4 +59,32 @@
 {
     border-radius: var(--border-rad);
     padding: -1em 0em;
+}
+
+.DetailedListRow .btn:hover {
+	transform: scale(1.1);
+}
+
+.DetailedListRow .select-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.DetailedListRow .btn-select-list {
+	padding: 1em;
+	background-color: var(--dark-accent);
+	border: none;
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
+	/* height: 40px;
+	width: 120px; */
+	color: var(--light-shade);
+	font-size: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	transition: ease 0.25s;
+}
+.DetailedListRow .btn-select-list:hover {
+	transform: scale(1.1);
 }
