@@ -1,21 +1,56 @@
 import "./ListForm.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
 import { NotAllowed } from "components";
 
 function ListForm() {
-	const { user, setUser } = useAuthContext();
+	const [lists, setLists] = useState([]);
+	const { user } = useAuthContext();
 	const { list_id } = useParams();
 	const { listName } = useParams();
 	const navigate = useNavigate();
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
 	const [form, setForm] = useState({
-		list_name: "",
+		list_name: listName,
 		image: "",
 	});
+
+	useEffect(() => {
+		const fetchListsByUserId = async () => {
+			setIsProcessing(true);
+			try {
+				const allLists = await apiClient.getAllListsByUserId();
+				setLists(allLists.data.all_lists);
+			} catch (error) {
+				setErrors(error);
+			}
+
+			setIsProcessing(false);
+		};
+
+		fetchListsByUserId();
+	}, []);
+
+	useEffect(() => {
+		const gettingImgUrl = () => {
+			if (lists.length !== 0) {
+				for (let i = 0; i < lists.length; i++) {
+					if (lists[i].id == list_id) {
+						setForm({
+							list_name: listName,
+							image: lists[i].image,
+						});
+						i = lists.length;
+					}
+				}
+			}
+		};
+
+		gettingImgUrl();
+	}, [listName, list_id, lists]);
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
@@ -114,16 +149,6 @@ function ListForm() {
 		} else {
 			setErrors((e) => ({ ...e, list_name_error: null }));
 		}
-		if (form.image === "") {
-			setErrors((e) => ({
-				...e,
-				image_error: "Please enter an image URL or cancel.",
-			}));
-			setIsProcessing(false);
-			return;
-		} else {
-			setErrors((e) => ({ ...e, image_error: null }));
-		}
 
 		const { data, error } = await apiClient.editList(list_id, {
 			list_name: form.list_name,
@@ -183,23 +208,36 @@ function ListForm() {
 						/>
 					</div>
 
-					<Link to="/my-lists">
+					{/* <Link to="/my-lists">
 						<button className="btn delete-account" onClick={handleOneDelete}>
 							Delete List
 						</button>
-					</Link>
+					</Link> */}
 
 					<div className="footer">
-						<button
-							className="btn"
-							disabled={isProcessing}
-							onClick={handleOnSubmit}
-						>
-							{isProcessing ? "Loading..." : "Save"}
-						</button>
-						<Link to={`/my-lists`}>
-							<button className="btn cancel">Cancel</button>
-						</Link>
+						<span className="main-action-btns">
+							<button
+								className="btn"
+								disabled={isProcessing}
+								onClick={handleOnSubmit}
+							>
+								{isProcessing ? "Loading..." : "Save"}
+							</button>
+							<Link to={`/my-lists`}>
+								<button className="btn cancel">Cancel</button>
+							</Link>
+						</span>
+
+						<span>
+							<Link to="/my-lists">
+								<button
+									className="btn delete-account"
+									onClick={handleOneDelete}
+								>
+									Delete List
+								</button>
+							</Link>
+						</span>
 					</div>
 				</div>
 			</div>

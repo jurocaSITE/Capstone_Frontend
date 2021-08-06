@@ -5,7 +5,25 @@
     align-self: flex-end;
 }
 
+.Replies .show-replies-toggle {
+    display: flex;
+    align-items: center;
+
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1.05rem;
+    color: var(--light-shade-6-opacity);
+}
+.Replies .show-replies-toggle svg {
+    padding-right: .5em;
+}
+.Replies .replies-feed-container {
+    margin-top: .8em;
+}
+
 .Replies .reply-container {
+    position: relative;
     padding: 1em;
     margin: .5em 0;
 
@@ -35,4 +53,44 @@
     border: none;
     border-radius: var(--border-rad);
     color: var(--light-shade-8-opacity);
+}
+
+/* ----- EditReplyForm ----- */
+
+.EditReplyForm .form-card {
+    /* .reply-container is relative */
+    position: absolute;
+    right: 120px;
+    bottom: 10px;
+    z-index: 100;
+
+    max-width: 20em;
+
+    background: var(--light-shade);
+    color: black;
+    border-radius: var(--border-rad);
+    padding: .5em;
+}
+.EditReplyForm textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    max-width: 100%;
+    max-height: 30em;
+    padding: 2px .5em;
+    margin-top: .5em;
+    resize: none;
+    overflow-y: auto;
+
+    border: solid 1px #8692A6;
+    border-radius: var(--border-rad);
+}
+.EditReplyForm .form-actions {
+    margin-top: .5em;
+    color: black;
+}
+.EditReplyForm .form-actions button {
+    color: black;
+    border: none;
+    background: none;
+    font-family: inherit;
 }

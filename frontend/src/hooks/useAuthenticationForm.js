@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // this has all of the logic that is shared between our login form and register form
 export const useAuthenticationForm = ({ user }) => {
-	const navigate = useNavigate();
 	const [passVisible, setPassVisible] = useState(false)
 	const [errors, setErrors] = useState({});
 	const [form, setForm] = useState({
@@ -13,14 +11,6 @@ export const useAuthenticationForm = ({ user }) => {
 		email: "",
 		password: "",
 	});
-
-	useEffect(() => {
-		// if user is already logged in,
-		// redirect them to the home page
-		if (user?.email) {
-			navigate("/");
-		}
-	}, [user, navigate]);
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "email") {

@@ -81,7 +81,7 @@ class ApiClient {
 		return await this.request({
 			endpoint: `auth/update-genre-interests`,
 			method: `PUT`,
-      		data: interests
+			data: interests,
 		});
 	}
 
@@ -194,9 +194,9 @@ class ApiClient {
 			endpoint: `lists/${listId}/add-book/${bookId}`,
 			method: `POST`,
 		});
-    }
-    
-    async deleteBookById(list_id, book_id) {
+	}
+
+	async deleteBookById(list_id, book_id) {
 		return await this.request({
 			endpoint: `lists/${list_id}/delete-book/${book_id}`,
 			method: `DELETE`,
@@ -233,6 +233,13 @@ class ApiClient {
 		});
 	}
 
+	async getSingleRating(ratingId) {
+		return await this.request({
+			endpoint: `ratings/${ratingId}`,
+			method: `GET`,
+		});
+	}
+
 	async createNewRatingForBook(book_id, rating) {
 		return await this.request({
 			endpoint: `ratings/${book_id}`,
@@ -255,7 +262,7 @@ class ApiClient {
 			method: `DELETE`,
 		});
 	}
-	
+
 	/* ----- Reply Endpoints ----- */
 
 	async getRepliesForRating(rating_id) {
@@ -290,5 +297,7 @@ class ApiClient {
 }
 
 export default new ApiClient(
-	process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000"
+	// "https://teca-web.herokuapp.com"
+	// process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000"
+	"http://localhost:5000"
 );

@@ -8,7 +8,7 @@ import apiClient from "services/apiClient";
 import "./Navbar.css";
 
 export default function Navbar({ appRef }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user, setUser } = useAuthContext();
   const { show, nodeRef, triggerRef } = useDetectClickOut(false);
 
@@ -31,6 +31,9 @@ export default function Navbar({ appRef }) {
             {!user && (
               <>
                 <span className="user-buttons">
+                  <Link to="/" activeClassName="active" end>
+                    Home
+                  </Link>
                   <Link to="/login">Login</Link>
                   <Link to="/signup">Sign up</Link>
                 </span>
@@ -44,11 +47,6 @@ export default function Navbar({ appRef }) {
                     Home
                   </Link>
                 </li>
-                {/* <li>
-                  <Link to="/community" activeClassName="active" end>
-                    Community
-                  </Link>
-                </li> */}
                 <li>
                   <Link to="/my-lists" activeClassName="active" end>
                     My Lists
@@ -61,7 +59,9 @@ export default function Navbar({ appRef }) {
                   <li>Account</li>
                 </Link>
                 <Link to="/">
-                  <li className="sign-out" onClick={handleOnSignOut}>Sign Out</li>
+                  <li className="sign-out" onClick={handleOnSignOut}>
+                    Sign Out
+                  </li>
                 </Link>
               </ul>
             )}

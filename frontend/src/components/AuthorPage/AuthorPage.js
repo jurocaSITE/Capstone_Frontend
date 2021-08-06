@@ -5,107 +5,105 @@ import { useSearchContext } from "contexts/search";
 import apiClient from "services/apiClient";
 import { useParams } from "react-router-dom";
 
+const defaultUserPicture =
+  "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
 
-const defaultUserPicture = "https://source.unsplash.com/random/1440x400";
+export default function AuthorPage() {
+  let offset = 0;
+  const { author_name } = useParams();
+  const { errors, setErrors } = useSearchContext();
+  const [booksByAuthor, setBooksByAuthor] = useState([]);
+  const [booksRelatedToAuth, setBooksRelatedToAuth] = useState([]);
+  const [booksAboutAuthor, setBooksAboutAuthor] = useState([]);
+  const [isBooksByAuthorEmpty, setIsBooksByAuthorEmpty] = useState(true);
+  const [isBooksAboutAuthorEmpty, setIsBooksAboutAuthorEmpty] = useState(true);
 
-export default function AuthorPage() { 
-    let offset = 0;
-    const { author_name } = useParams();
-    const {
-      errors,
-      setErrors,
-    } = useSearchContext();
-    const [booksRelatedToAuth, setBooksRelatedToAuth] = useState([]);
-    const [booksByAuthor, setBooksByAuthor] = useState([]);
-    const [booksAboutAuthor, setBooksAboutAuthor] = useState([]);
-    const [isBooksByAuthorEmpty, setIsBooksByAuthorEmpty] = useState(true);
-    const [isBooksAboutAuthorEmpty, setIsBooksAboutAuthorEmpty] = useState(true);
+  useEffect(() => {
+    const fetchBooksByKeyword = async () => {
+      offset = 0;
+      let books_by_author = [];
+      let books_about_author = [];
 
+      const { data, error } = await apiClient.getBooksByKeyword(
+        author_name,
+        offset
+      );
+      if (error) {
+        setErrors((e) => ({ ...e, db: error }));
+      }
+      if (data?.books) {
+        setErrors(null);
+        setBooksRelatedToAuth(data.books);
 
-    useEffect(() => {
-	    const fetchBooksByKeyword = async () => {
-            offset = 0;
-            let books_by_author = [];
-            let books_about_author = [];
+        // console.log("data.books", data.books)
+        // console.log("data.books[0].authors", data.books[0].authors, "compare to: author_name ", author_name)
 
+        // THIS BLOCK FILTERS THE DATA.BOOKS TO ONLY KEEP BOOKS BY THE AUTHOR
 
-            const { data, error } = await apiClient.getBooksByKeyword(author_name, offset);
-            if (error) {
-            setErrors((e) => ({ ...e, db: error }));
+        for (let i = 0; i < data?.books?.length; i++) {
+          for (let j = 0; j < data?.books[i]?.authors?.length; j++) {
+            if (data?.books[i]?.authors[j] === author_name) {
+              books_by_author.push(data.books[i]);
             }
-            if (data?.books) {
-            setErrors(null);
-            setBooksRelatedToAuth(data.books);
+          }
+        }
+        setBooksByAuthor(books_by_author);
 
-            // console.log("data.books", data.books)
-            // console.log("data.books[0].authors", data.books[0].authors, "compare to: author_name ", author_name)
+        // THIS BLOCK FILTERS THE DATA.BOOKS TO ONLY KEEP BOOKS ABOUT THE AUTHOR
 
-                // THIS BLOCK FILTERS THE DATA.BOOKS TO ONLY KEEP BOOKS BY THE AUTHOR
+        for (let i = 0; i < data.books.length; i++) {
+          if (data.books[i]?.title?.includes(author_name)) {
+            books_about_author.push(data.books[i]);
+          }
+        }
+        setBooksAboutAuthor(books_about_author);
 
-                for (let i = 0; i < data.books.length; i++){ 
-                    for (let j = 0; j < data.books[i].authors.length; j++){
-                        if (data.books[i].authors[j] === author_name) {
-                            books_by_author.push(data.books[i]);
-                        }
-                    }
-                } 
-                setBooksByAuthor(books_by_author);
+        if (books_by_author?.length > 0) {
+          setIsBooksByAuthorEmpty(false);
+          console.log("isBooksByAuthorEmpty", isBooksByAuthorEmpty);
+        }
 
-                // THIS BLOCK FILTERS THE DATA.BOOKS TO ONLY KEEP BOOKS ABOUT THE AUTHOR
+        if (books_about_author?.length > 0) {
+          setIsBooksAboutAuthorEmpty(false);
+          console.log("isBooksAboutAuthorEmpty", isBooksAboutAuthorEmpty);
+        }
+      }
+    };
 
-                for (let i = 0; i < data.books.length; i++){ 
-                    if (data.books[i].title.includes(author_name)) {
-                        books_about_author.push(data.books[i]);
-                    }
-                } 
-                setBooksAboutAuthor(books_about_author);
+    fetchBooksByKeyword();
+  }, []); //use effect block runs whenever the dependency changes (the stuff in the array)
 
-                if (books_by_author.length > 0){
-                    setIsBooksByAuthorEmpty(false);
-                    console.log("isBooksByAuthorEmpty",isBooksByAuthorEmpty)
-                }
+  return (
+    <div className="AuthorPage">
+      <div
+        className="container"
+        style={{
+          backgroundImage: `url(${defaultUserPicture})`,
+        }}
+      >
+        {/* <img className="img" alt="author profile" src={defaultUserPicture} /> */}
+        <div className="author-header">
+          <h1>{author_name}</h1>
+          <h3>1,860,293 monthly readers</h3>
+        </div>
+      </div>
 
-                if (books_about_author.length > 0){
-                    setIsBooksAboutAuthorEmpty(false);
-                    console.log("isBooksAboutAuthorEmpty",isBooksAboutAuthorEmpty)
-                }
-
-            }
-        };
-
-        fetchBooksByKeyword();
-    }, []); //use effect block runs whenever the dependency changes (the stuff in the array)
-
-    return (
-		<div className="AuthorPage">
-
-            <div className="container">
-                <img
-                    className="img"
-                    alt="author profile"
-                    src={defaultUserPicture}
-                />
-                <div className="author-header-name"><h1>{author_name}</h1></div>
-                <div className="monthy-readers"><h3>1,860,293 monthly readers</h3></div>
+      <div className="information">
+        <div className="books-by-and-about-author">
+          <h2>Books related to: {author_name}</h2>
+          {isBooksByAuthorEmpty === false ? (
+            <div className="books">
+              {booksRelatedToAuth.map((book) => (
+                <BookPreview book={book} key={book.title} />
+              ))}
             </div>
+          ) : (
+            <div className="empty-message">
+              <h2>We did not find any books related to this author.</h2>
+            </div>
+          )}
 
-            <div className="information">
-                <div className="books-by-and-about-author">
-
-                    <h2>Books related to: {author_name}</h2>
-                        {isBooksByAuthorEmpty === false ? (
-                            <div className="books">
-                                {booksRelatedToAuth.map((book) => (
-                                    <BookPreview book={book} key={book.title} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="empty-message">
-                                <h2>We did not find any books related to this author.</h2>
-                            </div>
-                        )}
-
-                    {/* <h2>{author_name}'s bibliography</h2>
+          {/* <h2>{author_name}'s bibliography</h2>
                     {isBooksByAuthorEmpty === false ? (
                         <div className="books">
                             {booksByAuthor.map((book) => (
@@ -118,7 +116,7 @@ export default function AuthorPage() {
                         </div>
                     )} */}
 
-                    {/* <h2>Books written about {author_name}</h2>
+          {/* <h2>Books written about {author_name}</h2>
                     {isBooksAboutAuthorEmpty === false ? (
                         <div className="books">
                             {booksAboutAuthor.map((book) => (
@@ -130,9 +128,21 @@ export default function AuthorPage() {
                             <h2>We did not find any books about this author.</h2>
                         </div>
                     )} */}
-                </div>
-            </div>
 
-		</div>
-	);
+          <h2>Books written about {author_name}</h2>
+          {isBooksAboutAuthorEmpty === false ? (
+            <div className="books">
+              {booksAboutAuthor.map((book) => (
+                <BookPreview book={book} key={book.title} />
+              ))}
+            </div>
+          ) : (
+            <div className="empty-message">
+              <h2>We did not find any books about this author.</h2>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }

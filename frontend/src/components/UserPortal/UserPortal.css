@@ -22,6 +22,7 @@
     position: absolute;
     left: -5.5em;
     top: 1.5em;
+    z-index: 100;
 
     background: var(--light-shade);
     width: 7em;

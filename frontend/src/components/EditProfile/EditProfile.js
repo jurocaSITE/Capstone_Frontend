@@ -11,16 +11,14 @@ function EditProfile() {
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [errors, setErrors] = useState({});
 	const { user, setUser } = useAuthContext();
+	const [successMessage, setSuccessMessage] = useState(false);
+	const birthDate = moment(user?.date_of_birth).format("MM/DD/YYYY");
 	const [form, setForm] = useState({
 		first_name: user?.first_name,
 		last_name: user?.last_name,
 		profile_picture: user?.profile_picture || "",
 		date_of_birth: "",
 	});
-	//TODO: DELETE THESE CONSOLE LOGS
-	// console.log(user?.date_of_birth);
-	// console.log(moment(user?.date_of_birth).format("YYYY/MM/DD"));
-	const birthDate = moment(user?.date_of_birth).format("MM/DD/YYYY");
 
 	const fetchUser = async () => {
 		const { data, error } = await apiClient.fetchUserFromToken();
@@ -135,7 +133,11 @@ function EditProfile() {
 		if (error) setErrors((e) => ({ ...e, form: error }));
 		else {
 			fetchUser();
-			navigate("/profile");
+			setSuccessMessage(true);
+			setTimeout(() => {
+				setSuccessMessage(false);
+			}, 5000);
+			navigate("/account");
 		}
 
 		setIsProcessing(false);
@@ -151,6 +153,11 @@ function EditProfile() {
 
 				{errors.form && <span className="error">{errors.form}</span>}
 				<br />
+				{successMessage && (
+					<span className="success-message">
+						{successMessage ? "Sucessfully updated" : ""}
+					</span>
+				)}
 
 				<div className="form">
 					<div className="input-field">

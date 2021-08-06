@@ -1,11 +1,21 @@
 import apiClient from "services/apiClient";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthenticationForm } from "hooks/useAuthenticationForm";
 
 export const useLoginForm = ({ user, setUser }) => {
+	const navigate = useNavigate()
 	const { form, errors, passVisible, togglePassVisibility, setErrors, handleOnInputChange } =
 		useAuthenticationForm({ user });
 	const [isProcessing, setIsProcessing] = useState(false);
+
+	useEffect(() => {
+		// if user is already logged in,
+		// redirect them to the home page
+		if (user?.email) {
+			navigate("/");
+		}
+	}, [user, navigate]);
 
 	const handleOnSubmit = async () => {
 		setIsProcessing(true);

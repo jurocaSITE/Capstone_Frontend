@@ -1,58 +1,74 @@
 .UpdateGenreInterests {
-    min-height: 100vh;
-    width: 80%;
-    margin: 0 auto;
+	min-height: 100vh;
+	width: 80%;
+	margin: 0 auto;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    padding: 1em .5em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	padding: 1em 0.5em;
 }
 .UpdateGenreInterests .interests-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    gap: 1em;
-   
-    padding: 1em 3em;
-    border-radius: var(--border-rad);
-    background: rgba(255, 255, 255, .1);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto;
+	gap: 1em;
+
+	padding: 1em 3em;
+	border-radius: var(--border-rad);
+	background: rgba(255, 255, 255, 0.1);
 }
 .UpdateGenreInterests input[type="checkbox"] {
-    display: none;
+	display: none;
 }
 .UpdateGenreInterests .interest-card {
-    position: relative;
-    padding: .5em 2em;
-    margin: 0 1em;
-    white-space: nowrap;
-    text-transform: capitalize;
+	position: relative;
+	padding: 0.5em 2em;
+	margin: 0 1em;
+	white-space: nowrap;
+	text-transform: capitalize;
 
-    color: var(--dark-shade);
-    background: var(--light-shade);
-    border-radius: var(--border-rad);
-    box-shadow: var(--default-shadow);
+	color: var(--dark-shade);
+	background: var(--light-shade);
+	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
 
-    transition: ease .25s;
+	transition: ease 0.25s;
 }
 .UpdateGenreInterests .interest-card:hover {
-    cursor: pointer;
-    transform: scale(1.05);
+	cursor: pointer;
+	transform: scale(1.05);
 }
 .UpdateGenreInterests .checked {
-    background: var(--light-shade-6-opacity);
+	background: var(--light-shade-6-opacity);
 }
 .UpdateGenreInterests .interest-card svg {
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
 
-    color: var(--light-accent);
+	color: var(--light-accent);
 }
 .UpdateGenreInterests .checked svg {
-    color: green;
+	color: green;
 }
 .UpdateGenreInterests button {
-    margin-top: 1em;
+	margin-top: 1em;
+}
+
+.UpdateGenreInterests .buttons {
+	display: flex;
+}
+.UpdateGenreInterests .buttons .go-back {
+	margin-right: 2em;
+}
+.UpdateGenreInterests .success-message {
+	background: #c6fb91;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
 }

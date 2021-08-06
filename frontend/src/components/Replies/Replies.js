@@ -1,24 +1,20 @@
 import "./Replies.css";
 import { useEffect, useState } from "react";
+import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import moment from "moment";
 import apiClient from "services/apiClient";
 import { useReplyForm } from "hooks/useReplyForm";
+import useDetectClickOut from "hooks/useDetectClickOut";
 import { useAuthContext } from "contexts/auth";
 
-function Replies({ ratingId }) {
+export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
   const { user } = useAuthContext();
-  const [replies, setReplies] = useState([]);
+  const [showReplies, setShowReplies] = useState(false);
   const [isFetching, setIsFetching] = useState([]);
   const [errors, setErrors] = useState(null);
-  const {
-    form,
-    isProcessing,
-    setIsProcessing,
-    resetForm,
-    handleOnInputChange,
-    handleOnUpdate,
-    handleOnDelete
-  } = useReplyForm({ ratingId, replyId: 0 });
+  const { isProcessing, handleOnDelete } = useReplyForm({
+    ratingId,
+  });
 
   const userOwnsReply = (reply) => {
     if (user?.id === reply?.userId) {
@@ -27,6 +23,8 @@ function Replies({ ratingId }) {
       return false;
     }
   };
+
+  const repliesExist = replies[repliesIdx]?.length;
 
   useEffect(() => {
     const fetchReplies = async () => {
@@ -39,55 +37,147 @@ function Replies({ ratingId }) {
       }
       if (data?.replies) {
         setErrors((e) => ({ ...e, reply: null }));
-        setReplies(data.replies);
+        setReplies((r) => ({ ...r, [repliesIdx]: data.replies }));
       }
 
       setIsFetching(false);
     };
 
     fetchReplies();
-  }, [ratingId]);
+  }, [ratingId, repliesIdx, setReplies]);
 
-  const updateOnDelete = async (replyId) => {
-		setIsProcessing(true);
-    // most logic handled by useReplyForm custom hook
-		const deletedItem = await handleOnDelete(replyId)
-		if (deletedItem) {
-      // TODO: explore more efficient ways to remove an item from an array
-      const newData = replies.filter((r) => !(r.id === deletedItem.id));
-      setReplies(newData);
-		}
-		setIsProcessing(false);
-	};
+  const toggleShowReplies = () => setShowReplies(!showReplies);
 
   return (
     <div className="Replies">
       {/* {errors?.reply && <span className="error">{errors.reply}</span>} */}
 
-      {replies.map((x) => (
-        <div className="reply-container">
-          <p>{x.replyBody}</p>
-          <span className="reply-meta">
-            {moment(x.updatedAt).format("lll")}
-            {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+      {repliesExist ? (
+        <button className="show-replies-toggle" onClick={toggleShowReplies}>
+          {showReplies ? (
+            <>
+            <GoTriangleUp />
+            Hide {repliesExist} Replies
+            </>
+          ) : (
+            <>
+            <GoTriangleDown />
+            View {repliesExist} Replies
+            </>
+          )}
+        </button>
+      ) : null}
 
-            {userOwnsReply(x) && (
-              <span className="meta-actions">
-                <button className="edit-reply-btn">Edit</button>
-                <button
-                  className="delete-reply-btn"
-                  onClick={() => updateOnDelete(x.id)}
-                  disabled={isProcessing}
-                >
-                  Delete
-                </button>
-              </span>
-            )}
-          </span>
-        </div>
-      ))}
+      <div hidden={!showReplies} className="replies-feed-container">
+        {replies[repliesIdx]?.map((x) => (
+          <div className="reply-container">
+            <p>{x.replyBody}</p>
+            <span className="reply-meta">
+              {moment(x.updatedAt).format("lll")}
+              {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+
+              {userOwnsReply(x) && (
+                <span className="meta-actions">
+                  <EditReplyForm
+                    ratingId={ratingId}
+                    replyId={x.id}
+                    replyBody={x.replyBody}
+                    replies={replies}
+                    setReplies={setReplies}
+                    repliesIdx={repliesIdx}
+                  />
+                  <button
+                    className="delete-reply-btn"
+                    onClick={() =>
+                      handleOnDelete(x.id, replies, setReplies, repliesIdx)
+                    }
+                    disabled={isProcessing}
+                  >
+                    Delete
+                  </button>
+                </span>
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-export default Replies;
+function EditReplyForm({
+  ratingId,
+  replyId,
+  replyBody,
+  replies,
+  setReplies,
+  repliesIdx,
+}) {
+  const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
+  const {
+    form,
+    isProcessing,
+    setForm,
+    handleOnInputChange,
+    handleOnUpdate,
+  } = useReplyForm({ ratingId });
+
+  useEffect(() => {
+    setForm({
+      replyBody: replyBody,
+    });
+  }, [replyBody, setForm]);
+
+  return (
+    <span className="EditReplyForm">
+      <button ref={triggerRef}>Edit</button>
+
+      {show && (
+        <div ref={nodeRef} className="form-card">
+          <label hidden htmlFor="replyBody">
+            Update Reply
+          </label>
+          {/* {errors.reply && <span className="error">{errors.reply}</span>} */}
+          <textarea
+            name="replyBody"
+            placeholder="Add a Public Reply..."
+            rows="4"
+            cols="30"
+            value={form.replyBody}
+            onChange={handleOnInputChange}
+          />
+
+          <span className="form-actions">
+            <button
+              className="submit-reply-btn"
+              onClick={() => {
+                handleOnUpdate(
+                  setShow,
+                  replyId,
+                  replies,
+                  setReplies,
+                  repliesIdx
+                );
+              }}
+              disabled={isProcessing}
+            >
+              Update
+            </button>
+            <button
+              className="cancel-reply-btn"
+              onClick={() => {
+                setForm({
+                  replyBody: replyBody,
+                });
+                setShow(false);
+              }}
+              disabled={isProcessing}
+            >
+              Cancel
+            </button>
+          </span>
+        </div>
+      )}
+    </span>
+  );
+}

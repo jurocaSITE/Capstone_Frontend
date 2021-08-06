@@ -116,3 +116,13 @@
 	transition: ease 0.25s;
 	margin-left: 10px;
 }
+
+.EditProfile .success-message {
+	background: #c6fb91;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+}

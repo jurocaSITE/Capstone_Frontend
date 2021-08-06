@@ -16,6 +16,12 @@ export default function Register() {
     handleOnSubmit,
   } = useRegistrationForm({ user, setUser });
 
+  const keyPressEnter = (e) => {
+    if (e.keyCode === 13) {
+      handleOnSubmit();
+    }
+  };
+
   return (
     <div className="Register">
       <div className="card">
@@ -93,6 +99,7 @@ export default function Register() {
               placeholder="Enter a secure password"
               value={form.password}
               onChange={handleOnInputChange}
+              onKeyDown={keyPressEnter}
               required
             />
             <span className="pass-eye" onClick={togglePassVisibility}>

@@ -6,7 +6,8 @@ import { NotAllowed } from "components";
 import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
 
-const defaultUserPicture = "https://source.unsplash.com/random";
+const defaultUserPicture =
+	"https://images.unsplash.com/photo-1557672211-0741026eacfb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
 
 function ProfilePage() {
 	const { user } = useAuthContext();
@@ -110,7 +111,7 @@ function ProfilePage() {
 					</div> */}
 				</div>
 			</div>
-			<div className="top-authors">
+			{/* <div className="top-authors">
 				<h2>Top authors this month</h2>
 				<div className="author-cards">
 					<AuthorCard />
@@ -118,7 +119,7 @@ function ProfilePage() {
 					<AuthorCard />
 					<AuthorCard />
 				</div>
-			</div>
+			</div> */}
 			<div className="library">
 				<h2>My Library</h2>
 				<div className="lists-cards">
