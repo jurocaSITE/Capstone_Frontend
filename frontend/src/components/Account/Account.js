@@ -7,10 +7,10 @@ import { useAuthContext } from "contexts/auth";
 import { NotAllowed } from "components";
 
 function Account() {
-	const navigate = useNavigate();
-	const { user, setUser } = useAuthContext();
-	const [errors, setErrors] = useState({});
-	const [toggleState, setToggleState] = useState(1);
+  const navigate = useNavigate();
+  const { user, setUser } = useAuthContext();
+  const [errors, setErrors] = useState({});
+  const [toggleState, setToggleState] = useState(1);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -29,16 +29,16 @@ function Account() {
     handleOnSignOut();
   };
 
-	if (!user?.email) {
-		return <NotAllowed />;
-	}
-	return (
-		<div className="Account">
-			<section className="header">
-				<h1>Account</h1>
-				<p>Update your profile and set your account preferences</p>
-			</section>
-			{/*<section className="card-content">
+  if (!user?.email) {
+    return <NotAllowed />;
+  }
+  return (
+    <div className="Account">
+      <section className="header">
+        <h1>Account</h1>
+        <p>Update your profile and set your account preferences</p>
+      </section>
+      {/*<section className="card-content">
 				<div className="card">
 					<h1>hola</h1>
 					<h1>hola</h1>
@@ -102,6 +102,15 @@ function Account() {
               text={`Update Interests`}
               link={`/update-interests`}
             />
+
+            <h4 className="current-interests-header">Current Interests</h4>
+            <hr/>
+            <div className="current-interests-feed">
+              {!user?.genre_interest?.length && "No interests found. Change this by adding some with the button above."}
+              {user?.genre_interest?.map((genre) => (
+                <span className="genre-tag">{genre}</span>
+              ))}
+            </div>
           </div>
 
           <div

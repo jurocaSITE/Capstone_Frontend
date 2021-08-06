@@ -5,7 +5,7 @@ import { useSearchContext } from "contexts/search";
 import apiClient from "services/apiClient";
 import { useParams } from "react-router-dom";
 
-const defaultUserPicture = "https://source.unsplash.com/random/1440x400";
+const defaultUserPicture = "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
 
 export default function AuthorPage() {
   let offset = 0;

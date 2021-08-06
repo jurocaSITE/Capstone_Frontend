@@ -120,3 +120,19 @@
 	box-shadow: var(--default-shadow);
 	transform: scale(1.1);
 }
+
+/* ----- Update Interests Tab ----- */
+.Account .current-interests-header {
+	margin-top: 1em;
+}
+.Account .current-interests-feed {
+	display: flex;
+	flex-wrap: wrap;
+}
+.Account .current-interests-feed .genre-tag {
+	border-radius: var(--border-rad);
+	background: var(--light-accent);
+	color: var(--light-shade);
+	padding: .25em .5em;
+	margin: .25em;
+}
