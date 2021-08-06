@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 export default function DetailedListRow({ book }) {
+// export default function DetailedListRow({ book, handleOnRemove }) {
     const { list_id } = useParams(); // searches url for list_id param if list else null
     const [lists, setLists] = useState([]);
     const [errors, setErrors] = useState(null);
@@ -18,6 +19,10 @@ export default function DetailedListRow({ book }) {
 	const [showMenu, setShowMenu] = useState(false);
 
 	const toggleMenu = () => setShowMenu(!showMenu);
+
+    // const removeClickHandler = async () => {
+    //     handleOnRemove(book.id);
+    // };
 
     const handleOnRemove = async (event) => {
         await apiClient.deleteBookById(list_id, book.id);
@@ -87,10 +92,6 @@ export default function DetailedListRow({ book }) {
                     }
                     ></img>
                 </div>
-                
-                {/* <div className="row-item">
-                        <h2>{bookList.index + 1}</h2>
-                </div> */}
 
 				<div className="row-item">
                     <h3>{book.title}</h3>
@@ -114,6 +115,7 @@ export default function DetailedListRow({ book }) {
                     <MoreHorizIcon className="three-dots" onClick={toggleMenu} />
                         {showMenu && (
                             <ul className="options">
+                                    {/* <button className="btn" onClick={removeClickHandler}> */}
                                     <button className="btn" onClick={handleOnRemove}>
                                         Remove
                                     </button>
@@ -128,7 +130,7 @@ export default function DetailedListRow({ book }) {
                 </div>
             
 			</div>
-             <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
+             {/* <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
                 <div className="select-list">
                     {lists.map((list) => (
                     <button
@@ -147,7 +149,7 @@ export default function DetailedListRow({ book }) {
                     </button>
                     ))}
                 </div>
-            </Modal> 
+            </Modal>  */}
             <Modal id={`modal-opened-${book.id}-copy`} modal_title="Copy to">
                 <div className="select-list">
                     {lists.map((list) => (

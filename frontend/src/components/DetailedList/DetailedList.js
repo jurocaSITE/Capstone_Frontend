@@ -1,7 +1,7 @@
 import "./DetailedList.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { DetailedListRow} from "components";
+import { DetailedListRow, ListView } from "components";
 import apiClient from "services/apiClient";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "contexts/auth";
@@ -15,7 +15,6 @@ export default function DetailedList() {
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
     const [isEmpty, setIsEmpty] = useState(true);
-    const [isFetching, setIsFetching] = useState(false);
 
     
 	useEffect(() => {
@@ -61,16 +60,36 @@ export default function DetailedList() {
 		fetchListContents();
 	}, []); //use effect block runs whenever the dependency changes (the stuff in the array)
 
-	if (!user?.email) {
-		return <NotAllowed />;
-	}
-    const addToList = async (bookId, listId) => {
-		setIsFetching(true);
+		//create component "ListView" with just a div that iterates through bookList and provide detailedListRow
+		//pass bookList to the componenent
 
-		const { data, error } = await apiClient.addBookToList(bookId, listId);
+	// const handleOnRemove = async (bookId) => {
+	// 	const deletedItem = await apiClient.deleteBookById(list_id, bookId);
+	// 	console.log("bookId is", bookId)
+    // };
 
-		setIsFetching(false);
-	};
+    // const handleOnCopy = async (bookId, listId) => {
+    //     const { data, error } = await apiClient.addBookToList(bookId, listId);
+    //     if (error) {
+    //         setErrors(error);
+    //         console.log(error)
+    //     }
+    // };
+
+    // const handleOnTransfer = async (bookId, listId) => {
+    //     const { data, error } = await apiClient.addBookToList(bookId, listId);
+    //     if (error) {
+    //         setErrors(error);
+    //         console.log(error)
+    //     }
+    //     if (!error){
+    //         handleOnRemove();
+    //     }
+	// };
+	
+	// if (!user?.email) {
+	// 	return <NotAllowed />;
+	// }
 
 	return (
 		<div className="DetailedList">
@@ -102,12 +121,12 @@ export default function DetailedList() {
 					</div>
 				) : (
 					<div className="book-info">
-						<div className="index">
-							{/* {listContents.map((book, index) => (
+						<div className="display">
+							{/* <ListView bookList={bookList} handleOnRemove={handleOnRemove} /> */}
+							{/* {bookList.map((book) => (
 								<div className="row">
-									<h2>{index + 1}</h2>
-								</div>
-								
+									<DetailedListRow book={book} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer}/>
+								</div>	
 							))} */}
 							{bookList.map((book) => (
 								<div className="row">
@@ -115,78 +134,6 @@ export default function DetailedList() {
 								</div>	
 							))}
 						</div>
-						{/* <div className="preview">
-							{bookList.map((book) => (
-								<div className="row">
-									<img
-										alt="book cover"
-										src={
-											// book?.imageLinks?.large ||
-											// book?.imageLinks?.medium ||
-											// book?.imageLinks?.small ||
-											book?.imageLinks?.thumbnail
-										}
-									></img>
-								</div>
-							))}
-						</div>
-						<div className="title-and-author">
-							{bookList.map((book) => (
-								<div className="row">
-									<h3>{book.title}</h3>
-									<h3>by <a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></h3>
-								</div>
-							))}
-						</div>
-						<div className="dates">
-							{listContents.map((book) => (
-								<div className="row">
-									<h3>{moment(book.added_on).format("MMMM Do YYYY")}</h3>
-								</div>
-							))}
-						</div>
-						<div className="tags">
-							{bookList?.map((book) => {
-								// book.categories = array w/categories
-								// array called unique categories --> implement logic here using split("/") that
-								// gets all unique categories and then returns for each book in the list
-								const unique_categories = [];
-
-								for (let i = 0; i < book?.categories?.length; i++) {
-									let split = book.categories[i].split("/");
-									for (let j = 0; j < split.length; j++) {
-										if (!unique_categories.includes(split[j])) {
-											unique_categories.push(split[j]);
-										}
-									}
-								}
-								return (
-									<div className="row">
-										{unique_categories.map((category) => {
-											return (
-												<div className="r">
-													<Genre text={category} />
-												</div>
-											);
-										})}
-									</div>
-								);
-							})}
-						</div>
-						<div className="page-count">
-							{bookList.map((book) => (
-								<div className="row">
-									<h2>{book.pageCount}</h2>
-								</div>
-							))}
-						</div>
-						<div className="settings">
-							{bookList.map((book) => (
-								<div className="row">
-                                    <ListSidebar />
-								</div>
-							))}
-						</div> */}
 					</div>
 				)}
 			</div>
