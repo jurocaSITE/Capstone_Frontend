@@ -129,37 +129,41 @@ export default function DetailedListRow({ book }) {
             
 			</div>
              <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
-                {lists.map((list) => (
-                <button
-                    className="btn-select-list"
-                    key={list.id}
-                    onClick={() => {
-                        // console.log("errors is", errors)
-                        // console.log("this should be false", (errors === "Cannot add duplicate book."))
-                        // console.log("babyError is", babyError)
-                            handleOnTransfer(list.id);   
-                            console.log("book.id", book.id, "book title is", book.title)
-                            console.log("transfer and delete should have successfully happened")                       
-                    }}
-                >
-                {list.list_name}
-                </button>
-                ))}
+                <div className="select-list">
+                    {lists.map((list) => (
+                    <button
+                        className="btn-select-list"
+                        key={list.id}
+                        onClick={() => {
+                            // console.log("errors is", errors)
+                            // console.log("this should be false", (errors === "Cannot add duplicate book."))
+                            // console.log("babyError is", babyError)
+                                handleOnTransfer(list.id);   
+                                console.log("book.id", book.id, "book title is", book.title)
+                                console.log("transfer and delete should have successfully happened")                       
+                        }}
+                    >
+                    {list.list_name}
+                    </button>
+                    ))}
+                </div>
             </Modal> 
             <Modal id={`modal-opened-${book.id}-copy`} modal_title="Copy to">
-                {lists.map((list) => (
-                <button
-                    className="btn-select-list"
-                    key={list.id}
-                    onClick={() => {
-                            handleOnCopy(list.id);   
-                            console.log("book.id", book.id, "book title is", book.title)
-                            console.log("copying book to another list successfully happened")                       
-                    }}
-                >
-                {list.list_name}
-                </button>
-                ))}
+                <div className="select-list">
+                    {lists.map((list) => (
+                    <button
+                        className="btn-select-list"
+                        key={list.id}
+                        onClick={() => {
+                                handleOnCopy(list.id);   
+                                console.log("book.id", book.id, "book title is", book.title)
+                                console.log("copying book to another list successfully happened")                       
+                        }}
+                    >
+                    {list.list_name}
+                    </button>
+                    ))}
+                </div>
             </Modal> 
 		</div>
 	);
