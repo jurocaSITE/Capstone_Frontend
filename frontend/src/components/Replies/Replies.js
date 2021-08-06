@@ -1,5 +1,6 @@
 import "./Replies.css";
 import { useEffect, useState } from "react";
+import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import moment from "moment";
 import apiClient from "services/apiClient";
 import { useReplyForm } from "hooks/useReplyForm";
@@ -53,7 +54,17 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
 
       {repliesExist ? (
         <button className="show-replies-toggle" onClick={toggleShowReplies}>
-          {showReplies ? `Hide ${repliesExist} Replies` : `View ${repliesExist} Replies`}
+          {showReplies ? (
+            <>
+            <GoTriangleUp />
+            Hide {repliesExist} Replies
+            </>
+          ) : (
+            <>
+            <GoTriangleDown />
+            View {repliesExist} Replies
+            </>
+          )}
         </button>
       ) : null}
 
@@ -107,7 +118,6 @@ function EditReplyForm({
     form,
     isProcessing,
     setForm,
-    resetForm,
     handleOnInputChange,
     handleOnUpdate,
   } = useReplyForm({ ratingId });
@@ -156,7 +166,9 @@ function EditReplyForm({
             <button
               className="cancel-reply-btn"
               onClick={() => {
-                resetForm();
+                setForm({
+                  replyBody: replyBody,
+                });
                 setShow(false);
               }}
               disabled={isProcessing}

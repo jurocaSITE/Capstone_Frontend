@@ -130,7 +130,7 @@ export default function Ratings({ book_id }) {
                     <FaRegStar /> {x.rating}
                   </p>
                 </span>
-                <p>{x.reviewBody}</p>
+                <p className="review-body">{x.reviewBody}</p>
                 <span className="meta">
                   {moment(x.updatedAt).format("lll")}
                   {x.updatedAt !== x.createdAt ? ` (edited)` : null}

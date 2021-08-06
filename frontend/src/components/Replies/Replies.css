@@ -5,6 +5,23 @@
     align-self: flex-end;
 }
 
+.Replies .show-replies-toggle {
+    display: flex;
+    align-items: center;
+
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1.05rem;
+    color: var(--light-shade-6-opacity);
+}
+.Replies .show-replies-toggle svg {
+    padding-right: .5em;
+}
+.Replies .replies-feed-container {
+    margin-top: .8em;
+}
+
 .Replies .reply-container {
     position: relative;
     padding: 1em;
