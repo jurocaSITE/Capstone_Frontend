@@ -15,6 +15,7 @@ export default function AuthorPage() {
       errors,
       setErrors,
     } = useSearchContext();
+    const [booksRelatedToAuth, setBooksRelatedToAuth] = useState([]);
     const [booksByAuthor, setBooksByAuthor] = useState([]);
     const [booksAboutAuthor, setBooksAboutAuthor] = useState([]);
     const [isBooksByAuthorEmpty, setIsBooksByAuthorEmpty] = useState(true);
@@ -34,6 +35,7 @@ export default function AuthorPage() {
             }
             if (data?.books) {
             setErrors(null);
+            setBooksRelatedToAuth(data.books);
 
             // console.log("data.books", data.books)
             // console.log("data.books[0].authors", data.books[0].authors, "compare to: author_name ", author_name)
@@ -89,7 +91,21 @@ export default function AuthorPage() {
 
             <div className="information">
                 <div className="books-by-and-about-author">
-                    <h2>{author_name}'s bibliography</h2>
+
+                    <h2>Books related to: {author_name}</h2>
+                        {isBooksByAuthorEmpty === false ? (
+                            <div className="books">
+                                {booksRelatedToAuth.map((book) => (
+                                    <BookPreview book={book} key={book.title} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="empty-message">
+                                <h2>We did not find any books related to this author.</h2>
+                            </div>
+                        )}
+
+                    {/* <h2>{author_name}'s bibliography</h2>
                     {isBooksByAuthorEmpty === false ? (
                         <div className="books">
                             {booksByAuthor.map((book) => (
@@ -100,9 +116,9 @@ export default function AuthorPage() {
                         <div className="empty-message">
                             <h2>We did not find any books by this author.</h2>
                         </div>
-                    )}
+                    )} */}
 
-                    <h2>Books written about {author_name}</h2>
+                    {/* <h2>Books written about {author_name}</h2>
                     {isBooksAboutAuthorEmpty === false ? (
                         <div className="books">
                             {booksAboutAuthor.map((book) => (
@@ -113,7 +129,7 @@ export default function AuthorPage() {
                         <div className="empty-message">
                             <h2>We did not find any books about this author.</h2>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
 
