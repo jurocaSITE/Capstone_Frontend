@@ -1,14 +1,14 @@
 import "./ListCard.css";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "contexts/auth";
+// import { useAuthContext } from "contexts/auth";
 import useDetectClickOut from "hooks/useDetectClickOut";
 
 const defaultBookCover = "https://source.unsplash.com/random";
 
 function ListCard({ list }) {
-	const { user } = useAuthContext();
+	// const { user } = useAuthContext();
 	const { show, nodeRef, triggerRef } = useDetectClickOut(false);
 	// const [expanded, setExpanded] = React.useState(false);
 

@@ -1,12 +1,13 @@
 import "./ListForm.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import apiClient from "services/apiClient";
 import { useAuthContext } from "contexts/auth";
 import { NotAllowed } from "components";
 
 function ListForm() {
-	const { user, setUser } = useAuthContext();
+	const [lists, setLists] = useState([]);
+	const { user } = useAuthContext();
 	const { list_id } = useParams();
 	const { listName } = useParams();
 	const navigate = useNavigate();
@@ -16,6 +17,40 @@ function ListForm() {
 		list_name: listName,
 		image: "",
 	});
+
+	useEffect(() => {
+		const fetchListsByUserId = async () => {
+			setIsProcessing(true);
+			try {
+				const allLists = await apiClient.getAllListsByUserId();
+				setLists(allLists.data.all_lists);
+			} catch (error) {
+				setErrors(error);
+			}
+
+			setIsProcessing(false);
+		};
+
+		fetchListsByUserId();
+	}, []);
+
+	useEffect(() => {
+		const gettingImgUrl = () => {
+			if (lists.length !== 0) {
+				for (let i = 0; i < lists.length; i++) {
+					if (lists[i].id == list_id) {
+						setForm({
+							list_name: listName,
+							image: lists[i].image,
+						});
+						i = lists.length;
+					}
+				}
+			}
+		};
+
+		gettingImgUrl();
+	}, [listName, list_id, lists]);
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
@@ -113,16 +148,6 @@ function ListForm() {
 			return;
 		} else {
 			setErrors((e) => ({ ...e, list_name_error: null }));
-		}
-		if (form.image === "") {
-			setErrors((e) => ({
-				...e,
-				image_error: "Please enter an image URL or cancel.",
-			}));
-			setIsProcessing(false);
-			return;
-		} else {
-			setErrors((e) => ({ ...e, image_error: null }));
 		}
 
 		const { data, error } = await apiClient.editList(list_id, {

@@ -17,14 +17,6 @@ function ListFormCreateNew() {
 	const { bookId } = useParams(); // searches for a book id patam if not sets to null
 	const [isFetching, setIsFetching] = useState(false);
 
-	// throw error if the user tries to name a list with a default name
-	const defaultListNames = [
-		"Want To Read",
-		"Currently Reading",
-		"Did Not Finish",
-		"Finished",
-	];
-
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "list_name") {
 			if (event.target.value === "") {
@@ -143,12 +135,14 @@ function ListFormCreateNew() {
 						{errors.image_error && (
 							<span className="error">{errors.image_error}</span>
 						)}
-						<label htmlFor="image">New Cover</label>
+						<label htmlFor="image">
+							New Cover (Leave blanck for default list cover)
+						</label>
 						<input
 							type="text"
 							// type="file"
 							name="image"
-							placeholder="Leave blanck for default list cover"
+							placeholder="Add new image URL."
 							value={form.image}
 							onChange={handleOnInputChange}
 						/>

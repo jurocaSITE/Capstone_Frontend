@@ -128,10 +128,10 @@ function Lists() {
 			<div className="display-lists-area">
 				{filteredData
 					? filteredData.map((list) => (
-							<ListCard list={list} className="list-card" />
+							<ListCard key={list.id} list={list} className="list-card" />
 					  ))
 					: otherLists.map((list) => (
-							<ListCard list={list} className="list-card" />
+							<ListCard key={list.id} list={list} className="list-card" />
 					  ))}
 				{/* {alphabeticallySortedLists.map((list) => (
 					<ListCard list={list} className="list-card" />
