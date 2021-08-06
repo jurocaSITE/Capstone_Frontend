@@ -176,7 +176,7 @@ export default function Book() {
           </div>
         </div>
 
-        <Modal>
+        <Modal modal_title="Add To">
           <div className="select-list">
             {lists.map((list) => (
               <button

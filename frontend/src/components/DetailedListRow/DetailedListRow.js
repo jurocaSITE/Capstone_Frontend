@@ -10,23 +10,26 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 export default function DetailedListRow({ book }) {
     const { list_id } = useParams(); // searches url for list_id param if list else null
-    const [expanded, setExpanded] = React.useState(false);
     const [lists, setLists] = useState([]);
     const [errors, setErrors] = useState(null);
     const [isFetchingLists, setIsFetchingLists] = useState(false);
-    const [babyError, setBabyError] = useState({});
     const { user } = useAuthContext();
-
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-    };
     
 	const [showMenu, setShowMenu] = useState(false);
 
 	const toggleMenu = () => setShowMenu(!showMenu);
 
-    const handleOnDelete = async (event) => {
+    const handleOnRemove = async (event) => {
         await apiClient.deleteBookById(list_id, book.id);
+    };
+
+    const handleOnCopy = async (listId) => {
+        setIsFetchingLists(true);
+        const { data, error } = await apiClient.addBookToList(book.id, listId);
+        if (error) {
+            setErrors(error);
+            console.log(error)
+        }
     };
 
     const handleOnTransfer = async (listId) => {
@@ -35,10 +38,9 @@ export default function DetailedListRow({ book }) {
         if (error) {
             setErrors(error);
             console.log(error)
-            setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
         }
         if (!error){
-            handleOnDelete();
+            handleOnRemove();
         }
     };
 
@@ -112,19 +114,21 @@ export default function DetailedListRow({ book }) {
                     <MoreHorizIcon className="three-dots" onClick={toggleMenu} />
                         {showMenu && (
                             <ul className="options">
-                                    <button className="btn" onClick={handleOnDelete}>
+                                    <button className="btn" onClick={handleOnRemove}>
                                         Remove
                                     </button>
-                                    <a href={`#modal-opened-${book.id}`} className="link-1" id="modal-closed">
-                                        {user && book.id ? <button className="btn">Transfer {book.title}</button> : null}
+                                    <a href={`#modal-opened-${book.id}-transfer`} className="link-1" id="modal-closed">
+                                        {user && book.id ? <button className="btn">Transfer</button> : null}
                                     </a>
-                                    
+                                    <a href={`#modal-opened-${book.id}-copy`} className="link-1" id="modal-closed">
+                                        {user && book.id ? <button className="btn">Copy</button> : null}
+                                    </a>
                             </ul>
                         )}
                 </div>
             
 			</div>
-             <Modal id={`modal-opened-${book.id}`}>
+             <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
                 {lists.map((list) => (
                 <button
                     className="btn-select-list"
@@ -136,6 +140,21 @@ export default function DetailedListRow({ book }) {
                             handleOnTransfer(list.id);   
                             console.log("book.id", book.id, "book title is", book.title)
                             console.log("transfer and delete should have successfully happened")                       
+                    }}
+                >
+                {list.list_name}
+                </button>
+                ))}
+            </Modal> 
+            <Modal id={`modal-opened-${book.id}-copy`} modal_title="Copy to">
+                {lists.map((list) => (
+                <button
+                    className="btn-select-list"
+                    key={list.id}
+                    onClick={() => {
+                            handleOnCopy(list.id);   
+                            console.log("book.id", book.id, "book title is", book.title)
+                            console.log("copying book to another list successfully happened")                       
                     }}
                 >
                 {list.list_name}
