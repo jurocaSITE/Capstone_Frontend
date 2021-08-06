@@ -1,97 +1,89 @@
 .Lists {
-  background-color: var(--dark-shade);
-  min-height: 100vh;
-  padding: 1em 0;
+	background-color: var(--dark-shade);
+	min-height: 100vh;
+	padding: 1em 0;
 }
 
 .Lists h1 {
-  color: var(--light-shade);
+	color: var(--light-shade);
 }
 
 .Lists .top .title {
-  background-color: var(--dark-shade);
-  padding: 1em 2em;
-  grid-column: 1 / -1;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 48px;
-  text-align: center;
+	background-color: var(--dark-shade);
+	padding: 1em 2em;
+	grid-column: 1 / -1;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 48px;
+	text-align: center;
 }
 
 .Lists .default-lists {
-  background: var(--light-accent);
-  background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fpattern-png-transparent-4.png&f=1&nofb=1);
-  padding: 2em 0 2em 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-evenly;
+	background: var(--light-accent);
+	background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fpattern-png-transparent-4.png&f=1&nofb=1);
+	padding: 2em 0 2em 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: space-evenly;
 }
 
 .Lists .search-and-create {
-  display: flex;
-  padding: 30px;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	padding: 30px;
+	justify-content: space-between;
+	align-items: center;
 }
 .Lists .search-and-create .search {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .Lists .search-and-create .search-bar {
-  background-color: var(--light-shade);
-  opacity: 0.5;
-  border-radius: var(--border-rad);
+	background-color: var(--light-shade);
+	opacity: 0.5;
+	border-radius: var(--border-rad);
 }
 .Lists .search-and-create .search-bar input {
-  color: var(--dark-shade-darkest);
+	color: var(--dark-shade-darkest);
 }
 
 .Lists .search-and-create .search-icon {
-  color: var(--light-shade);
-  margin-left: 10px;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
+	color: var(--light-shade);
+	margin-left: 10px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
 }
 .Lists .search-and-create .search-icon .icon {
-  font-size: 37px;
-  cursor: pointer;
+	font-size: 37px;
+	cursor: pointer;
 }
 
 .Lists .search-and-create .create-new-list {
-  cursor: pointer;
-  padding-left: 1em;
+	cursor: pointer;
+	padding-left: 1em;
 }
 .Lists .create-new-list h2 {
-  font-size: 3rem;
+	font-size: 3rem;
 }
 @media screen and (min-width: 768px) {
-  .Lists .create-new-list h2 {
-    font-size: 1.5rem;
-  }
-  .Lists .create-new-list h2::before {
-    content: 'Create New List ';
-  }
+	.Lists .create-new-list h2 {
+		font-size: 1.5rem;
+	}
+	.Lists .create-new-list h2::before {
+		content: "Create New List ";
+	}
 }
 
 .Lists .display-lists-area {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  padding: 1em 2em;
-  gap: 1em;
-  max-width: 100%;
-  justify-items: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	padding: 1em 2em;
+	gap: 4em;
+	max-width: 100%;
+	justify-items: center;
 }
-/* .Lists .display-lists-area {
-	display: flex;
-	padding: 2em 0 2em 0;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	align-items: center;
-	margin-bottom: 70px;
-} */

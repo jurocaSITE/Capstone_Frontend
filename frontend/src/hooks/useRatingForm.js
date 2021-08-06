@@ -1,15 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import apiClient from "services/apiClient";
 
 export const useRatingForm = ({ bookId, ratingId }) => {
 	const [errors, setErrors] = useState({});
 	const [isProcessing, setIsProcessing] = useState(false);
+	const [rating, setRating] = useState({});
 	const [form, setForm] = useState({
 		rating: 0,
 		reviewTitle: "",
 		reviewBody: "",
-		replyBody: ""
+		replyBody: "",
 	});
+
+	useEffect(() => {
+		const fetchSingleRating = async () => {
+			setIsProcessing(true);
+			try {
+				const singleRating = await apiClient.getSingleRating(ratingId);
+				setRating(singleRating.data.rating);
+				setForm({
+					rating: rating?.rating || 0,
+					reviewTitle: rating?.reviewTitle || "",
+					reviewBody: rating?.reviewBody || "",
+					replyBody: "",
+				});
+			} catch (error) {
+				setErrors(error);
+			}
+
+			setIsProcessing(false);
+		};
+
+		fetchSingleRating();
+	}, [ratingId, rating?.rating, rating?.reviewTitle, rating?.reviewBody]);
+
 	let success = 0;
 
 	const handleOnInputChange = (event) => {
@@ -49,7 +73,6 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 			success = 0;
 		}
 		if (data?.rating) {
-			console.log("Rating added...", data.rating);
 			success = 1;
 		}
 
@@ -73,7 +96,6 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 			success = 0;
 		}
 		if (data?.rating) {
-			console.log("Rating updated...", data.rating);
 			success = 1;
 		}
 

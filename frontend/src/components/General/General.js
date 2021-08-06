@@ -9,6 +9,7 @@ function General() {
   const { user, setUser } = useAuthContext();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState(false);
   const [form, setForm] = useState({
     username: user?.username,
     new_password: "",
@@ -20,20 +21,20 @@ function General() {
 
   const togglePassVisibility = (e) => {
     const { name, checked } = e.target;
-	if (checked) {
-		if (name === "reveal-password-2") {
-			setPassVisible2(true)
-		} else {
-			setPassVisible(true)
-		}
-	}
-	if (!checked) {
-		if (name === "reveal-password-2") {
-			setPassVisible2(false)
-		} else {
-			setPassVisible(false)
-		}
-	}
+    if (checked) {
+      if (name === "reveal-password-2") {
+        setPassVisible2(true);
+      } else {
+        setPassVisible(true);
+      }
+    }
+    if (!checked) {
+      if (name === "reveal-password-2") {
+        setPassVisible2(false);
+      } else {
+        setPassVisible(false);
+      }
+    }
   };
 
   const fetchUser = async () => {
@@ -122,7 +123,17 @@ function General() {
     if (error) setErrors((e) => ({ ...e, form: error }));
     else {
       fetchUser();
-      navigate("/profile");
+      setSuccessMessage(true);
+      setTimeout(() => {
+        setSuccessMessage(false);
+      }, 5000);
+      setForm({
+        username: user?.username,
+        new_password: "",
+        current_password_username: "",
+        current_password_password: "",
+      });
+      navigate("/account");
     }
 
     setIsProcessing(false);
@@ -161,7 +172,17 @@ function General() {
     if (error) setErrors((e) => ({ ...e, form: error }));
     else {
       fetchUser();
-      navigate("/profile");
+      setSuccessMessage(true);
+      setTimeout(() => {
+        setSuccessMessage(false);
+      }, 5000);
+      setForm({
+        username: user?.username,
+        new_password: "",
+        current_password_username: "",
+        current_password_password: "",
+      });
+      navigate("/account");
     }
 
     setIsProcessing(false);
@@ -176,10 +197,14 @@ function General() {
       </div>
 
       <div className="username-content">
+        {successMessage && (
+          <span className="sucess-message">
+            {successMessage ? "Sucessfully updated" : ""}
+          </span>
+        )}
         {errors.form && <span className="error">{errors?.form}</span>}
         <br />
         <h3>Username</h3>
-
         <label htmlFor="username">USERNAME</label>
         {errors.username_error && (
           <span className="error">{errors.username_error}</span>
@@ -191,7 +216,6 @@ function General() {
           value={form.username}
           onChange={handleOnInputChange}
         />
-
         <label htmlFor="current_password_username">Verify password</label>
         {errors.current_password_username_error && (
           <span className="error">
@@ -229,24 +253,18 @@ function General() {
 
       <div className="change-password-content">
         <h3>Change Password</h3>
-
-        <label htmlFor="new_password" className="password">
-          New password
-          {errors.new_password_error && (
-            <span className="error">{errors.new_password_error}</span>
-          )}
-          <input
-            type={passVisible2 ? "text" : "password"}
-            name="new_password"
-            placeholder="Enter new password"
-            value={form.new_password}
-            onChange={handleOnInputChange}
-          />
-        </label>
-
-        <label htmlFor="current_password_password" className="password">
-          Verify password
-        </label>
+        <label htmlFor="new_password">New password</label>
+        {errors.new_password_error && (
+          <span className="error">{errors.new_password_error}</span>
+        )}
+        <input
+          type={passVisible2 ? "text" : "password"}
+          name="new_password"
+          placeholder="Enter new password"
+          value={form.new_password}
+          onChange={handleOnInputChange}
+        />
+        <label htmlFor="current_password_password">Old password</label>
         {errors.current_password_password_error && (
           <span className="error">
             {errors.current_password_password_error}
@@ -255,7 +273,7 @@ function General() {
         <input
           type={passVisible2 ? "text" : "password"}
           name="current_password_password"
-          placeholder="Enter current password"
+          placeholder="Enter old password"
           value={form.current_password_password}
           onChange={handleOnInputChange}
         />

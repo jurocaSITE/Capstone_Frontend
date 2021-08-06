@@ -1,6 +1,6 @@
 .ListCard {
 	display: grid;
-	grid-template-rows: 2fr 1fr;
+	grid-template-rows: 6fr 1fr;
 	background-color: var(--light-shade);
 	border-radius: var(--border-rad);
 	box-shadow: var(--default-shadow);
@@ -21,48 +21,35 @@
 	height: 10em;
 	width: 18em;
 	border-radius: var(--border-rad);
-	transition: ease .25s;
+	transition: ease 0.25s;
 }
 .ListCard img:hover {
 	transform: scale(1.05);
 }
 
 .ListCard .information {
-	display: grid;
 	color: var(--dark-shade);
-	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr;
 	margin: 10px;
 }
 
-.ListCard .information .by-and-more {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr;
-}
-
-.ListCard .information .by-and-more .by-username {
-	grid-column: 1;
-}
-
-.ListCard .information .by-and-more .create-new-list {
-	grid-column: 2;
+.ListCard .create-new-list {
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
 	position: relative;
 }
 
-.ListCard .information .by-and-more .create-new-list .three-dots {
+.ListCard .three-dots {
 	font-size: 2.5rem;
 	cursor: pointer;
+	color: black;
 }
 
 /* The toggled menu that appears after clicking dots */
 .ListCard .create-new-list .options {
 	position: absolute;
-	top: 2em;
-	right: -6em;
+	top: 1.5em;
+	right: -4em;
 
 	padding: 0.5em 2em;
 	background-color: var(--light-shade);

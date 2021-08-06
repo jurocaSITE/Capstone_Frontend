@@ -38,12 +38,6 @@ function Account() {
         <h1>Account</h1>
         <p>Update your profile and set your account preferences</p>
       </section>
-      {/*<section className="card-content">
-				<div className="card">
-					<h1>hola</h1>
-					<h1>hola</h1>
-				</div>
-			</section> */}
       <div className="container">
         <div className="bloc-tabs">
           <button
@@ -104,9 +98,10 @@ function Account() {
             />
 
             <h4 className="current-interests-header">Current Interests</h4>
-            <hr/>
+            <hr />
             <div className="current-interests-feed">
-              {!user?.genre_interest?.length && "No interests found. Change this by adding some with the button above."}
+              {!user?.genre_interest?.length &&
+                "No interests found. Change this by adding some with the button above."}
               {user?.genre_interest?.map((genre) => (
                 <span className="genre-tag">{genre}</span>
               ))}
