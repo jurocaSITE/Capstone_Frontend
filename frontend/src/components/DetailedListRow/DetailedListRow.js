@@ -8,8 +8,8 @@ import { useAuthContext } from "contexts/auth";
 import { useParams } from "react-router-dom";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
-export default function DetailedListRow({ book }) {
-// export default function DetailedListRow({ book, handleOnRemove }) {
+// export default function DetailedListRow({ book }) {
+export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, handleOnTransfer}) {
     const { list_id } = useParams(); // searches url for list_id param if list else null
     const [lists, setLists] = useState([]);
     const [errors, setErrors] = useState(null);
@@ -20,33 +20,16 @@ export default function DetailedListRow({ book }) {
 
 	const toggleMenu = () => setShowMenu(!showMenu);
 
-    // const removeClickHandler = async () => {
-    //     handleOnRemove(book.id);
-    // };
-
-    const handleOnRemove = async (event) => {
-        await apiClient.deleteBookById(list_id, book.id);
+    const removeClickHandler = async () => {
+        handleOnRemove(book.id);
     };
 
-    const handleOnCopy = async (listId) => {
-        setIsFetchingLists(true);
-        const { data, error } = await apiClient.addBookToList(book.id, listId);
-        if (error) {
-            setErrors(error);
-            console.log(error)
-        }
+    const transferClickHandler = async (listId) => {
+        handleOnTransfer(book.id, listId);
     };
 
-    const handleOnTransfer = async (listId) => {
-        setIsFetchingLists(true);
-        const { data, error } = await apiClient.addBookToList(book.id, listId);
-        if (error) {
-            setErrors(error);
-            console.log(error)
-        }
-        if (!error){
-            handleOnRemove();
-        }
+    const copyClickHandler = async (listId) => {
+        handleOnCopy(book.id, listId);
     };
 
     useEffect(() => {
@@ -115,8 +98,8 @@ export default function DetailedListRow({ book }) {
                     <MoreHorizIcon className="three-dots" onClick={toggleMenu} />
                         {showMenu && (
                             <ul className="options">
-                                    {/* <button className="btn" onClick={removeClickHandler}> */}
-                                    <button className="btn" onClick={handleOnRemove}>
+                                    <button className="btn" onClick={removeClickHandler}>
+                                    {/* <button className="btn" onClick={handleOnRemove}> */}
                                         Remove
                                     </button>
                                     <a href={`#modal-opened-${book.id}-transfer`} className="link-1" id="modal-closed">
@@ -130,7 +113,7 @@ export default function DetailedListRow({ book }) {
                 </div>
             
 			</div>
-             {/* <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
+             <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
                 <div className="select-list">
                     {lists.map((list) => (
                     <button
@@ -140,7 +123,7 @@ export default function DetailedListRow({ book }) {
                             // console.log("errors is", errors)
                             // console.log("this should be false", (errors === "Cannot add duplicate book."))
                             // console.log("babyError is", babyError)
-                                handleOnTransfer(list.id);   
+                                transferClickHandler(list.id);   
                                 console.log("book.id", book.id, "book title is", book.title)
                                 console.log("transfer and delete should have successfully happened")                       
                         }}
@@ -149,7 +132,7 @@ export default function DetailedListRow({ book }) {
                     </button>
                     ))}
                 </div>
-            </Modal>  */}
+            </Modal> 
             <Modal id={`modal-opened-${book.id}-copy`} modal_title="Copy to">
                 <div className="select-list">
                     {lists.map((list) => (
@@ -157,7 +140,7 @@ export default function DetailedListRow({ book }) {
                         className="btn-select-list"
                         key={list.id}
                         onClick={() => {
-                                handleOnCopy(list.id);   
+                                copyClickHandler(list.id);   
                                 console.log("book.id", book.id, "book title is", book.title)
                                 console.log("copying book to another list successfully happened")                       
                         }}

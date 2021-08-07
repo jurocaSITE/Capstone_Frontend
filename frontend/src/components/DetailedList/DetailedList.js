@@ -16,7 +16,69 @@ export default function DetailedList() {
 	const { list_id } = useParams(); // searches url for book_id param if book else null
     const [isEmpty, setIsEmpty] = useState(true);
 
-    
+    const fetchBooksInList = async () => {
+		const { data, error } = await apiClient.getBooksInList(list_id);
+		if (error) {
+			setErrors(error);
+		}
+		if (data?.books_in_list) {
+			setErrors(null);
+			// console.log("books in list", data.books_in_list)
+			setBookList(data.books_in_list);
+		}
+	};
+
+	const fetchListContents = async () => {
+		const { data, error } = await apiClient.getListContents(list_id);
+		if (error) {
+			setErrors(error);
+		}
+		if (data?.list_contents) {
+			setErrors(null);
+			setListContents(data.list_contents);
+		}
+		if (data?.list_contents.length > 0) {
+			setIsEmpty(false);
+		}
+	};
+
+	const handleOnRemove = async (bookId) => {
+		await apiClient.deleteBookById(list_id, bookId);
+		console.log("bookId is", bookId)
+		fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+		fetchListContents(); // refreshes num books on delete/copy/transfer
+		console.log("bookList", bookList.length-1)
+		if (bookList.length-1 === 0){
+			setIsEmpty(true)
+		}
+    };
+
+    const handleOnCopy = async (bookId, listId) => {
+		const { data, error } = await apiClient.addBookToList(bookId, listId);
+		fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+		fetchListContents(); // refreshes num books on delete/copy/transfer
+		if (bookList.length-1 === 0){
+			setIsEmpty(true)
+		}
+        if (error) {
+            setErrors(error);
+            console.log(error)
+        }
+    };
+
+    const handleOnTransfer = async (bookId, listId) => {
+		const { data, error } = await apiClient.addBookToList(bookId, listId);
+        if (error) {
+            setErrors(error);
+            console.log(error)
+        }
+        if (!error){
+			handleOnRemove(bookId, list_id);
+			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+			fetchListContents(); // refreshes num books on delete/copy/transfer
+        }
+	};
+
 	useEffect(() => {
 		const fetchListName = async () => {
 			const { data, error } = await apiClient.getListNameById(list_id);
@@ -29,67 +91,14 @@ export default function DetailedList() {
 			}
 		};
 
-		const fetchBooksInList = async () => {
-			const { data, error } = await apiClient.getBooksInList(list_id);
-			if (error) {
-				setErrors(error);
-			}
-			if (data?.books_in_list) {
-				setErrors(null);
-				// console.log("books in list", data.books_in_list)
-				setBookList(data.books_in_list);
-			}
-		};
-
-		const fetchListContents = async () => {
-			const { data, error } = await apiClient.getListContents(list_id);
-			if (error) {
-				setErrors(error);
-			}
-			if (data?.list_contents) {
-				setErrors(null);
-				setListContents(data.list_contents);
-			}
-			if (data?.list_contents.length > 0) {
-				setIsEmpty(false);
-			}
-		};
-
 		fetchBooksInList();
 		fetchListName();
 		fetchListContents();
 	}, []); //use effect block runs whenever the dependency changes (the stuff in the array)
-
-		//create component "ListView" with just a div that iterates through bookList and provide detailedListRow
-		//pass bookList to the componenent
-
-	// const handleOnRemove = async (bookId) => {
-	// 	const deletedItem = await apiClient.deleteBookById(list_id, bookId);
-	// 	console.log("bookId is", bookId)
-    // };
-
-    // const handleOnCopy = async (bookId, listId) => {
-    //     const { data, error } = await apiClient.addBookToList(bookId, listId);
-    //     if (error) {
-    //         setErrors(error);
-    //         console.log(error)
-    //     }
-    // };
-
-    // const handleOnTransfer = async (bookId, listId) => {
-    //     const { data, error } = await apiClient.addBookToList(bookId, listId);
-    //     if (error) {
-    //         setErrors(error);
-    //         console.log(error)
-    //     }
-    //     if (!error){
-    //         handleOnRemove();
-    //     }
-	// };
 	
-	// if (!user?.email) {
-	// 	return <NotAllowed />;
-	// }
+	if (!user?.email) {
+		return <NotAllowed />;
+	}
 
 	return (
 		<div className="DetailedList">
@@ -122,17 +131,7 @@ export default function DetailedList() {
 				) : (
 					<div className="book-info">
 						<div className="display">
-							{/* <ListView bookList={bookList} handleOnRemove={handleOnRemove} /> */}
-							{/* {bookList.map((book) => (
-								<div className="row">
-									<DetailedListRow book={book} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer}/>
-								</div>	
-							))} */}
-							{bookList.map((book) => (
-								<div className="row">
-									<DetailedListRow book={book}/>
-								</div>	
-							))}
+							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} />
 						</div>
 					</div>
 				)}

@@ -71,7 +71,7 @@ function ProfilePage() {
 	}, []);
 
 	const settingLists = () => {
-		for (let i = 0; i < lists.length; i++) {
+		for (let i = 0; i < lists?.length; i++) {
 			if (lists[i].list_name === "Want To Read") {
 				defaultLists.push(lists[i]);
 			} else if (lists[i].list_name === "Currently Reading") {
