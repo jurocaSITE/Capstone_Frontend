@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { ListCard, ListCardNoChange, NotAllowed } from "components";
 import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
-import { BiSearch } from "react-icons/bi";
 import apiClient from "services/apiClient";
 import { Link } from "react-router-dom";
 import { useSearchForm } from "hooks/useSearchForm";
@@ -113,13 +112,12 @@ function Lists() {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
+              type="search"
               inputProps={{ "aria-label": "search" }}
               onChange={handleOnFilter}
+              onFocus={()=>{setIsSorting(0)}}
             />
           </div>
-          {/* <button type="submit" className="search-icon">
-						<BiSearch className="icon" />
-					</button> */}
         </div>
 
         <div className="create-new-list">
@@ -144,13 +142,28 @@ function Lists() {
         </button>
       </div>
 
-      <div className="display-lists-area">
-        {!isSorting &&
-          !filteredData &&
-          otherLists?.map((list) => (
-            <ListCard key={list.id} list={list} className="list-card" />
-          ))}
+      {/* Uses CSS to hide when sorting or filtering to avoid mapping
+          after every filter or sort
+       */}
+      <div
+        className={
+          Boolean(isSorting) || Boolean(filteredData)
+            ? "hidden"
+            : "display-lists-area"
+        }
+      >
+        {otherLists?.map((list) => (
+          <ListCard key={list.id} list={list} className="list-card" />
+        ))}
+      </div>
 
+      <div
+        className={
+          Boolean(isSorting) || Boolean(filteredData)
+            ? "display-lists-area"
+            : "hidden"
+        }
+      >
         {!isSorting &&
           filteredData?.map((list) => (
             <ListCard key={list.id} list={list} className="list-card" />

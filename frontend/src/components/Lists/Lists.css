@@ -103,11 +103,16 @@
 	transform: scale(1.1);
 }
 
+/* ----- Display Lists ----- */
 .Lists .display-lists-area {
 	display: grid;
 	grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
     gap: 1em;
 	padding: 1em;
 	max-width: 100%;
+	min-height: 352px;
 	justify-items: center;
+}
+.Lists .hidden {
+	display: none;
 }
