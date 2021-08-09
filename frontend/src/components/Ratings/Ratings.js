@@ -102,7 +102,6 @@ export default function Ratings({ book_id }) {
         <h2>Reviews</h2>
         {user && <Link to={`/set-rating/add/${book_id}`}>Add Review +</Link>}
       </span>
-      {errors && String(errors)}
       {isFetching && <div className="loader"></div>}
 
       <div className="ratings-feed-container">
