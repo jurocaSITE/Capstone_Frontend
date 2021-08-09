@@ -129,7 +129,7 @@ export default function AuthorPage() {
                         </div>
                     )} */}
 
-          <h2>Books written about {author_name}</h2>
+          {/* <h2>Books written about {author_name}</h2>
           {isBooksAboutAuthorEmpty === false ? (
             <div className="books">
               {booksAboutAuthor.map((book) => (
@@ -140,7 +140,7 @@ export default function AuthorPage() {
             <div className="empty-message">
               <h2>We did not find any books about this author.</h2>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
