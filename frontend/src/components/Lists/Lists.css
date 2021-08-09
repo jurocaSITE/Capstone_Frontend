@@ -30,7 +30,7 @@
 
 .Lists .search-and-create {
 	display: flex;
-	padding: 30px;
+	padding:  1.5em 1em;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -79,11 +79,35 @@
 	}
 }
 
+/* ----- Filter Button ----- */
+.Lists .filter-buttons {
+	display: flex;
+	padding: .5em 1em;
+}
+.Lists .filter-buttons button {
+	margin: 0 .25em;
+	padding: .25em .5em;
+	border: 1px solid var(--light-shade);
+	border-radius: var(--border-rad);
+	background: none;
+	color: var(--light-shade);
+	font-family: inherit;
+	font-size: 1.1rem;
+	transition: ease .25s;
+}
+.Lists .filter-buttons .active-sort {
+	background: var(--light-shade);
+	color: var(--dark-shade);
+}
+.Lists .filter-buttons button:hover {
+	transform: scale(1.1);
+}
+
 .Lists .display-lists-area {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	padding: 1em 2em;
-	gap: 4em;
+	grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
+    gap: 1em;
+	padding: 1em;
 	max-width: 100%;
 	justify-items: center;
 }

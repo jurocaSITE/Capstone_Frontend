@@ -31,20 +31,25 @@ function Lists() {
   const classes = useStyles();
   const { filteredData, handleFilter } = useSearchForm();
   const { user } = useAuthContext();
-  const [lists, setLists] = useState([]);
+  //   const [lists, setLists] = useState([]);
+  const [defaultLists, setDefaultLists] = useState([]);
+  const [otherLists, setOtherLists] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
   const [isSorting, setIsSorting] = useState(0);
-  let defaultLists = [];
-  let otherLists = [];
+  //   let defaultLists = [];
+  //   let otherLists = [];
   // let copyLists = []
 
   useEffect(() => {
     const fetchListsByUserId = async () => {
       setIsFetching(true);
       try {
-        const allLists = await apiClient.getAllListsByUserId();
-        setLists(allLists.data.all_lists);
+        const defaults = await apiClient.getDefaultListsByUserId();
+        setDefaultLists(defaults.data.default_lists);
+
+        const created = await apiClient.getCreatedListsByUserId();
+        setOtherLists(created.data.created_lists);
       } catch (error) {
         setError(error);
       }
@@ -55,32 +60,32 @@ function Lists() {
     fetchListsByUserId();
   }, []);
 
-  const settingLists = () => {
-    for (let i = 0; i < lists.length; i++) {
-      if (lists[i].list_name === "Want To Read") {
-        defaultLists.push(lists[i]);
-      } else if (lists[i].list_name === "Currently Reading") {
-        defaultLists.push(lists[i]);
-      } else if (lists[i].list_name === "Did Not Finish") {
-        defaultLists.push(lists[i]);
-      } else if (lists[i].list_name === "Finished") {
-        defaultLists.push(lists[i]);
-      } else {
-        otherLists.push(lists[i]);
-        // copyLists.push(lists[i]);
-      }
-    }
-  };
+  //   const settingLists = () => {
+  //     for (let i = 0; i < lists.length; i++) {
+  //       if (lists[i].list_name === "Want To Read") {
+  //         defaultLists.push(lists[i]);
+  //       } else if (lists[i].list_name === "Currently Reading") {
+  //         defaultLists.push(lists[i]);
+  //       } else if (lists[i].list_name === "Did Not Finish") {
+  //         defaultLists.push(lists[i]);
+  //       } else if (lists[i].list_name === "Finished") {
+  //         defaultLists.push(lists[i]);
+  //       } else {
+  //         otherLists.push(lists[i]);
+  //         // copyLists.push(lists[i]);
+  //       }
+  //     }
+  //   };
 
-  settingLists();
+  //   settingLists();
 
   const handleOnFilter = (e) => {
     handleFilter(e, otherLists);
   };
 
   const handleSorting = (sortType) => {
-    if (isSorting) setIsSorting(0);
-    else setIsSorting(sortType);
+    if (isSorting !== sortType) setIsSorting(sortType);
+    else setIsSorting(0);
   };
 
   if (!user?.email) {
@@ -94,7 +99,7 @@ function Lists() {
       </div>
 
       <div className="default-lists">
-        {defaultLists.map((list) => (
+        {defaultLists?.map((list) => (
           <ListCardNoChange key={list.id} list={list} className="list-card" />
         ))}
       </div>
@@ -125,10 +130,16 @@ function Lists() {
       </div>
 
       <div className="filter-buttons">
-        <button className="alpha-sort" onClick={() => handleSorting(1)}>
+        <button
+          className={isSorting === 1 ? "active-sort" : ""}
+          onClick={() => handleSorting(1)}
+        >
           alphabetical
         </button>
-        <button className="alpha-sort" onClick={() => handleSorting(2)}>
+        <button
+          className={isSorting === 2 ? "active-sort" : ""}
+          onClick={() => handleSorting(2)}
+        >
           oldest
         </button>
       </div>
