@@ -59,9 +59,11 @@ function Lists() {
 				defaultLists.push(lists[i]);
 			} else if (lists[i].list_name === "Currently Reading") {
 				defaultLists.push(lists[i]);
-			} else if (lists[i].list_name === "Did Not Finish") {
-				defaultLists.push(lists[i]);
 			} else if (lists[i].list_name === "Finished") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Reviewed Books") {
+				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Did Not Finish") {
 				defaultLists.push(lists[i]);
 			} else {
 				otherLists.push(lists[i]);
@@ -96,7 +98,9 @@ function Lists() {
 
 			<div className="default-lists">
 				{defaultLists.map((list) => (
-					<ListCardNoChange key={list.id} list={list} className="list-card" />
+					<div key={list.id} className="list-card">
+						<ListCardNoChange list={list} />
+					</div>
 				))}
 			</div>
 

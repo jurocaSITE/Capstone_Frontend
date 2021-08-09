@@ -58,9 +58,18 @@ export default function Book() {
 			setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
 			console.log("error is", error);
 		}
+		const reviews = await apiClient.getRatingsForBook(bookId);
 		setIsFetchingLists(false);
 		if (listName === "Finished") {
-			navigate(`/set-rating/add/${bookId}`);
+			if (reviews?.data?.ratings.length > 0) {
+				for (let i = 0; i < reviews?.data?.ratings.length; i++) {
+					if (reviews.data.ratings[i].userId === user.id) {
+						navigate(`/my-lists/${listId}`);
+					}
+				}
+			} else {
+				navigate(`/set-rating/add/${bookId}`);
+			}
 		}
 	};
 

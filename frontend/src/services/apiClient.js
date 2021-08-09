@@ -196,6 +196,13 @@ class ApiClient {
 		});
 	}
 
+	async addBookToReviewedBooksList(bookId) {
+		return await this.request({
+			endpoint: `lists/reviewed-book/list/add/${bookId}`,
+			method: `POST`,
+		});
+	}
+
 	async deleteBookById(list_id, book_id) {
 		return await this.request({
 			endpoint: `lists/${list_id}/delete-book/${book_id}`,

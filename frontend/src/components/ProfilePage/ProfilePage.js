@@ -16,7 +16,7 @@ function ProfilePage() {
 	const [error, setError] = useState(null);
 	const [bookList, setBookList] = useState([]);
 	const [isEmpty, setIsEmpty] = useState(false);
-  
+
 	let currentlyReadingListId = "";
 	let defaultLists = [];
 	let otherLists = [];
@@ -37,35 +37,35 @@ function ProfilePage() {
 		const fetchBooksInList = async (listId) => {
 			const { data, error } = await apiClient.getBooksInList(listId);
 			if (error) {
-			  setError(error);
+				setError(error);
 			}
 			if (data?.books_in_list) {
-			  setError(null);
-			  setBookList(data.books_in_list);
-			  console.log("currentlyReading",data.books_in_list);
+				setError(null);
+				setBookList(data.books_in_list);
+				console.log("currentlyReading", data.books_in_list);
 			}
-			if (data?.books_in_list[0] === 0){
-			  setIsEmpty(true);
+			if (data?.books_in_list[0] === 0) {
+				setIsEmpty(true);
 			}
-		  };
-	  
-		  const fetchCurrentlyReadingByUserId = async () => {
+		};
+
+		const fetchCurrentlyReadingByUserId = async () => {
 			const { data, error } = await apiClient.getCurrentlyReadingListByUserId();
 			if (error) {
-			  setError(error);
+				setError(error);
 			}
 			if (data?.currently_reading) {
-			  setError(null);
-			  currentlyReadingListId = data.currently_reading.id;
-			  // console.log("data.currently_reading", data.currently_reading);
-			  // console.log("fetchBooksInList(currentlyReadingListId)",fetchBooksInList(currentlyReadingListId));
-			  fetchBooksInList(currentlyReadingListId);
-			  console.log("bookListLength is", bookList[0])
+				setError(null);
+				currentlyReadingListId = data.currently_reading.id;
+				// console.log("data.currently_reading", data.currently_reading);
+				// console.log("fetchBooksInList(currentlyReadingListId)",fetchBooksInList(currentlyReadingListId));
+				fetchBooksInList(currentlyReadingListId);
+				//   console.log("bookListLength is", bookList[0])
 			}
-		  };
-	  
-		  fetchBooksInList();
-		  fetchCurrentlyReadingByUserId();
+		};
+
+		fetchBooksInList();
+		fetchCurrentlyReadingByUserId();
 
 		fetchListsByUserId();
 	}, []);
@@ -131,16 +131,19 @@ function ProfilePage() {
 			<div className="currently-reading">
 				<h2>Currently Reading</h2>
 				<div className="books">
-				{(isEmpty===true) ? (
-                    <div className="empty-message">
-                        <h2>Your list doesn't have any books in it! Add books to change this.</h2>
-                    </div>
-				) : (
-					<div className="home-feed-books">
-					{bookList.map((book) => (
-						<BookPreview book={book} key={book.title} />
-					))}
-					</div>
+					{isEmpty === true ? (
+						<div className="empty-message">
+							<h2>
+								Your list doesn't have any books in it! Add books to change
+								this.
+							</h2>
+						</div>
+					) : (
+						<div className="home-feed-books">
+							{bookList.map((book) => (
+								<BookPreview book={book} key={book.title} />
+							))}
+						</div>
 					)}
 				</div>
 			</div>

@@ -85,6 +85,12 @@ function ListForm() {
 					list_name_error:
 						"User are not allowed to create lists with the same name as a default list.",
 				}));
+			} else if (event.target.value.toLocaleLowerCase() === "reviewed books") {
+				setErrors((e) => ({
+					...e,
+					list_name_error:
+						"User are not allowed to create lists with the same name as a default list.",
+				}));
 			} else {
 				setErrors((e) => ({ ...e, list_name_error: null }));
 			}
@@ -139,6 +145,14 @@ function ListForm() {
 			setIsProcessing(false);
 			return;
 		} else if (event.target.value.toLocaleLowerCase() === "did not finish") {
+			setErrors((e) => ({
+				...e,
+				list_name_error:
+					"User are not allowed to create lists with the same name as a default list.",
+			}));
+			setIsProcessing(false);
+			return;
+		} else if (event.target.value.toLocaleLowerCase() === "reviewed books") {
 			setErrors((e) => ({
 				...e,
 				list_name_error:

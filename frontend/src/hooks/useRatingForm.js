@@ -16,7 +16,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 		const fetchSingleRating = async () => {
 			setIsProcessing(true);
 			try {
-				const singleRating = await apiClient.getSingleRating(ratingId);
+				const singleRating = await apiClient.getSingleRating();
 				setRating(singleRating.data.rating);
 				setForm({
 					rating: rating?.rating || 0,
@@ -67,6 +67,8 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 			reviewTitle: form.reviewTitle,
 			reviewBody: form.reviewBody,
 		});
+
+		await apiClient.addBookToReviewedBooksList(bookId);
 
 		if (error) {
 			setErrors((e) => ({ ...e, form: error }));
