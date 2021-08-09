@@ -37,6 +37,10 @@
 	width: 100%;
 	border-radius: 6px;
 	margin: 0.4em 0;
+
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 .General .username-content {

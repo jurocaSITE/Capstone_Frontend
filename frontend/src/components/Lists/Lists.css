@@ -107,7 +107,9 @@
 .Lists .display-lists-area {
 	display: grid;
 	grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
-    gap: 1em;
+    /* gap: 1em; */
+	row-gap: 1em;
+	column-gap: 1.5em;
 	padding: 1em;
 	max-width: 100%;
 	min-height: 352px;
