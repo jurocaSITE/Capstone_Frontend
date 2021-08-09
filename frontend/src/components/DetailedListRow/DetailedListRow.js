@@ -7,6 +7,7 @@ import moment from "moment";
 import { useAuthContext } from "contexts/auth";
 import { useParams } from "react-router-dom";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import useDetectClickOut from "hooks/useDetectClickOut";
 
 // export default function DetailedListRow({ book }) {
 export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, handleOnTransfer}) {
@@ -15,13 +16,11 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
     const [errors, setErrors] = useState(null);
     const [isFetchingLists, setIsFetchingLists] = useState(false);
     const { user } = useAuthContext();
-    
-	const [showMenu, setShowMenu] = useState(false);
-
-	const toggleMenu = () => setShowMenu(!showMenu);
+    const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
 
     const removeClickHandler = async () => {
         handleOnRemove(book.id);
+        setShow(false);
     };
 
     const transferClickHandler = async (listId) => {
@@ -61,6 +60,7 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
     //     }
     // };
     return (
+        
 		<div className="DetailedListRow">
 
 			<div className="information">
@@ -95,34 +95,33 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
                 </div>
                 
                 <div className="row-item">
-                    <MoreHorizIcon className="three-dots" onClick={toggleMenu} />
-                        {showMenu && (
-                            <ul className="options">
-                                    <button className="btn" onClick={removeClickHandler}>
-                                    {/* <button className="btn" onClick={handleOnRemove}> */}
-                                        Remove
-                                    </button>
-                                    <a href={`#modal-opened-${book.id}-transfer`} className="link-1" id="modal-closed">
-                                        {user && book.id ? <button className="btn">Transfer</button> : null}
-                                    </a>
-                                    <a href={`#modal-opened-${book.id}-copy`} className="link-1" id="modal-closed">
-                                        {user && book.id ? <button className="btn">Copy</button> : null}
-                                    </a>
-                            </ul>
-                        )}
+                    <MoreHorizIcon ref={triggerRef} className="three-dots" />
+                    {show ? (
+                        <ul ref={nodeRef} className="options">
+                        <a href={`#removed`} onClick={removeClickHandler}>
+                            <li>Remove</li>
+                        </a>
+                        <a href={`#modal-opened-${book.id}-transfer`} id="modal-closed">
+                            {user && book.id ? <li>Transfer</li> : null}
+                        </a>
+                        <a href={`#modal-opened-${book.id}-copy`} id="modal-closed">
+                            {user && book.id ? <li>Copy</li> : null}
+                        </a>
+                        </ul>
+                    ) : null}
                 </div>
             
 			</div>
              <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
                 <div className="select-list">
                     {lists.map((list) => (
+                    <a href="#modal-closed">
                     <button
                         className="btn-select-list"
                         key={list.id}
                         onClick={() => {
                             // console.log("errors is", errors)
                             // console.log("this should be false", (errors === "Cannot add duplicate book."))
-                            // console.log("babyError is", babyError)
                                 transferClickHandler(list.id);   
                                 console.log("book.id", book.id, "book title is", book.title)
                                 console.log("transfer and delete should have successfully happened")                       
@@ -130,12 +129,14 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
                     >
                     {list.list_name}
                     </button>
+                    </a>
                     ))}
                 </div>
             </Modal> 
             <Modal id={`modal-opened-${book.id}-copy`} modal_title="Copy to">
                 <div className="select-list">
                     {lists.map((list) => (
+                    <a href="#modal-closed">
                     <button
                         className="btn-select-list"
                         key={list.id}
@@ -147,6 +148,7 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
                     >
                     {list.list_name}
                     </button>
+                    </a>
                     ))}
                 </div>
             </Modal> 
