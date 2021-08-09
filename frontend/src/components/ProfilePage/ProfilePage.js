@@ -130,19 +130,19 @@ function ProfilePage() {
 			</div>
 			<div className="currently-reading">
 				<h2>Currently Reading</h2>
-				<div className="books">
 				{(isEmpty===true) ? (
                     <div className="empty-message">
                         <h2>Your list doesn't have any books in it! Add books to change this.</h2>
                     </div>
 				) : (
-					<div className="home-feed-books">
-					{bookList.map((book) => (
-						<BookPreview book={book} key={book.title} />
-					))}
+					<div className="books">
+						<div className="home-feed-books">
+						{bookList.map((book) => (
+							<BookPreview book={book} key={book.title} />
+						))}
+						</div>
 					</div>
 					)}
-				</div>
 			</div>
 			{/* <div className="my-reviews">
 				<h2>My Reviews</h2>
