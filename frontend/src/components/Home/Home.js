@@ -8,9 +8,7 @@ const home_hero_img =
 const defaultBookCover = 
   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.calendarclub.co.uk%2F-%2Fmedia%2Fproductimages%2F18%2F66%2F186694_main.jpg&f=1&nofb=1";
 
-export default function Home({ topSellers = [] }) {
-  console.log("process env REACT_APP_REMOTE_HOST...", process.env.REACT_APP_REMOTE_HOST_URL)
-  console.log("top sellers in home...", topSellers)
+export default function Home({ topSellers = [], isFetchingTopSellers = false }) {
   return (
     <div className="Home">
       <div className="home-hero">
@@ -29,7 +27,8 @@ export default function Home({ topSellers = [] }) {
       <div className="home-feed">
         <h2 className="top-seller-head">NYT Top Sellers</h2>
         
-        <div className="home-feed-books">
+        <div className="top-seller-feed-books">
+          {isFetchingTopSellers && <div className="loader">Loading...</div>}
           {topSellers.map((book) => (
             <div className="preview">
               <Link to={`/books/top/sellers/${book.title}`}>

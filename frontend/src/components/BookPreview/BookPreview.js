@@ -18,9 +18,9 @@ export default function BookPreview({ book = {} }) {
 					<img
 						alt="book cover"
 						src={
-							book?.imageLinks?.large ||
-							book?.imageLinks?.medium ||
-							book?.imageLinks?.small ||
+							// book?.imageLinks?.large ||
+							// book?.imageLinks?.medium ||
+							// book?.imageLinks?.small ||
 							book?.imageLinks?.thumbnail ||
 							defaultBookCover
 						}
@@ -36,7 +36,7 @@ export default function BookPreview({ book = {} }) {
 							{book?.averageRating?.toFixed(1) || `Unavailable`}
 						</span>
 						<div className="categories">
-							{renderBookCategories(book?.categories).map((category) => {
+							{renderBookCategories(book?.categories).slice(0, 1).map((category) => {
 								return (
 									<div className="genre-tag" key={category}>
 										<Genre text={category} />

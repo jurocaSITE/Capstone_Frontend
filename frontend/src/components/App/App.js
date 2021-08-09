@@ -44,11 +44,12 @@ export default function AppContainer() {
 function App() {
 	const [topSellers, setTopSellers] = useState([]);
 	const [errors, setErrors] = useState(null);
+	const [isFetchingTopSellers, setIsFetchingTopSellers] = useState(null);
 	const { user, setUser } = useAuthContext();
 
 	useEffect(() => {
 		const fetchTopSellers = async () => {
-			//setIsFetching(true)
+			setIsFetchingTopSellers(true)
 
 			const { data, error } = await apiClient.getTopSellers();
 			if (error) {
@@ -59,8 +60,8 @@ function App() {
 				setErrors(null);
 				setTopSellers(data.top_sellers);
 			}
+			setIsFetchingTopSellers(false)
 		};
-		//setIsFetching(false)
 		fetchTopSellers();
 	}, []);
 
@@ -113,7 +114,7 @@ function App() {
 					{user ? (
 						<Route path="/" element={<UserHome topSellers={topSellers} />} />
 					) : (
-						<Route path="/" element={<Home topSellers={topSellers} />} />
+						<Route path="/" element={<Home topSellers={topSellers} isFetchingTopSellers={isFetchingTopSellers}/>} />
 					)}
 				</Routes>
 				<Footer />

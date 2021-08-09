@@ -31,8 +31,8 @@
     margin-left: 1em;
 }
 .BookPreview .book-details .authors {
+    padding: .25em 0 1em;
     max-height: 5em;
-    overflow: hidden;
     overflow: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */

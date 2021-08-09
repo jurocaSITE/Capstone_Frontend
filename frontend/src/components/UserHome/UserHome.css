@@ -3,17 +3,7 @@
     color: var(--light-shade);
 }
 
-.UserHome h1,
-.UserHome h2 {
-	margin: 0;
-}
-
 .UserHome .home-feed {
-	padding: 1em;
-	color: var(--light-shade);
-}
-
-.UserHome .home-feed{
 	padding: 1em;
 	color: var(--light-shade);
 }
@@ -30,4 +20,12 @@
 	padding: 2em;
 	display: flex;
 	justify-content: center;
+}
+
+.home-feed-books {
+	padding: 1em;
+
+	display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(350px, 1fr) );
+    gap: 1em;
 }
