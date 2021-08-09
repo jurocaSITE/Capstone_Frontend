@@ -23,7 +23,7 @@
 	border-radius: var(--border-rad);
 	transition: ease 0.25s;
 }
-.ListCard img:hover {
+.ListCard .ListCard-Link:hover img {
 	transform: scale(1.05);
 }
 
