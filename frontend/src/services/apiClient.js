@@ -166,6 +166,20 @@ class ApiClient {
 		});
 	}
 
+	async getDefaultListsByUserId() {
+		return await this.request({
+			endpoint: `lists/get-default-lists`,
+			method: `GET`,
+		});
+	}
+
+	async getCreatedListsByUserId() {
+		return await this.request({
+			endpoint: `lists/get-created-lists`,
+			method: `GET`,
+		});
+	}
+
 	async createList(credentials) {
 		return await this.request({
 			endpoint: `lists/create-new-list`,
