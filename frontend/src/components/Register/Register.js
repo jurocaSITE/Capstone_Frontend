@@ -30,25 +30,27 @@ export default function Register() {
         {errors.form && <span className="error">{errors.form}</span>}
         <br />
 
-				<div className="form">
-					<div className="input-field">
-						<label htmlFor="first_name">First name*</label>
-						<input
-							type="text"
-							name="first_name"
-							placeholder="Enter your first name"
-							value={form.first_name}
-							onChange={handleOnInputChange}
-							required
-						/>
-						{errors.first_name_error && (
-							<span className="error">{errors.first_name_error}</span>
-						)}
-					</div>
+        <div className="form">
+          <div className="input-field">
+            <label htmlFor="first_name">First name*</label>
+            <input
+              className="regular-input"
+              type="text"
+              name="first_name"
+              placeholder="Enter your first name"
+              value={form.first_name}
+              onChange={handleOnInputChange}
+              required
+            />
+            {errors.first_name_error && (
+              <span className="error">{errors.first_name_error}</span>
+            )}
+          </div>
 
           <div className="input-field">
             <label htmlFor="last_name">Last name*</label>
             <input
+              className="regular-input"
               type="text"
               name="last_name"
               placeholder="Enter your last name"
@@ -64,6 +66,7 @@ export default function Register() {
           <div className="input-field">
             <label htmlFor="name">Username*</label>
             <input
+              className="regular-input"
               type="text"
               name="username"
               placeholder="Enter a unique username"
@@ -76,24 +79,26 @@ export default function Register() {
             )}
           </div>
 
-					<div className="input-field">
-						<label htmlFor="email">Email Address*</label>
-						<input
-							type="email"
-							name="email"
-							placeholder="Enter a valid email"
-							value={form.email}
-							onChange={handleOnInputChange}
-							required
-						/>
-						{errors.email_error && (
-							<span className="error">{errors.email_error}</span>
-						)}
-					</div>
+          <div className="input-field">
+            <label htmlFor="email">Email Address*</label>
+            <input
+              className="regular-input"
+              type="email"
+              name="email"
+              placeholder="Enter a valid email"
+              value={form.email}
+              onChange={handleOnInputChange}
+              required
+            />
+            {errors.email_error && (
+              <span className="error">{errors.email_error}</span>
+            )}
+          </div>
 
           <div className="input-field password">
             <label htmlFor="password">Password*</label>
             <input
+              className="pass-input"
               type={passVisible ? "text" : "password"}
               name="password"
               placeholder="Enter a secure password"

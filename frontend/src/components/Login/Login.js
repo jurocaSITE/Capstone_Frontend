@@ -34,6 +34,7 @@ export default function Login() {
           <div className="input-field">
             <label htmlFor="email">Email*</label>
             <input
+              className="email-input"
               type="email"
               name="email"
               placeholder="Enter email"
@@ -46,7 +47,8 @@ export default function Login() {
           <div className="input-field password">
             <label htmlFor="password">Password*</label>
             <input
-              type={passVisible ? "text": "password"}
+              className="pass-input"
+              type={passVisible ? "text" : "password"}
               name="password"
               placeholder="Enter password"
               value={form.password}
@@ -60,10 +62,10 @@ export default function Login() {
               <span className="error">{errors.password}</span>
             )}
             <div className="footer">
-							<p>
-								Forgot your password? Reset it <Link to="/recover">here</Link>
-							</p>
-						</div>
+              <p>
+                Forgot your password? Reset it <Link to="/recover">here</Link>
+              </p>
+            </div>
           </div>
 
           <button

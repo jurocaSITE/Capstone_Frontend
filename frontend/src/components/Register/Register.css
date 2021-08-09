@@ -42,11 +42,21 @@
 
 .Register .card .form .input-field input {
     height: 52px;
-    padding: 0 15px;
     font-size: 16px;
     border: solid 1px #8692A6;
     width: 100%;
     border-radius: 6px;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+.Register .input-field .regular-input {
+    padding: 0 15px;
+}
+.Register .input-field .pass-input {
+    padding: 0 15px;
+    padding-right: 39px;
 }
 
 .Register .input-field.password {
@@ -54,8 +64,8 @@
 }
 .Register .input-field.password .pass-eye {
     position: absolute;
-    right: -20px;
-    top: 44px;
+    right: 12px;
+    top: 42px;
     cursor: pointer;
 }
 .Register .pass-eye svg {
