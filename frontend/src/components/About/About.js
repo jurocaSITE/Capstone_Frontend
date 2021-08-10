@@ -17,7 +17,7 @@ export default function About() {
 					<br />
 					<p>
 						Welcome to Teca! Here you can find new books to read and keep track
-						of the one you already love. You can also become part of the Teca
+						of the ones you already love. You can also become part of the Teca
 						community and help others find books by leaving amazing reviews.
 					</p>
 					<br />
@@ -25,7 +25,7 @@ export default function About() {
 						We designed Teca with you, the user, in mind. We not only wanted to
 						create a website where book lovers could go and discover new books,
 						but we also wanted to provide our users with an amazing experience.
-						From the colors all the way to our logo, we focus on providing a
+						From the colors all the way to our logo, we focused on providing a
 						cozy feeling to our website, so that our users could feel like they
 						were in an actual library when browsing through the website.
 					</p>
