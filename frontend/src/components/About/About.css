@@ -1,8 +1,46 @@
 .About {
-    min-height: 100vh;
+	min-height: 100vh;
+	margin: 2em;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1em;
+.About .about-us-hero-text {
+	/* padding-right: 1em; */
+}
+.About .about-us-hero-text p {
+	font-size: 1.125rem; /* this equals 18px */
+	text-align: justify;
+}
+.About .about-us-hero-text a {
+	color: var(--main-clr);
+}
+.About .about-us-hero img {
+	display: none;
+}
+
+.About .about-us-title {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1em;
+}
+
+@media screen and (min-width: 768px) {
+	.About .about-us-hero {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	.About .about-us-hero img {
+		display: block;
+		object-fit: contain;
+		/* width: 20em; */
+		max-height: 33em;
+		border-radius: var(--border-rad);
+		/* box-shadow: var(--default-shadow); */
+	}
+}
+@media screen and (min-width: 850px) {
+	.About .about-us-hero img {
+		width: 80em;
+	}
 }

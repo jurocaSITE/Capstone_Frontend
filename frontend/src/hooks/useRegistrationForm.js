@@ -4,16 +4,22 @@ import { useNavigate } from "react-router-dom";
 import { useAuthenticationForm } from "hooks/useAuthenticationForm";
 
 export const useRegistrationForm = ({ user, setUser }) => {
-	const navigate = useNavigate()
-	const { form, errors, passVisible, togglePassVisibility, setErrors, handleOnInputChange } =
-		useAuthenticationForm({ user });
+	const navigate = useNavigate();
+	const {
+		form,
+		errors,
+		passVisible,
+		togglePassVisibility,
+		setErrors,
+		handleOnInputChange,
+	} = useAuthenticationForm({ user });
 	const [isProcessing, setIsProcessing] = useState(false);
 
 	useEffect(() => {
 		// if user is already logged in,
 		// redirect them to the home page
 		if (user?.email) {
-			navigate("/update-interests")
+			navigate("/update-interests");
 		}
 	}, [user, navigate]);
 
@@ -58,6 +64,38 @@ export const useRegistrationForm = ({ user, setUser }) => {
 			}));
 			setIsProcessing(false);
 			return;
+		}
+		if (form.password.match(/[A-Z]/) === null) {
+			setErrors((e) => ({
+				...e,
+				password: "Password must contain at least one capital letter.",
+			}));
+			setIsProcessing(false);
+			return;
+		}
+		if (form.password.match(/[0-9]/) === null) {
+			setErrors((e) => ({
+				...e,
+				password: "Password must contain at least one number.",
+			}));
+			setIsProcessing(false);
+			return;
+		}
+		if (form.password.match(/[!@#$%^&*.]/) === null) {
+			setErrors((e) => ({
+				...e,
+				password: "Password must contain at least one special character.",
+			}));
+			setIsProcessing(false);
+			return;
+		}
+		if (form.password.length < 7) {
+			setErrors((e) => ({
+				...e,
+				password: "Password length must be greater than 7.",
+			}));
+			setIsProcessing(false);
+			return;
 		} else {
 			setErrors((e) => ({ ...e, password: null }));
 		}
@@ -85,7 +123,7 @@ export const useRegistrationForm = ({ user, setUser }) => {
 		if (data?.user) {
 			setUser(data.user);
 			apiClient.setToken(data.token);
-			console.log("Navigating after registration...")
+			console.log("Navigating after registration...");
 		}
 		setIsProcessing(false);
 	};

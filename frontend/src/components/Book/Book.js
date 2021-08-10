@@ -51,18 +51,27 @@ export default function Book() {
   }, []);
 
   const addToList = async (bookId, listId, listName) => {
-    setIsFetchingLists(true);
-    const { data, error } = await apiClient.addBookToList(bookId, listId);
-    if (error) {
-      setErrors(error);
-      setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
-      console.log("error is", error);
-    }
-    setIsFetchingLists(false);
-    if (listName === "Finished") {
-      navigate(`/set-rating/add/${bookId}`);
-    }
-  };
+	setIsFetchingLists(true);
+	const { data, error } = await apiClient.addBookToList(bookId, listId);
+	if (error) {
+		setErrors(error);
+		setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
+		console.log("error is", error);
+	}
+	const reviews = await apiClient.getRatingsForBook(bookId);
+	setIsFetchingLists(false);
+	if (listName === "Finished") {
+		if (reviews?.data?.ratings.length > 0) {
+			for (let i = 0; i < reviews?.data?.ratings.length; i++) {
+				if (reviews.data.ratings[i].userId === user.id) {
+					navigate(`/my-lists/${listId}`);
+				}
+			}
+		} else {
+			navigate(`/set-rating/add/${bookId}`);
+		}
+	}
+};
 
   useEffect(() => {
     window.scrollTo(0, 0); // makes sure the page renders at the top of the screen

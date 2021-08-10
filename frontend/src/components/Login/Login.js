@@ -5,30 +5,30 @@ import { useAuthContext } from "contexts/auth";
 import "./Login.css";
 
 export default function Login() {
-  const { user, setUser } = useAuthContext();
-  const {
-    form,
-    errors,
-    isProcessing,
-    passVisible,
-    togglePassVisibility,
-    handleOnInputChange,
-    handleOnSubmit,
-  } = useLoginForm({ user, setUser });
+	const { user, setUser } = useAuthContext();
+	const {
+		form,
+		errors,
+		isProcessing,
+		passVisible,
+		togglePassVisibility,
+		handleOnInputChange,
+		handleOnSubmit,
+	} = useLoginForm({ user, setUser });
 
-  const keyPressEnter = (e) => {
-    if (e.keyCode === 13) {
-      handleOnSubmit();
-    }
-  };
+	const keyPressEnter = (e) => {
+		if (e.keyCode === 13) {
+			handleOnSubmit();
+		}
+	};
 
-  return (
-    <div className="Login">
-      <div className="card">
-        <h2>Login</h2>
+	return (
+		<div className="Login">
+			<div className="card">
+				<h2>Login</h2>
 
-        {errors.form && <span className="error">{errors.form}</span>}
-        <br />
+				{errors.form && <span className="error">{errors.form}</span>}
+				<br />
 
         <div className="form">
           <div className="input-field">
@@ -61,28 +61,28 @@ export default function Login() {
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}
-            <div className="footer">
+            {/* <div className="footer">
               <p>
                 Forgot your password? Reset it <Link to="/recover">here</Link>
               </p>
-            </div>
+            </div> */}
           </div>
 
-          <button
-            className="btn"
-            disabled={isProcessing}
-            onClick={handleOnSubmit}
-          >
-            {isProcessing ? "Loading..." : "Login"}
-          </button>
-        </div>
+					<button
+						className="btn"
+						disabled={isProcessing}
+						onClick={handleOnSubmit}
+					>
+						{isProcessing ? "Loading..." : "Login"}
+					</button>
+				</div>
 
-        <div className="footer">
-          <p>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+				<div className="footer">
+					<p>
+						Don't have an account? <Link to="/signup">Sign Up</Link>
+					</p>
+				</div>
+			</div>
+		</div>
+	);
 }

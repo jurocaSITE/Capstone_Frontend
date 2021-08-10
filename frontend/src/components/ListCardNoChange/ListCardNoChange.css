@@ -1,14 +1,13 @@
 .ListCardNoChange {
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
 	background-color: var(--light-shade);
 	border-radius: var(--border-rad);
 	box-shadow: var(--default-shadow);
 	width: 15em;
 	height: 15em;
 	padding: 1em;
-	margin: 1em .25em;
+	/* margin: 1em 0.25em; */
 }
 /* .ListCardNoChange {
 	display: grid;
@@ -36,7 +35,7 @@
 .ListCardNoChange .cover svg {
 	font-size: 7rem;
 	fill: var(--light-accent);
-	transition: ease .25s;
+	transition: ease 0.25s;
 }
 .ListCardNoChange .cover a:hover svg {
 	font-size: 8rem;
@@ -52,7 +51,7 @@
 .ListCardNoChange .information {
 	margin: 0 auto;
 	padding: 1em 0;
-	color: var(--dark-shade)
+	color: var(--dark-shade);
 }
 .ListCardNoChange .information h2 {
 	font-weight: 600;

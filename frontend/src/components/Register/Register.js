@@ -113,6 +113,15 @@ export default function Register() {
             {errors.password && (
               <span className="error">{errors.password}</span>
             )}
+            <ul>
+              <li>Password must contain at least one capital letter.</li>
+              <li>Password must contain at least one number</li>
+              <li>
+                Password must contain at least one special character Ex.
+                !@#$%^&*.
+              </li>
+              <li>Password's length must be greater than 7</li>
+            </ul>
           </div>
 
           <button

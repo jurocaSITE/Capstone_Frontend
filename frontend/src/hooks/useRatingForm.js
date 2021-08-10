@@ -18,6 +18,7 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 			try {
 				const singleRating = await apiClient.getSingleRating(ratingId);
 				setRating(singleRating.data.rating);
+				console.log(rating?.rating);
 				setForm({
 					rating: rating?.rating || 0,
 					reviewTitle: rating?.reviewTitle || "",
@@ -67,6 +68,8 @@ export const useRatingForm = ({ bookId, ratingId }) => {
 			reviewTitle: form.reviewTitle,
 			reviewBody: form.reviewBody,
 		});
+
+		await apiClient.addBookToReviewedBooksList(bookId);
 
 		if (error) {
 			setErrors((e) => ({ ...e, form: error }));

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // this has all of the logic that is shared between our login form and register form
 export const useAuthenticationForm = ({ user }) => {
-	const [passVisible, setPassVisible] = useState(false)
+	const [passVisible, setPassVisible] = useState(false);
 	const [errors, setErrors] = useState({});
 	const [form, setForm] = useState({
 		first_name: "",
@@ -11,6 +11,21 @@ export const useAuthenticationForm = ({ user }) => {
 		email: "",
 		password: "",
 	});
+
+	// const passwordValidation = (password) => {
+	// 	if (password.match(/[A-Z]/) === null) {
+	// 		setErrors((e) => ({ ...e, password: "Password must contain at least one capital letter." }));
+	// 	}
+	// 	if (password.match(/[0-9]/) === null) {
+	// 		setErrors((e) => ({ ...e, password: "Password must contain at least one number." }));
+	// 	}
+	// 	if (password.match(/[!@#$%^&*.]/) === null) {
+	// 		setErrors((e) => ({ ...e, password: "Password must contain at least one special character." }));
+	// 	}
+	// 	if (password.length < 7) {
+	// 		setErrors((e) => ({ ...e, password: "Password length must be greater than 7." }));
+	// 	}
+	// }
 
 	const handleOnInputChange = (event) => {
 		if (event.target.name === "email") {
@@ -53,7 +68,32 @@ export const useAuthenticationForm = ({ user }) => {
 		if (event.target.name === "password") {
 			if (event.target.value === "") {
 				setErrors((e) => ({ ...e, password: "Missing password." }));
-			} else {
+			}
+			// if (event.target.value.match(/[A-Z]/) === null) {
+			// 	setErrors((e) => ({
+			// 		...e,
+			// 		password: "Password must contain at least one capital letter.",
+			// 	}));
+			// }
+			// if (event.target.value.match(/[0-9]/) === null) {
+			// 	setErrors((e) => ({
+			// 		...e,
+			// 		password: "Password must contain at least one number.",
+			// 	}));
+			// }
+			// if (event.target.value.match(/[!@#$%^&*.]/) === null) {
+			// 	setErrors((e) => ({
+			// 		...e,
+			// 		password: "Password must contain at least one special character.",
+			// 	}));
+			// }
+			// if (event.target.value.length < 7) {
+			// 	setErrors((e) => ({
+			// 		...e,
+			// 		password: "Password length must be greater than 7.",
+			// 	}));
+			// }
+			else {
 				setErrors((e) => ({ ...e, password: null }));
 			}
 		}
@@ -70,6 +110,6 @@ export const useAuthenticationForm = ({ user }) => {
 		setErrors,
 		setPassVisible,
 		handleOnInputChange,
-		togglePassVisibility
+		togglePassVisibility,
 	};
 };
