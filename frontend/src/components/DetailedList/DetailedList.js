@@ -12,6 +12,7 @@ export default function DetailedList() {
 	const [listContents, setListContents] = useState([]);
 	const [listName, setListName] = useState([]);
 	const [errors, setErrors] = useState(null);
+	const [modalStatus, setModalStatus] = useState(null)
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
     const [isEmpty, setIsEmpty] = useState(true);
@@ -70,13 +71,15 @@ export default function DetailedList() {
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
         if (error) {
             setErrors(error);
-            console.log(error)
+			console.log(error)
         }
         if (!error){
 			handleOnRemove(bookId, list_id);
+			setModalStatus(`#modal-closed`)
 			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
 			fetchListContents(); // refreshes num books on delete/copy/transfer
-        }
+		}
+		console.log(modalStatus)
 	};
 
 	useEffect(() => {
@@ -131,7 +134,7 @@ export default function DetailedList() {
 				) : (
 					<div className="book-info">
 						<div className="display">
-							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} />
+							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} modalStatus={modalStatus} errorMessage={errors}/>
 						</div>
 					</div>
 				)}

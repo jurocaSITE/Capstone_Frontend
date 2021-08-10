@@ -40,3 +40,5 @@ export { default as General } from "./General/General";
 export { default as ReplyForm } from "./ReplyForm/ReplyForm";
 export { default as NotFound } from "./NotFound/NotFound";
 export { default as NotAllowed } from "./NotAllowed/NotAllowed";
+export { default as ContactUs } from "./ContactUs/ContactUs";
+

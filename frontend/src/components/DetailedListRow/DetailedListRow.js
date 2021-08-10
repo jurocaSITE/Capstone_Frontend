@@ -10,7 +10,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useDetectClickOut from "hooks/useDetectClickOut";
 
 // export default function DetailedListRow({ book }) {
-export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, handleOnTransfer}) {
+export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, handleOnTransfer, modalStatus, errorMessage}) {
     const { list_id } = useParams(); // searches url for list_id param if list else null
     const [lists, setLists] = useState([]);
     const [errors, setErrors] = useState(null);
@@ -39,6 +39,7 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
             setLists(allLists.data.all_lists);
         } catch (error) {
             setErrors(error);
+            console.log("detailed list row error is", errors)
         }
 
         setIsFetchingLists(false);
@@ -114,8 +115,9 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
 			</div>
              <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
                 <div className="select-list">
+                    <div className="error">{errorMessage && String(errorMessage)}</div>
                     {lists.map((list) => (
-                    <a href="#modal-closed">
+                    // <a href={modalStatus}>
                     <button
                         className="btn-select-list"
                         key={list.id}
@@ -129,7 +131,7 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
                     >
                     {list.list_name}
                     </button>
-                    </a>
+                    // </a>
                     ))}
                 </div>
             </Modal> 

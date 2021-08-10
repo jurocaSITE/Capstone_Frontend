@@ -128,3 +128,15 @@
 .Book .book-desc::-webkit-scrollbar-thumb {
 	background: var(--light-accent);
 }
+
+.Book .select-list .error {
+    background: #fe5421;
+    background: rgba(245, 41, 41, 0.1);
+    color: rgba(245, 41, 41, 1);
+    /* color: white; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}

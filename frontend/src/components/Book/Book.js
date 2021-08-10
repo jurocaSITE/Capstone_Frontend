@@ -25,8 +25,6 @@ export default function Book() {
 	const { title } = useParams(); // searches url for title param if topSeller else null
 	const { book_id } = useParams(); // searches url for book_id param if book else null
 	const { user } = useAuthContext();
-	const [babyError, setBabyError] = useState({});
-
 	const [book, setBook] = useState({});
 	const [isFetchingBook, setIsFetchingBook] = useState(false);
 	const [isFetchingLists, setIsFetchingLists] = useState(false);
@@ -55,7 +53,6 @@ export default function Book() {
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
 		if (error) {
 			setErrors(error);
-			setBabyError((e) => ({ ...e, modal: "Cannot add duplicate book." }));
 			console.log("error is", error);
 		}
 		setIsFetchingLists(false);
@@ -110,14 +107,14 @@ export default function Book() {
 			return <div className="loader">Loading...</div>;
 		}
 
-		if (errors) {
-			return (
-				<>
-					<h1>Error</h1>
-					<p className="error">{String(errors)}</p>
-				</>
-			);
-		}
+		// if (errors) {
+		// 	return (
+		// 		<>
+		// 			<h1>Error</h1>
+		// 			<p className="error">{String(errors)}</p>
+		// 		</>
+		// 	);
+		// }
 
 		return (
 			<>
@@ -176,7 +173,6 @@ export default function Book() {
 								dangerouslySetInnerHTML={{ __html: book?.description }}
 							/>
 							<a href="#modal-opened" className="link-1" id="modal-closed">
-								{/* <ActionButton link={`#`} text={"Add to List"} /> */}
 								{user && book_id ? (
 									<button className="btn">Add to list</button>
 								) : null}
@@ -187,17 +183,13 @@ export default function Book() {
 
 				<Modal modal_title="Add To">
 					<div className="select-list">
+						<div className="error">{errors && String(errors)}</div>
 						{lists.map((list) => (
 							<button
 								className="btn-select-list"
 								key={list.id}
 								onClick={() => {
 									addToList(book.id, list.id, list.list_name);
-									// if(babyError.modal !== "Cannot add duplicate book."){
-									// 	addToList(book.id, list.id);
-									// } else {
-									// 	console.log("Hello")
-									// }
 								}}
 							>
 								{list.list_name}
