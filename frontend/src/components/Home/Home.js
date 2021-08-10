@@ -3,8 +3,6 @@ import { ActionButton } from "components";
 import slothLogo from "assets/teca_logo_dark_accent.png"
 import "./Home.css";
 
-const home_hero_img =
-  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
 const defaultBookCover = 
   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.calendarclub.co.uk%2F-%2Fmedia%2Fproductimages%2F18%2F66%2F186694_main.jpg&f=1&nofb=1";
 
@@ -21,7 +19,7 @@ export default function Home({ topSellers = [], isFetchingTopSellers = false }) 
           </p>
           <ActionButton link={"/signup"} text={"Sign up now!"} />
         </div>
-        <img alt="library shelves" src={slothLogo || home_hero_img} />
+        <img alt="cute sloth logo for teca" src={slothLogo} />
       </div>
 
       <div className="home-feed">

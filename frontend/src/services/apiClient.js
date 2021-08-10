@@ -139,6 +139,10 @@ class ApiClient {
 		return await this.request({ endpoint: `books/id/${id}`, method: `GET` });
 	}
 
+	async getBooksByAuthor(author_name) {
+		return await this.request({ endpoint: `books/author/${author_name}`, method: `GET` });
+	}
+
 	async getBooksInList(list_id) {
 		return await this.request({
 			endpoint: `books/my-lists/${list_id}`,
@@ -243,6 +247,13 @@ class ApiClient {
 	async getRatingsForBook(book_id) {
 		return await this.request({
 			endpoint: `ratings/book/${book_id}`,
+			method: `GET`,
+		});
+	}
+
+	async getRatingsByUser() {
+		return await this.request({
+			endpoint: `ratings/user`,
 			method: `GET`,
 		});
 	}

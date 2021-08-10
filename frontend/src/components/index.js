@@ -30,6 +30,7 @@ export { default as AuthorCard } from "./AuthorCard/AuthorCard";
 export { default as Modal } from "./Modal/Modal";
 export { default as Account } from "./Account/Account";
 export { default as Ratings } from "./Ratings/Ratings";
+export { default as UserRatings } from "./UserRatings/UserRatings";
 export { default as AddRating } from "./AddRating/AddRating";
 export { default as UpdateGenreInterests } from "./UpdateGenreInterests/UpdateGenreInterests";
 export { default as About } from "./About/About";

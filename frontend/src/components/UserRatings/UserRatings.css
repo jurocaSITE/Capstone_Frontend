@@ -1,0 +1,57 @@
+.UserRatings {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 90%;
+}
+.UserRatings .ratings-feed-container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1em 2em;
+    margin-top: 1.5em;
+    max-height: 30em;
+    overflow-y: auto;
+
+    background: var(--dark-shade-darkest);
+    border-radius: var(--border-rad);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, .1);
+}
+.UserRatings .rating-review 
+{
+    display: flex;
+    align-items: center;
+    margin: .5em 0;
+}
+.UserRatings .rating-review .bookmark
+{
+    font-size: 2rem;
+    padding: 0 .5em;
+    transition: ease .25s;
+}
+.UserRatings .rating-review .bookmark:hover {
+    transform: scale(1.2);
+}
+.UserRatings .rating-review-content
+{
+    flex: 6;
+    padding: 1em 2em;
+    border: solid 1px var(--light-shade);
+    border-radius: var(--border-rad);
+}
+.UserRatings .rating-review-content-head
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.UserRatings .rating-review .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .9rem;
+    margin-top: 1em;
+    color: var(--light-accent);
+}

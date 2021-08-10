@@ -21,10 +21,7 @@
 }
 .Book .book-card img {
 	object-fit: contain;
-	/* max-height: 500px; */
-	/* width: 312.5px; */
-	/* min-height: 20em; */
-	/* width: 20em; */
+	max-height: 500px;
 	border-radius: var(--border-rad);
 	box-shadow: var(--default-shadow);
 	transition: ease 0.5s;
