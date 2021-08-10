@@ -47,6 +47,10 @@
     justify-content: space-between;
     align-items: center;
 }
+.UserRatings .rating-review-content .review-body 
+{
+    padding-top: .5em;
+}
 .UserRatings .rating-review .meta {
     display: flex;
     justify-content: space-between;

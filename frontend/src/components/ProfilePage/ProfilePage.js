@@ -116,7 +116,8 @@ function ProfilePage() {
         </div>
       </div>
 
-      {/* <div className="top-authors">
+      <div className="user-feed">
+        {/* <div className="top-authors">
 				<h2>Top authors this month</h2>
 				<div className="author-cards">
 					<AuthorCard />
@@ -126,46 +127,52 @@ function ProfilePage() {
 				</div>
 			</div> */}
 
-      <div className="library">
-        <h2>My Library</h2>
-        <div className="lists-cards">
-          {error?.defaults ? (
-            <span className="error">{error.defaults}</span>
+        <div className="library">
+          <h2>My Library</h2>
+          <div className="lists-cards">
+            {error?.defaults ? (
+              <span className="error">{error.defaults}</span>
+            ) : null}
+            {defaultLists?.map((list) => (
+              <ProfileListCard
+                key={list.id}
+                list={list}
+                className="list-card"
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="currently-reading">
+          {error?.currently ? (
+            <span className="error">{error.currently}</span>
           ) : null}
-          {defaultLists?.map((list) => (
-            <ProfileListCard key={list.id} list={list} className="list-card" />
-          ))}
+          {error?.inList ? <span className="error">{error.inList}</span> : null}
+          
+		  <h2>Currently Reading</h2>
+          <div className="books">
+            {isEmpty === true ? (
+              <div className="empty-message">
+                <h2>
+                  Your list doesn't have any books in it! Add books to change
+                  this.
+                </h2>
+              </div>
+            ) : (
+              <div className="home-feed-books">
+                {bookList.map((book) => (
+                  <BookPreview book={book} key={book.title} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
 
-      <div className="currently-reading">
-        {error?.currently ? (
-          <span className="error">{error.currently}</span>
-        ) : null}
-        {error?.inList ? <span className="error">{error.inList}</span> : null}
-        <h2>Currently Reading</h2>
-        <div className="books">
-          {isEmpty === true ? (
-            <div className="empty-message">
-              <h2>
-                Your list doesn't have any books in it! Add books to change
-                this.
-              </h2>
-            </div>
-          ) : (
-            <div className="home-feed-books">
-              {bookList.map((book) => (
-                <BookPreview book={book} key={book.title} />
-              ))}
-            </div>
-          )}
+        <div className="my-reviews">
+          <h2>My Reviews</h2>
+
+          <UserRatings setErrors={setError} />
         </div>
-      </div>
-
-      <div className="my-reviews">
-        <h2>My Reviews</h2>
-        
-		<UserRatings setErrors={setError} />
       </div>
     </div>
   );

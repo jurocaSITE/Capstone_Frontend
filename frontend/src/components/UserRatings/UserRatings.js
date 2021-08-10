@@ -47,6 +47,8 @@ function UserRatings({ setErrors }) {
                 </p>
               </span>
 
+              <p className="review-body">{x.reviewBody}</p>
+
               <span className="meta">
                 {moment(x.updatedAt).format("lll")}
                 {x.updatedAt !== x.createdAt ? ` (edited)` : null}

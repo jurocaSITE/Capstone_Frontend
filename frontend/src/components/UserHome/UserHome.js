@@ -23,7 +23,6 @@ export default function UserHome({ topSellers = [] }) {
       if (data?.books_in_list) {
         setError(null);
         setBookList(data.books_in_list);
-        console.log("currentlyReading", data.books_in_list);
       }
       if (data?.books_in_list[0] === 0) {
         setIsEmpty(true);
@@ -41,13 +40,11 @@ export default function UserHome({ topSellers = [] }) {
         // console.log("data.currently_reading", data.currently_reading);
         // console.log("fetchBooksInList(currentlyReadingListId)",fetchBooksInList(currentlyReadingListId));
         fetchBooksInList(currentlyReadingListId);
-        console.log("bookListLength is", bookList[0]);
       }
     };
 
     fetchBooksInList();
     fetchCurrentlyReadingByUserId();
-    console.log("isEmpty", isEmpty);
   }, []);
 
   return (
