@@ -189,6 +189,7 @@ class ApiClient {
 		});
 	}
 
+	// add book to list
 	async addBookToList(bookId, listId) {
 		return await this.request({
 			endpoint: `lists/${listId}/add-book/${bookId}`,
@@ -196,6 +197,7 @@ class ApiClient {
 		});
 	}
 
+	// add book to Reviewed Books list
 	async addBookToReviewedBooksList(bookId) {
 		return await this.request({
 			endpoint: `lists/reviewed-book/list/add/${bookId}`,

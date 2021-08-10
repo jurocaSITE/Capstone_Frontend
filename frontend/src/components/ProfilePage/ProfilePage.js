@@ -80,6 +80,8 @@ function ProfilePage() {
 				defaultLists.push(lists[i]);
 			} else if (lists[i].list_name === "Finished") {
 				defaultLists.push(lists[i]);
+			} else if (lists[i].list_name === "Reviewed Books") {
+				defaultLists.push(lists[i]);
 			} else {
 				otherLists.push(lists[i]);
 			}
