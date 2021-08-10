@@ -15,10 +15,6 @@ function ProfilePage() {
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
   const [bookList, setBookList] = useState([]);
-  const [isEmpty, setIsEmpty] = useState(false);
-
-  //   let currentlyReadingListId = "";
-  //   let otherLists = [];
 
   useEffect(() => {
     // TODO: possibly combine some of the useEffects functions
@@ -35,57 +31,21 @@ function ProfilePage() {
       setIsFetching(false);
     };
 
-    const fetchBooksInList = async (listId) => {
-      setError((e) => ({ ...e, inList: null }));
-      const { data, error } = await apiClient.getBooksInList(listId);
-      if (error) {
-        setError((e) => ({ ...e, inList: error }));
-      }
-      if (data?.books_in_list) {
-        setError((e) => ({ ...e, inList: null }));
-        setBookList(data.books_in_list);
-      }
-      if (data?.books_in_list[0] === 0) {
-        setIsEmpty(true);
-      }
-    };
-
     const fetchCurrentlyReadingByUserId = async () => {
-      setError((e) => ({ ...e, currently: null }));
       const { data, error } = await apiClient.getCurrentlyReadingListByUserId();
       if (error) {
         setError((e) => ({ ...e, currently: error }));
       }
       if (data?.currently_reading) {
         setError((e) => ({ ...e, currently: null }));
-        // currentlyReadingListId = data.currently_reading.id;
-        fetchBooksInList(data.currently_reading.id);
-        console.log("bookListLength is", bookList[0]);
+        // fetchBooksInList(data.currently_reading.id);
+        setBookList(data.currently_reading.list_contents)
       }
     };
 
-    fetchBooksInList();
     fetchCurrentlyReadingByUserId();
     fetchDefaultLists();
   }, []);
-
-  //   const settingLists = () => {
-  //     for (let i = 0; i < lists?.length; i++) {
-  //       if (lists[i].list_name === "Want To Read") {
-  //         defaultLists.push(lists[i]);
-  //       } else if (lists[i].list_name === "Currently Reading") {
-  //         defaultLists.push(lists[i]);
-  //       } else if (lists[i].list_name === "Did Not Finish") {
-  //         defaultLists.push(lists[i]);
-  //       } else if (lists[i].list_name === "Finished") {
-  //         defaultLists.push(lists[i]);
-  //       } else {
-  //         otherLists.push(lists[i]);
-  //       }
-  //     }
-  //   };
-
-  //   settingLists();
 
   if (!user?.email) {
     return <NotAllowed />;
@@ -151,7 +111,7 @@ function ProfilePage() {
           
 		  <h2>Currently Reading</h2>
           <div className="books">
-            {isEmpty === true ? (
+            {bookList[0] === 0 ? (
               <div className="empty-message">
                 <h2>
                   Your list doesn't have any books in it! Add books to change
@@ -170,7 +130,6 @@ function ProfilePage() {
 
         <div className="my-reviews">
           <h2>My Reviews</h2>
-
           <UserRatings setErrors={setError} />
         </div>
       </div>

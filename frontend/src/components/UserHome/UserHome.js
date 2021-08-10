@@ -10,25 +10,8 @@ const defaultBookCover =
 export default function UserHome({ topSellers = [] }) {
   const [error, setError] = useState(null);
   const [bookList, setBookList] = useState([]);
-  const [isEmpty, setIsEmpty] = useState(false);
-
-  let currentlyReadingListId = "";
 
   useEffect(() => {
-    const fetchBooksInList = async (listId) => {
-      const { data, error } = await apiClient.getBooksInList(listId);
-      if (error) {
-        setError(error);
-      }
-      if (data?.books_in_list) {
-        setError(null);
-        setBookList(data.books_in_list);
-      }
-      if (data?.books_in_list[0] === 0) {
-        setIsEmpty(true);
-      }
-    };
-
     const fetchCurrentlyReadingByUserId = async () => {
       const { data, error } = await apiClient.getCurrentlyReadingListByUserId();
       if (error) {
@@ -36,14 +19,10 @@ export default function UserHome({ topSellers = [] }) {
       }
       if (data?.currently_reading) {
         setError(null);
-        currentlyReadingListId = data.currently_reading.id;
-        // console.log("data.currently_reading", data.currently_reading);
-        // console.log("fetchBooksInList(currentlyReadingListId)",fetchBooksInList(currentlyReadingListId));
-        fetchBooksInList(currentlyReadingListId);
+        setBookList(data.currently_reading.list_contents);
       }
     };
 
-    fetchBooksInList();
     fetchCurrentlyReadingByUserId();
   }, []);
 
@@ -73,7 +52,7 @@ export default function UserHome({ topSellers = [] }) {
       <div className="home-feed">
         <h2>Currently Reading</h2>
 
-        {isEmpty === true ? (
+        {bookList[0] === 0 ? (
           <div className="empty-message">
             <h2>
               Your list doesn't have any books in it! Add books to change this.
@@ -82,8 +61,8 @@ export default function UserHome({ topSellers = [] }) {
         ) : (
           <div className="home-feed-books">
             {bookList.map((book) => (
-              <BookPreview book={book} key={book.title} />
-            ))}
+                <BookPreview book={book} key={book.title} />
+              ))}
           </div>
         )}
       </div>
