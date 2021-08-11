@@ -93,6 +93,7 @@ export default function DetailedListRow({
     <div className="DetailedListRow">
       <div className="information">
         <div className="row-item">
+        <Link to={`/books/id/${book.id}`}>
           <img
             alt="book cover"
             src={
@@ -101,7 +102,9 @@ export default function DetailedListRow({
               // book.imageLinks?.small ||
               book.imageLinks?.thumbnail
             }
-          ></img>
+          >
+          </img>
+        </Link>
         </div>
 
         <div className="row-item">
