@@ -5,6 +5,7 @@ import { useAuthContext } from "contexts/auth";
 import { FaBars } from "react-icons/fa";
 import useDetectClickOut from "hooks/useDetectClickOut";
 import apiClient from "services/apiClient";
+import slothLogo from "assets/slothLogo.svg";
 import "./Navbar.css";
 
 export default function Navbar({ appRef }) {
@@ -70,9 +71,12 @@ export default function Navbar({ appRef }) {
       </div>
 
       <div className="content">
-        <span className="logo">
-          <Link to="/">teca</Link>
-        </span>
+        {/* <span className="logo"> */}
+          <Link className="logo" to="/">
+            <img alt="teca sloth logo" src={slothLogo} />
+            teca
+          </Link>
+        {/* </span> */}
 
         {!user && (
           <>

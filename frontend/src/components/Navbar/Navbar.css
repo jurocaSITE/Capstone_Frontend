@@ -4,10 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 45px;
+  /* height: fit-content; */
+  /* height: 45px; */
 
   background: var(--main-clr);
-  padding: 0.5em 1em;
+  padding: 1em;
+  z-index: 32;
 }
 .Navbar .content {
   display: none;
@@ -78,6 +80,15 @@
   .Navbar .content .logo {
     font-family: "Source Serif Pro", sans-serif;
     font-size: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  .Navbar .logo {
+    color: var(--dark-shade);
+  }
+  .Navbar .content .logo img {
+    height: 45px;
+    padding-right: 7px;
   }
   .Navbar .content .user-buttons {
     flex-direction: row;
