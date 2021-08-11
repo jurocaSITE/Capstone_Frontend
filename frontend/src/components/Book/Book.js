@@ -191,12 +191,12 @@ export default function Book() {
                 {user && book_id ? (
                   <button className="btn">Add to list</button>
                 ) : null}
-                {successMessage && (
+              </a>
+              {successMessage && (
                   <span className="success">
                     {successMessage ? "Book successfully added!" : ""}
                   </span>
                 )}
-              </a>
             </div>
           </div>
         </div>

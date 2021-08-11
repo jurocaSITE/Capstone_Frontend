@@ -1,7 +1,7 @@
 import "./ContactUs.css";
 import { FaLinkedin } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
-import jungahProfile from "assets/Jungah Profile.jpeg";
+import jungahProfile from "assets/Jungah Profile.jpg";
 import camilaProfile from "assets/Camila Profile.jpg";
 import robertProfile from "assets/Robert Profile.jpg";
 
