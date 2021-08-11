@@ -30,6 +30,8 @@ export default function Book() {
 	const [isFetchingLists, setIsFetchingLists] = useState(false);
 	const [errors, setErrors] = useState(null);
 	const [lists, setLists] = useState([]);
+	const [successMessage, setSuccessMessage] = useState(false);
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -49,13 +51,22 @@ export default function Book() {
 	}, []);
 
 	const addToList = async (bookId, listId, listName) => {
-		setIsFetchingLists(true);
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
 		if (error) {
 			setErrors(error);
 			console.log("error is", error);
+			setTimeout(() => { // limits error message to show for 2 seconds
+				setErrors(null);
+			}, 2000);
+			setIsFetchingLists(false);
+		} else {
+			console.log("book successfully added!");
+			window.location.href=`#modal-closed`; //closes modal when book succesfully copies
+			setSuccessMessage(true);
+			setTimeout(() => { // limits success message to show for 3 seconds
+				setSuccessMessage(false);
+			}, 3000);
 		}
-		setIsFetchingLists(false);
 		if (listName === "Finished") {
 			navigate(`/set-rating/add/${bookId}`);
 		}
@@ -84,7 +95,6 @@ export default function Book() {
 			const { data, error } = await apiClient.getTopSellerByName(title);
 			if (error) {
 				setErrors(error);
-				// setBook({})
 			}
 			if (data?.top_seller) {
 				setErrors(null);
@@ -106,15 +116,6 @@ export default function Book() {
 		if (isFetchingBook || isFetchingLists) {
 			return <div className="loader">Loading...</div>;
 		}
-
-		// if (errors) {
-		// 	return (
-		// 		<>
-		// 			<h1>Error</h1>
-		// 			<p className="error">{String(errors)}</p>
-		// 		</>
-		// 	);
-		// }
 
 		return (
 			<>
@@ -176,6 +177,11 @@ export default function Book() {
 								{user && book_id ? (
 									<button className="btn">Add to list</button>
 								) : null}
+								{successMessage && (
+								<span className="success">
+									{successMessage ? "Book successfully added!"  : ""}
+								</span>
+								)}
 							</a>
 						</div>
 					</div>
