@@ -19,6 +19,10 @@
     padding: 0em 1.5em;
 }
 
+.DetailedListRow .information .row-item h2{
+	font-weight: normal;
+}
+
 .DetailedListRow .information .row-item .tab a{
     color: var(--dark-accent);
 }
@@ -35,34 +39,10 @@
 
 .DetailedListRow .information .row-item .options {
     position: absolute;
-    height: 80px;
-    width: 40px;
-	padding: 0em 1em;
+	padding: .5em 1em;
 	background-color: var(--light-shade);
-	border-radius: var(--border-rad);
-}
-
-/* .DetailedListRow .information .row-item .options .btn{
-    position: absolute;
-    font-size: 95%;
-    top: 0;
-    left: 14px;
-    width: 5em;
-    height: 2em;
-} */
-
-.DetailedListRow .information .row-item .options .btn{
-    margin-left: -.9em;
-}
-
-.DetailedListRow .information .row-item .options .btn:hover
-{
     border-radius: var(--border-rad);
-    padding: -1em 0em;
-}
-
-.DetailedListRow .btn:hover {
-	transform: scale(1.1);
+    margin-top: 1.25em;
 }
 
 .DetailedListRow .select-list {
@@ -71,14 +51,34 @@
 	align-items: center;
 }
 
+.DetailedListRow ul 
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.DetailedListRow li
+{
+    list-style-type: none;
+    color: var(--dark-shade);
+    margin: .25em 0;
+    transition: ease .25s;
+}
+
+.DetailedListRow a li:hover
+{
+    background: var(--dark-accent);
+    border-radius: var(--border-rad);
+    color: var(--light-shade);
+    padding: .2em .5em;
+}
+
 .DetailedListRow .btn-select-list {
 	padding: 1em;
 	background-color: var(--dark-accent);
 	border: none;
 	border-radius: var(--border-rad);
 	box-shadow: var(--default-shadow);
-	/* height: 40px;
-	width: 120px; */
 	color: var(--light-shade);
 	font-size: 20px;
 	margin-top: 20px;
@@ -86,5 +86,8 @@
 	transition: ease 0.25s;
 }
 .DetailedListRow .btn-select-list:hover {
-	transform: scale(1.1);
+    background: var(--dark-accent);
+    border-radius: var(--border-rad);
+    color: var(--light-shade);
+    transform: scale(1.1);
 }

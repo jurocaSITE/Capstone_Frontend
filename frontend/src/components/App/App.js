@@ -28,6 +28,7 @@ import {
 	DetailedList,
 	UpdateGenreInterests,
 	AuthorPage,
+	ContactUs,
 } from "components";
 
 // this is for global context so all components can access searchResults, user
@@ -111,11 +112,13 @@ function App() {
 					<Route path="/signup" element={<Register />} />
 					<Route path="/update-interests" element={<UpdateGenreInterests />} />
 					<Route path="/search" element={<SearchResults />} />
+					<Route path="/contact" element={<ContactUs />} />
 					{user ? (
 						<Route path="/" element={<UserHome topSellers={topSellers} />} />
 					) : (
 						<Route path="/" element={<Home topSellers={topSellers} isFetchingTopSellers={isFetchingTopSellers}/>} />
 					)}
+					
 				</Routes>
 				<Footer />
 			</BrowserRouter>

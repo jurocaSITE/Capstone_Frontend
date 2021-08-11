@@ -99,6 +99,17 @@
 	padding: 1em 0;
 }
 
+.ProfilePage .currently-reading .empty-message {
+	margin-top: 2em;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	border: 1px solid var(--light-shade);
+	padding: 2em;
+	border-radius: var(--border-rad);
+	text-align: center;
+}
+
 .ProfilePage .my-reviews {
 	color: var(--light-shade);
 }

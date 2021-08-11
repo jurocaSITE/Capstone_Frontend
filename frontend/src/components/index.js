@@ -18,6 +18,7 @@ export { default as ListForm } from "./ListForm/ListForm";
 export { default as ListFormCreateNew } from "./ListFormCreateNew/ListFormCreateNew";
 export { default as DetailedList } from "./DetailedList/DetailedList";
 export { default as DetailedListRow } from "./DetailedListRow/DetailedListRow";
+export { default as ListView } from "./ListView/ListView";
 export { default as Genre } from "./Genre/Genre";
 export { default as ListSidebar } from "./ListSidebar/ListSidebar";
 export { default as AuthorPage } from "./AuthorPage/AuthorPage";
@@ -40,3 +41,5 @@ export { default as General } from "./General/General";
 export { default as ReplyForm } from "./ReplyForm/ReplyForm";
 export { default as NotFound } from "./NotFound/NotFound";
 export { default as NotAllowed } from "./NotAllowed/NotAllowed";
+export { default as ContactUs } from "./ContactUs/ContactUs";
+

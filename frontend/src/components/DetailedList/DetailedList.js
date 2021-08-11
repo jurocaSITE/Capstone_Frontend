@@ -1,7 +1,7 @@
 import "./DetailedList.css";
 import React from "react";
 import { useState, useEffect } from "react";
-import { DetailedListRow} from "components";
+import { DetailedListRow, ListView } from "components";
 import apiClient from "services/apiClient";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "contexts/auth";
@@ -12,12 +12,96 @@ export default function DetailedList() {
 	const [listContents, setListContents] = useState([]);
 	const [listName, setListName] = useState([]);
 	const [errors, setErrors] = useState(null);
+	const [transferSuccessMessage, setTransferSuccessMessage] = useState(false)
+	const [copySuccessMessage, setCopySuccessMessage] = useState(false)
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
-    const [isEmpty, setIsEmpty] = useState(true);
-    const [isFetching, setIsFetching] = useState(false);
+	const [isEmpty, setIsEmpty] = useState(true);
 
-    
+    const fetchBooksInList = async () => {
+		const { data, error } = await apiClient.getBooksInList(list_id);
+		if (error) {
+			setErrors(error);
+		}
+		if (data?.books_in_list) {
+			setErrors(null);
+			// console.log("books in list", data.books_in_list)
+			setBookList(data.books_in_list);
+		}
+	};
+
+	const fetchListContents = async () => {
+		const { data, error } = await apiClient.getListContents(list_id);
+		if (error) {
+			setErrors(error);
+		}
+		if (data?.list_contents) {
+			setErrors(null);
+			setListContents(data.list_contents);
+		}
+		if (data?.list_contents.length > 0) {
+			setIsEmpty(false);
+		}
+	};
+
+	const handleOnRemove = async (bookId) => {
+		await apiClient.deleteBookById(list_id, bookId);
+		console.log("bookId is", bookId)
+		fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+		fetchListContents(); // refreshes num books on delete/copy/transfer
+		console.log("bookList", bookList.length-1)
+		if (bookList.length-1 === 0){
+			setIsEmpty(true)
+		}
+    };
+
+    const handleOnCopy = async (bookId, listId) => {
+		const { data, error } = await apiClient.addBookToList(bookId, listId);
+		if (bookList.length-1 === 0){
+			setIsEmpty(true)
+		}
+        if (error) {
+			setErrors(error); // sets error message which is passed into ListView and DetailedListRow
+			setTimeout(() => { // limits error message to show for 2 seconds
+				setErrors(null);
+			}, 2000);
+			console.log(error)
+		} 
+		if (!error) {
+			setCopySuccessMessage(true);
+			setTimeout(() => { // limits success message to show for 3 seconds
+				setCopySuccessMessage(false);
+			}, 3000);
+			window.location.href=`#modal-closed`; //closes modal when book succesfully copies
+			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+			fetchListContents(); // refreshes num books on delete/copy/transfer
+			console.log("book succesfully copied!")
+		}
+    };
+
+    const handleOnTransfer = async (bookId, listId) => {
+		const { data, error } = await apiClient.addBookToList(bookId, listId);
+        if (error) {
+            setErrors(error); // sets error message which is passed into ListView and DetailedListRow
+			console.log(error)
+			setTimeout(() => { // limits error message to show for 2 seconds
+				setErrors(null);
+			}, 2000);
+        }
+        if (!error){
+			setTransferSuccessMessage(true);
+			setTimeout(() => { // limits success message to show for 3 seconds
+				setTransferSuccessMessage(false);
+			}, 3000);
+			handleOnRemove(bookId, list_id);
+			window.location.href=`#modal-closed`; // closes modal when book succesfully transfers
+			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+			fetchListContents(); // refreshes num books on delete/copy/transfer
+			console.log("book succesfully transferred!")
+		}
+
+	};
+
 	useEffect(() => {
 		const fetchListName = async () => {
 			const { data, error } = await apiClient.getListNameById(list_id);
@@ -30,47 +114,14 @@ export default function DetailedList() {
 			}
 		};
 
-		const fetchBooksInList = async () => {
-			const { data, error } = await apiClient.getBooksInList(list_id);
-			if (error) {
-				setErrors(error);
-			}
-			if (data?.books_in_list) {
-				setErrors(null);
-				// console.log("books in list", data.books_in_list)
-				setBookList(data.books_in_list);
-			}
-		};
-
-		const fetchListContents = async () => {
-			const { data, error } = await apiClient.getListContents(list_id);
-			if (error) {
-				setErrors(error);
-			}
-			if (data?.list_contents) {
-				setErrors(null);
-				setListContents(data.list_contents);
-			}
-			if (data?.list_contents.length > 0) {
-				setIsEmpty(false);
-			}
-		};
-
 		fetchBooksInList();
 		fetchListName();
 		fetchListContents();
 	}, []); //use effect block runs whenever the dependency changes (the stuff in the array)
-
+	
 	if (!user?.email) {
 		return <NotAllowed />;
 	}
-    const addToList = async (bookId, listId) => {
-		setIsFetching(true);
-
-		const { data, error } = await apiClient.addBookToList(bookId, listId);
-
-		setIsFetching(false);
-	};
 
 	return (
 		<div className="DetailedList">
@@ -102,91 +153,19 @@ export default function DetailedList() {
 					</div>
 				) : (
 					<div className="book-info">
-						<div className="index">
-							{/* {listContents.map((book, index) => (
-								<div className="row">
-									<h2>{index + 1}</h2>
-								</div>
-								
-							))} */}
-							{bookList.map((book) => (
-								<div className="row">
-									<DetailedListRow book={book}/>
-								</div>	
-							))}
+						<div className="display">
+							{transferSuccessMessage && (
+								<span className="success">
+									{transferSuccessMessage ? "Book successfully transferred!"  : ""}
+								</span>
+							)}
+							{copySuccessMessage && (
+								<span className="success">
+									{copySuccessMessage ? "Book successfully copied!"  : ""}
+								</span>
+							)}
+							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} errorMessage={errors}/>
 						</div>
-						{/* <div className="preview">
-							{bookList.map((book) => (
-								<div className="row">
-									<img
-										alt="book cover"
-										src={
-											// book?.imageLinks?.large ||
-											// book?.imageLinks?.medium ||
-											// book?.imageLinks?.small ||
-											book?.imageLinks?.thumbnail
-										}
-									></img>
-								</div>
-							))}
-						</div>
-						<div className="title-and-author">
-							{bookList.map((book) => (
-								<div className="row">
-									<h3>{book.title}</h3>
-									<h3>by <a href={`/author/${book.authors}`}> {book.author || book?.authors?.map((author) => author )} </a></h3>
-								</div>
-							))}
-						</div>
-						<div className="dates">
-							{listContents.map((book) => (
-								<div className="row">
-									<h3>{moment(book.added_on).format("MMMM Do YYYY")}</h3>
-								</div>
-							))}
-						</div>
-						<div className="tags">
-							{bookList?.map((book) => {
-								// book.categories = array w/categories
-								// array called unique categories --> implement logic here using split("/") that
-								// gets all unique categories and then returns for each book in the list
-								const unique_categories = [];
-
-								for (let i = 0; i < book?.categories?.length; i++) {
-									let split = book.categories[i].split("/");
-									for (let j = 0; j < split.length; j++) {
-										if (!unique_categories.includes(split[j])) {
-											unique_categories.push(split[j]);
-										}
-									}
-								}
-								return (
-									<div className="row">
-										{unique_categories.map((category) => {
-											return (
-												<div className="r">
-													<Genre text={category} />
-												</div>
-											);
-										})}
-									</div>
-								);
-							})}
-						</div>
-						<div className="page-count">
-							{bookList.map((book) => (
-								<div className="row">
-									<h2>{book.pageCount}</h2>
-								</div>
-							))}
-						</div>
-						<div className="settings">
-							{bookList.map((book) => (
-								<div className="row">
-                                    <ListSidebar />
-								</div>
-							))}
-						</div> */}
 					</div>
 				)}
 			</div>
