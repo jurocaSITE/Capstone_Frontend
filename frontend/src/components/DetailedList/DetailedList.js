@@ -12,7 +12,8 @@ export default function DetailedList() {
 	const [listContents, setListContents] = useState([]);
 	const [listName, setListName] = useState([]);
 	const [errors, setErrors] = useState(null);
-	const [successMessage, setSuccessMessage] = useState(false)
+	const [transferSuccessMessage, setTransferSuccessMessage] = useState(false)
+	const [copySuccessMessage, setCopySuccessMessage] = useState(false)
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
 	const [isEmpty, setIsEmpty] = useState(true);
@@ -67,9 +68,9 @@ export default function DetailedList() {
 			console.log(error)
 		} 
 		if (!error) {
-			setSuccessMessage(true);
+			setCopySuccessMessage(true);
 			setTimeout(() => { // limits success message to show for 3 seconds
-				setSuccessMessage(false);
+				setCopySuccessMessage(false);
 			}, 3000);
 			window.location.href=`#modal-closed`; //closes modal when book succesfully copies
 			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
@@ -88,10 +89,11 @@ export default function DetailedList() {
 			}, 2000);
         }
         if (!error){
-			setSuccessMessage(true);
+			setTransferSuccessMessage(true);
 			setTimeout(() => { // limits success message to show for 3 seconds
-				setSuccessMessage(false);
-			}, 3000);			handleOnRemove(bookId, list_id);
+				setTransferSuccessMessage(false);
+			}, 3000);
+			handleOnRemove(bookId, list_id);
 			window.location.href=`#modal-closed`; // closes modal when book succesfully transfers
 			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
 			fetchListContents(); // refreshes num books on delete/copy/transfer
@@ -152,9 +154,14 @@ export default function DetailedList() {
 				) : (
 					<div className="book-info">
 						<div className="display">
-							{successMessage && (
+							{transferSuccessMessage && (
 								<span className="success">
-									{successMessage ? "Book successfully added!"  : ""}
+									{transferSuccessMessage ? "Book successfully transferred!"  : ""}
+								</span>
+							)}
+							{copySuccessMessage && (
+								<span className="success">
+									{copySuccessMessage ? "Book successfully copied!"  : ""}
 								</span>
 							)}
 							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} errorMessage={errors}/>
