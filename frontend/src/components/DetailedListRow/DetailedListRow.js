@@ -10,7 +10,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useDetectClickOut from "hooks/useDetectClickOut";
 
 // export default function DetailedListRow({ book }) {
-export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, handleOnTransfer, modalStatus, errorMessage}) {
+export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, handleOnTransfer, errorMessage}) {
     const { list_id } = useParams(); // searches url for list_id param if list else null
     const [lists, setLists] = useState([]);
     const [errors, setErrors] = useState(null);
@@ -100,7 +100,7 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
                     {show ? (
                         <ul ref={nodeRef} className="options">
                         <a href={`#removed`} onClick={removeClickHandler}>
-                            <li>Remove</li>
+                            <li classname="remove-button" >Remove</li>
                         </a>
                         <a href={`#modal-opened-${book.id}-transfer`} id="modal-closed">
                             {user && book.id ? <li>Transfer</li> : null}
@@ -116,41 +116,38 @@ export default function DetailedListRow({ book, handleOnRemove, handleOnCopy, ha
              <Modal id={`modal-opened-${book.id}-transfer`} modal_title="Transfer to">
                 <div className="select-list">
                     <div className="error">{errorMessage && String(errorMessage)}</div>
+                    {/* {successMessage && (
+                        <span className="success">
+                            {successMessage ? "Successfully transferred book!" : ""}
+                        </span>
+                    )} */}
+
                     {lists.map((list) => (
-                    // <a href={modalStatus}>
                     <button
                         className="btn-select-list"
                         key={list.id}
                         onClick={() => {
-                            // console.log("errors is", errors)
-                            // console.log("this should be false", (errors === "Cannot add duplicate book."))
-                                transferClickHandler(list.id);   
-                                console.log("book.id", book.id, "book title is", book.title)
-                                console.log("transfer and delete should have successfully happened")                       
+                                transferClickHandler(list.id);  
                         }}
                     >
                     {list.list_name}
                     </button>
-                    // </a>
                     ))}
                 </div>
             </Modal> 
             <Modal id={`modal-opened-${book.id}-copy`} modal_title="Copy to">
                 <div className="select-list">
+                    <div className="error">{errorMessage && String(errorMessage)}</div>
                     {lists.map((list) => (
-                    <a href="#modal-closed">
                     <button
                         className="btn-select-list"
                         key={list.id}
                         onClick={() => {
-                                copyClickHandler(list.id);   
-                                console.log("book.id", book.id, "book title is", book.title)
-                                console.log("copying book to another list successfully happened")                       
+                                copyClickHandler(list.id);                  
                         }}
                     >
                     {list.list_name}
                     </button>
-                    </a>
                     ))}
                 </div>
             </Modal> 

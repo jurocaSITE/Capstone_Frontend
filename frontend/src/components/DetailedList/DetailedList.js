@@ -12,10 +12,10 @@ export default function DetailedList() {
 	const [listContents, setListContents] = useState([]);
 	const [listName, setListName] = useState([]);
 	const [errors, setErrors] = useState(null);
-	const [modalStatus, setModalStatus] = useState(null)
+	// const [successMessage, setSuccessMessage] = useState(false)
 	const [bookList, setBookList] = useState([]);
 	const { list_id } = useParams(); // searches url for book_id param if book else null
-    const [isEmpty, setIsEmpty] = useState(true);
+	const [isEmpty, setIsEmpty] = useState(true);
 
     const fetchBooksInList = async () => {
 		const { data, error } = await apiClient.getBooksInList(list_id);
@@ -56,30 +56,43 @@ export default function DetailedList() {
 
     const handleOnCopy = async (bookId, listId) => {
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
-		fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
-		fetchListContents(); // refreshes num books on delete/copy/transfer
 		if (bookList.length-1 === 0){
 			setIsEmpty(true)
 		}
         if (error) {
-            setErrors(error);
-            console.log(error)
-        }
+			setErrors(error); // sets error message which is passed into ListView and DetailedListRow
+			setTimeout(() => { // limits error message timer to show for 2 seconds
+				setErrors(null);
+			}, 2000);
+			console.log(error)
+		} 
+		if (!error) {
+			window.location.href=`#modal-closed`; //closes modal when book succesfully copies
+			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
+			fetchListContents(); // refreshes num books on delete/copy/transfer
+			console.log("book succesfully copied!")
+		}
     };
 
     const handleOnTransfer = async (bookId, listId) => {
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
         if (error) {
-            setErrors(error);
+            setErrors(error); // sets error message which is passed into ListView and DetailedListRow
 			console.log(error)
+			setTimeout(() => { // limits error message timer to show for 2 seconds
+				setErrors(null);
+			}, 2000);
+			// setSuccessMessage(false);
         }
         if (!error){
+			// setSuccessMessage(true);
 			handleOnRemove(bookId, list_id);
-			setModalStatus(`#modal-closed`)
+			window.location.href=`#modal-closed`; // closes modal when book succesfully transfers
 			fetchBooksInList(); // refreshes contents of list on delete/copy/transfer
 			fetchListContents(); // refreshes num books on delete/copy/transfer
+			console.log("book succesfully transferred!")
 		}
-		console.log(modalStatus)
+
 	};
 
 	useEffect(() => {
@@ -134,7 +147,7 @@ export default function DetailedList() {
 				) : (
 					<div className="book-info">
 						<div className="display">
-							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} modalStatus={modalStatus} errorMessage={errors}/>
+							<ListView bookList={bookList} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} errorMessage={errors}/>
 						</div>
 					</div>
 				)}

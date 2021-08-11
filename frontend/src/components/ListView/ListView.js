@@ -8,13 +8,13 @@ import { DetailedListRow } from "components";
 // pass bookList to the componenent to allow rerendering automatically
         
 
-export default function ListView({bookList, handleOnRemove, handleOnTransfer, handleOnCopy, modalStatus, errorMessage}) {
+export default function ListView({bookList, handleOnRemove, handleOnTransfer, handleOnCopy, errorMessage}) {
    
     return (
 		<div className="ListView">
             {bookList.map((book) => (
                 <div className="row">
-                    <DetailedListRow book={book} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} modalStatus={modalStatus} handleOnTransfer={handleOnTransfer} errorMessage={errorMessage}/>
+                    <DetailedListRow book={book} handleOnRemove={handleOnRemove} handleOnCopy={handleOnCopy} handleOnTransfer={handleOnTransfer} errorMessage={errorMessage}/>
                 </div>	
             ))}
 		</div>
