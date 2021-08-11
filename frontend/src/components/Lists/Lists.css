@@ -127,3 +127,12 @@
 .Lists .hidden {
 	display: none;
 }
+
+.Lists .empty-message {
+	border: 1px solid var(--light-shade);
+	margin-top: 2em;
+	margin: 0em 1em;
+	padding: 2em;
+	border-radius: var(--border-rad);
+	text-align: center;
+}

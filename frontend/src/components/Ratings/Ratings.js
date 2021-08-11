@@ -22,6 +22,7 @@ export default function Ratings({ book_id }) {
   const [isFetching, setIsFetching] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [errors, setErrors] = useState(null);
 
   useEffect(() => {
@@ -34,6 +35,9 @@ export default function Ratings({ book_id }) {
       if (data?.ratings) {
         setErrors(null);
         setRatings(data.ratings);
+      }
+      if (data?.ratings.length > 0) {
+        setIsEmpty(false);
       }
       setIsFetching(false);
     };
@@ -103,8 +107,16 @@ export default function Ratings({ book_id }) {
         {user && <Link to={`/set-rating/add/${book_id}`}>Add Review +</Link>}
       </span>
       {isFetching && <div className="loader"></div>}
-
-      <div className="ratings-feed-container">
+      {isEmpty === true ? (
+					<div className="ratings">
+						<div className="empty-message">
+							<h2>
+								There are no reviews for this book yet.
+							</h2>
+						</div>
+					</div>
+				) : (
+          <div className="ratings-feed-container">
         {ratings.map((x, idx) => (
           <div className="rating-review-replies" key={x.id}>
             <div className="rating-review">
@@ -165,6 +177,7 @@ export default function Ratings({ book_id }) {
           </div>
         ))}
       </div>
+    )}
     </div>
   );
 }

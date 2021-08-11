@@ -8,6 +8,7 @@ import { FaRegStar, FaBookmark } from "react-icons/fa";
 function UserRatings({ setErrors }) {
   const [ratings, setRatings] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
   //   const [errors, setErrors] = useState(null);
 
   useEffect(() => {
@@ -21,6 +22,9 @@ function UserRatings({ setErrors }) {
         setErrors((e) => ({ ...e, ratings: null }));
         setRatings(data.ratings);
       }
+      if (data?.ratings.length > 0) {
+        setIsEmpty(false);
+      }
       setIsFetching(false);
     };
 
@@ -33,30 +37,40 @@ function UserRatings({ setErrors }) {
 
   return (
     <div className="UserRatings">
-      <div className="ratings-feed-container">
-        {ratings?.map((x) => (
-          <div className="rating-review">
-            <Link to={`/books/id/${x.bookId}`}>
-              <FaBookmark className="bookmark" />
-            </Link>
-            <div className="rating-review-content">
-              <span className="rating-review-content-head">
-                <h2>{x.reviewTitle}</h2>
-                <p>
-                  <FaRegStar /> {x.rating}
-                </p>
-              </span>
+      {isEmpty === true ? (
+					<div className="ratings">
+						<div className="empty-message">
+							<h2>
+								You haven't written any reviews yet!
+							</h2>
+						</div>
+					</div>
+				) : (
+          <div className="ratings-feed-container">
+          {ratings?.map((x) => (
+            <div className="rating-review">
+              <Link to={`/books/id/${x.bookId}`}>
+                <FaBookmark className="bookmark" />
+              </Link>
+              <div className="rating-review-content">
+                <span className="rating-review-content-head">
+                  <h2>{x.reviewTitle}</h2>
+                  <p>
+                    <FaRegStar /> {x.rating}
+                  </p>
+                </span>
 
-              <p className="review-body">{x.reviewBody}</p>
+                <p className="review-body">{x.reviewBody}</p>
 
-              <span className="meta">
-                {moment(x.updatedAt).format("lll")}
-                {x.updatedAt !== x.createdAt ? ` (edited)` : null}
-              </span>
+                <span className="meta">
+                  {moment(x.updatedAt).format("lll")}
+                  {x.updatedAt !== x.createdAt ? ` (edited)` : null}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
