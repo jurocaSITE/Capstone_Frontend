@@ -11,7 +11,19 @@
 	justify-content: center;
 	color: black;
 }
-
+.ContactUs .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ContactUs .teca-email {
+    display: flex;
+    align-items: center;
+    color: var(--light-shade-8-opacity);
+}
+.ContactUs .teca-email svg {
+    padding-right: .5em;
+}
 .ContactUs .contact-cards{
     margin-top: 1%;
     display: flex;

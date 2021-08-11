@@ -1,5 +1,6 @@
 import "./ContactUs.css";
 import { FaLinkedin } from "react-icons/fa";
+import { GrMail } from "react-icons/gr";
 import jungahProfile from "assets/Jungah Profile.jpeg";
 import camilaProfile from "assets/Camila Profile.jpg";
 import robertProfile from "assets/Robert Profile.jpg";
@@ -13,12 +14,19 @@ export default function ContactUs() {
       <div className="ContactUs">
         <div className="title">
           <h1>Contact Us</h1>
-          <p>Email: services.teca@gmail.com</p>
+          <p className="teca-email">
+            <GrMail size="20"/>
+            <span hidden>Email</span> services.teca@gmail.com
+          </p>
         </div>
 
         <div className="contact-cards">
           <div className="card">
-            <img classname="profile jungah" alt="profile cover" src={jungahProfile} />
+            <img
+              classname="profile jungah"
+              alt="profile cover"
+              src={jungahProfile}
+            />
             <div className="info">
               <div className="name">
                 <h2>Jungah Ahn</h2>
