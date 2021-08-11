@@ -36,6 +36,8 @@ function Lists() {
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
   const [isSorting, setIsSorting] = useState(0);
+  const [isEmpty, setIsEmpty] = useState(true);
+
   //   let defaultLists = [];
   //   let otherLists = [];
   // let copyLists = []
@@ -48,6 +50,9 @@ function Lists() {
         setDefaultLists(defaults.data.default_lists);
 
         const created = await apiClient.getCreatedListsByUserId();
+        if (created?.data?.created_lists?.length > 0) {
+          setIsEmpty(false);
+        }
         setOtherLists(created.data.created_lists);
       } catch (error) {
         setError(error);
@@ -127,60 +132,70 @@ function Lists() {
         </div>
       </div>
 
-      <div className="filter-buttons">
-        <button
-          className={isSorting === 1 ? "active-sort" : ""}
-          onClick={() => handleSorting(1)}
-        >
-          alphabetical
-        </button>
-        <button
-          className={isSorting === 2 ? "active-sort" : ""}
-          onClick={() => handleSorting(2)}
-        >
-          oldest
-        </button>
-      </div>
+      {isEmpty === true ? (
+						<div className="empty-message">
+							<h2>
+								This space is empty! Create a new list to change this.
+							</h2>
+						</div>
+				) : (
+          <div className="not-empty">
+            <div className="filter-buttons">
+               <button
+                className={isSorting === 1 ? "active-sort" : ""}
+                onClick={() => handleSorting(1)}
+              >
+                alphabetical
+              </button>
+              <button
+                className={isSorting === 2 ? "active-sort" : ""}
+                onClick={() => handleSorting(2)}
+              >
+                oldest
+              </button>
+            </div>
 
-      {/* Uses CSS to hide when sorting or filtering to avoid mapping
-          after every filter or sort
-       */}
-      <div
-        className={
-          Boolean(isSorting) || Boolean(filteredData)
-            ? "hidden"
-            : "display-lists-area"
-        }
-      >
-        {otherLists?.map((list) => (
-          <ListCard key={list.id} list={list} className="list-card" />
-        ))}
-      </div>
+            {/* Uses CSS to hide when sorting or filtering to avoid mapping
+            after every filter or sort */}
+            <div
+              className={
+                Boolean(isSorting) || Boolean(filteredData)
+                  ? "hidden"
+                  : "display-lists-area"
+              }
+            >
+              {otherLists?.map((list) => (
+                <ListCard key={list.id} list={list} className="list-card" />
+              ))}
+            </div>
 
-      <div
-        className={
-          Boolean(isSorting) || Boolean(filteredData)
-            ? "display-lists-area"
-            : "hidden"
-        }
-      >
-        {!isSorting &&
-          filteredData?.map((list) => (
-            <ListCard key={list.id} list={list} className="list-card" />
-          ))}
+            <div
+              className={
+                Boolean(isSorting) || Boolean(filteredData)
+                  ? "display-lists-area"
+                  : "hidden"
+              }
+            >
+              {!isSorting &&
+                filteredData?.map((list) => (
+                  <ListCard key={list.id} list={list} className="list-card" />
+                ))}
 
-        {isSorting === 1
-          ? alphaSort(otherLists)?.map((list) => (
-              <ListCard key={list.id} list={list} className="list-card" />
-            ))
-          : null}
+              {isSorting === 1
+                ? alphaSort(otherLists)?.map((list) => (
+                    <ListCard key={list.id} list={list} className="list-card" />
+                  ))
+                : null}
 
-        {isSorting === 2
-          ? dateSortOldest(otherLists)?.map((list) => (
-              <ListCard key={list.id} list={list} className="list-card" />
-            ))
-          : null}
-      </div>
+              {isSorting === 2
+                ? dateSortOldest(otherLists)?.map((list) => (
+                    <ListCard key={list.id} list={list} className="list-card" />
+                  ))
+                : null}
+            </div>
+          </div>
+      )}
+    
     </div>
   );
 }

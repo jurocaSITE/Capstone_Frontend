@@ -59,3 +59,26 @@
     margin-top: 1em;
     color: var(--light-accent);
 }
+.UserRatings .ratings
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0em 2em;
+    padding-bottom: 2em;
+    margin-top: 1.5em;
+    max-height: 30em;
+    overflow-y: auto;
+
+    background: var(--dark-shade-darkest);
+    border-radius: var(--border-rad);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, .1);
+}
+
+.UserRatings .ratings .empty-message {
+	margin-top: 2em;
+	border: 1px solid var(--light-shade);
+	padding: 2em;
+	border-radius: var(--border-rad);
+	text-align: center;
+}

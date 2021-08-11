@@ -107,11 +107,11 @@ export default function DetailedListRow({
 				</div>
 
 				<div className="row-item">
-					<Link to={`/books/id/${book.id}`}>
-						<h3>{book.title}</h3>
-					</Link>
-					<br></br>
 					<h3 className="tab">
+						<Link to={`/books/id/${book.id}`}>
+							<h3>{book.title}</h3>
+						</Link>
+						<br></br>
 						by{" "}
 						<a href={`/author/${book.authors}`}>
 							{" "}
@@ -143,7 +143,7 @@ export default function DetailedListRow({
 								{user && book.id ? <li>Transfer</li> : null}
 							</a>
 							<a href={`#modal-opened-${book.id}-copy`} id="modal-closed">
-								{user && book.id ? <li>Add to list</li> : null}
+								{user && book.id ? <li>Copy</li> : null}
 							</a>
 						</ul>
 					) : null}
