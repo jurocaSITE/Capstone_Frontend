@@ -14,6 +14,7 @@
 	--error-color: rgba(245, 41, 41, 1);
 	--border-rad: 6px;
 	--default-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+	--profile-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 body {
