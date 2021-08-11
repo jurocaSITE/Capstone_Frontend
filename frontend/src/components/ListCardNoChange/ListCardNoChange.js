@@ -1,10 +1,9 @@
 import "./ListCardNoChange.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import { BiBookHeart } from "react-icons/bi";
+import { BiBookHeart, BiBookBookmark } from "react-icons/bi";
 import { GoBook } from "react-icons/go";
 import { RiBook2Fill } from "react-icons/ri";
-import { FaBookDead } from "react-icons/fa";
 
 function ListCardNoChange({ list }) {
 	const renderIcon = () => {
@@ -12,8 +11,8 @@ function ListCardNoChange({ list }) {
 			return <BiBookHeart />;
 		} else if (list?.list_name === "Currently Reading") {
 			return <GoBook />;
-		} else if (list?.list_name === "Did Not Finish") {
-			return <FaBookDead />;
+		} else if (list?.list_name === "Reviewed Books") {
+			return <BiBookBookmark />;
 		} else if (list?.list_name === "Finished") {
 			return <RiBook2Fill />;
 		}

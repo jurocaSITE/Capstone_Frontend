@@ -21,21 +21,21 @@
 .Lists .default-lists {
 	background: var(--light-accent);
 	background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fclipground.com%2Fimages%2Fpattern-png-transparent-4.png&f=1&nofb=1);
-	padding: 2em 0 2em 0;
-	/* display: flex;
+	padding: 2em 1em;
+	display: flex;
 	flex-wrap: wrap;
 	align-content: center;
-	justify-content: space-evenly; */
-	display: grid;
+	justify-content: space-between;
+	/* display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	row-gap: 2em;
+	row-gap: 2em; */
 }
 
-.Lists .default-lists .list-card {
+/* .Lists .default-lists .list-card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
+} */
 
 .Lists .search-and-create {
 	display: flex;

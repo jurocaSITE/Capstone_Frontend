@@ -57,9 +57,6 @@ export default function DetailedList() {
 
     const handleOnCopy = async (bookId, listId) => {
 		const { data, error } = await apiClient.addBookToList(bookId, listId);
-		if (bookList.length-1 === 0){
-			setIsEmpty(true)
-		}
         if (error) {
 			setErrors(error); // sets error message which is passed into ListView and DetailedListRow
 			setTimeout(() => { // limits error message to show for 2 seconds

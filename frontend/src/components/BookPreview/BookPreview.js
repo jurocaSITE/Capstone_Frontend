@@ -32,7 +32,7 @@ export default function BookPreview({ book = {} }) {
             {/* <h4>by {book.authors}</h4> */}
             <span className="rating-avg">
               <FaStar size="20" />
-              {book?.averageRating?.toFixed(1) || `Unavailable`}
+              {book?.averageRating?.toFixed(1) || `No Ratings Yet`}
             </span>
             <div className="categories">
               <div className="genre-tag">

@@ -51,38 +51,40 @@ export default function Book() {
   }, []);
 
   const addToList = async (bookId, listId, listName) => {
-	// setIsFetchingLists(true);
-	const { data, error } = await apiClient.addBookToList(bookId, listId);
-	if (error) {
-		setErrors(error);
-		console.log("error is", error);
-		setTimeout(() => { // limits error message to show for 2 seconds
-			setErrors(null);
-		}, 2000);
-		setIsFetchingLists(false);
-	} else {
-		console.log("book successfully added!");
-		window.location.href=`#modal-closed`; //closes modal when book succesfully copies
-		setSuccessMessage(true);
-		setTimeout(() => { // limits success message to show for 3 seconds
-			setSuccessMessage(false);
-		}, 3000);
-	}
-	// const reviews = await apiClient.getRatingsForBook(bookId);
-	// setIsFetchingLists(false);
-	
-	if (listName === "Finished") {
-		if (reviews?.data?.ratings.length > 0) {
-			for (let i = 0; i < reviews?.data?.ratings.length; i++) {
-				if (reviews.data.ratings[i].userId === user.id) {
-					navigate(`/my-lists/${listId}`);
-				}
-			}
-		} else {
-			navigate(`/set-rating/add/${bookId}`);
-		}
-	}
-};
+    // setIsFetchingLists(true);
+    const { data, error } = await apiClient.addBookToList(bookId, listId);
+    if (error) {
+      setErrors(error);
+      console.log("error is", error);
+      setTimeout(() => {
+        // limits error message to show for 2 seconds
+        setErrors(null);
+      }, 2000);
+      setIsFetchingLists(false);
+    } else {
+      console.log("book successfully added!");
+      window.location.href = `#modal-closed`; //closes modal when book succesfully copies
+      setSuccessMessage(true);
+      setTimeout(() => {
+        // limits success message to show for 3 seconds
+        setSuccessMessage(false);
+      }, 3000);
+    }
+    // setIsFetchingLists(false);
+
+    const reviews = await apiClient.getRatingsForBook(bookId);
+    if (listName === "Finished") {
+      if (reviews?.data?.ratings.length > 0) {
+        for (let i = 0; i < reviews?.data?.ratings.length; i++) {
+          if (reviews.data.ratings[i].userId === user.id) {
+            navigate(`/my-lists/${listId}`);
+          }
+        }
+      } else {
+        navigate(`/set-rating/add/${bookId}`);
+      }
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0); // makes sure the page renders at the top of the screen
@@ -146,12 +148,14 @@ export default function Book() {
               <h1>{book.title}</h1>
               <h2 className="book-author">
                 <u>
-				  {book?.author ? <a href={`/author/${book.author}`}>{book.author}</a> :
-				  	renderBookAuthors(book?.authors)
-				  }
+                  {book?.author ? (
+                    <a href={`/author/${book.author}`}>{book.author}</a>
+                  ) : (
+                    renderBookAuthors(book?.authors)
+                  )}
                 </u>
               </h2>
-			  
+
               <h3 className="pub-date">
                 {book?.publishedDate && (
                   <>Published {moment(book.publishedDate).format("ll")}</>
@@ -187,11 +191,11 @@ export default function Book() {
                 {user && book_id ? (
                   <button className="btn">Add to list</button>
                 ) : null}
-							{successMessage && (
-								<span className="success">
-									{successMessage ? "Book successfully added!"  : ""}
-								</span>
-								)}
+                {successMessage && (
+                  <span className="success">
+                    {successMessage ? "Book successfully added!" : ""}
+                  </span>
+                )}
               </a>
             </div>
           </div>
@@ -199,7 +203,7 @@ export default function Book() {
 
         <Modal modal_title="Add To">
           <div className="select-list">
-		  <div className="error">{errors && String(errors)}</div>
+            {errors ? <span className="error">{String(errors)}</span> : null}
             {lists.map((list) => (
               <button
                 className="btn-select-list"
