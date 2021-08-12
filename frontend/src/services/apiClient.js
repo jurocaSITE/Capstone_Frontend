@@ -331,7 +331,7 @@ class ApiClient {
 }
 
 export default new ApiClient(
-	"https://teca-web.herokuapp.com"
+	"https://teca-web.herokuapp.com/"
 	// process.env.REACT_APP_REMOTE_HOST_URL || "http://localhost:5000"
 	// "http://localhost:5000"
 );
