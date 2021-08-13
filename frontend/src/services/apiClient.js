@@ -140,7 +140,10 @@ class ApiClient {
 	}
 
 	async getBooksByAuthor(author_name) {
-		return await this.request({ endpoint: `books/author/${author_name}`, method: `GET` });
+		return await this.request({
+			endpoint: `books/author/${author_name}`,
+			method: `GET`,
+		});
 	}
 
 	async getBooksInList(list_id) {
@@ -248,6 +251,13 @@ class ApiClient {
 		return await this.request({
 			endpoint: `lists/${list_id}/books`,
 			method: `GET`,
+		});
+	}
+
+	async deleteBookFromReviewedBooksListByBookId(book_id) {
+		return await this.request({
+			endpoint: `lists/reviewed-books/delete/book/id/${book_id}`,
+			method: `DELETE`,
 		});
 	}
 
