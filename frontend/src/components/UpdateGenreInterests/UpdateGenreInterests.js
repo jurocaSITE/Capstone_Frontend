@@ -102,13 +102,13 @@ export default function UpdateGenreInterests() {
 						))}
 					</form>
 					<div className="buttons">
-						<div className="go-back">
+						{/* <div className="go-back">
 							<ActionButton text={`Go to Account`} link={`/account`} />
-						</div>
+						</div> */}
 						<div className="go-to-profile">
 							<ActionButton text={`Go to Profile`} link={`/profile`} />
 						</div>
-						<ActionButton text={`Submit`} clickFunc={handleOnSubmit} />
+						<ActionButton text={`Save`} clickFunc={handleOnSubmit} />
 					</div>
 				</>
 			)}
