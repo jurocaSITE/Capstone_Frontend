@@ -87,6 +87,15 @@ function ProfilePage() {
 				</div>
 			</div> */}
 
+        <div className="current-interests-feed">
+          <h2 className="header">My Favorite Genres</h2>
+          {!user?.genre_interest?.length &&
+            "No interests found. Change this by adding some with the button above."}
+          {user?.genre_interest?.map((genre) => (
+            <span className="genre-tag">{genre}</span>
+          ))}
+        </div>
+
         <div className="library">
           <h2>My Library</h2>
           <div className="lists-cards">
@@ -108,24 +117,24 @@ function ProfilePage() {
             <span className="error">{error.currently}</span>
           ) : null}
           {error?.inList ? <span className="error">{error.inList}</span> : null}
-          
-		  <h2>Currently Reading</h2>
-          <div className="books">
-            {bookList[0] === 0 ? (
-              <div className="empty-message">
-                <h2>
-                  Your list doesn't have any books in it! Add books to change
-                  this.
-                </h2>
-              </div>
-            ) : (
-              <div className="home-feed-books">
-                {bookList.map((book) => (
-                  <BookPreview book={book} key={book.title} />
-                ))}
-              </div>
-            )}
-          </div>
+            
+          <h2>Currently Reading</h2>
+            <div className="books">
+              {bookList[0] === 0 ? (
+                <div className="empty-message">
+                  <h2>
+                    Your list doesn't have any books in it! Add books to change
+                    this.
+                  </h2>
+                </div>
+              ) : (
+                <div className="home-feed-books">
+                  {bookList.map((book) => (
+                    <BookPreview book={book} key={book.title} />
+                  ))}
+                </div>
+              )}
+            </div>
         </div>
 
         <div className="my-reviews">

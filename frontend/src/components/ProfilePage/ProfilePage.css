@@ -89,6 +89,26 @@
 	padding: 1em 0;
 }
 
+/* ----- Genre Interests ----- */
+
+.ProfilePage .current-interests-feed {
+	padding-top: 2em;
+	padding-bottom: 3em;
+}
+
+.ProfilePage .current-interests-feed .header{
+	margin-bottom: 2em;
+}
+
+.ProfilePage .current-interests-feed .genre-tag {
+	border-radius: var(--border-rad);
+	background: var(--light-accent);
+	color: var(--light-shade);
+	padding: .25em .5em;
+	margin: .25em;
+	
+}
+
 /* ----- Currently Reading ----- */
 .ProfilePage .currently-reading {
 	/* margin: 30px; */
