@@ -30,13 +30,15 @@
 .ListCard .information {
 	color: var(--dark-shade);
 	margin: 10px;
+	text-align: center;
 }
 
-.ListCard .create-new-list {
+.ListCard .list-actions {
 	display: flex;
 	justify-content: flex-end;
 	align-items: flex-end;
 	position: relative;
+	padding: 0 .5em;
 }
 
 .ListCard .three-dots {
@@ -46,7 +48,7 @@
 }
 
 /* The toggled menu that appears after clicking dots */
-.ListCard .create-new-list .options {
+.ListCard .list-actions .options {
 	position: absolute;
 	top: 1.5em;
 	right: -4em;
@@ -54,9 +56,10 @@
 	padding: 0.5em 2em;
 	background-color: var(--light-shade);
 	border-radius: var(--border-rad);
+	box-shadow: var(--default-shadow);
 }
 
-.ListCard .create-new-list li {
+.ListCard .list-actions li {
 	color: black;
 	list-style-type: none;
 	white-space: nowrap;

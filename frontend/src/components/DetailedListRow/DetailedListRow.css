@@ -14,7 +14,7 @@
 }
 
 .DetailedListRow .information .row-item{
-	display: grid;
+	/* display: grid; */
     align-self: center;
     padding: 0em 1.5em;
 }
@@ -23,18 +23,35 @@
 	font-weight: normal;
 }
 
-.DetailedListRow .information .row-item .tab a{
-    color: var(--dark-accent);
+.DetailedListRow .information .row-item .tab {
+    overflow: hidden;
+    text-overflow: ellipsis ;
+    min-width: 2em;
+    /* white-space: nowrap; */
 }
-
+.DetailedListRow .information .row-item .tab h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* .DetailedListRow .information .row-item .tab a{
+    color: var(--dark-accent);
+} */
 .DetailedListRow .information .row-item .tab a:hover{
     text-decoration: underline;
 }
 
-.DetailedListRow .information .row-item .three-dots:hover
-{
+.DetailedListRow .information .row-item .three-dots:hover {
     cursor: pointer;
     color: var(--dark-accent);
+}
+
+.DetailedListRow .information .row-item.categories {
+    display: flex;
+    flex-flow: wrap;
+    overflow: hidden;
+}
+.DetailedListRow .row-item.categories .GenreTag {
+    margin: .25em;
 }
 
 .DetailedListRow .information .row-item .options {

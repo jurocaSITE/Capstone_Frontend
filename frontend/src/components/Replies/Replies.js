@@ -1,6 +1,7 @@
 import "./Replies.css";
 import { useEffect, useState } from "react";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
+import { FaRegUser, FaUser } from "react-icons/fa"
 import moment from "moment";
 import apiClient from "services/apiClient";
 import { useReplyForm } from "hooks/useReplyForm";
@@ -71,6 +72,7 @@ export default function Replies({ ratingId, replies, setReplies, repliesIdx }) {
       <div hidden={!showReplies} className="replies-feed-container">
         {replies[repliesIdx]?.map((x) => (
           <div className="reply-container">
+            <h4 className="reply-user">{userOwnsReply(x) ? <><FaUser /> You</> : <><FaRegUser />{x.username}</>}</h4>
             <p>{x.replyBody}</p>
             <span className="reply-meta">
               {moment(x.updatedAt).format("lll")}

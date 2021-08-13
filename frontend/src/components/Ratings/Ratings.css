@@ -91,6 +91,10 @@
     color: var(--light-shade-8-opacity);
 }
 
+.Ratings .meta-actions {
+    display: flex;
+}
+
 .Ratings .meta svg {
     cursor: pointer;
     margin: 0 .5em;
