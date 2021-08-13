@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import { Genre } from "components";
 import { renderBookAuthors, renderBookCategories } from "utils/book";
 import "./BookPreview.css";
 
