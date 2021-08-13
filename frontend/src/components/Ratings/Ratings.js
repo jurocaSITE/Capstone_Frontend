@@ -155,7 +155,7 @@ export default function Ratings({ book_id }) {
                         {renderDelete(x)}
                       </>
                     )}
-                    {user && !userOwnsRating(x) && (
+                    {user && (
                       <ReplyForm
                         ratingId={x.id}
                         replies={replies}
